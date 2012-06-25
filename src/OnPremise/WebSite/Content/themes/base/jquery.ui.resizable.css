@@ -1,19 +1,14 @@
-/*
- * Note: While Microsoft is not the author of this file, Microsoft is
- * offering you a license subject to the terms of the Microsoft Software
- * License Terms for Microsoft ASP.NET Model View Controller 4 Developer Preview.
- * Microsoft reserves all other rights. The notices below are provided
- * for informational purposes only and are not the license terms under
- * which Microsoft distributed this file.
+/*!
+ * jQuery UI Resizable 1.8.20
  *
- * jQuery UI Resizable 1.8.11
- *
- * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)]
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Resizable#theming
  */
 .ui-resizable { position: relative;}
-.ui-resizable-handle { position: absolute;font-size: 0.1px;z-index: 99999; display: block;}
+.ui-resizable-handle { position: absolute;font-size: 0.1px; display: block; }
 .ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle { display: none; }
 .ui-resizable-n { cursor: n-resize; height: 7px; width: 100%; top: -5px; left: 0; }
 .ui-resizable-s { cursor: s-resize; height: 7px; width: 100%; bottom: -5px; left: 0; }
