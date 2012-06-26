@@ -11,7 +11,7 @@
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebSite</RootNamespace>
+    <RootNamespace>Thinktecture.IdentityServer.Web</RootNamespace>
     <AssemblyName>WebSite</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -47,9 +47,15 @@
       <HintPath>..\..\..\packages\Newtonsoft.Json.4.5.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Services" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -115,6 +121,9 @@
       <Private>True</Private>
       <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="Thinktecture.IdentityModel">
+      <HintPath>..\..\..\packages\Thinktecture.IdentityModel.2.0.0.0\lib\net45\Thinktecture.IdentityModel.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\..\..\packages\WebGrease.1.0.0\lib\WebGrease.dll</HintPath>
@@ -134,6 +143,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\IdentityServerConfiguration.sdf" />
+    <Content Include="App_Data\script.sql" />
+    <Content Include="Content\images\logo.jpg" />
+    <Content Include="Content\resources\jsnotify.htm" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -189,7 +202,13 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Configuration\connectionStrings.config" />
+    <Content Include="Configuration\identity.config" />
+    <Content Include="Configuration\identityServices.config" />
+    <Content Include="Configuration\profile.config" />
+    <Content Include="Configuration\repositories.config" />
+    <Content Include="Configuration\tracing.azure.config" />
+    <Content Include="Configuration\tracing.config" />
     <None Include="Scripts\jquery-1.7.2.intellisense.js">
       <DependentUpon>jquery-1.7.2.js</DependentUpon>
     </None>
@@ -218,6 +237,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Content\Site.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -226,17 +246,54 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
+    <Content Include="Views\Admin\Certificates.cshtml" />
+    <Content Include="Views\Admin\Configuration.cshtml" />
+    <Content Include="Views\Admin\Endpoints.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\MyClaims.cshtml" />
+    <Content Include="Views\ClientCertificatesAdmin\Add.cshtml" />
+    <Content Include="Views\ClientCertificatesAdmin\Delete.cshtml" />
+    <Content Include="Views\ClientCertificatesAdmin\Edit.cshtml" />
+    <Content Include="Views\ClientCertificatesAdmin\Index.cshtml" />
+    <Content Include="Views\DelegationAdmin\Add.cshtml" />
+    <Content Include="Views\DelegationAdmin\Delete.cshtml" />
+    <Content Include="Views\DelegationAdmin\Edit.cshtml" />
+    <Content Include="Views\DelegationAdmin\Index.cshtml" />
+    <Content Include="Views\Home\AppIntegration.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\InitialConfiguration\Index.cshtml" />
+    <Content Include="Views\RelyingPartiesAdmin\Add.cshtml" />
+    <Content Include="Views\RelyingPartiesAdmin\Delete.cshtml" />
+    <Content Include="Views\RelyingPartiesAdmin\Edit.cshtml" />
+    <Content Include="Views\RelyingPartiesAdmin\Index.cshtml" />
+    <Content Include="Views\Shared\Confirm.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\SignedOut.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\WSFederation\SignOut.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Libraries\Thinktecture.IdentityServer.Core.Repositories\Thinktecture.IdentityServer.Core.Repositories.csproj">
+      <Project>{9658f86f-3059-4731-9eb0-5f67a4ff1a8a}</Project>
+      <Name>Thinktecture.IdentityServer.Core.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Thinktecture.IdentityServer.Core\Thinktecture.IdentityServer.Core.csproj">
+      <Project>{38ce5c59-909e-4da6-8e1d-7eee7312ca9a}</Project>
+      <Name>Thinktecture.IdentityServer.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Thinktecture.IdentityServer.Web.Library\Thinktecture.IdentityServer.Web.Library.csproj">
+      <Project>{fc2d7e2a-65a2-480f-aae8-855fd026af85}</Project>
+      <Name>Thinktecture.IdentityServer.Web.Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -252,15 +309,14 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>1831</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:1208/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>https://adfs.leastprivilege.vm/idsrv</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

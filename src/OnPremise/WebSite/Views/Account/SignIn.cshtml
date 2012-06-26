@@ -1,0 +1,65 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.SignInModel
+
+@{
+    ViewBag.Title = "Username / Password Sign In";
+    ViewBag.Meta = "<meta name=\"viewport\" content=\"width=320\" />";
+}
+
+<h2>Username / Password Sign In</h2>
+
+@Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
+
+@using (Html.BeginForm())
+{
+    <div>
+        <fieldset>
+            <legend>Account Information</legend>
+                
+            <div class="editor-label">
+                @Html.LabelFor(m => m.UserName)
+            </div>
+            <div class="editor-field-slim">
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+                
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Password)
+            </div>
+            <div class="editor-field-slim">
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+                
+            <div class="editor-label">
+                @Html.CheckBoxFor(m => m.EnableSSO)
+                @Html.LabelFor(m => m.EnableSSO)
+            </div>
+                
+            <p>
+                <input type="submit" value="Sign In" />
+            </p>
+        </fieldset>
+
+        <br />
+        
+        @if ((ViewBag.ShowClientCertificateLink != null) && (ViewBag.ShowClientCertificateLink))
+        { 
+            @Html.ActionLink("Use client certificate", "CertificateSignIn", new { returnUrl = ViewBag.ReturnUrl }) 
+        }
+    </div>
+}
+
+@if (false)
+{
+    <script src="../../Scripts/jquery-1.6.4.js" type="text/javascript" />
+} 
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#UserName").focus();
+
+    });
+
+</script>

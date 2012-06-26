@@ -1,0 +1,32 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.Administration.EditClientCertificatesModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>
+    Edit Client Certificates for @Model.UserName
+    <a href="@Url.Content("~/docs/clientCertificates.html")" target="_blank">(help)</a>
+</h2>
+
+<p>
+    @Html.ActionLink("Add New", "Add")
+</p>
+
+<ul>
+    @foreach (var cert in Model.ClientCertificates)
+    { 
+        <li>
+            <b>@cert.Description</b>
+            <br />
+            @cert.Thumbprint
+            @Html.ActionLink("(delete)", "delete", new { userName = Model.UserName, thumbprint = cert.Thumbprint })
+            <br />
+            <br />
+        </li>
+    }
+</ul>
+
+<p>
+    @Html.ActionLink("Back", "Index")
+</p>

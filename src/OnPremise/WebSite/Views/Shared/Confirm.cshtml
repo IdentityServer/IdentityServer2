@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Confirm";
+}
+
+<h2>Confirm</h2>
+
+@using (Html.BeginForm())
+{ 
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    
+    <label>Are you sure?</label>
+    <br />
+    <br />
+    <input type="submit" value="Yes!" />
+}

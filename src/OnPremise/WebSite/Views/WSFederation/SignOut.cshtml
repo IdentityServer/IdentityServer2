@@ -1,0 +1,24 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "Federated Sign Out";
+}
+
+<h2>Federated Sign Out</h2>
+
+@foreach (var link in Model)
+{
+    <p>
+        <a href="@link">@link</a>
+        &nbsp;
+        <img src="@link?wa=wsignoutcleanup1.0" title="Signout Request" alt="Signout Request" />
+    </p>
+}
+
+
+@if (!string.IsNullOrWhiteSpace(ViewBag.ReturnUrl))
+{
+    <p>
+        <a href='@ViewBag.ReturnUrl'>Return to application</a>
+    </p>
+}

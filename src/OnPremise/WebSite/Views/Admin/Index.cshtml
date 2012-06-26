@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Administration";
+}
+
+<h2>Administration</h2>
+
+<p>
+    @Html.ActionLink("My Claims", "myclaims")
+</p>
+
+<p>
+    @Html.ActionLink("My Token", "mytoken")
+</p>
+
+<p>
+    @Html.ActionLink("Global Configuration", "configuration")
+</p>
+
+<p>
+    @Html.ActionLink("Endpoint Configuration", "endpoints")
+</p>
+
+<p>
+    @Html.ActionLink("Service Certificates", "certificates")
+</p>
+
+<p>
+    @Html.ActionLink("Relying Parties", "index", "RelyingPartiesAdmin")
+</p>
+
+<p>
+    @Html.ActionLink("Client Certificates", "index", "ClientCertificatesAdmin")
+</p>
+
+<p>
+    @Html.ActionLink("Delegation", "index", "DelegationAdmin")
+</p>
+
+<p>
+    @Html.ActionLink("Recycle IdentityServer", "restart")
+</p>

@@ -1,61 +1,175 @@
-﻿body {
-    font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+body
+{
+    font-family: Calibri, Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
     color: #232323;
     background-color: #fff;
 }
 
-header, footer, nav, section {
-    display: block;
-}
-
-
 /* Styles for basic forms
 -----------------------------------------------------------*/
-fieldset {
-    border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
+
+fieldset 
+{
+    border:1px solid #ddd;
+    padding:0 1.4em 1.4em 1.4em;
+    margin:0 0 1.5em 0;
 }
 
-legend {
-    font-size: 1.2em;
+legend 
+{
+    font-size:1.2em;
     font-weight: bold;
 }
 
-textarea {
+textarea 
+{
     min-height: 75px;
 }
 
-.editor-label {
+.editor-label 
+{
     margin: 1em 0 0 0;
 }
 
-.editor-field {
-    margin: 0.5em 0 0 0;
+.editor-field 
+{
+    margin:0.5em 0 0 0;
 }
 
+.editor-field-slim
+{
+    margin:0.5em 0 0 0;
+}
+
+.editor-field input[type=text]
+{
+    width:400px
+}
+
+.editor-field input[type=file]
+{
+    width:400px
+}
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
-.field-validation-error {
-    color: #f00;
+.field-validation-error
+{
+    color: #ff0000;
 }
 
-.field-validation-valid {
+.field-validation-valid
+{
     display: none;
 }
 
-.input-validation-error {
-    border: 1px solid #f00;
-    background-color: #fee;
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
 }
 
-.validation-summary-errors {
+.validation-summary-errors
+{
     font-weight: bold;
-    color: #f00;
+    color: #ff0000;
 }
 
-.validation-summary-valid {
+.validation-summary-valid
+{
     display: none;
 }
+
+/* Styles for the web frontent
+-----------------------------------------------------------*/
+
+
+a:link
+{
+    color: Black;
+    text-decoration: none;
+}
+
+a:visited
+{
+    color: Black;
+    text-decoration: none;
+}
+a:hover
+{
+    color: Black;
+    text-decoration: overline underline;
+}
+a:active
+{
+    color: Black;
+    text-decoration: none;
+}
+
+.masterHeader
+{
+    background-color: #606060;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.masterHeaderText
+{
+    padding-left: 15px;
+    font-weight: bold;
+    color: White;
+}
+
+.menu
+{
+    background-color: #7285a3;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: #000000;
+    padding-left: 15px;
+}
+
+.menu a:link
+{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.menu a:visited
+{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.menu a:hover
+{
+    color: #FFFFFF;
+    text-decoration: overline underline;
+}
+.menu a:active
+{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+a.bodyLink:link
+{
+    color: #7285a3;
+    text-decoration: none;
+}
+a.bodyLink:visited
+{
+    color: #7285a3;
+    text-decoration: none;
+}
+
+a.bodyLink:hover
+{
+    color: #7285a3;
+    text-decoration: overline underline;
+}
+a.bodyLink:active
+{
+    color: #7285a3;
+    text-decoration: none;
+}
+

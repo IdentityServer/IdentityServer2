@@ -1,0 +1,49 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.InitialConfigurationModel
+
+@{
+    ViewBag.Title = "Initial Configuration";
+}
+
+<h2>
+    Initial Configuration
+    <a href="@Url.Content("~/docs/initialConfiguration.html")" target="_blank">(help)</a>
+</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Settings</legend>
+
+        <div class="editor-label">
+            <b>@Html.LabelFor(model => model.SiteName)</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SiteName)
+            @Html.ValidationMessageFor(model => model.SiteName)
+        </div>
+
+        <div class="editor-label">
+            <b>@Html.LabelFor(model => model.IssuerUri)</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IssuerUri)
+            @Html.ValidationMessageFor(model => model.IssuerUri)
+        </div>
+
+        <div class="editor-label">
+            <b>@Html.LabelFor(model => model.SigningCertificate)</b>
+        </div>
+
+        <div class="editor-field">
+            @Html.DropDownList("SigningCertificate", Model.AvailableCertificatesList)
+        </div>
+
+         <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+
+}

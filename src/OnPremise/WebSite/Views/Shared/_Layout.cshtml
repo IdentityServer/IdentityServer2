@@ -1,16 +1,48 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.6.4.min.js")" type="text/javascript"></script>
+    @Html.Raw(ViewBag.Meta)
 </head>
-<body>
-    @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+<body>
+
+    <div class="masterHeader">
+        <br />
+        <img src="@Url.Content("~/Content/images/logo.jpg")" alt="Logo" />
+
+        <h2 class="masterHeaderText">@ViewBag.SiteName</h2>
+    </div>
+
+    <div class="menu">
+        @if (ViewBag.IsAdministrator)
+        {
+            @Html.ActionLink("[administration]", "index", "admin")
+            @: &nbsp;
+            <a href="http://wiki.thinktecture.com/IdentityServer.MainPage.ashx" target="_blank">[docs]</a>
+            @: &nbsp;
+        }
+        
+        @if (ViewBag.IsSignedIn)
+        { 
+            @Html.ActionLink("[home]", "index", "home")
+            @: &nbsp;
+            @Html.ActionLink("[sign out]", "signout", "account")
+            @: &nbsp;
+            @:(signed in as @Context.User.Identity.Name)
+        }
+        else
+        {
+            @Html.ActionLink("[home]", "index", "home")
+            @: &nbsp;
+            @Html.ActionLink("[sign in]", "signin", "account")
+        }
+    </div>
+        
+    <br />
+
+    @RenderBody()
 </body>
 </html>

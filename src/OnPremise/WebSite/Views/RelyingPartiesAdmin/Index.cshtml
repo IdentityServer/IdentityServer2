@@ -1,0 +1,22 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.Administration.RelyingPartiesModel
+@{
+    ViewBag.Title = "Relying Parties";
+}
+<h2>Relying Parties</h2>
+
+<p>
+    @Html.ActionLink("Add New", "add")
+</p>
+
+<ul>
+    @foreach (var item in Model.RelyingParties)
+    {
+        <li>
+            <b>@item.Name</b>
+            @Html.ActionLink("(edit)", "edit", new { id = item.Id })
+            @Html.ActionLink("(delete)", "delete", new { id = item.Id })
+            <br />
+            (@item.Realm)
+        </li>
+    }
+</ul>

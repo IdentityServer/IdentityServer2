@@ -1,0 +1,28 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "Delegation";
+}
+
+<h2>Delegation</h2>
+
+<p>
+    @Html.ActionLink("Add New", "add")
+</p>
+
+<ul>
+    @foreach (var user in Model)
+    { 
+        <li>
+            @user
+            @Html.ActionLink("(edit)", "edit", new { username = user })
+            @Html.ActionLink("(delete)", "deleteall", new { username = user })
+        </li>
+    }
+</ul>
+
+<p>
+    @Html.ActionLink("Back", "index", "admin")
+</p>
+
+

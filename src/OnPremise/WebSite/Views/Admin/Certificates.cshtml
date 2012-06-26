@@ -1,0 +1,85 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.Administration.EditCertificatesModel
+
+@{
+    ViewBag.Title = "Certificates Configuration";
+}
+
+<h2>
+    Certificates Configuration
+    <a href="http://wiki.thinktecture.com/IdentityServer.CertificatesConfiguration.ashx" target="_blank">(help)</a>
+</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        <legend>Configuration</legend>
+
+        <div class="editor-label">
+            <b>@Html.LabelFor(model => model.SslCertificate)</b>
+        </div>
+        <div class="editor-field">
+            @Model.SslCertificate
+            @Html.ValidationMessageFor(model => model.SslCertificate)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateSslCertificate)
+            @Html.LabelFor(model => model.UpdateSslCertificate)
+            @Html.ValidationMessageFor(model => model.UpdateSslCertificate)
+
+            @Html.DropDownList("UpdatedSslCertificate", Model.AvailableCertificatesList)
+        </div>
+
+        <div class="editor-label">
+            <b>@Html.LabelFor(model => model.SigningCertificate)</b>
+        </div>
+        <div class="editor-field">
+            @Model.SigningCertificate
+            @Html.ValidationMessageFor(model => model.SigningCertificate)
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UpdateSigningCertificate)
+            @Html.LabelFor(model => model.UpdateSigningCertificate)
+            @Html.ValidationMessageFor(model => model.UpdateSigningCertificate)
+
+            @Html.DropDownList("UpdatedSigningCertificate", Model.AvailableCertificatesList)
+        </div>
+
+        @if (ViewBag.SaveEnabled)
+        { 
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        }
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>
+
+@if (false)
+{
+    <script src="../../Scripts/jquery-1.6.4.js" type="text/javascript" />
+} 
+
+<script type="text/javascript">
+    $(function () {
+
+        $("#UpdatedSigningCertificate").change(function () {
+            $("#UpdateSigningCertificate").attr("checked", true);
+        });
+
+        $("#UpdatedSslCertificate").change(function () {
+            $("#UpdateSslCertificate").attr("checked", true);
+        });
+
+    });
+
+</script>

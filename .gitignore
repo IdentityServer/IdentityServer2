@@ -1,5 +1,7 @@
 bin/
 obj/
 packages/
+build/
 *.suo
 *.csproj.user
+*.sdf

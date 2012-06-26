@@ -1,0 +1,16 @@
+﻿@model Dictionary<string, string>
+
+@{
+    ViewBag.Title = "Application Integration";
+}
+
+<h2>Application Integration</h2>
+
+@foreach (var pair in Model)
+{
+    <p>
+        <b>@pair.Key</b>
+        <br />
+        @pair.Value
+    </p> 
+}
