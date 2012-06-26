@@ -75,7 +75,8 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             {
                 foreach (var cert in store.Certificates)
                 {
-                    list.Add(cert.Subject);
+                    // todo: add friendly name
+                    list.Add(string.Format("{0}", cert.Subject));
                 }
             }
             finally

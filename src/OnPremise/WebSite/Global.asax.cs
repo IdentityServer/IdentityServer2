@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Configuration;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.IdentityModel.Services;
-using System.Linq;
+using System.Security.Claims;
 using System.Web;
-using System.Web.Http;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Thinktecture.IdentityServer.Repositories;
+using Thinktecture.IdentityServer.Repositories.Sql;
 using Thinktecture.IdentityServer.TokenService;
 
 namespace Thinktecture.IdentityServer.Web
@@ -24,6 +23,9 @@ namespace Thinktecture.IdentityServer.Web
 
         protected void Application_Start()
         {
+            Database.SetInitializer(new ConfigurationDatabaseInitializer());
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
+
             SetupCompositionContainer();
             Container.Current.SatisfyImportsOnce(this);
 

@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurationDatabaseInitializer.cs" />
     <Compile Include="EntityModel\Certificates.cs" />
     <Compile Include="EntityModel\ClientCertificates.cs" />
     <Compile Include="ClientCertificatesRepository.cs" />

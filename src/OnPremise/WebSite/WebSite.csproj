@@ -151,7 +151,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\IdentityServerConfiguration.sdf" />
+    <Content Include="App_Data\1IdentityServerConfiguration.sdf" />
     <Content Include="App_Data\script.sql" />
     <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\resources\jsnotify.htm" />
