@@ -7,3 +7,5 @@ _bin_deployableAssemblies/
 *.suo
 *.csproj.user
 *.sdf
+*.mdf
+*.ldf
