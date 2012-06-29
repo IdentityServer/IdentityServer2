@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
-using Thinktecture.IdentityModel.Claims;
+using Thinktecture.IdentityModel.Authorization;
 
 namespace Thinktecture.IdentityServer.Web.Security
 {

@@ -17,13 +17,13 @@ using System.ServiceModel;
 using System.Text;
 using System.Web;
 using System.Xml;
-using Thinktecture.IdentityModel.Claims;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
 using Thinktecture.IdentityServer.Web.ViewModels.OAuth2;
 using Thinktecture.IdentityModel.Tokens;
+using Thinktecture.IdentityModel;
 
 namespace Thinktecture.IdentityServer.Web.Security
 {
