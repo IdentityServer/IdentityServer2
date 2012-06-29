@@ -15,6 +15,7 @@ using Thinktecture.IdentityServer.Web.ActionResults;
 using Thinktecture.IdentityServer.Web.Security;
 using Thinktecture.IdentityServer.Web.ViewModels.OAuth2;
 using Thinktecture.IdentityModel.Tokens;
+using System.IdentityModel.Services;
 
 namespace Thinktecture.IdentityServer.Web.Controllers
 {
@@ -75,10 +76,10 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 SecurityToken token;
                 if (auth.TryIssueToken(new EndpointAddress(uri), principal, ConfigurationRepository.Configuration.HttpTokenType, out token))
                 {
-                    var jwt = token as JsonWebToken;
+                    var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[ConfigurationRepository.Configuration.HttpTokenType];
                     var response = new AccessTokenResponse
                     {
-                        AccessToken = new JsonWebTokenHandler().WriteToken(jwt),
+                        AccessToken = handler.WriteToken(token),
                         TokenType = TokenTypes.JsonWebToken,
                         ExpiresIn = ConfigurationRepository.Configuration.DefaultTokenLifetime * 60,
                     };
