@@ -3,7 +3,6 @@
  * see license.txt
  */
 
-
 namespace Thinktecture.IdentityServer.Models
 {
     public class EndpointConfiguration
