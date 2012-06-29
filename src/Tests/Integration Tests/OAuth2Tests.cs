@@ -14,8 +14,9 @@ using System.IdentityModel.Tokens;
 using System.Net;
 using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Thinktecture.IdentityModel.Clients;
+using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityModel.Tokens;
-using Thinktecture.IdentityServer.OAuth;
 
 namespace Thinktecture.IdentityServer.Tests
 {
@@ -73,12 +74,12 @@ namespace Thinktecture.IdentityServer.Tests
 
             config.AudienceRestriction.AllowedAudienceUris.Add(new Uri(scope));
 
-            var handler = new SimpleWebTokenHandler();
+            var handler = new JsonWebTokenHandler();
             handler.Configuration = config;
 
-            var swt = handler.ReadToken(response.AccessToken);
+            var jwt = handler.ReadToken(response.AccessToken);
 
-            var id = handler.ValidateToken(swt);
+            var id = handler.ValidateToken(jwt);
         }
 
         //[TestMethod]

@@ -26,6 +26,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public string DefaultTokenType { get; set; }
 
         [Required]
+        public string HttpTokenType { get; set; }
+
+        [Required]
         public int DefaultTokenLifetime { get; set; }
 
         [Required]

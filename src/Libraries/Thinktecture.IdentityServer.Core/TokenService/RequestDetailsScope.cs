@@ -27,7 +27,7 @@ namespace Thinktecture.IdentityServer.TokenService
                 EncryptingCredentials = new X509EncryptingCredentials(details.EncryptingCertificate);
             }
 
-            if (RequestDetails.TokenType == TokenTypes.SimpleWebToken)
+            if (RequestDetails.TokenType == TokenTypes.SimpleWebToken || RequestDetails.TokenType == TokenTypes.JsonWebToken)
             {
                 SigningCredentials = new HmacSigningCredentials(details.RelyingPartyRegistration.SymmetricSigningKey);
             }

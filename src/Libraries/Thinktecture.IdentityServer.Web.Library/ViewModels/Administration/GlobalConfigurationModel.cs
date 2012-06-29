@@ -28,6 +28,10 @@ namespace Thinktecture.IdentityServer.Web.ViewModels.Administration
         public string DefaultTokenType { get; set; }
 
         [Required]
+        [DisplayName("Token Type for HTTP Clients")]
+        public string HttpTokenType { get; set; }
+
+        [Required]
         [DisplayName("Default Token Lifetime (in hours)")]
         public int DefaultTokenLifetime { get; set; }
 

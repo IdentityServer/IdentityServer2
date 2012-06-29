@@ -13,6 +13,7 @@ namespace Thinktecture.IdentityServer.Models
         public String IssuerUri { get; set; }
         public String IssuerContactEmail { get; set; }
         public string DefaultTokenType { get; set; }
+        public string HttpTokenType { get; set; }
         public int DefaultTokenLifetime { get; set; }
         public int MaximumTokenLifetime { get; set; }
         public int SsoCookieLifetime { get; set; }

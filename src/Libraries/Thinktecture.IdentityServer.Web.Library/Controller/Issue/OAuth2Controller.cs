@@ -73,13 +73,13 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 }
 
                 SecurityToken token;
-                if (auth.TryIssueToken(new EndpointAddress(uri), principal, TokenTypes.SimpleWebToken, out token))
+                if (auth.TryIssueToken(new EndpointAddress(uri), principal, ConfigurationRepository.Configuration.HttpTokenType, out token))
                 {
-                    var swt = token as SimpleWebToken;
+                    var jwt = token as JsonWebToken;
                     var response = new AccessTokenResponse
                     {
-                        AccessToken = new SimpleWebTokenHandler().WriteToken(swt),
-                        TokenType = TokenTypes.SimpleWebToken,
+                        AccessToken = new JsonWebTokenHandler().WriteToken(jwt),
+                        TokenType = TokenTypes.JsonWebToken,
                         ExpiresIn = ConfigurationRepository.Configuration.DefaultTokenLifetime * 60,
                     };
 

@@ -13,7 +13,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Thinktecture.IdentityServer.OAuth;
+using Thinktecture.IdentityModel.Clients;
 
 namespace Thinktecture.IdentityServer.Tests
 {

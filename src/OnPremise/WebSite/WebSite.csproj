@@ -131,7 +131,7 @@
     </Reference>
     <Reference Include="Thinktecture.IdentityModel, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\Thinktecture.IdentityModel.2.0.1\lib\net45\Thinktecture.IdentityModel.dll</HintPath>
+      <HintPath>..\..\..\packages\Thinktecture.IdentityModel.2.0.2\lib\net45\Thinktecture.IdentityModel.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -215,7 +215,6 @@
     <Content Include="Configuration\identityServices.config" />
     <Content Include="Configuration\profile.config" />
     <Content Include="Configuration\repositories.config" />
-    <Content Include="Configuration\tracing.azure.config" />
     <Content Include="Configuration\tracing.config" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />

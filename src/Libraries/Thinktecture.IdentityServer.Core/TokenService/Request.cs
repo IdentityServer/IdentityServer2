@@ -377,14 +377,14 @@ namespace Thinktecture.IdentityServer.TokenService
 
         private void ValidateTokenType(RequestDetails details)
         {
-            if (details.TokenType == TokenTypes.SimpleWebToken)
+            if (details.TokenType == TokenTypes.SimpleWebToken || details.TokenType == TokenTypes.JsonWebToken)
             {
                 if (details.RelyingPartyRegistration == null ||
                     details.RelyingPartyRegistration.SymmetricSigningKey == null ||
                     details.RelyingPartyRegistration.SymmetricSigningKey.Length == 0)
                 {
-                    Tracing.Error("SWT token requested, but no symmetric signing key found");
-                    throw new InvalidRequestException("SWT token requested, but no symmetric signing key found");
+                    Tracing.Error("Token with symmetric siganture requested, but no symmetric signing key found");
+                    throw new InvalidRequestException("Token with symmetric siganture requested, but no symmetric signing key found");
                 }
             }
         }
