@@ -20,7 +20,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 Id = rpEntity.Id.ToString(),
                 Name = rpEntity.Name,
-                Realm = new Uri("http://" + rpEntity.Realm),
+                Realm = new Uri(rpEntity.Realm),
                 ExtraData1 = rpEntity.ExtraData1,
                 ExtraData2 = rpEntity.ExtraData2,
                 ExtraData3 = rpEntity.ExtraData3
@@ -49,7 +49,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             var rpEntity = new RelyingParties
             {
                 Name = relyingParty.Name,
-                Realm = relyingParty.Realm.AbsoluteUri.StripProtocolMoniker(),
+                Realm = relyingParty.Realm.AbsoluteUri,
                 ExtraData1 = relyingParty.ExtraData1,
                 ExtraData2 = relyingParty.ExtraData2,
                 ExtraData3 = relyingParty.ExtraData3,
@@ -86,7 +86,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                  {
                      Id = rp.Id.ToString(),
                      Name = rp.Name,
-                     Realm = new Uri("http://" + rp.Realm)
+                     Realm = new Uri(rp.Realm)
                  }).ToList();
         }
         #endregion
