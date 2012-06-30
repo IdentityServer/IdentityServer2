@@ -29,15 +29,6 @@ namespace Thinktecture.IdentityServer.Web
             SetupCompositionContainer();
             Container.Current.SatisfyImportsOnce(this);
 
-            FederatedAuthentication.FederationConfigurationCreated += (s, e) =>
-            {
-                if (!string.IsNullOrWhiteSpace(ConfigurationRepository.SigningCertificate.SubjectDistinguishedName))
-                {
-                    e.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers.AddOrReplace(
-                        new X509CertificateSessionSecurityTokenHandler(ConfigurationRepository.SigningCertificate.Certificate));
-                }
-            };
-
             AreaRegistration.RegisterAllAreas();
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
