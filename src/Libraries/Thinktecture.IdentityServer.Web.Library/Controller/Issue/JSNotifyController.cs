@@ -46,7 +46,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers.Issue
 
             if (tokenType == null)
             {
-                tokenType = TokenTypes.SimpleWebToken;
+                tokenType = ConfigurationRepository.Configuration.HttpTokenType;
             }
 
             Tracing.Information("Token type: " + tokenType);

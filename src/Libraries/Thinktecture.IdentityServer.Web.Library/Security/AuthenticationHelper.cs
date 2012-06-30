@@ -247,10 +247,10 @@ namespace Thinktecture.IdentityServer.Web.Security
                 return false;
             }
 
-            var swt = token as SimpleWebToken;
-            if (swt != null)
+            if (tokenType == TokenTypes.JsonWebToken || tokenType == TokenTypes.SimpleWebToken)
             {
-                response.TokenString = new SimpleWebTokenHandler().WriteToken(swt);
+                var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[tokenType];
+                response.TokenString = handler.WriteToken(token);
                 response.ContentType = "text";
             }
             else

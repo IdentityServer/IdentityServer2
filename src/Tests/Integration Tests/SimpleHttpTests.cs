@@ -75,7 +75,7 @@ namespace Thinktecture.IdentityServer.Tests
             var result = client.GetAsync(baseAddress + values.ToQueryString()).Result;
             
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, result.StatusCode);
-            Assert.AreEqual<string>(MediaTypeNames.Text.Xml, result.Content.Headers.ContentType.MediaType);
+            Assert.AreEqual<string>(MediaTypeNames.Text.Plain, result.Content.Headers.ContentType.MediaType);
         }
 
         //[TestMethod]
