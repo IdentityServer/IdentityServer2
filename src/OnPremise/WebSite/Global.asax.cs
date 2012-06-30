@@ -23,9 +23,13 @@ namespace Thinktecture.IdentityServer.Web
 
         protected void Application_Start()
         {
+            // create empty config database if it not exists
             Database.SetInitializer(new ConfigurationDatabaseInitializer());
+            
+            // set the anti CSRF for name (that's a unqiue claim in our system)
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
 
+            // setup MEF
             SetupCompositionContainer();
             Container.Current.SatisfyImportsOnce(this);
 
