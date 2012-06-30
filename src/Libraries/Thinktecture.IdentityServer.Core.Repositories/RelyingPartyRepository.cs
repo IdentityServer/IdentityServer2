@@ -18,17 +18,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 
             using (var entities = IdentityServerConfigurationContext.Get())
             {
-                var strippedRealm = realm.StripProtocolMoniker();
+                var match = (from rp in entities.RelyingParties
+                             where rp.Realm.Equals(realm, System.StringComparison.OrdinalIgnoreCase)
+                             select rp)
+                            .FirstOrDefault();
 
-                var bestMatch = (from rp in entities.RelyingParties
-                                 where strippedRealm.Contains(rp.Realm)
-                                 orderby rp.Realm descending
-                                 select rp)
-                                .FirstOrDefault();
-
-                if (bestMatch != null)
+                if (match != null)
                 {
-                    relyingParty = bestMatch.ToDomainModel();
+                    relyingParty = match.ToDomainModel();
                     return true;
                 }
             }

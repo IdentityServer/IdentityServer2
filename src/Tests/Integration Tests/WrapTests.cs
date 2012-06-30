@@ -18,7 +18,7 @@ namespace Thinktecture.IdentityServer.Tests
     {
         WrapClient _client;
         string baseAddress = Constants.Wrap.LocalBaseAddress;
-        string scope = Constants.Realms.LocalRP;
+        string scope = Constants.Realms.TestRP;
 
         [TestInitialize]
         public void Setup()

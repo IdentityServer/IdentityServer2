@@ -50,7 +50,7 @@ namespace Thinktecture.IdentityServer.Tests
 
         public static class Realms
         {
-            public const string LocalRP = "https://roadie/rp/";
+            public const string TestRP = "https://test/rp/";
             public const string UnknownRealm = "http://unknown/";
             public const string PlainTextNoEncryption = "http://server/noEncryption/";
             public const string SslNoEncryption = "https://server/noEncryption/";

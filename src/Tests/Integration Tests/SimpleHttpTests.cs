@@ -22,7 +22,7 @@ namespace Thinktecture.IdentityServer.Tests
         string baseAddress = Constants.Http.LocalBaseAddress;
         //string baseAddress = Constants.Http.CloudBaseAddress;
         
-        string rp = Constants.Realms.LocalRP;
+        string rp = Constants.Realms.TestRP;
 
         [TestMethod]
         public void NoRealm()

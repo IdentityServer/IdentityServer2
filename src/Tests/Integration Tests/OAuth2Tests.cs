@@ -22,7 +22,7 @@ namespace Thinktecture.IdentityServer.Tests
         string baseAddress = Constants.OAuth2.LocalBaseAddress;
         //string baseAddress = Constants.OAuth2.CloudBaseAddress;
 
-        string scope = Constants.Realms.LocalRP;
+        string scope = Constants.Realms.TestRP;
 
         [TestMethod]
         public void ValidUserNameCredential()
