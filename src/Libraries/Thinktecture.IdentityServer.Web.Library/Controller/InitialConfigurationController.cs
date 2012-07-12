@@ -47,6 +47,11 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         [HttpPost]
         public ActionResult Index(InitialConfigurationModel model)
         {
+            if (!string.IsNullOrWhiteSpace(ConfigurationRepository.SigningCertificate.SubjectDistinguishedName))
+            {
+                return RedirectToAction("index", "home");
+            }
+
             if (ModelState.IsValid)
             {
                 var config = ConfigurationRepository.Configuration;
