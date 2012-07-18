@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using Thinktecture.IdentityServer.Models;
+using Models = Thinktecture.IdentityServer.Models;
+using Entities = Thinktecture.IdentityServer.Repositories.Sql;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
 {
@@ -121,12 +123,36 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         }
         #endregion
 
-        #region Misc
-        public static string StripProtocolMoniker(this string uriString)
+        #region IdentityProvider
+        public static List<Models.IdentityProvider> ToDomainModel(this List<Entities.IdentityProvider> idps)
         {
-            var uri = new Uri(uriString);
-            string stripped = uri.AbsoluteUri.Substring(uri.Scheme.Length + 3);
-            return stripped.ToLowerInvariant();
+            return new List<Models.IdentityProvider>(
+                from idp in idps
+                select new Models.IdentityProvider
+                {
+                    Name = idp.Name,
+                    DisplayName = idp.DisplayName,
+                    Type = idp.Type,
+                    WSFederationEndpoint = idp.WSFederationEndpoint,
+                    IssuerThumbprint = idp.IssuerThumbprint
+                });
+        }
+
+        public static Models.IdentityProvider ToDomainModel(this Entities.IdentityProvider idp)
+        {
+            if (idp == null)
+            {
+                return null;
+            }
+
+            return new Models.IdentityProvider
+            {
+                Name = idp.Name,
+                DisplayName = idp.DisplayName,
+                Type = idp.Type,
+                WSFederationEndpoint = idp.WSFederationEndpoint,
+                IssuerThumbprint = idp.IssuerThumbprint
+            };
         }
         #endregion
     }

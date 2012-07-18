@@ -54,6 +54,13 @@ namespace Thinktecture.IdentityServer.Web
                 new { controller = "WSFederation", action = "issue" }
             );
 
+            // ws-federation HRD (mvc)
+            routes.MapRoute(
+                "hrd",
+                "issue/hrd",
+                new { controller = "Hrd", action = "issue" }
+            );
+
             // jsnotify (mvc)
             routes.MapRoute(
                 "jsnotify",

@@ -80,6 +80,7 @@
     <Compile Include="Controller\FederationMetadataController.cs" />
     <Compile Include="Controller\HomeController.cs" />
     <Compile Include="Controller\InitialConfigurationController.cs" />
+    <Compile Include="Controller\Issue\HrdController.cs" />
     <Compile Include="Controller\Issue\JSNotifyController.cs" />
     <Compile Include="Controller\Issue\OAuth2Controller.cs" />
     <Compile Include="Controller\Issue\SimpleHttpController.cs" />

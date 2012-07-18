@@ -25,6 +25,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 
         public DbSet<Endpoints> Endpoints { get; set; }
 
+        public DbSet<IdentityProvider> IdentityProviders { get; set; }
+
         public static Func<IdentityServerConfigurationContext> FactoryMethod { get; set; }
 
         public IdentityServerConfigurationContext()

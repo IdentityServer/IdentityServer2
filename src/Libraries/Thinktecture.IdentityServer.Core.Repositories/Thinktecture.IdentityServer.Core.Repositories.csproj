@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationDatabaseInitializer.cs" />
+    <Compile Include="IdentityProviderRepository.cs" />
     <Compile Include="EntityModel\Certificates.cs" />
     <Compile Include="EntityModel\ClientCertificates.cs" />
     <Compile Include="ClientCertificatesRepository.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="EntityModel\Delegation.cs" />
     <Compile Include="DelegationRepository.cs" />
     <Compile Include="EntityModel\Endpoints.cs" />
+    <Compile Include="EntityModel\IdentityProvider.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="EntityModel\Global.cs" />
     <Compile Include="IdentityServerConfigurationContext.cs" />

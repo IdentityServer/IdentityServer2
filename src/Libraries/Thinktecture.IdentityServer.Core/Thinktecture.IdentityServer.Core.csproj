@@ -110,10 +110,13 @@
     <Compile Include="Models\GlobalConfiguration.cs" />
     <Compile Include="Endpoints.cs" />
     <Compile Include="Helper\Cache.cs" />
+    <Compile Include="Models\IdentityProvider.cs" />
+    <Compile Include="Models\IdentityProviderTypes.cs" />
     <Compile Include="Repositories\IClaimsRepository.cs" />
     <Compile Include="Repositories\IClientCertificatesRepository.cs" />
     <Compile Include="Repositories\ICacheRepository.cs" />
     <Compile Include="Repositories\IDelegationRepository.cs" />
+    <Compile Include="Repositories\IIdentityProviderRepository.cs" />
     <Compile Include="TokenService\SignInSessionsManager.cs" />
     <Compile Include="TokenService\ClientCertificateIssuerNameRegistry.cs" />
     <Compile Include="TokenService\RepositoryX509SecurityTokenHandler.cs" />
