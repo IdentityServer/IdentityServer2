@@ -117,6 +117,7 @@
     <Compile Include="Repositories\ICacheRepository.cs" />
     <Compile Include="Repositories\IDelegationRepository.cs" />
     <Compile Include="Repositories\IIdentityProviderRepository.cs" />
+    <Compile Include="TokenService\IdentityProviderIssuerNameRegistry.cs" />
     <Compile Include="TokenService\SignInSessionsManager.cs" />
     <Compile Include="TokenService\ClientCertificateIssuerNameRegistry.cs" />
     <Compile Include="TokenService\RepositoryX509SecurityTokenHandler.cs" />

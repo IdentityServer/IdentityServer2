@@ -10,7 +10,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 {
     public class IdentityProviderRepository : IIdentityProviderRepository
     {
-        IEnumerable<Models.IdentityProvider> IIdentityProviderRepository.Get()
+        IEnumerable<Models.IdentityProvider> IIdentityProviderRepository.GetAll()
         {
             using (var entities = IdentityServerConfigurationContext.Get())
             {
