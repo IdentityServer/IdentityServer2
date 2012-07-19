@@ -8,6 +8,7 @@ namespace Thinktecture.IdentityServer.Models
     public class EndpointConfiguration
     {
         public bool WSFederation { get; set; }
+        public bool WSFederationHrd { get; set; }
         public bool WSTrustMessage { get; set; }
         public bool WSTrustMixed { get; set; }
         public bool SimpleHttp { get; set; }

@@ -22,7 +22,7 @@ namespace Thinktecture.IdentityServer.Configuration
         /// <summary>
         /// Gets or sets type of the class that provides encryption certificates
         /// </summary>
-        [global::System.Configuration.ConfigurationProperty(TokenServiceConfigurationPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.SqlCompactConfigurationRepository, Thinktecture.IdentityServer")]
+        [global::System.Configuration.ConfigurationProperty(TokenServiceConfigurationPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.Sql.ConfigurationRepository, Thinktecture.IdentityServer.Core.Repositories")]
         public global::System.String TokenServiceConfiguration
         {
             get
@@ -47,7 +47,7 @@ namespace Thinktecture.IdentityServer.Configuration
         /// <summary>
         /// Gets or sets type of the class that provides encryption certificates
         /// </summary>
-        [global::System.Configuration.ConfigurationProperty(UserManagementPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.ProviderUserRepository, Thinktecture.IdentityServer")]
+        [global::System.Configuration.ConfigurationProperty(UserManagementPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.ProviderUserRepository, Thinktecture.IdentityServer.Core.Repositories")]
         public global::System.String UserManagement
         {
             get
@@ -69,7 +69,7 @@ namespace Thinktecture.IdentityServer.Configuration
         /// </summary>
         internal const global::System.String ClaimsRepositoryPropertyName = "claimsRepository";
 
-        [global::System.Configuration.ConfigurationProperty(ClaimsRepositoryPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.ProviderClaimsRepository, Thinktecture.IdentityServer")]
+        [global::System.Configuration.ConfigurationProperty(ClaimsRepositoryPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.ProviderClaimsRepository, Thinktecture.IdentityServer.Core.Repositories")]
         public global::System.String ClaimsRepository
         {
             get
@@ -79,6 +79,28 @@ namespace Thinktecture.IdentityServer.Configuration
             set
             {
                 base[ClaimsRepositoryPropertyName] = value;
+            }
+        }
+
+        #endregion
+
+        #region ClaimsTransformationRulesRepository Property
+
+        /// <summary>
+        /// The XML name of the <see cref="ConfigurationProvider"/> property.
+        /// </summary>
+        internal const global::System.String ClaimsTransformationRulesRepositoryPropertyName = "claimsTransformationRules";
+
+        [global::System.Configuration.ConfigurationProperty(ClaimsTransformationRulesRepositoryPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.PassThruTransformationRuleRepository, Thinktecture.IdentityServer.Core.Repositories")]
+        public global::System.String ClaimsTransformationRules
+        {
+            get
+            {
+                return (global::System.String)base[ClaimsTransformationRulesRepositoryPropertyName];
+            }
+            set
+            {
+                base[ClaimsTransformationRulesRepositoryPropertyName] = value;
             }
         }
 
@@ -94,7 +116,7 @@ namespace Thinktecture.IdentityServer.Configuration
         /// <summary>
         /// Gets or sets type of the class that provides encryption certificates
         /// </summary>
-        [global::System.Configuration.ConfigurationProperty(RelyingPartiesPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.SqlCompactRelyingPartyRepository, Thinktecture.IdentityServer")]
+        [global::System.Configuration.ConfigurationProperty(RelyingPartiesPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.Sql.RelyingPartyRepository, Thinktecture.IdentityServer.Core.Repositories")]
         public global::System.String RelyingParties
         {
             get
@@ -119,7 +141,7 @@ namespace Thinktecture.IdentityServer.Configuration
         /// <summary>
         /// Gets or sets type of the class that provides encryption certificates
         /// </summary>
-        [global::System.Configuration.ConfigurationProperty(ClientCertificatesPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.SqlCompactUserMappingsRepository, Thinktecture.IdentityServer")]
+        [global::System.Configuration.ConfigurationProperty(ClientCertificatesPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.Sql.ClientCertificatesRepository, Thinktecture.IdentityServer.Core.Repositories")]
         public global::System.String ClientCertificates
         {
             get
@@ -129,6 +151,31 @@ namespace Thinktecture.IdentityServer.Configuration
             set
             {
                 base[ClientCertificatesPropertyName] = value;
+            }
+        }
+
+        #endregion
+
+        #region IdentityProvider Property
+
+        /// <summary>
+        /// The XML name of the <see cref="ConfigurationProvider"/> property.
+        /// </summary>
+        internal const global::System.String IdentityProviderPropertyName = "identityProvider";
+
+        /// <summary>
+        /// Gets or sets type of the class that provides encryption certificates
+        /// </summary>
+        [global::System.Configuration.ConfigurationProperty(IdentityProviderPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.Sql.IdentityProviderRepository, Thinktecture.IdentityServer")]
+        public global::System.String IdentityProvider
+        {
+            get
+            {
+                return (global::System.String)base[IdentityProviderPropertyName];
+            }
+            set
+            {
+                base[IdentityProviderPropertyName] = value;
             }
         }
 
@@ -144,7 +191,7 @@ namespace Thinktecture.IdentityServer.Configuration
         /// <summary>
         /// Gets or sets type of the class that provides encryption certificates
         /// </summary>
-        [global::System.Configuration.ConfigurationProperty(DelegationPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.SqlCompactUserMappingsRepository, Thinktecture.IdentityServer")]
+        [global::System.Configuration.ConfigurationProperty(DelegationPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.Sql.DelegationRepository, Thinktecture.IdentityServer.Core.Repositories")]
         public global::System.String Delegation
         {
             get
@@ -169,7 +216,7 @@ namespace Thinktecture.IdentityServer.Configuration
         /// <summary>
         /// Gets or sets type of the class that provides encryption certificates
         /// </summary>
-        [global::System.Configuration.ConfigurationProperty(CachingPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.MemoryCacheRepository, Thinktecture.IdentityServer")]
+        [global::System.Configuration.ConfigurationProperty(CachingPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.MemoryCacheRepository, Thinktecture.IdentityServer.Core.Repositories")]
         public global::System.String Caching
         {
             get

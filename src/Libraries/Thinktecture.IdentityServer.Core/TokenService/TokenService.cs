@@ -117,6 +117,7 @@ namespace Thinktecture.IdentityServer.TokenService
             // externally authenticated user
             if (principal.HasClaim(c => c.Type == Constants.Claims.IdentityProvider && c.Issuer == Constants.LocalIssuer))
             {
+                Tracing.Information("Issuing a token for an external user.");
                 return GetExternalOutputClaims(principal, requestDetails);
             }
 

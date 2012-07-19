@@ -16,6 +16,10 @@ namespace Thinktecture.IdentityServer.Web.ViewModels.Administration
         public Boolean WSFederation { get; set; }
 
         [Required]
+        [DisplayName("WS-Federation Home Realm Discovery (Federation)")]
+        public Boolean WSFederationHrd { get; set; }
+
+        [Required]
         [DisplayName("WS-Trust Message Security")]
         public Boolean WSTrustMessage { get; set; }
 

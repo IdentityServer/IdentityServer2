@@ -17,6 +17,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public Boolean WSFederation { get; set; }
         
         [Required]
+        public bool WSFederationHrd { get; set; }
+        
+        [Required]
         public Boolean WSTrustMessage { get; set; }
         
         [Required]

@@ -28,7 +28,9 @@ namespace Thinktecture.IdentityServer.Repositories
                 { typeof(IRelyingPartyRepository).FullName, section.RelyingParties },
                 { typeof(IClientCertificatesRepository).FullName, section.ClientCertificates},
                 { typeof(IDelegationRepository).FullName, section.Delegation},
-                { typeof(ICacheRepository).FullName, section.Caching }
+                { typeof(ICacheRepository).FullName, section.Caching },
+                { typeof(IIdentityProviderRepository).FullName, section.IdentityProvider },
+                { typeof(IClaimsTransformationRulesRepository).FullName, section.ClaimsTransformationRules },
             };
         }
 

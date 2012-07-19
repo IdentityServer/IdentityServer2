@@ -45,7 +45,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         {
             Tracing.Verbose("HRD endpoint called.");
 
-            if (!ConfigurationRepository.Endpoints.WSFederation)
+            if (!ConfigurationRepository.Endpoints.WSFederationHrd)
             {
                 return new HttpNotFoundResult();
             }
@@ -163,7 +163,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
         private ActionResult RedirectToIdentityProvider(IdentityProvider identityProvider, SignInRequestMessage request)
         {
-            var message = new SignInRequestMessage(new Uri(identityProvider.WSFederationEndpoint), request.Realm);
+            var message = new SignInRequestMessage(new Uri(identityProvider.WSFederationEndpoint), ConfigurationRepository.Configuration.IssuerUri);
             SetContextCookie(request.Context, request.Realm);
 
             return new RedirectResult(message.WriteQueryString());

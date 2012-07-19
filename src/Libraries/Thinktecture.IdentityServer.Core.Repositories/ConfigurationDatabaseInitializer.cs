@@ -58,6 +58,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 new IdentityProvider
                 {
                     Name = "ADFS",
+                    DisplayName = "LeastPrivilege ADFS Server",
                     Type = Models.IdentityProviderTypes.WS,
                     WSFederationEndpoint = "https://adfs.leastprivilege.vm/adfs/ls/",
                     IssuerThumbprint = "8EC7F962CC083FF7C5997D8A4D5ED64B12E4C174"
@@ -103,6 +104,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Name = "Standard",
 
                 WSFederation = true,
+                WSFederationHrd = false,
                 FederationMetadata = true,
                 WSTrustMessage = false,
                 WSTrustMixed = true,
