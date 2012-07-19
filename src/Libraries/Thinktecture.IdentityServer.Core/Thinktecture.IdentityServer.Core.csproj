@@ -113,6 +113,7 @@
     <Compile Include="Models\IdentityProvider.cs" />
     <Compile Include="Models\IdentityProviderTypes.cs" />
     <Compile Include="Repositories\IClaimsRepository.cs" />
+    <Compile Include="Repositories\IClaimsTransformationRulesRepository.cs" />
     <Compile Include="Repositories\IClientCertificatesRepository.cs" />
     <Compile Include="Repositories\ICacheRepository.cs" />
     <Compile Include="Repositories\IDelegationRepository.cs" />
