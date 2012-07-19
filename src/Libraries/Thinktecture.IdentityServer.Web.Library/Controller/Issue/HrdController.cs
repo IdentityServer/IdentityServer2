@@ -9,17 +9,15 @@ using System.IdentityModel.Selectors;
 using System.IdentityModel.Services;
 using System.IdentityModel.Services.Configuration;
 using System.IdentityModel.Tokens;
+using System.Linq;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json.Linq;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
 using Thinktecture.IdentityServer.Web.ActionResults;
-using Thinktecture.IdentityServer.Web.Security;
-using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace Thinktecture.IdentityServer.Web.Controllers
 {
@@ -110,7 +108,8 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             var principal = ValidateToken(token);
             var issuerName = principal.Claims.First().Issuer;
 
-            principal.Identities.First().AddClaim(new Claim(Constants.Claims.IdentityProvider, issuerName));
+            principal.Identities.First().AddClaim(
+                new Claim(Constants.Claims.IdentityProvider, issuerName, ClaimValueTypes.String, Constants.LocalIssuer));
 
             var context = GetContextCookie();
             var message = new SignInRequestMessage(new Uri("http://foo"), context.Realm);
@@ -151,12 +150,12 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             throw new System.NotImplementedException();
         }
 
-        private ActionResult RedirectToIdentityProvider(SignInRequestMessage message)
+        private ActionResult RedirectToIdentityProvider(SignInRequestMessage request)
         {
             IdentityProvider idp = null;
-            if (IdentityProviderRepository.TryGet(message.HomeRealm, out idp))
+            if (IdentityProviderRepository.TryGet(request.HomeRealm, out idp))
             {
-                return RedirectToIdentityProvider(idp, message);
+                return RedirectToIdentityProvider(idp, request);
             }
 
             return View("Error");
@@ -189,11 +188,8 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 throw new InvalidOperationException("cookie");
             }
 
-            var j = JObject.Parse(HttpUtility.UrlDecode(cookie.Value));
-
-            var c = j.ToObject<Context>();
-
-            return c;
+            var json = JObject.Parse(HttpUtility.UrlDecode(cookie.Value));
+            return json.ToObject<Context>();
         }
 
         internal class Context
