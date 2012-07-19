@@ -34,17 +34,25 @@ namespace Thinktecture.IdentityServer.TokenService
         [Import]
         public IClaimsRepository ClaimsRepository { get; set; }
 
+        [Import]
+        public IIdentityProviderRepository IdentityProviderRepository { get; set; }
+
+        [Import]
+        public IClaimsTransformationRulesRepository ClaimsTransformationRulesRepository { get; set; }
+
         public TokenService(SecurityTokenServiceConfiguration configuration)
             : base(configuration)
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public TokenService(SecurityTokenServiceConfiguration configuration, IUserRepository userRepository, IClaimsRepository claimsRepository)
+        public TokenService(SecurityTokenServiceConfiguration configuration, IUserRepository userRepository, IClaimsRepository claimsRepository, IIdentityProviderRepository identityProviderRepository, IClaimsTransformationRulesRepository claimsTransformationRulesRepository)
             : base(configuration)
         {
             UserRepository = userRepository;
             ClaimsRepository = claimsRepository;
+            IdentityProviderRepository = identityProviderRepository;
+            ClaimsTransformationRulesRepository = claimsTransformationRulesRepository;
         }
 
         protected GlobalConfiguration GlobalConfiguration
@@ -106,6 +114,12 @@ namespace Thinktecture.IdentityServer.TokenService
         {
             var requestDetails = (scope as RequestDetailsScope).RequestDetails;
 
+            // externally authenticated user
+            if (principal.HasClaim(c => c.Type == Constants.Claims.IdentityProvider && c.Issuer == Constants.LocalIssuer))
+            {
+                return GetExternalOutputClaims(principal, requestDetails);
+            }
+
             var userClaims = GetOutputClaims(principal, requestDetails, ClaimsRepository);
             var outputIdentity = new ClaimsIdentity(userClaims);
 
@@ -137,6 +151,25 @@ namespace Thinktecture.IdentityServer.TokenService
             userClaims.AddRange(claimsRepository.GetClaims(principal, requestDetails));
 
             return userClaims;
+        }
+
+        protected virtual ClaimsIdentity GetExternalOutputClaims(ClaimsPrincipal principal, RequestDetails requestDetails)
+        {
+            var idpClaim = principal.FindFirst(c => c.Type == Constants.Claims.IdentityProvider && c.Issuer == Constants.LocalIssuer);
+
+            if (idpClaim == null)
+            {
+                throw new InvalidOperationException("No identity provider claim found.");
+            }
+
+            IdentityProvider idp = null;
+            if (IdentityProviderRepository.TryGet(idpClaim.Value, out idp))
+            {
+                var transformedClaims = ClaimsTransformationRulesRepository.ProcessClaims(principal, idp, requestDetails);
+                return new ClaimsIdentity(transformedClaims, "External");
+            }
+
+            throw new InvalidOperationException("Invalid identity provider.");
         }
 
         protected virtual ClaimsIdentity GetActAsClaimsIdentity(ClaimsIdentity clientIdentity, RequestDetails requestDetails)

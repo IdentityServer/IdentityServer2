@@ -6,6 +6,6 @@ namespace Thinktecture.IdentityServer.Repositories
     public interface IIdentityProviderRepository
     {
         IEnumerable<IdentityProvider> GetAll();
-        bool TryGet(string identifier, out IdentityProvider identityProvider);
+        bool TryGet(string name, out IdentityProvider identityProvider);
     }
 }
