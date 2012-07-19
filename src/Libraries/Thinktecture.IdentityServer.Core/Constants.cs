@@ -9,6 +9,13 @@ namespace Thinktecture.IdentityServer
     {
         public const string AuthenticationType = "IdentityServer";
 
+        public static class Claims
+        {
+            public const string Base = "http://identityserver.thinktecture.com/claims/";
+
+            public const string IdentityProvider = Base + "identityprovider";
+        }
+
         public static class Actions
         {
             public const string Issue          = "Issue";

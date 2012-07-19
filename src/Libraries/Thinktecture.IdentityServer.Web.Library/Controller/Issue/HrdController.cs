@@ -19,6 +19,7 @@ using Thinktecture.IdentityServer.TokenService;
 using Thinktecture.IdentityServer.Web.ActionResults;
 using Thinktecture.IdentityServer.Web.Security;
 using System.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace Thinktecture.IdentityServer.Web.Controllers
 {
@@ -107,12 +108,13 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         private ActionResult ProcessSignInResponse(SignInResponseMessage responseMessage, SecurityToken token)
         {
             var principal = ValidateToken(token);
-            //principal.Identities.First().AddClaim(new Claim("http://rdw/claims/identityprovider", "adfs"));
+            var issuerName = principal.Claims.First().Issuer;
 
-            //var context = GetContextCookie();
+            principal.Identities.First().AddClaim(new Claim(Constants.Claims.IdentityProvider, issuerName));
 
-            var message = new SignInRequestMessage(new Uri("http://foo"), "" /* context.Realm */);
-            //message.Context = context.Wctx;
+            var context = GetContextCookie();
+            var message = new SignInRequestMessage(new Uri("http://foo"), context.Realm);
+            message.Context = context.Wctx;
 
             // issue token and create ws-fed response
             var wsFedResponse = FederatedPassiveSecurityTokenServiceOperations.ProcessSignInRequest(
@@ -143,11 +145,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             return new ClaimsPrincipal(identity);
         }
 
-        private object GetContextCookie()
-        {
-            throw new NotImplementedException();
-        }
-
+       
         private ActionResult ShowHomeRealmSelection()
         {
             throw new System.NotImplementedException();
@@ -167,14 +165,43 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         private ActionResult RedirectToIdentityProvider(IdentityProvider identityProvider, SignInRequestMessage request)
         {
             var message = new SignInRequestMessage(new Uri(identityProvider.WSFederationEndpoint), request.Realm);
-
-            // TODO: handle context differently
-            message.Context = request.Context;
+            SetContextCookie(request.Context, request.Realm);
 
             return new RedirectResult(message.WriteQueryString());
         }
 
-       
+        private void SetContextCookie(string wctx, string realm)
+        {
+            var j = JObject.FromObject(new Context { Wctx = wctx, Realm = realm });
+
+            var cookie = new HttpCookie("rdwcontext", j.ToString());
+            cookie.Secure = true;
+            cookie.HttpOnly = true;
+
+            Response.Cookies.Add(cookie);
+        }
+
+        private Context GetContextCookie()
+        {
+            var cookie = Request.Cookies["rdwcontext"];
+            if (cookie == null)
+            {
+                throw new InvalidOperationException("cookie");
+            }
+
+            var j = JObject.Parse(HttpUtility.UrlDecode(cookie.Value));
+
+            var c = j.ToObject<Context>();
+
+            return c;
+        }
+
+        internal class Context
+        {
+            public string Wctx { get; set; }
+            public string Realm { get; set; }
+        }
+
         #endregion
     }
 }
