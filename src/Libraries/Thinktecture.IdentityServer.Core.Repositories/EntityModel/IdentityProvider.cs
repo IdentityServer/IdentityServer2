@@ -14,11 +14,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public string Type { get; set; }
 
         [Required]
-        public string Identifier { get; set; }
-        
-        [Required]
         public bool ShowInHrdSelection { get; set; }
-
 
         public string WSFederationEndpoint { get; set; }
         public string IssuerThumbprint { get; set; }

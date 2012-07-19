@@ -118,6 +118,7 @@
     <Compile Include="Repositories\ICacheRepository.cs" />
     <Compile Include="Repositories\IDelegationRepository.cs" />
     <Compile Include="Repositories\IIdentityProviderRepository.cs" />
+    <Compile Include="Repositories\PassThruTransformationRuleRepository.cs" />
     <Compile Include="TokenService\IdentityProviderIssuerNameRegistry.cs" />
     <Compile Include="TokenService\SignInSessionsManager.cs" />
     <Compile Include="TokenService\ClientCertificateIssuerNameRegistry.cs" />

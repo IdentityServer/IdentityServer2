@@ -18,11 +18,11 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
         }
 
-        public bool TryGet(string identifier, out Models.IdentityProvider identityProvider)
+        public bool TryGet(string name, out Models.IdentityProvider identityProvider)
         {
             using (var entities = IdentityServerConfigurationContext.Get())
             {
-                identityProvider = entities.IdentityProviders.Where(idp => idp.Identifier == identifier).FirstOrDefault().ToDomainModel();
+                identityProvider = entities.IdentityProviders.Where(idp => idp.Name == name).FirstOrDefault().ToDomainModel();
                 return (identityProvider != null);
             }
         }
