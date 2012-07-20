@@ -112,12 +112,17 @@
     <Compile Include="Helper\Cache.cs" />
     <Compile Include="Models\IdentityProvider.cs" />
     <Compile Include="Models\IdentityProviderTypes.cs" />
+    <Compile Include="Models\NewConfiguration\DiagnosticsConfiguration.cs" />
     <Compile Include="Repositories\IClaimsRepository.cs" />
     <Compile Include="Repositories\IClaimsTransformationRulesRepository.cs" />
     <Compile Include="Repositories\IClientCertificatesRepository.cs" />
     <Compile Include="Repositories\ICacheRepository.cs" />
     <Compile Include="Repositories\IDelegationRepository.cs" />
     <Compile Include="Repositories\IIdentityProviderRepository.cs" />
+    <Compile Include="Models\NewConfiguration\OAuthWrapConfiguration.cs" />
+    <Compile Include="Models\NewConfiguration\GlobalConfiguration.cs" />
+    <Compile Include="Models\NewConfiguration\WSTrustConfiguration.cs" />
+    <Compile Include="Models\NewConfiguration\WSFederationConfiguration.cs" />
     <Compile Include="Repositories\PassThruTransformationRuleRepository.cs" />
     <Compile Include="TokenService\IdentityProviderIssuerNameRegistry.cs" />
     <Compile Include="TokenService\SignInSessionsManager.cs" />
