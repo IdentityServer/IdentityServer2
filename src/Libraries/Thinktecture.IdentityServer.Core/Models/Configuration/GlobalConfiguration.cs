@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Models.Configuration
 {
-    class GlobalConfiguration
+    public class GlobalConfiguration
     {
         public String SiteName { get; set; }
         public String IssuerUri { get; set; }

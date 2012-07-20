@@ -13,6 +13,7 @@ namespace Thinktecture.IdentityServer.Repositories.Configuration
 
         GlobalConfiguration Global { get; set; }
         DiagnosticsConfiguration Diagnostics { get; set; }
+        KeyMaterialConfiguration Keys { get; set; }
 
         WSFederationConfiguration WSFederation { get; set; }
         FederationMetadataConfiguration FederationMetadata { get; set; }
