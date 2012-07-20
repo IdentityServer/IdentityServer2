@@ -17,10 +17,12 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         public int MaximumTokenLifetime { get; set; }
         public int SsoCookieLifetime { get; set; }
 
-
         public Boolean RequireEncryption { get; set; }
         public Boolean RequireRelyingPartyRegistration { get; set; }
         public Boolean EnableClientCertificateAuthentication { get; set; }
         public Boolean EnforceUsersGroupMembership { get; set; }
+
+        public int HttpPort { get; set; }
+        public int HttpsPort { get; set; }
     }
 }
