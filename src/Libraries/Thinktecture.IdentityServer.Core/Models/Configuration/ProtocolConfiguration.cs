@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Models.Configuration
 {
-    public class FederationMetadataConfiguration : ProtocolConfiguration
-    { }
+    public class ProtocolConfiguration
+    {
+        public bool Enabled { get; set; }
+    }
 }

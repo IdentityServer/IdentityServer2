@@ -108,6 +108,7 @@
     <Compile Include="Models\Configuration\KeyMaterialConfiguration.cs" />
     <Compile Include="Models\Configuration\OAuth2Configuration.cs" />
     <Compile Include="Models\Configuration\FederationMetadataConfiguration.cs" />
+    <Compile Include="Models\Configuration\ProtocolConfiguration.cs" />
     <Compile Include="Models\DelegationSetting.cs" />
     <Compile Include="Models\EndpointConfiguration.cs" />
     <Compile Include="Models\GlobalConfiguration.cs" />
@@ -116,7 +117,7 @@
     <Compile Include="Models\IdentityProvider.cs" />
     <Compile Include="Models\IdentityProviderTypes.cs" />
     <Compile Include="Models\Configuration\DiagnosticsConfiguration.cs" />
-    <Compile Include="Repositories\Configuration\INewConfigurationRepository.cs" />
+    <Compile Include="Repositories\Configuration\IConfigurationRepository.cs" />
     <Compile Include="Repositories\IClaimsRepository.cs" />
     <Compile Include="Repositories\IClaimsTransformationRulesRepository.cs" />
     <Compile Include="Repositories\IClientCertificatesRepository.cs" />

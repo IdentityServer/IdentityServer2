@@ -1,19 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Thinktecture.IdentityServer.Models.Configuration
+namespace Thinktecture.IdentityServer.Repositories.Sql.Configuration
 {
-    public class WSFederationConfiguration : ProtocolConfiguration
+    public class WSFederationConfiguration
     {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        public bool Enabled { get; set; }
+
+        [Required]
         public bool EnableAuthentication { get; set; }
+
+        [Required]
         public bool EnableFederation { get; set; }
+
+        [Required]
         public bool EnableHrd { get; set; }
 
+        [Required]
         public bool AllowReplyTo { get; set; }
+
+        [Required]
         public Boolean RequireReplyToWithinRealm { get; set; }
+        
+        [Required]
         public Boolean RequireSslForReplyTo { get; set; }
     }
 }

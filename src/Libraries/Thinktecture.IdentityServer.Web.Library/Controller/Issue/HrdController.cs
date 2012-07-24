@@ -89,18 +89,6 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             {
                 return ShowHomeRealmSelection();
             }
-
-            //// issue token and create ws-fed response
-            //var response = FederatedPassiveSecurityTokenServiceOperations.ProcessSignInRequest(
-            //    message,
-            //    principal as ClaimsPrincipal,
-            //    TokenServiceConfiguration.Current.CreateSecurityTokenService());
-
-            //// set cookie for single-sign-out
-            //new SignInSessionsManager(HttpContext, ConfigurationRepository.Configuration.MaximumTokenLifetime)
-            //    .AddRealm(response.BaseUri.AbsoluteUri);
-
-            //return new WSFederationResult(response);
         }
 
         private ActionResult ProcessSignInResponse(SignInResponseMessage responseMessage, SecurityToken token)

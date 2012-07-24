@@ -13,8 +13,32 @@ using Entities = Thinktecture.IdentityServer.Repositories.Sql;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
 {
-    internal static class Extensions
+    internal static class Mappings
     {
+        #region GlobalConfiguration
+        public static Models.Configuration.GlobalConfiguration ToDomainModel(this Entities.Configuration.GlobalConfiguration entity)
+        {
+            return new Models.Configuration.GlobalConfiguration
+            {
+                SiteName = entity.SiteName,
+                IssuerUri = entity.IssuerUri,
+                IssuerContactEmail = entity.IssuerContactEmail,
+                DefaultHttpTokenType = entity.DefaultHttpTokenType,
+                DefaultWSTokenType = entity.DefaultWSTokenType,
+                DefaultTokenLifetime = entity.DefaultTokenLifetime,
+                MaximumTokenLifetime = entity.MaximumTokenLifetime,
+                EnableClientCertificateAuthentication = entity.EnableClientCertificateAuthentication,
+                EnforceUsersGroupMembership = entity.EnforceUsersGroupMembership,
+                HttpPort = entity.HttpPort,
+                HttpsPort = entity.HttpsPort,
+                RequireEncryption = entity.RequireEncryption,
+                RequireRelyingPartyRegistration = entity.RequireRelyingPartyRegistration,
+                SsoCookieLifetime = entity.SsoCookieLifetime
+            };
+        }
+        #endregion
+
+
         #region Relying Party
         public static RelyingParty ToDomainModel(this RelyingParties rpEntity)
         {

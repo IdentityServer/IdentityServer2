@@ -7,7 +7,7 @@ using Thinktecture.IdentityServer.Models.Configuration;
 
 namespace Thinktecture.IdentityServer.Repositories.Configuration
 {
-    public interface INewConfigurationRepository
+    public interface IConfigurationRepository
     {
         bool SupportsWriteAccess { get; }
 

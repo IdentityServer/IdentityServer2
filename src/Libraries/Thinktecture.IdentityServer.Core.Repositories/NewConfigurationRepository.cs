@@ -1,9 +1,14 @@
 ﻿using System;
 using Thinktecture.IdentityServer.Repositories.Configuration;
+using Thinktecture.IdentityServer.Repositories.Sql;
+using System.Linq;
+using Thinktecture.IdentityServer.Repositories.Sql.Configuration;
+using Models = Thinktecture.IdentityServer.Models;
+using Entities = Thinktecture.IdentityServer.Repositories.Sql;
 
 namespace Thinktecture.IdentityServer.Core.Repositories
 {
-    public class NewConfigurationRepository : INewConfigurationRepository
+    public class NewConfigurationRepository : IConfigurationRepository
     {
         public bool SupportsWriteAccess
         {
@@ -14,7 +19,13 @@ namespace Thinktecture.IdentityServer.Core.Repositories
         {
             get
             {
-                throw new NotImplementedException();
+                using (var entities = NewIdentityServerConfigurationContext.Get())
+                {
+                    var config = entities.GlobalConfiguration.First<Entities.Configuration.GlobalConfiguration>();
+
+                    // map to domain model
+                    return config.ToDomainModel();
+                }
             }
             set
             {

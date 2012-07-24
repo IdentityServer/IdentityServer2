@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Models.Configuration
 {
-    public class WSTrustConfiguration
+    public class WSTrustConfiguration : ProtocolConfiguration
     {
-        public bool Enabled { get; set; }
-
         public bool EnableMessageSecurity { get; set; }
         public bool EnableMixedModeSecurity { get; set; }
         public bool EnableClientCertificateAuthentication { get; set; }

@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Models.Configuration
 {
-    public class OAuthWrapConfiguration
-    {
-        public bool Enabled { get; set; }
-    }
+    public class OAuthWrapConfiguration : ProtocolConfiguration
+    { }
 }

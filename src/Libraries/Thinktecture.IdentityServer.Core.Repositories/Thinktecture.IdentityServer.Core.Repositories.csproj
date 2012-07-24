@@ -71,17 +71,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationDatabaseInitializer.cs" />
+    <Compile Include="EntityModel\Configuration\WSFederationConfiguration.cs" />
+    <Compile Include="NewIdentityServerConfigurationContext.cs" />
+    <Compile Include="EntityModel\Configuration\GlobalConfiguration.cs" />
     <Compile Include="IdentityProviderRepository.cs" />
-    <Compile Include="EntityModel\Certificates.cs" />
     <Compile Include="EntityModel\ClientCertificates.cs" />
     <Compile Include="ClientCertificatesRepository.cs" />
     <Compile Include="ConfigurationRepository.cs" />
     <Compile Include="EntityModel\Delegation.cs" />
     <Compile Include="DelegationRepository.cs" />
-    <Compile Include="EntityModel\Endpoints.cs" />
     <Compile Include="EntityModel\IdentityProvider.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="EntityModel\Global.cs" />
+    <Compile Include="Mappings.cs" />
     <Compile Include="IdentityServerConfigurationContext.cs" />
     <Compile Include="MemoryCacheRepository.cs" />
     <Compile Include="NewConfigurationRepository.cs" />
@@ -102,9 +102,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EntityModel\Configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
