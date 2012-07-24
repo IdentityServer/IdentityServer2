@@ -19,7 +19,7 @@ namespace Thinktecture.IdentityServer.Web.GlobalFilter
         {
             Container.Current.SatisfyImportsOnce(this);
 
-            filterContext.Controller.ViewBag.SiteName = ConfigurationRepository.Configuration.SiteName;
+            filterContext.Controller.ViewBag.SiteName = ConfigurationRepository.Global.SiteName;
             filterContext.Controller.ViewBag.IsAdministrator = ClaimsAuthorize.CheckAccess(Constants.Actions.Administration, Constants.Resources.UI);
             filterContext.Controller.ViewBag.IsSignedIn = filterContext.HttpContext.User.Identity.IsAuthenticated;
 

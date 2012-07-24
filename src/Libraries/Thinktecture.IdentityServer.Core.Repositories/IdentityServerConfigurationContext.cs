@@ -8,24 +8,24 @@ using System.Configuration;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using Thinktecture.IdentityServer.Repositories.Sql.Configuration;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
 {    
     public class IdentityServerConfigurationContext : DbContext
     {
-        public DbSet<Global> Global { get; set; }
+        public DbSet<GlobalConfiguration> GlobalConfiguration { get; set; }
+        public DbSet<WSFederationConfiguration> WSFederation { get; set; }
+        public DbSet<KeyMaterialConfiguration> Keys { get; set; }
 
-        public DbSet<Certificates> Certificates { get; set; }
+
 
         public DbSet<ClientCertificates> ClientCertificates { get; set; }
-
         public DbSet<Delegation> Delegation { get; set; }
-
         public DbSet<RelyingParties> RelyingParties { get; set; }
-
-        public DbSet<Endpoints> Endpoints { get; set; }
-
         public DbSet<IdentityProvider> IdentityProviders { get; set; }
+
+
 
         public static Func<IdentityServerConfigurationContext> FactoryMethod { get; set; }
 

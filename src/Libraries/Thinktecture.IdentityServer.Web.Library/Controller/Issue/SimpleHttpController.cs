@@ -33,15 +33,15 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         {
             Tracing.Verbose("Simple HTTP endpoint called.");
 
-            if (!ConfigurationRepository.Endpoints.SimpleHttp)
-            {
-                Tracing.Warning("Simple HTTP endpoint is disabled in configuration");
-                return new HttpNotFoundResult();
-            }
+            //if (!ConfigurationRepository.Endpoints.SimpleHttp)
+            //{
+            //    Tracing.Warning("Simple HTTP endpoint is disabled in configuration");
+            //    return new HttpNotFoundResult();
+            //}
 
             if (tokenType == null)
             {
-                tokenType = ConfigurationRepository.Configuration.HttpTokenType;
+                tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
             }
 
             Tracing.Information("Token type: " + tokenType);

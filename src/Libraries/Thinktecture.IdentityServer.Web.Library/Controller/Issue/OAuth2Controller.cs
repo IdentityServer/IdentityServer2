@@ -43,7 +43,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         {
             Tracing.Verbose("OAuth2 endpoint called.");
 
-            if (!ConfigurationRepository.Endpoints.OAuth2)
+            if (!ConfigurationRepository.OAuth2.Enabled)
             {
                 Tracing.Error("OAuth2 endpoint called, but disabled in configuration");
                 return new HttpNotFoundResult();
@@ -74,14 +74,14 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 }
 
                 SecurityToken token;
-                if (auth.TryIssueToken(new EndpointAddress(uri), principal, ConfigurationRepository.Configuration.HttpTokenType, out token))
+                if (auth.TryIssueToken(new EndpointAddress(uri), principal, ConfigurationRepository.Global.DefaultHttpTokenType, out token))
                 {
-                    var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[ConfigurationRepository.Configuration.HttpTokenType];
+                    var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[ConfigurationRepository.Global.DefaultHttpTokenType];
                     var response = new AccessTokenResponse
                     {
                         AccessToken = handler.WriteToken(token),
                         TokenType = TokenTypes.JsonWebToken,
-                        ExpiresIn = ConfigurationRepository.Configuration.DefaultTokenLifetime * 60,
+                        ExpiresIn = ConfigurationRepository.Global.DefaultTokenLifetime * 60,
                     };
 
                     Tracing.Information("OAuth2 issue successful for user: " + request.UserName);

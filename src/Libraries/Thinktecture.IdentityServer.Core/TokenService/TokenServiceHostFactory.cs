@@ -37,7 +37,7 @@ namespace Thinktecture.IdentityServer.TokenService
         /// <returns>A WS-Trust ServiceHost</returns>
         public override ServiceHostBase CreateServiceHost(string constructorString, Uri[] baseAddresses)
         {
-            var globalConfiguration = ConfigurationRepository.Configuration;
+            var globalConfiguration = ConfigurationRepository.Global;
             var config = CreateSecurityTokenServiceConfiguration(constructorString);
             var host = new WSTrustServiceHost(config, baseAddresses);
             
@@ -49,20 +49,20 @@ namespace Thinktecture.IdentityServer.TokenService
             serviceBehavior.AddressFilterMode = AddressFilterMode.Any;
 
             // add and configure a mixed mode security endpoint
-            if (ConfigurationRepository.Endpoints.WSTrustMixed)
+            if (ConfigurationRepository.WSTrust.Enabled && ConfigurationRepository.WSTrust.EnableMixedModeSecurity)
             {
                 EndpointIdentity epi = null;
-                if (ConfigurationRepository.Configuration.EnableStrongEpiForSsl)
-                {
-                    if (ConfigurationRepository.SslCertificate.Certificate == null)
-                    {
-                        throw new ServiceActivationException("No SSL certificate configured for strong endpoint identity.");
-                    }
+                //if (ConfigurationRepository.Configuration.EnableStrongEpiForSsl)
+                //{
+                //    if (ConfigurationRepository.SslCertificate.Certificate == null)
+                //    {
+                //        throw new ServiceActivationException("No SSL certificate configured for strong endpoint identity.");
+                //    }
 
-                    epi = EndpointIdentity.CreateX509CertificateIdentity(ConfigurationRepository.SslCertificate.Certificate);
-                }
+                //    epi = EndpointIdentity.CreateX509CertificateIdentity(ConfigurationRepository.SslCertificate.Certificate);
+                //}
 
-                if (globalConfiguration.EnableClientCertificates)
+                if (ConfigurationRepository.WSTrust.EnableClientCertificateAuthentication)
                 {
                     var sep2 = host.AddServiceEndpoint(
                         typeof(IWSTrust13SyncContract),
@@ -87,13 +87,13 @@ namespace Thinktecture.IdentityServer.TokenService
             }
 
             // add and configure a message security endpoint
-            if (ConfigurationRepository.Endpoints.WSTrustMessage)
+            if (ConfigurationRepository.WSTrust.Enabled && ConfigurationRepository.WSTrust.EnableMessageSecurity)
             {
                 var credential = new ServiceCredentials();
-                credential.ServiceCertificate.Certificate = ConfigurationRepository.SigningCertificate.Certificate;
+                credential.ServiceCertificate.Certificate = ConfigurationRepository.Keys.SigningCertificate;
                 host.Description.Behaviors.Add(credential);
 
-                if (globalConfiguration.EnableClientCertificates)
+                if (ConfigurationRepository.WSTrust.EnableClientCertificateAuthentication)
                 {
                     host.AddServiceEndpoint(
                         typeof(IWSTrust13SyncContract),

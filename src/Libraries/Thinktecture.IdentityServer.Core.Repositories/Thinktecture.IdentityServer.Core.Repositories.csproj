@@ -71,20 +71,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationDatabaseInitializer.cs" />
+    <Compile Include="EntityModel\Configuration\KeyMaterialConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\WSFederationConfiguration.cs" />
-    <Compile Include="NewIdentityServerConfigurationContext.cs" />
+    <Compile Include="IdentityServerConfigurationContext.cs" />
     <Compile Include="EntityModel\Configuration\GlobalConfiguration.cs" />
     <Compile Include="IdentityProviderRepository.cs" />
     <Compile Include="EntityModel\ClientCertificates.cs" />
     <Compile Include="ClientCertificatesRepository.cs" />
-    <Compile Include="ConfigurationRepository.cs" />
+    <Compile Include="__ConfigurationRepository.cs" />
     <Compile Include="EntityModel\Delegation.cs" />
     <Compile Include="DelegationRepository.cs" />
     <Compile Include="EntityModel\IdentityProvider.cs" />
     <Compile Include="Mappings.cs" />
-    <Compile Include="IdentityServerConfigurationContext.cs" />
+    <Compile Include="__IdentityServerConfigurationContext.cs" />
     <Compile Include="MemoryCacheRepository.cs" />
-    <Compile Include="NewConfigurationRepository.cs" />
+    <Compile Include="ConfigurationRepository.cs" />
     <Compile Include="NullCacheRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderClaimsRepository.cs" />

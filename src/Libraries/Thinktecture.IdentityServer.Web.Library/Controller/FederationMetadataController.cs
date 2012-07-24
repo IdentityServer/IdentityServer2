@@ -33,15 +33,15 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
         public ActionResult Generate()
         {
-            if (ConfigurationRepository.Endpoints.FederationMetadata)
+            if (ConfigurationRepository.FederationMetadata.Enabled)
             {
                 return Cache.ReturnFromCache<ActionResult>(CacheRepository, Constants.CacheKeys.WSFedMetadata, 1, () =>
                     {
                         var endpoints = Endpoints.Create(
                             HttpContext.Request.Headers["Host"],
                             HttpContext.Request.ApplicationPath,
-                            ConfigurationRepository.Endpoints.HttpPort,
-                            ConfigurationRepository.Endpoints.HttpsPort);
+                            ConfigurationRepository.Global.HttpPort,
+                            ConfigurationRepository.Global.HttpsPort);
 
                         return new ContentResult
                         {

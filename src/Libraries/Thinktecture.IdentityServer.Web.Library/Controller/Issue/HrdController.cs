@@ -45,7 +45,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         {
             Tracing.Verbose("HRD endpoint called.");
 
-            if (!ConfigurationRepository.Endpoints.WSFederationHrd)
+            if (!ConfigurationRepository.WSFederation.Enabled || ! ConfigurationRepository.WSFederation.EnableFederation)
             {
                 return new HttpNotFoundResult();
             }
@@ -120,7 +120,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         {
             var config = new SecurityTokenHandlerConfiguration();
             config.AudienceRestriction.AudienceMode = AudienceUriMode.Always;
-            config.AudienceRestriction.AllowedAudienceUris.Add(new Uri(ConfigurationRepository.Configuration.IssuerUri));
+            config.AudienceRestriction.AllowedAudienceUris.Add(new Uri(ConfigurationRepository.Global.IssuerUri));
 
             var registry = new IdentityProviderIssuerNameRegistry(IdentityProviderRepository.GetAll());
             config.IssuerNameRegistry = registry;
@@ -151,7 +151,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
         private ActionResult RedirectToIdentityProvider(IdentityProvider identityProvider, SignInRequestMessage request)
         {
-            var message = new SignInRequestMessage(new Uri(identityProvider.WSFederationEndpoint), ConfigurationRepository.Configuration.IssuerUri);
+            var message = new SignInRequestMessage(new Uri(identityProvider.WSFederationEndpoint), ConfigurationRepository.Global.IssuerUri);
             SetContextCookie(request.Context, request.Realm);
 
             return new RedirectResult(message.WriteQueryString());

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Thinktecture.IdentityModel.Constants;
+using Thinktecture.IdentityServer.Repositories.Sql.Configuration;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
 {
@@ -17,13 +18,13 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
     {
         protected override void Seed(IdentityServerConfigurationContext context)
         {
-            context.Global.Add(CreateGlobalConfiguration());
-            context.Endpoints.Add(CreateEndpointConfiguration());
-            CreateCertificateConfiguration().ForEach(c => context.Certificates.Add(c));
+            //context.Global.Add(CreateGlobalConfiguration());
+            //context.Endpoints.Add(CreateEndpointConfiguration());
+            //CreateCertificateConfiguration().ForEach(c => context.Certificates.Add(c));
 
-            // for test purposes
-            CreateTestRelyingParties().ForEach(rp => context.RelyingParties.Add(rp));
-            CreateTestIdentityProviders().ForEach(idp => context.IdentityProviders.Add(idp));
+            //// for test purposes
+            //CreateTestRelyingParties().ForEach(rp => context.RelyingParties.Add(rp));
+            //CreateTestIdentityProviders().ForEach(idp => context.IdentityProviders.Add(idp));
 
 
             base.Seed(context);
@@ -66,76 +67,65 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private static Global CreateGlobalConfiguration()
+        private static GlobalConfiguration CreateGlobalConfiguration()
         {
-            return new Global
+            return new GlobalConfiguration
             {
-                Name = "Standard",
-
                 SiteName = "thinktecture identity server for .NET 4.5",
                 IssuerUri = "http://identityserver45.thinktecture.com/trust/changethis",
                 IssuerContactEmail = "office@thinktecture.com",
-                DefaultTokenType = TokenTypes.Saml2TokenProfile11,
-                HttpTokenType = TokenTypes.JsonWebToken,
+                DefaultWSTokenType = TokenTypes.Saml2TokenProfile11,
+                DefaultHttpTokenType = TokenTypes.JsonWebToken,
                 DefaultTokenLifetime = 10,
                 MaximumTokenLifetime = 24,
                 SsoCookieLifetime = 10,
-
-                RequireSsl = true,
                 RequireEncryption = false,
-                RequireReplyToWithinRealm = true,
-                RequireSignInConfirmation = false,
-
-                AllowKnownRealmsOnly = true,
-                AllowReplyTo = false,
-
-                EnableDelegation = false,
-                EnableClientCertificates = false,
-                EnableFederationMessageTracing = false,
-                EnableStrongEpiForSsl = false,
                 EnforceUsersGroupMembership = true,
-            };
-        }
-
-        private static Endpoints CreateEndpointConfiguration()
-        {
-            return new Endpoints
-            {
-                Name = "Standard",
-
-                WSFederation = true,
-                WSFederationHrd = false,
-                FederationMetadata = true,
-                WSTrustMessage = false,
-                WSTrustMixed = true,
-
-                SimpleHttp = false,
-                OAuthWRAP = false,
-                OAuth2 = false,
-                JSNotify = false,
-
                 HttpPort = 80,
-                HttpsPort = 443
-
+                HttpsPort = 443,
+                EnableClientCertificateAuthentication = false
             };
         }
 
-        private static List<Certificates> CreateCertificateConfiguration()
-        {
-            return new List<Certificates>
-            {
-                new Certificates
-                {
-                    Name = "SSL",
-                    SubjectDistinguishedName = ""
-                },
+        //private static Endpoints CreateEndpointConfiguration()
+        //{
+        //    return new Endpoints
+        //    {
+        //        Name = "Standard",
 
-                new Certificates
-                {
-                    Name = "SigningCertificate",
-                    SubjectDistinguishedName = ""
-                },
-            };
-        }
+        //        WSFederation = true,
+        //        WSFederationHrd = false,
+        //        FederationMetadata = true,
+        //        WSTrustMessage = false,
+        //        WSTrustMixed = true,
+
+        //        SimpleHttp = false,
+        //        OAuthWRAP = false,
+        //        OAuth2 = false,
+        //        JSNotify = false,
+
+        //        HttpPort = 80,
+        //        HttpsPort = 443
+
+        //    };
+        //}
+
+        //private static List<Certificates> CreateCertificateConfiguration()
+        //{
+        //    return new List<Certificates>
+        //    {
+        //        new Certificates
+        //        {
+        //            Name = "SSL",
+        //            SubjectDistinguishedName = ""
+        //        },
+
+        //        new Certificates
+        //        {
+        //            Name = "SigningCertificate",
+        //            SubjectDistinguishedName = ""
+        //        },
+        //    };
     }
 }
+

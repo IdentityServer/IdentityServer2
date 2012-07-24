@@ -35,8 +35,8 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             var endpoints = Endpoints.Create(
                                HttpContext.Request.Headers["Host"],
                                HttpContext.Request.ApplicationPath,
-                               ConfigurationRepository.Endpoints.HttpPort,
-                               ConfigurationRepository.Endpoints.HttpsPort);
+                               ConfigurationRepository.Global.HttpPort,
+                               ConfigurationRepository.Global.HttpsPort);
 
             var list = new Dictionary<string, string>
             {

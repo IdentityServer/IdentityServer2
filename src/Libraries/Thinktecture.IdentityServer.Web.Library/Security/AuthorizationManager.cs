@@ -64,7 +64,7 @@ namespace Thinktecture.IdentityServer.Web.Security
 
         protected virtual bool AuthorizeTokenIssuance(Collection<Claim> resource, ClaimsIdentity id)
         {
-            if (!ConfigurationRepository.Configuration.EnforceUsersGroupMembership)
+            if (!ConfigurationRepository.Global.EnforceUsersGroupMembership)
             {
                 var authResult = id.IsAuthenticated;
                 if (!authResult)

@@ -36,17 +36,17 @@ namespace Thinktecture.IdentityServer.Web.Controllers.Issue
         {
             Tracing.Verbose("JSNotify endpoint called.");
 
-            if (!ConfigurationRepository.Endpoints.JSNotify)
-            {
-                Tracing.Warning("JSNotify endpoint called, but disabled in configuration");
-                return new HttpNotFoundResult();
-            }
+            //if (!ConfigurationRepository.Endpoints.JSNotify)
+            //{
+            //    Tracing.Warning("JSNotify endpoint called, but disabled in configuration");
+            //    return new HttpNotFoundResult();
+            //}
 
             Tracing.Information("JSNotify endpoint called for realm: " + realm);
 
             if (tokenType == null)
             {
-                tokenType = ConfigurationRepository.Configuration.HttpTokenType;
+                tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
             }
 
             Tracing.Information("Token type: " + tokenType);
@@ -68,7 +68,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers.Issue
                 {
                     AccessToken = response.TokenString,
                     TokenType = response.TokenType,
-                    ExpiresIn = ConfigurationRepository.Configuration.DefaultTokenLifetime * 60
+                    ExpiresIn = ConfigurationRepository.Global.DefaultTokenLifetime * 60
                 };
 
                 Tracing.Information("JSNotify issue successful for user: " + User.Identity.Name);

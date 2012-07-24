@@ -38,7 +38,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         public ActionResult SignIn(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            ViewBag.ShowClientCertificateLink = ConfigurationRepository.Configuration.EnableClientCertificates;
+            ViewBag.ShowClientCertificateLink = ConfigurationRepository.Global.EnableClientCertificateAuthentication;
 
             return View();
         }
@@ -50,19 +50,19 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             {
                 if (UserRepository.ValidateUser(model.UserName, model.Password))
                 {
-                    return SetPrincipalAndRedirect(model.UserName, AuthenticationMethods.Password, returnUrl, model.EnableSSO, ConfigurationRepository.Configuration.SsoCookieLifetime);
+                    return SetPrincipalAndRedirect(model.UserName, AuthenticationMethods.Password, returnUrl, model.EnableSSO, ConfigurationRepository.Global.SsoCookieLifetime);
                 }
             }
 
             ModelState.AddModelError("", "Incorrect credentials or no authorization.");
 
-            ViewBag.ShowClientCertificateLink = ConfigurationRepository.Configuration.EnableClientCertificates;
+            ViewBag.ShowClientCertificateLink = ConfigurationRepository.Global.EnableClientCertificateAuthentication;
             return View(model);
         }
 
         public ActionResult CertificateSignIn(string returnUrl)
         {
-            if (!ConfigurationRepository.Configuration.EnableClientCertificates)
+            if (!ConfigurationRepository.Global.EnableClientCertificateAuthentication)
             {
                 return new HttpNotFoundResult();
             }
@@ -74,7 +74,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 string userName;
                 if (UserRepository.ValidateUser(new X509Certificate2(clientCert.Certificate), out userName))
                 {
-                    return SetPrincipalAndRedirect(userName, AuthenticationMethods.X509, returnUrl, false, ConfigurationRepository.Configuration.SsoCookieLifetime);
+                    return SetPrincipalAndRedirect(userName, AuthenticationMethods.X509, returnUrl, false, ConfigurationRepository.Global.SsoCookieLifetime);
                 }
             }
 

@@ -38,6 +38,25 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         }
         #endregion
 
+        #region WSFederationConfiguration
+        public static Models.Configuration.WSFederationConfiguration ToDomainModel(this Entities.Configuration.WSFederationConfiguration entity)
+        {
+            return new Models.Configuration.WSFederationConfiguration
+            {
+                AllowReplyTo = entity.AllowReplyTo,
+                EnableAuthentication = entity.EnableAuthentication,
+                Enabled = entity.Enabled,
+                EnableFederation = entity.EnableFederation,
+                EnableHrd = entity.EnableHrd,
+                RequireReplyToWithinRealm = entity.RequireReplyToWithinRealm,
+                RequireSslForReplyTo = entity.RequireSslForReplyTo
+            };
+        }
+        #endregion
+
+
+
+
 
         #region Relying Party
         public static RelyingParty ToDomainModel(this RelyingParties rpEntity)

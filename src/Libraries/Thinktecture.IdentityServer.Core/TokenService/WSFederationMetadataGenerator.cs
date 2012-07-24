@@ -46,9 +46,9 @@ namespace Thinktecture.IdentityServer.TokenService
         public string Generate()
         {
             var tokenServiceDescriptor = GetTokenServiceDescriptor();
-            var id = new EntityId(ConfigurationRepository.Configuration.IssuerUri);
+            var id = new EntityId(ConfigurationRepository.Global.IssuerUri);
             var entity = new EntityDescriptor(id);
-            entity.SigningCredentials = new X509SigningCredentials(ConfigurationRepository.SigningCertificate.Certificate);
+            entity.SigningCredentials = new X509SigningCredentials(ConfigurationRepository.Keys.SigningCertificate);
             entity.RoleDescriptors.Add(tokenServiceDescriptor);
 
             var ser = new MetadataSerializer();
@@ -61,7 +61,7 @@ namespace Thinktecture.IdentityServer.TokenService
         private SecurityTokenServiceDescriptor GetTokenServiceDescriptor()
         {
             var tokenService = new SecurityTokenServiceDescriptor();
-            tokenService.ServiceDescription = ConfigurationRepository.Configuration.SiteName;
+            tokenService.ServiceDescription = ConfigurationRepository.Global.SiteName;
             tokenService.Keys.Add(GetSigningKeyDescriptor());
 
             tokenService.PassiveRequestorEndpoints.Add(new EndpointReference(_endpoints.WSFederation.AbsoluteUri));
@@ -73,23 +73,23 @@ namespace Thinktecture.IdentityServer.TokenService
             ClaimsRepository.GetSupportedClaimTypes().ToList().ForEach(claimType => tokenService.ClaimTypesOffered.Add(new DisplayClaim(claimType)));
             tokenService.ProtocolsSupported.Add(new Uri("http://docs.oasis-open.org/wsfed/federation/200706"));
 
-            if (ConfigurationRepository.Endpoints.WSTrustMessage)
+            if (ConfigurationRepository.WSTrust.Enabled && ConfigurationRepository.WSTrust.EnableMessageSecurity)
             {
                 var addressMessageUserName = new EndpointAddress(_endpoints.WSTrustMessageUserName, null, null, CreateMetadataReader(_endpoints.WSTrustMex), null);
                 tokenService.SecurityTokenServiceEndpoints.Add(new EndpointReference(addressMessageUserName.Uri.AbsoluteUri));
 
-                if (ConfigurationRepository.Configuration.EnableClientCertificates)
+                if (ConfigurationRepository.WSTrust.EnableClientCertificateAuthentication)
                 {
                     var addressMessageCertificate = new EndpointAddress(_endpoints.WSTrustMessageCertificate, null, null, CreateMetadataReader(_endpoints.WSTrustMex), null);
                     tokenService.SecurityTokenServiceEndpoints.Add(new EndpointReference(addressMessageCertificate.Uri.AbsoluteUri));
                 }
             }
-            if (ConfigurationRepository.Endpoints.WSTrustMixed)
+            if (ConfigurationRepository.WSTrust.Enabled && ConfigurationRepository.WSTrust.EnableMixedModeSecurity)
             {
                 var addressMixedUserName = new EndpointAddress(_endpoints.WSTrustMixedUserName, null, null, CreateMetadataReader(_endpoints.WSTrustMex), null);
                 tokenService.SecurityTokenServiceEndpoints.Add(new EndpointReference(addressMixedUserName.Uri.AbsoluteUri));
 
-                if (ConfigurationRepository.Configuration.EnableClientCertificates)
+                if (ConfigurationRepository.WSTrust.EnableClientCertificateAuthentication)
                 {
                     var addressMixedCertificate = new EndpointAddress(_endpoints.WSTrustMixedCertificate, null, null, CreateMetadataReader(_endpoints.WSTrustMex), null);
                     tokenService.SecurityTokenServiceEndpoints.Add(new EndpointReference(addressMixedCertificate.Uri.AbsoluteUri));
@@ -104,7 +104,7 @@ namespace Thinktecture.IdentityServer.TokenService
 
         private KeyDescriptor GetSigningKeyDescriptor()
         {
-            var certificate = ConfigurationRepository.SigningCertificate.Certificate;
+            var certificate = ConfigurationRepository.Keys.SigningCertificate;
 
             var clause = new X509SecurityToken(certificate).CreateKeyIdentifierClause<X509RawDataKeyIdentifierClause>();
             var key = new KeyDescriptor(new SecurityKeyIdentifier(clause));

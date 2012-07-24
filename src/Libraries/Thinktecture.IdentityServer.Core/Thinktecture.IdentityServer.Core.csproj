@@ -103,21 +103,18 @@
     <Compile Include="Configuration\RepositoryConfigurationSection.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Helper\X509Certificates.cs" />
-    <Compile Include="Models\CertificateConfiguration.cs" />
     <Compile Include="Models\ClientCertificate.cs" />
     <Compile Include="Models\Configuration\KeyMaterialConfiguration.cs" />
     <Compile Include="Models\Configuration\OAuth2Configuration.cs" />
     <Compile Include="Models\Configuration\FederationMetadataConfiguration.cs" />
     <Compile Include="Models\Configuration\ProtocolConfiguration.cs" />
     <Compile Include="Models\DelegationSetting.cs" />
-    <Compile Include="Models\EndpointConfiguration.cs" />
-    <Compile Include="Models\GlobalConfiguration.cs" />
     <Compile Include="Endpoints.cs" />
     <Compile Include="Helper\Cache.cs" />
     <Compile Include="Models\IdentityProvider.cs" />
     <Compile Include="Models\IdentityProviderTypes.cs" />
     <Compile Include="Models\Configuration\DiagnosticsConfiguration.cs" />
-    <Compile Include="Repositories\Configuration\IConfigurationRepository.cs" />
+    <Compile Include="Repositories\IConfigurationRepository.cs" />
     <Compile Include="Repositories\IClaimsRepository.cs" />
     <Compile Include="Repositories\IClaimsTransformationRulesRepository.cs" />
     <Compile Include="Repositories\IClientCertificatesRepository.cs" />
@@ -137,7 +134,6 @@
     <Compile Include="TokenService\WSFederationMetadataGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Container.cs" />
-    <Compile Include="Repositories\IConfigurationRepository.cs" />
     <Compile Include="Repositories\IRelyingPartyRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Models\RelyingParty.cs" />
@@ -154,7 +150,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repositories\Configuration\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -9,6 +9,7 @@ using System.IdentityModel.Configuration;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using Thinktecture.IdentityServer.Models;
+using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.TokenService
@@ -24,30 +25,30 @@ namespace Thinktecture.IdentityServer.TokenService
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
-        public GlobalConfiguration GlobalConfiguration { get; protected set; }
+        public IConfigurationRepository GlobalConfiguration { get; protected set; }
 
         public TokenServiceConfiguration() : base()
         {
             Tracing.Information("Configuring token service");
             Container.Current.SatisfyImportsOnce(this);
-            GlobalConfiguration = ConfigurationRepository.Configuration;
+            GlobalConfiguration = ConfigurationRepository;
 
             SecurityTokenService = typeof(TokenService);
-            DefaultTokenLifetime = TimeSpan.FromHours(GlobalConfiguration.DefaultTokenLifetime);
-            MaximumTokenLifetime = TimeSpan.FromDays(GlobalConfiguration.MaximumTokenLifetime);
-            DefaultTokenType = GlobalConfiguration.DefaultTokenType;
+            DefaultTokenLifetime = TimeSpan.FromHours(GlobalConfiguration.Global.DefaultTokenLifetime);
+            MaximumTokenLifetime = TimeSpan.FromDays(GlobalConfiguration.Global.MaximumTokenLifetime);
+            DefaultTokenType = GlobalConfiguration.Global.DefaultWSTokenType;
 
-            TokenIssuerName = GlobalConfiguration.IssuerUri;
-            SigningCredentials = new X509SigningCredentials(ConfigurationRepository.SigningCertificate.Certificate);
+            TokenIssuerName = GlobalConfiguration.Global.IssuerUri;
+            SigningCredentials = new X509SigningCredentials(ConfigurationRepository.Keys.SigningCertificate);
 
-            if (GlobalConfiguration.EnableDelegation)
+            if (ConfigurationRepository.WSTrust.EnableDelegation)
             {
                 Tracing.Information("Configuring identity delegation support");
 
                 try
                 {
                     var actAsRegistry = new ConfigurationBasedIssuerNameRegistry();
-                    actAsRegistry.AddTrustedIssuer(ConfigurationRepository.SigningCertificate.Certificate.Thumbprint, GlobalConfiguration.IssuerUri);
+                    actAsRegistry.AddTrustedIssuer(ConfigurationRepository.Keys.SigningCertificate.Thumbprint, GlobalConfiguration.Global.IssuerUri);
 
                     var actAsHandlers = SecurityTokenHandlerCollectionManager["ActAs"];
                     actAsHandlers.Configuration.IssuerNameRegistry = actAsRegistry;

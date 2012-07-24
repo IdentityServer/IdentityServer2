@@ -36,7 +36,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         {
             Tracing.Verbose("WS-Federation endpoint called.");
 
-            if (!ConfigurationRepository.Endpoints.WSFederation)
+            if (!ConfigurationRepository.WSFederation.Enabled && ConfigurationRepository.WSFederation.EnableAuthentication)
             {
                 return new HttpNotFoundResult();
             }
@@ -70,7 +70,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 TokenServiceConfiguration.Current.CreateSecurityTokenService());
 
             // set cookie for single-sign-out
-            new SignInSessionsManager(HttpContext, ConfigurationRepository.Configuration.MaximumTokenLifetime)
+            new SignInSessionsManager(HttpContext, ConfigurationRepository.Global.MaximumTokenLifetime)
                 .AddRealm(response.BaseUri.AbsoluteUri);
 
             return new WSFederationResult(response);

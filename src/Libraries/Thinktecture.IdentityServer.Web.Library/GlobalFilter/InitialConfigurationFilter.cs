@@ -22,7 +22,7 @@ namespace Thinktecture.IdentityServer.Web.GlobalFilter
 
             if (!filterContext.ActionDescriptor.ControllerDescriptor.ControllerName.Equals("InitialConfiguration"))
             {
-                if (string.IsNullOrWhiteSpace(ConfigurationRepository.SigningCertificate.SubjectDistinguishedName))
+                if ((ConfigurationRepository.Keys.SigningCertificate == null))
                 {
                     var route = new RouteValueDictionary(new Dictionary<string, object>
                         {

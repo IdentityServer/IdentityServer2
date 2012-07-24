@@ -19,6 +19,7 @@ using System.Xml;
 using Thinktecture.IdentityModel;
 using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityServer.Models;
+using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.TokenService
@@ -55,7 +56,7 @@ namespace Thinktecture.IdentityServer.TokenService
             ClaimsTransformationRulesRepository = claimsTransformationRulesRepository;
         }
 
-        protected GlobalConfiguration GlobalConfiguration
+        protected IConfigurationRepository ConfigurationRepository
         {
             get
             {
@@ -88,7 +89,7 @@ namespace Thinktecture.IdentityServer.TokenService
             Tracing.Information("Authentication method: " + principal.Identities.First().FindFirst(ClaimTypes.AuthenticationMethod).Value);
 
             // analyze request
-            var request = new Request(GlobalConfiguration);
+            var request = new Request(ConfigurationRepository);
             var details = request.Analyze(rst, principal);
 
             // validate against policy
@@ -98,7 +99,7 @@ namespace Thinktecture.IdentityServer.TokenService
             var scope = new RequestDetailsScope(
                 details, 
                 SecurityTokenServiceConfiguration.SigningCredentials, 
-                GlobalConfiguration.RequireEncryption);
+                ConfigurationRepository.Global.RequireEncryption);
 
             return scope;
         }
@@ -200,7 +201,7 @@ namespace Thinktecture.IdentityServer.TokenService
         {
             var response = base.GetResponse(request, tokenDescriptor);
 
-            if (GlobalConfiguration.EnableFederationMessageTracing)
+            if (ConfigurationRepository.Diagnostics.EnableFederationMessageTracing)
             {
                 Tracing.Information(SerializeRequest(request));
                 Tracing.Information(SerializeResponse(response));

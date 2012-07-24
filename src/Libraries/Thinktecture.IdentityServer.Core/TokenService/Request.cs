@@ -15,6 +15,7 @@ using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
+using Thinktecture.IdentityServer.Models.Configuration;
 
 namespace Thinktecture.IdentityServer.TokenService
 {
@@ -23,7 +24,7 @@ namespace Thinktecture.IdentityServer.TokenService
     /// </summary>
     public class Request
     {
-        GlobalConfiguration _configuration;
+        IConfigurationRepository _configuration;
         RequestDetails _details;
 
         [Import]
@@ -32,13 +33,13 @@ namespace Thinktecture.IdentityServer.TokenService
         [Import]
         public IDelegationRepository DelegationRepository { get; set; }
 
-        public Request(GlobalConfiguration configuration)
+        public Request(IConfigurationRepository configuration)
         {
             _configuration = configuration;
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public Request(GlobalConfiguration configuration, IRelyingPartyRepository relyingPartyRepository, IDelegationRepository delegationRepository)
+        public Request(IConfigurationRepository configuration, IRelyingPartyRepository relyingPartyRepository, IDelegationRepository delegationRepository)
         {
             _configuration = configuration;
             RelyingPartyRepository = relyingPartyRepository;
@@ -171,7 +172,7 @@ namespace Thinktecture.IdentityServer.TokenService
             {
                 if (!String.IsNullOrEmpty(details.Request.ReplyTo))
                 {
-                    if (_configuration.AllowReplyTo)
+                    if (_configuration.WSFederation.AllowReplyTo)
                     {
                         // explicit address
                         details.ReplyToAddress = new Uri(details.Request.ReplyTo);
@@ -207,7 +208,7 @@ namespace Thinktecture.IdentityServer.TokenService
         {
             if (string.IsNullOrWhiteSpace(rst.TokenType))
             {
-                details.TokenType = _configuration.DefaultTokenType;
+                details.TokenType = _configuration.Global.DefaultWSTokenType;
                 Tracing.Information("Token Type: not specified, falling back to default token type");
             }
             else
@@ -348,7 +349,7 @@ namespace Thinktecture.IdentityServer.TokenService
             // check for ActAs request
             if (details.IsActAsRequest)
             {
-                if (!_configuration.EnableDelegation)
+                if (!_configuration.WSTrust.EnableDelegation)
                 {
                     Tracing.Error("Request is ActAs request - but ActAs is not enabled");
                     throw new InvalidRequestException("Request is ActAs request - but ActAs is not enabled");
@@ -365,7 +366,7 @@ namespace Thinktecture.IdentityServer.TokenService
         protected virtual void ValidateSsl(RequestDetails details)
         {
             // check if SSL is used (for passive only)
-            if (_configuration.RequireSsl && !details.UsesSsl)
+            if (_configuration.WSFederation.RequireSslForReplyTo && !details.UsesSsl)
             {
                 if (!details.IsActive)
                 {
@@ -392,7 +393,7 @@ namespace Thinktecture.IdentityServer.TokenService
         protected virtual void ValidateEncryption(RequestDetails details)
         {
             // check if token must be encrypted
-            if (_configuration.RequireEncryption && (!details.UsesEncryption))
+            if (_configuration.Global.RequireEncryption && (!details.UsesEncryption))
             {
                 Tracing.Error("Configuration requires encryption - but no key available");
                 throw new InvalidRequestException("No encryption key available");
@@ -404,7 +405,7 @@ namespace Thinktecture.IdentityServer.TokenService
             // check if replyto is part of a registered realm (when not explicitly registered in config)
             if (!details.IsReplyToFromConfiguration)
             {
-                if (_configuration.RequireReplyToWithinRealm && (!details.ReplyToAddressIsWithinRealm))
+                if (_configuration.WSFederation.RequireReplyToWithinRealm && (!details.ReplyToAddressIsWithinRealm))
                 {
                     Tracing.Error("Configuration requires that ReplyTo is a sub-address of the realm - this is not the case");
                     throw new InvalidRequestException("Invalid ReplyTo");
@@ -415,7 +416,7 @@ namespace Thinktecture.IdentityServer.TokenService
         protected virtual void ValidateKnownRealm(RequestDetails details)
         {
             // check if realm is allowed
-            if (_configuration.AllowKnownRealmsOnly && (!details.IsKnownRealm))
+            if (_configuration.Global.RequireRelyingPartyRegistration && (!details.IsKnownRealm))
             {
                 Tracing.Error("Configuration requires a known realm - but realm is not registered");
 
