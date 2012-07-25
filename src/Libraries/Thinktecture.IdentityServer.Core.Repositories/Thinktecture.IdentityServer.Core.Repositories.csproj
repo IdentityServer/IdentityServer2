@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationDatabaseInitializer.cs" />
+    <Compile Include="EntityModel\Configuration\DiagnosticsConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\FederationMetadataConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\OAuth2Configuration.cs" />
     <Compile Include="EntityModel\Configuration\KeyMaterialConfiguration.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="DelegationRepository.cs" />
     <Compile Include="EntityModel\IdentityProvider.cs" />
     <Compile Include="Mappings.cs" />
-    <Compile Include="__IdentityServerConfigurationContext.cs" />
     <Compile Include="MemoryCacheRepository.cs" />
     <Compile Include="ConfigurationRepository.cs" />
     <Compile Include="NullCacheRepository.cs" />

@@ -42,11 +42,24 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             get
             {
-                throw new NotImplementedException();
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.Diagnostics.First<Entities.Configuration.DiagnosticsConfiguration>();
+
+                    // map to domain model
+                    return entity.ToDomainModel();
+                }
             }
             set
             {
-                throw new NotImplementedException();
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.Diagnostics.First<Entities.Configuration.DiagnosticsConfiguration>();
+                    entities.Diagnostics.Remove(entity);
+
+                    entities.Diagnostics.Add(value.ToEntity());
+                    entities.SaveChanges();
+                }
             }
         }
 
@@ -93,7 +106,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
             set
             {
-                throw new NotImplementedException();
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.WSFederation.First<Entities.Configuration.WSFederationConfiguration>();
+                    entities.WSFederation.Remove(entity);
+
+                    entities.WSFederation.Add(value.ToEntity());
+                    entities.SaveChanges();
+                }
             }
         }
 
@@ -111,7 +131,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
             set
             {
-                throw new NotImplementedException();
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.FederationMetadata.First<Entities.Configuration.FederationMetadataConfiguration>();
+                    entities.FederationMetadata.Remove(entity);
+
+                    entities.FederationMetadata.Add(value.ToEntity());
+                    entities.SaveChanges();
+                }
             }
         }
 
@@ -129,7 +156,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
             set
             {
-                throw new NotImplementedException();
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.WSTrust.First<Entities.Configuration.WSTrustConfiguration>();
+                    entities.WSTrust.Remove(entity);
+
+                    entities.WSTrust.Add(value.ToEntity());
+                    entities.SaveChanges();
+                }
             }
         }
 
@@ -147,19 +181,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
             set
             {
-                throw new NotImplementedException();
-            }
-        }
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.OAuth2.First<Entities.Configuration.OAuth2Configuration>();
+                    entities.OAuth2.Remove(entity);
 
-        public Models.Configuration.OAuthWrapConfiguration OAuthWrap
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
+                    entities.OAuth2.Add(value.ToEntity());
+                    entities.SaveChanges();
+                }
             }
         }
     }

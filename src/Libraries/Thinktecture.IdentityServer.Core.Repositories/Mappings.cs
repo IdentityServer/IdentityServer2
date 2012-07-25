@@ -74,6 +74,20 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 RequireSslForReplyTo = entity.RequireSslForReplyTo
             };
         }
+
+        public static Entities.Configuration.WSFederationConfiguration ToEntity(this Models.Configuration.WSFederationConfiguration model)
+        {
+            return new Entities.Configuration.WSFederationConfiguration
+            {
+                AllowReplyTo = model.AllowReplyTo,
+                EnableAuthentication = model.EnableAuthentication,
+                Enabled = model.Enabled,
+                EnableFederation = model.EnableFederation,
+                EnableHrd = model.EnableHrd,
+                RequireReplyToWithinRealm = model.RequireReplyToWithinRealm,
+                RequireSslForReplyTo = model.RequireSslForReplyTo
+            };
+        }
         #endregion
 
         #region KeyMaterialConfiguration
@@ -126,6 +140,19 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 EnableMixedModeSecurity = entity.EnableMixedModeSecurity
             };
         }
+
+        public static Entities.Configuration.WSTrustConfiguration ToEntity(this Models.Configuration.WSTrustConfiguration model)
+        {
+            return new Entities.Configuration.WSTrustConfiguration
+            {
+                EnableClientCertificateAuthentication = model.EnableClientCertificateAuthentication,
+                Enabled = model.Enabled,
+                EnableDelegation = model.EnableDelegation,
+                EnableFederatedAuthentication = model.EnableFederatedAuthentication,
+                EnableMessageSecurity = model.EnableMessageSecurity,
+                EnableMixedModeSecurity = model.EnableMixedModeSecurity
+            };
+        }
         #endregion
 
         #region FederationMetadataConfiguration
@@ -134,6 +161,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new Models.Configuration.FederationMetadataConfiguration
             {
                 Enabled = entity.Enabled
+            };
+        }
+
+        public static Entities.Configuration.FederationMetadataConfiguration ToEntity(this Models.Configuration.FederationMetadataConfiguration model)
+        {
+            return new Entities.Configuration.FederationMetadataConfiguration
+            {
+                Enabled = model.Enabled
             };
         }
         #endregion
@@ -146,9 +181,33 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Enabled = entity.Enabled
             };
         }
+        
+        public static Entities.Configuration.OAuth2Configuration ToEntity(this Models.Configuration.OAuth2Configuration model)
+        {
+            return new Entities.Configuration.OAuth2Configuration
+            {
+                Enabled = model.Enabled
+            };
+        }
         #endregion
 
+        #region DiagnosticsConfiguration
+        public static Models.Configuration.DiagnosticsConfiguration ToDomainModel(this Entities.Configuration.DiagnosticsConfiguration entity)
+        {
+            return new Models.Configuration.DiagnosticsConfiguration
+            {
+                EnableFederationMessageTracing = entity.EnableFederationMessageTracing
+            };
+        }
 
+        public static Entities.Configuration.DiagnosticsConfiguration ToEntity(this Models.Configuration.DiagnosticsConfiguration model)
+        {
+            return new Entities.Configuration.DiagnosticsConfiguration
+            {
+                EnableFederationMessageTracing = model.EnableFederationMessageTracing
+            };
+        }
+        #endregion
 
         #region Relying Party
         public static RelyingParty ToDomainModel(this RelyingParties rpEntity)

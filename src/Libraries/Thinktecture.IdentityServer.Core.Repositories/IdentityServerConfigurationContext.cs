@@ -20,7 +20,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public DbSet<WSTrustConfiguration> WSTrust { get; set; }
         public DbSet<FederationMetadataConfiguration> FederationMetadata { get; set; }
         public DbSet<OAuth2Configuration> OAuth2 { get; set; }
-
+        public DbSet<DiagnosticsConfiguration> Diagnostics { get; set; }
+        
 
         public DbSet<ClientCertificates> ClientCertificates { get; set; }
         public DbSet<Delegation> Delegation { get; set; }
