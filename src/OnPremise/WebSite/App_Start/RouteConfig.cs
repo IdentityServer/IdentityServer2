@@ -1,26 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceModel.Activation;
-using System.Web;
-using System.Web.Http;
+﻿using System.ServiceModel.Activation;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
 
 namespace Thinktecture.IdentityServer.Web
 {
     public class RouteConfig
     {
-        public static void RegisterRoutes(RouteCollection routes)
+        public static void RegisterRoutes(RouteCollection routes, IConfigurationRepository configuration)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                "FederationMetadata",
-                "FederationMetadata/2007-06/FederationMetadata.xml",
-                new { controller = "FederationMetadata", action = "Generate" }
-            );
+            if (configuration.FederationMetadata.Enabled)
+            {
+                routes.MapRoute(
+                    "FederationMetadata",
+                    "FederationMetadata/2007-06/FederationMetadata.xml",
+                    new { controller = "FederationMetadata", action = "Generate" }
+                );
+            }
 
             routes.MapRoute(
                 "RelyingPartiesAdmin",
@@ -48,52 +47,65 @@ namespace Thinktecture.IdentityServer.Web
             );
 
             // ws-federation (mvc)
-            routes.MapRoute(
-                "wsfederation",
-                "issue/wsfed",
-                new { controller = "WSFederation", action = "issue" }
-            );
+            if (configuration.WSFederation.Enabled && configuration.WSFederation.EnableAuthentication)
+            {
+                routes.MapRoute(
+                    "wsfederation",
+                    "issue/wsfed",
+                    new { controller = "WSFederation", action = "issue" }
+                );
+            }
 
             // ws-federation HRD (mvc)
-            routes.MapRoute(
-                "hrd",
-                "issue/hrd",
-                new { controller = "Hrd", action = "issue" }
-            );
+            if (configuration.WSFederation.Enabled && configuration.WSFederation.EnableFederation)
+            {
+                routes.MapRoute(
+                    "hrd",
+                    "issue/hrd",
+                    new { controller = "Hrd", action = "issue" }
+                );
+            }
 
-            // jsnotify (mvc)
-            routes.MapRoute(
-                "jsnotify",
-                "issue/jsnotify",
-                new { controller = "JSNotify", action = "issue" }
-            );
+            //// jsnotify (mvc)
+            //routes.MapRoute(
+            //    "jsnotify",
+            //    "issue/jsnotify",
+            //    new { controller = "JSNotify", action = "issue" }
+            //);
 
-            // simple http (mvc)
-            routes.MapRoute(
-                "simplehttp",
-                "issue/simple",
-                new { controller = "SimpleHttp", action = "issue" }
-            );
+            //// simple http (mvc)
+            //routes.MapRoute(
+            //    "simplehttp",
+            //    "issue/simple",
+            //    new { controller = "SimpleHttp", action = "issue" }
+            //);
 
-            // oauth wrap (mvc)
-            routes.MapRoute(
-                "wrap",
-                "issue/wrap",
-                new { controller = "Wrap", action = "issue" }
-            );
+            //// oauth wrap (mvc)
+            //routes.MapRoute(
+            //    "wrap",
+            //    "issue/wrap",
+            //    new { controller = "Wrap", action = "issue" }
+            //);
 
-            // oauth2 (mvc)
-            routes.MapRoute(
-                "oauth2",
-                "issue/oauth2/{action}",
-                new { controller = "OAuth2", action = "token" }
-            );
+            // oauth2
+            if (configuration.OAuth2.Enabled)
+            {
+                routes.MapRoute(
+                    "oauth2",
+                    "issue/oauth2/{action}",
+                    new { controller = "OAuth2", action = "token" }
+                );
+            }
 
             // ws-trust (wcf)
-            routes.Add(new ServiceRoute(
-                "issue/wstrust",
-                new TokenServiceHostFactory(),
-                typeof(TokenServiceConfiguration)));
+            if (configuration.WSTrust.Enabled)
+            {
+                routes.Add(new ServiceRoute(
+                    "issue/wstrust",
+                    new TokenServiceHostFactory(),
+                    typeof(TokenServiceConfiguration))
+                );
+            }
         }
     }
 }

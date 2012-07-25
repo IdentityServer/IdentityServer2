@@ -13,6 +13,5 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         public bool EnableClientCertificateAuthentication { get; set; }
         public bool EnableFederatedAuthentication { get; set; }
         public Boolean EnableDelegation { get; set; }
-        public Boolean EnableStrongEpiForSsl { get; set; }
     }
 }
