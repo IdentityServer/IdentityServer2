@@ -143,7 +143,6 @@
     <Compile Include="TokenService\RequestDetails.cs" />
     <Compile Include="TokenService\TokenService.cs" />
     <Compile Include="TokenService\TokenServiceConfiguration.cs" />
-    <Compile Include="TokenService\TokenServiceHostFactory.cs" />
     <Compile Include="TokenService\X509CertificateSessionSecurityTokenHandler.cs" />
     <Compile Include="Tracing\Tracing.cs" />
   </ItemGroup>

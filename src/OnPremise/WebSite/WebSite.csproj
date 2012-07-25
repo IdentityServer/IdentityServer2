@@ -312,6 +312,10 @@
       <Project>{38ce5c59-909e-4da6-8e1d-7eee7312ca9a}</Project>
       <Name>Thinktecture.IdentityServer.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Thinktecture.IdentityServer.Protocols\Thinktecture.IdentityServer.Protocols.csproj">
+      <Project>{c129c90c-774c-47d7-a19e-57b31c87ae18}</Project>
+      <Name>Thinktecture.IdentityServer.Protocols</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Libraries\Thinktecture.IdentityServer.Web.Library\Thinktecture.IdentityServer.Web.Library.csproj">
       <Project>{fc2d7e2a-65a2-480f-aae8-855fd026af85}</Project>
       <Name>Thinktecture.IdentityServer.Web.Library</Name>

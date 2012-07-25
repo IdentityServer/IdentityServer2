@@ -14,7 +14,7 @@ using System.ServiceModel.Security;
 using Thinktecture.IdentityModel.WSTrust;
 using Thinktecture.IdentityServer.Repositories;
 
-namespace Thinktecture.IdentityServer.TokenService
+namespace Thinktecture.IdentityServer.Protocols.WSTrust
 {
     /// <summary>
     /// Abstracts away the details of the WS-Trust ServiceHost creation and configuration
