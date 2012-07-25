@@ -9,6 +9,7 @@
 
 using System;
 using Thinktecture.IdentityServer.Models;
+using Thinktecture.IdentityServer.Models.Configuration;
 
 namespace Thinktecture.IdentityServer.Tests
 {
@@ -36,18 +37,18 @@ namespace Thinktecture.IdentityServer.Tests
                 
                 DefaultTokenLifetime = 10,
                 MaximumTokenLifetime = 24,
-                DefaultTokenType = "urn:oasis:names:tc:SAML:2.0:assertion",
+                DefaultWSTokenType = "urn:oasis:names:tc:SAML:2.0:assertion",
 
-                EnableClientCertificates = true,
-                EnableDelegation = false,
+                EnableClientCertificateAuthentication = true,
+                //EnableDelegation = false,
 
-                AllowKnownRealmsOnly = true,
-                AllowReplyTo = false,
-                RequireReplyToWithinRealm = true,
+                RequireRelyingPartyRegistration = true,
+                //AllowReplyTo = false,
+                //RequireReplyToWithinRealm = true,
                 
                 RequireEncryption = true,
-                RequireSsl = true,
-                RequireSignInConfirmation = false
+                //RequireSsl = true,
+                //RequireSignInConfirmation = false
             };
         }
 

@@ -18,7 +18,7 @@ namespace Thinktecture.IdentityServer.Web
                 "initialconfiguration",
                 new { controller = "InitialConfiguration", action = "Index" }
             );
-            
+
             routes.MapRoute(
                 "RelyingPartiesAdmin",
                 "admin/relyingparties/{action}/{id}",
