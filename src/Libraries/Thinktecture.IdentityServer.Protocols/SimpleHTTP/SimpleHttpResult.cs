@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Constants;
 
-namespace Thinktecture.IdentityServer.Web.ActionResults
+namespace Thinktecture.IdentityServer.Protocols.SimpleHttp
 {
     public class SimpleHttpResult : ContentResult
     {

@@ -9,7 +9,7 @@ using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Thinktecture.IdentityServer.Web.ActionResults
+namespace Thinktecture.IdentityServer.Protocols.JSNotify
 {
     public class JSNotifyResult : ActionResult
     {
@@ -22,7 +22,7 @@ namespace Thinktecture.IdentityServer.Web.ActionResults
 
         public override void ExecuteResult(ControllerContext context)
         {
-            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Thinktecture.IdentityServer.Web.Resources.jsnotify.htm");
+            var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Thinktecture.IdentityServer.Protocols.JSNotify.jsnotify.htm");
             var html = new StreamReader(stream).ReadToEnd();
 
             var ser = new DataContractJsonSerializer(typeof(AccessTokenResponse));

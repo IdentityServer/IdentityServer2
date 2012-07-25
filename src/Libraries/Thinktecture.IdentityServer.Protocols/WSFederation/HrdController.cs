@@ -17,9 +17,8 @@ using Newtonsoft.Json.Linq;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
-using Thinktecture.IdentityServer.Web.ActionResults;
 
-namespace Thinktecture.IdentityServer.Web.Controllers
+namespace Thinktecture.IdentityServer.Protocols.WSFederation
 {
     public class HrdController : Controller
     {

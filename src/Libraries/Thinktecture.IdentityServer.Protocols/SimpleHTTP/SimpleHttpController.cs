@@ -9,10 +9,9 @@ using System.Security.Claims;
 using System.ServiceModel;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.ActionResults;
 using Thinktecture.IdentityServer.Web.Security;
 
-namespace Thinktecture.IdentityServer.Web.Controllers
+namespace Thinktecture.IdentityServer.Protocols.SimpleHttp
 {
     public class SimpleHttpController : Controller
     {

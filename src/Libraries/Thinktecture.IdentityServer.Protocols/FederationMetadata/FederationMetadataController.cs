@@ -10,7 +10,7 @@ using Thinktecture.IdentityServer.Helper;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
 
-namespace Thinktecture.IdentityServer.Web.Controllers
+namespace Thinktecture.IdentityServer.Protocols.FederationMetadata
 {
     public class FederationMetadataController : Controller
     {

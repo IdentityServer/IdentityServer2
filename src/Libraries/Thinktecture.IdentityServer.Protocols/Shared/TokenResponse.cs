@@ -3,7 +3,7 @@
  * see license.txt
  */
 
-namespace Thinktecture.IdentityServer.Web.Security
+namespace Thinktecture.IdentityServer.Protocols
 {
     public class TokenResponse
     {

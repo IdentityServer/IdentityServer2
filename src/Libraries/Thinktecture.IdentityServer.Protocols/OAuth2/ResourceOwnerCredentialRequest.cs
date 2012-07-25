@@ -5,7 +5,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace Thinktecture.IdentityServer.Web.ViewModels.OAuth2
+namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {
     public class ResourceOwnerCredentialRequest
     {

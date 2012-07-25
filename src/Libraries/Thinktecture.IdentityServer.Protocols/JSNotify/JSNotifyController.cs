@@ -11,10 +11,9 @@ using System.Threading;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.ActionResults;
 using Thinktecture.IdentityServer.Web.Security;
 
-namespace Thinktecture.IdentityServer.Web.Controllers.Issue
+namespace Thinktecture.IdentityServer.Protocols.JSNotify
 {
     [ClaimsAuthorize(Constants.Actions.Issue, Constants.Resources.JSNotify)]
     public class JSNotifyController : Controller

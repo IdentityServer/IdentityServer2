@@ -19,7 +19,7 @@ using System.Xml;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Repositories;
 
-namespace Thinktecture.IdentityServer.TokenService
+namespace Thinktecture.IdentityServer.Protocols.FederationMetadata
 {
     /// <summary>
     /// Handler for dynamic generation of the WS-Federation metadata document

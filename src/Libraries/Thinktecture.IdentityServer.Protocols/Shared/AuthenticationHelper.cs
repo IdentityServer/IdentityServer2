@@ -21,11 +21,11 @@ using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
-using Thinktecture.IdentityServer.Web.ViewModels.OAuth2;
 using Thinktecture.IdentityModel.Tokens;
 using Thinktecture.IdentityModel;
+using Thinktecture.IdentityServer.Protocols.OAuth2;
 
-namespace Thinktecture.IdentityServer.Web.Security
+namespace Thinktecture.IdentityServer.Protocols
 {
     public class AuthenticationHelper
     {

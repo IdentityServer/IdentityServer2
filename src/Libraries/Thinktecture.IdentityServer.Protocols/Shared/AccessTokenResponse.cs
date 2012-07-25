@@ -5,7 +5,7 @@
 
 using System.Runtime.Serialization;
 
-namespace Thinktecture.IdentityServer.Web.ActionResults
+namespace Thinktecture.IdentityServer.Protocols
 {
     [DataContract]
     public class AccessTokenResponse

@@ -11,10 +11,9 @@ using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
-using Thinktecture.IdentityServer.Web.ActionResults;
 using Thinktecture.IdentityServer.Web.Security;
 
-namespace Thinktecture.IdentityServer.Web.Controllers
+namespace Thinktecture.IdentityServer.Protocols.WSFederation
 {
     [ClaimsAuthorize(Constants.Actions.Issue, Constants.Resources.WSFederation)]
     public class WSFederationController : Controller

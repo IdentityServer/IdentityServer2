@@ -6,7 +6,7 @@
 using System;
 using System.Web.Mvc;
 
-namespace Thinktecture.IdentityServer.Web.ActionResults
+namespace Thinktecture.IdentityServer.Protocols
 {
     public class UnauthorizedResult : ActionResult
     {

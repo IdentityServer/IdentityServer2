@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Web.Security;
 
-namespace Thinktecture.IdentityServer.Web.ActionResults
+namespace Thinktecture.IdentityServer.Protocols
 {
     public class WrapResult : ActionResult
     {

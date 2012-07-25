@@ -11,13 +11,11 @@ using System.ServiceModel;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.ActionResults;
 using Thinktecture.IdentityServer.Web.Security;
-using Thinktecture.IdentityServer.Web.ViewModels.OAuth2;
 using Thinktecture.IdentityModel.Tokens;
 using System.IdentityModel.Services;
 
-namespace Thinktecture.IdentityServer.Web.Controllers
+namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {
     public class OAuth2Controller : Controller
     {

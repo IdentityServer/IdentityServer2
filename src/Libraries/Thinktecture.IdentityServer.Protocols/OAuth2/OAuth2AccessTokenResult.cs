@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Thinktecture.IdentityServer.Web.ActionResults
+namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {
     public class OAuth2AccessTokenResult : ActionResult
     {

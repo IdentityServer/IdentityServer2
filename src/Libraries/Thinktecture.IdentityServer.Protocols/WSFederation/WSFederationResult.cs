@@ -6,7 +6,7 @@
 using System.IdentityModel.Services;
 using System.Web.Mvc;
 
-namespace Thinktecture.IdentityServer.Web.ActionResults
+namespace Thinktecture.IdentityServer.Protocols.WSFederation
 {
     public class WSFederationResult : ContentResult
     {
