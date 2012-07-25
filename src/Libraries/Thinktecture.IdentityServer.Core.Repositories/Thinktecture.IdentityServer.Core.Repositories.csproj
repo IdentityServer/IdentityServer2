@@ -71,8 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationDatabaseInitializer.cs" />
+    <Compile Include="EntityModel\Configuration\FederationMetadataConfiguration.cs" />
+    <Compile Include="EntityModel\Configuration\OAuth2Configuration.cs" />
     <Compile Include="EntityModel\Configuration\KeyMaterialConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\WSFederationConfiguration.cs" />
+    <Compile Include="EntityModel\Configuration\WSTrustConfiguration.cs" />
     <Compile Include="IdentityServerConfigurationContext.cs" />
     <Compile Include="EntityModel\Configuration\GlobalConfiguration.cs" />
     <Compile Include="IdentityProviderRepository.cs" />

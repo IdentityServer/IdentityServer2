@@ -10,6 +10,7 @@ using System.Security.Cryptography.X509Certificates;
 using Thinktecture.IdentityServer.Models;
 using Models = Thinktecture.IdentityServer.Models;
 using Entities = Thinktecture.IdentityServer.Repositories.Sql;
+using Thinktecture.IdentityModel;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
 {
@@ -36,6 +37,27 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 SsoCookieLifetime = entity.SsoCookieLifetime
             };
         }
+
+        public static Entities.Configuration.GlobalConfiguration ToEntity(this Models.Configuration.GlobalConfiguration model)
+        {
+            return new Entities.Configuration.GlobalConfiguration
+            {
+                SiteName = model.SiteName,
+                IssuerUri = model.IssuerUri,
+                IssuerContactEmail = model.IssuerContactEmail,
+                DefaultHttpTokenType = model.DefaultHttpTokenType,
+                DefaultWSTokenType = model.DefaultWSTokenType,
+                DefaultTokenLifetime = model.DefaultTokenLifetime,
+                MaximumTokenLifetime = model.MaximumTokenLifetime,
+                EnableClientCertificateAuthentication = model.EnableClientCertificateAuthentication,
+                EnforceUsersGroupMembership = model.EnforceUsersGroupMembership,
+                HttpPort = model.HttpPort,
+                HttpsPort = model.HttpsPort,
+                RequireEncryption = model.RequireEncryption,
+                RequireRelyingPartyRegistration = model.RequireRelyingPartyRegistration,
+                SsoCookieLifetime = model.SsoCookieLifetime
+            };
+        }
         #endregion
 
         #region WSFederationConfiguration
@@ -54,7 +76,77 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         }
         #endregion
 
+        #region KeyMaterialConfiguration
+        public static Models.Configuration.KeyMaterialConfiguration ToDomainModel(this Entities.Configuration.KeyMaterialConfiguration entity)
+        {
+            var model = new Models.Configuration.KeyMaterialConfiguration();
+            if (entity == null)
+            {
+                return model;
+            }
 
+            if (!string.IsNullOrWhiteSpace(entity.SigningCertificateName))
+            {
+                var cert = X509.LocalMachine.My.SubjectDistinguishedName.Find(entity.SigningCertificateName).FirstOrDefault();
+
+                if (cert == null)
+                {
+                    throw new InvalidOperationException("Signing certificate not found: " + entity.SigningCertificateName);
+                }
+
+                model.SigningCertificate = cert;
+            }
+
+            return model;
+        }
+
+        public static Entities.Configuration.KeyMaterialConfiguration ToEntity(this Models.Configuration.KeyMaterialConfiguration model)
+        {
+            var entity = new Entities.Configuration.KeyMaterialConfiguration();
+
+            if (model.SigningCertificate != null)
+            {
+                entity.SigningCertificateName = model.SigningCertificate.Subject;
+            }
+
+            return entity;
+        }
+        #endregion
+
+        #region WSTrustConfiguration
+        public static Models.Configuration.WSTrustConfiguration ToDomainModel(this Entities.Configuration.WSTrustConfiguration entity)
+        {
+            return new Models.Configuration.WSTrustConfiguration
+            {
+                EnableClientCertificateAuthentication = entity.EnableClientCertificateAuthentication,
+                Enabled = entity.Enabled,
+                EnableDelegation = entity.EnableDelegation,
+                EnableFederatedAuthentication = entity.EnableFederatedAuthentication,
+                EnableMessageSecurity = entity.EnableMessageSecurity,
+                EnableMixedModeSecurity = entity.EnableMixedModeSecurity
+            };
+        }
+        #endregion
+
+        #region FederationMetadataConfiguration
+        public static Models.Configuration.FederationMetadataConfiguration ToDomainModel(this Entities.Configuration.FederationMetadataConfiguration entity)
+        {
+            return new Models.Configuration.FederationMetadataConfiguration
+            {
+                Enabled = entity.Enabled
+            };
+        }
+        #endregion
+
+        #region OAuth2Configuration
+        public static Models.Configuration.OAuth2Configuration ToDomainModel(this Entities.Configuration.OAuth2Configuration entity)
+        {
+            return new Models.Configuration.OAuth2Configuration
+            {
+                Enabled = entity.Enabled
+            };
+        }
+        #endregion
 
 
 

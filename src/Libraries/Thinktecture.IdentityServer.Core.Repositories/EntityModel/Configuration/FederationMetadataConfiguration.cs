@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql.Configuration
 {
-    public class KeyMaterialConfiguration
+    public class FederationMetadataConfiguration
     {
         [Key]
         public int Id { get; set; }
 
-        public string SigningCertificateName { get; set; }
-        public string DecryptionCertificateName { get; set; }
-        public string RSASigningKey { get; set; }
+        [Required]
+        public bool Enabled { get; set; }
     }
 }

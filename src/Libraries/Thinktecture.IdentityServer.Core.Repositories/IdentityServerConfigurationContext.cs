@@ -17,7 +17,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public DbSet<GlobalConfiguration> GlobalConfiguration { get; set; }
         public DbSet<WSFederationConfiguration> WSFederation { get; set; }
         public DbSet<KeyMaterialConfiguration> Keys { get; set; }
-
+        public DbSet<WSTrustConfiguration> WSTrust { get; set; }
+        public DbSet<FederationMetadataConfiguration> FederationMetadata { get; set; }
+        public DbSet<OAuth2Configuration> OAuth2 { get; set; }
 
 
         public DbSet<ClientCertificates> ClientCertificates { get; set; }

@@ -3,12 +3,8 @@
  * see license.txt
  */
 
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Repositories.Sql.Configuration;
 
@@ -18,18 +14,88 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
     {
         protected override void Seed(IdentityServerConfigurationContext context)
         {
-            //context.Global.Add(CreateGlobalConfiguration());
-            //context.Endpoints.Add(CreateEndpointConfiguration());
-            //CreateCertificateConfiguration().ForEach(c => context.Certificates.Add(c));
-
-            //// for test purposes
-            //CreateTestRelyingParties().ForEach(rp => context.RelyingParties.Add(rp));
-            //CreateTestIdentityProviders().ForEach(idp => context.IdentityProviders.Add(idp));
+            // default configuration
+            context.GlobalConfiguration.Add(CreateDefaultGlobalConfiguration());
+            context.WSFederation.Add(CreateDefaultWSFederationConfiguration());
+            context.WSTrust.Add(CreateDefaultWSTrustConfiguration());
+            context.FederationMetadata.Add(CreateDefaultFederationMetadataConfiguration());
+            context.OAuth2.Add(CreateDefaultOAuth2Configuration());
+            
+            // test data
+            CreateTestRelyingParties().ForEach(rp => context.RelyingParties.Add(rp));
+            CreateTestIdentityProviders().ForEach(idp => context.IdentityProviders.Add(idp));
 
 
             base.Seed(context);
         }
 
+        #region Default Configuration
+        private static GlobalConfiguration CreateDefaultGlobalConfiguration()
+        {
+            return new GlobalConfiguration
+            {
+                SiteName = "thinktecture identity server for .NET 4.5",
+                IssuerUri = "http://identityserver45.thinktecture.com/trust/changethis",
+                IssuerContactEmail = "office@thinktecture.com",
+                DefaultWSTokenType = TokenTypes.Saml2TokenProfile11,
+                DefaultHttpTokenType = TokenTypes.JsonWebToken,
+                DefaultTokenLifetime = 10,
+                MaximumTokenLifetime = 24,
+                SsoCookieLifetime = 10,
+                RequireEncryption = false,
+                EnforceUsersGroupMembership = true,
+                HttpPort = 80,
+                HttpsPort = 443,
+                EnableClientCertificateAuthentication = false,
+                RequireRelyingPartyRegistration = true
+            };
+        }
+
+        private static WSFederationConfiguration CreateDefaultWSFederationConfiguration()
+        {
+            return new WSFederationConfiguration
+            {
+                AllowReplyTo = false,
+                EnableAuthentication = true,
+                Enabled = true,
+                EnableFederation = false,
+                EnableHrd = false,
+                RequireReplyToWithinRealm = true,
+                RequireSslForReplyTo = true
+            };
+        }
+
+        private WSTrustConfiguration CreateDefaultWSTrustConfiguration()
+        {
+            return new WSTrustConfiguration
+            {
+                EnableClientCertificateAuthentication = false,
+                Enabled = false,
+                EnableDelegation = false,
+                EnableFederatedAuthentication = false,
+                EnableMessageSecurity = false,
+                EnableMixedModeSecurity = false
+            };
+        }
+
+        private OAuth2Configuration CreateDefaultOAuth2Configuration()
+        {
+            return new OAuth2Configuration
+            {
+                Enabled = true
+            };
+        }
+
+        private FederationMetadataConfiguration CreateDefaultFederationMetadataConfiguration()
+        {
+            return new FederationMetadataConfiguration
+            {
+                Enabled = true
+            };
+        }
+        #endregion
+
+        #region Test Data
         private List<RelyingParties> CreateTestRelyingParties()
         {
             return new List<RelyingParties>
@@ -66,66 +132,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 }
             };
         }
-
-        private static GlobalConfiguration CreateGlobalConfiguration()
-        {
-            return new GlobalConfiguration
-            {
-                SiteName = "thinktecture identity server for .NET 4.5",
-                IssuerUri = "http://identityserver45.thinktecture.com/trust/changethis",
-                IssuerContactEmail = "office@thinktecture.com",
-                DefaultWSTokenType = TokenTypes.Saml2TokenProfile11,
-                DefaultHttpTokenType = TokenTypes.JsonWebToken,
-                DefaultTokenLifetime = 10,
-                MaximumTokenLifetime = 24,
-                SsoCookieLifetime = 10,
-                RequireEncryption = false,
-                EnforceUsersGroupMembership = true,
-                HttpPort = 80,
-                HttpsPort = 443,
-                EnableClientCertificateAuthentication = false
-            };
-        }
-
-        //private static Endpoints CreateEndpointConfiguration()
-        //{
-        //    return new Endpoints
-        //    {
-        //        Name = "Standard",
-
-        //        WSFederation = true,
-        //        WSFederationHrd = false,
-        //        FederationMetadata = true,
-        //        WSTrustMessage = false,
-        //        WSTrustMixed = true,
-
-        //        SimpleHttp = false,
-        //        OAuthWRAP = false,
-        //        OAuth2 = false,
-        //        JSNotify = false,
-
-        //        HttpPort = 80,
-        //        HttpsPort = 443
-
-        //    };
-        //}
-
-        //private static List<Certificates> CreateCertificateConfiguration()
-        //{
-        //    return new List<Certificates>
-        //    {
-        //        new Certificates
-        //        {
-        //            Name = "SSL",
-        //            SubjectDistinguishedName = ""
-        //        },
-
-        //        new Certificates
-        //        {
-        //            Name = "SigningCertificate",
-        //            SubjectDistinguishedName = ""
-        //        },
-        //    };
+        #endregion
     }
 }
 

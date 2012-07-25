@@ -19,6 +19,5 @@ namespace Thinktecture.IdentityServer.Repositories
         FederationMetadataConfiguration FederationMetadata { get; set; }
         WSTrustConfiguration WSTrust { get; set; }
         OAuth2Configuration OAuth2 { get; set; }
-        OAuthWrapConfiguration OAuthWrap { get; set; }
     }
 }
