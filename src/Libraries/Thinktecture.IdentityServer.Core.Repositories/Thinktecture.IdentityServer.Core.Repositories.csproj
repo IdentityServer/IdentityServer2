@@ -82,7 +82,6 @@
     <Compile Include="IdentityProviderRepository.cs" />
     <Compile Include="EntityModel\ClientCertificates.cs" />
     <Compile Include="ClientCertificatesRepository.cs" />
-    <Compile Include="__ConfigurationRepository.cs" />
     <Compile Include="EntityModel\Delegation.cs" />
     <Compile Include="DelegationRepository.cs" />
     <Compile Include="EntityModel\IdentityProvider.cs" />
