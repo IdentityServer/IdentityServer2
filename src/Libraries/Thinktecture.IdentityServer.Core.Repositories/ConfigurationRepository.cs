@@ -20,8 +20,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 using (var entities = IdentityServerConfigurationContext.Get())
                 {
                     var entity = entities.GlobalConfiguration.First<Entities.Configuration.GlobalConfiguration>();
-
-                    // map to domain model
                     return entity.ToDomainModel();
                 }
             }
@@ -45,8 +43,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 using (var entities = IdentityServerConfigurationContext.Get())
                 {
                     var entity = entities.Diagnostics.First<Entities.Configuration.DiagnosticsConfiguration>();
-
-                    // map to domain model
                     return entity.ToDomainModel();
                 }
             }
@@ -70,8 +66,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 using (var entities = IdentityServerConfigurationContext.Get())
                 {
                     var entity = entities.Keys.FirstOrDefault<Entities.Configuration.KeyMaterialConfiguration>();
-
-                    // map to domain model
                     return entity.ToDomainModel();
                 }
             }
@@ -99,8 +93,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 using (var entities = IdentityServerConfigurationContext.Get())
                 {
                     var entity = entities.WSFederation.First<Entities.Configuration.WSFederationConfiguration>();
-
-                    // map to domain model
                     return entity.ToDomainModel();
                 }
             }
@@ -124,8 +116,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 using (var entities = IdentityServerConfigurationContext.Get())
                 {
                     var entity = entities.FederationMetadata.First<Entities.Configuration.FederationMetadataConfiguration>();
-
-                    // map to domain model
                     return entity.ToDomainModel();
                 }
             }
@@ -149,8 +139,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 using (var entities = IdentityServerConfigurationContext.Get())
                 {
                     var entity = entities.WSTrust.First<Entities.Configuration.WSTrustConfiguration>();
-
-                    // map to domain model
                     return entity.ToDomainModel();
                 }
             }
@@ -174,8 +162,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 using (var entities = IdentityServerConfigurationContext.Get())
                 {
                     var entity = entities.OAuth2.First<Entities.Configuration.OAuth2Configuration>();
-
-                    // map to domain model
                     return entity.ToDomainModel();
                 }
             }
