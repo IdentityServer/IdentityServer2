@@ -12,15 +12,13 @@ namespace Thinktecture.IdentityServer.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            if (configuration.FederationMetadata.Enabled)
-            {
-                routes.MapRoute(
-                    "FederationMetadata",
-                    "FederationMetadata/2007-06/FederationMetadata.xml",
-                    new { controller = "FederationMetadata", action = "Generate" }
-                );
-            }
-
+            #region Administration & Configuration
+            routes.MapRoute(
+                "InitialConfiguration",
+                "initialconfiguration",
+                new { controller = "InitialConfiguration", action = "Index" }
+            );
+            
             routes.MapRoute(
                 "RelyingPartiesAdmin",
                 "admin/relyingparties/{action}/{id}",
@@ -38,15 +36,33 @@ namespace Thinktecture.IdentityServer.Web
                 "admin/delegation/{action}/{userName}",
                 new { controller = "DelegationAdmin", action = "Index", userName = UrlParameter.Optional }
             );
+            #endregion
 
+            #region Main UI
             routes.MapRoute(
-                "Default",
-                "{controller}/{action}/{id}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                new { controller = "^(?!issue).*" }
+                "Account",
+                "account/{action}",
+                new { controller = "Account", action = "Index", id = UrlParameter.Optional }
             );
 
-            // ws-federation (mvc)
+            routes.MapRoute(
+                "Home",
+                "{action}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+            #endregion
+           
+            #region Protocols
+            if (configuration.FederationMetadata.Enabled)
+            {
+                routes.MapRoute(
+                    "FederationMetadata",
+                    "FederationMetadata/2007-06/FederationMetadata.xml",
+                    new { controller = "FederationMetadata", action = "Generate" }
+                );
+            }
+
+            // ws-federation
             if (configuration.WSFederation.Enabled && configuration.WSFederation.EnableAuthentication)
             {
                 routes.MapRoute(
@@ -56,7 +72,7 @@ namespace Thinktecture.IdentityServer.Web
                 );
             }
 
-            // ws-federation HRD (mvc)
+            // ws-federation HRD
             if (configuration.WSFederation.Enabled && configuration.WSFederation.EnableFederation)
             {
                 routes.MapRoute(
@@ -65,6 +81,27 @@ namespace Thinktecture.IdentityServer.Web
                     new { controller = "Hrd", action = "issue" }
                 );
             }
+
+            // oauth2
+            if (configuration.OAuth2.Enabled)
+            {
+                routes.MapRoute(
+                    "oauth2",
+                    "issue/oauth2/{action}",
+                    new { controller = "OAuth2", action = "token" }
+                );
+            }
+
+            // ws-trust
+            if (configuration.WSTrust.Enabled)
+            {
+                routes.Add(new ServiceRoute(
+                    "issue/wstrust",
+                    new TokenServiceHostFactory(),
+                    typeof(TokenServiceConfiguration))
+                );
+            }
+
 
             //// jsnotify (mvc)
             //routes.MapRoute(
@@ -86,26 +123,8 @@ namespace Thinktecture.IdentityServer.Web
             //    "issue/wrap",
             //    new { controller = "Wrap", action = "issue" }
             //);
-
-            // oauth2
-            if (configuration.OAuth2.Enabled)
-            {
-                routes.MapRoute(
-                    "oauth2",
-                    "issue/oauth2/{action}",
-                    new { controller = "OAuth2", action = "token" }
-                );
-            }
-
-            // ws-trust (wcf)
-            if (configuration.WSTrust.Enabled)
-            {
-                routes.Add(new ServiceRoute(
-                    "issue/wstrust",
-                    new TokenServiceHostFactory(),
-                    typeof(TokenServiceConfiguration))
-                );
-            }
+            #endregion
         }
+
     }
 }
