@@ -20,6 +20,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             context.WSTrust.Add(CreateDefaultWSTrustConfiguration());
             context.FederationMetadata.Add(CreateDefaultFederationMetadataConfiguration());
             context.OAuth2.Add(CreateDefaultOAuth2Configuration());
+            context.Diagnostics.Add(CreateDefaultDiagnosticsConfiguration());
             
             // test data
             CreateTestRelyingParties().ForEach(rp => context.RelyingParties.Add(rp));
@@ -91,6 +92,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new FederationMetadataConfiguration
             {
                 Enabled = true
+            };
+        }
+
+        private DiagnosticsConfiguration CreateDefaultDiagnosticsConfiguration()
+        {
+            return new DiagnosticsConfiguration
+            {
+                EnableFederationMessageTracing = false
             };
         }
         #endregion
