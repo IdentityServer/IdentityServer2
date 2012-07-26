@@ -112,7 +112,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             //new SignInSessionsManager(HttpContext, ConfigurationRepository.Configuration.MaximumTokenLifetime)
             //    .AddRealm(response.BaseUri.AbsoluteUri);
 
-            return new WSFederationResult(wsFedResponse);
+            return new WSFederationResult(wsFedResponse, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
 
         private ClaimsPrincipal ValidateToken(SecurityToken token)

@@ -72,7 +72,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             new SignInSessionsManager(HttpContext, ConfigurationRepository.Global.MaximumTokenLifetime)
                 .AddRealm(response.BaseUri.AbsoluteUri);
 
-            return new WSFederationResult(response);
+            return new WSFederationResult(response, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
 
         private ActionResult ProcessWSFederationSignOut(SignOutRequestMessage message)
