@@ -117,7 +117,6 @@ namespace Thinktecture.IdentityServer.TokenService
             ValidateTokenType(details);
             ValidateReplyTo(details);
             ValidateEncryption(details);
-            ValidateSsl(details);
             ValidateDelegation(details);
 
             Tracing.Information("Policy Validation succeeded");
@@ -359,19 +358,6 @@ namespace Thinktecture.IdentityServer.TokenService
                 {
                     Tracing.Error(String.Format("ActAs mapping not found."));
                     throw new InvalidRequestException("ActAs mapping not found.");
-                }
-            }
-        }
-
-        protected virtual void ValidateSsl(RequestDetails details)
-        {
-            // check if SSL is used (for passive only)
-            if (_configuration.WSFederation.RequireSslForReplyTo && !details.UsesSsl)
-            {
-                if (!details.IsActive)
-                {
-                    Tracing.Error("Configuration requires SSL - but clear text reply address used");
-                    throw new InvalidRequestException("SSL is required");
                 }
             }
         }
