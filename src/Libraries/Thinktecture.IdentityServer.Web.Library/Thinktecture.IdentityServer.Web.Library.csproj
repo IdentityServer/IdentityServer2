@@ -65,11 +65,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\AccountController.cs" />
     <Compile Include="Controller\Admin\AdminController.cs" />
     <Compile Include="Controller\Admin\ClientCertificatesAdminController.cs" />
     <Compile Include="Controller\Admin\DelegationAdminController.cs" />
     <Compile Include="Controller\Admin\RelyingPartiesAdminController.cs" />
+    <Compile Include="Controller\AccountController.cs" />
+    <Compile Include="Controller\AccountControllerBase.cs" />
     <Compile Include="Controller\HomeController.cs" />
     <Compile Include="Controller\InitialConfigurationController.cs" />
     <Compile Include="GlobalFilter\GlobalViewModelFilter.cs" />

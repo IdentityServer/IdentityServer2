@@ -19,7 +19,7 @@ namespace Thinktecture.IdentityServer.Web.ViewModels
         [DisplayName("Password")]
         public string Password { get; set; }
 
-        [DisplayName("Enable Single-Sign-On?")]
+        [DisplayName("Remember me?")]
         public bool EnableSSO { get; set; }
     }
 }

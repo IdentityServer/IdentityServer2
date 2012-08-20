@@ -10,6 +10,7 @@ using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Services;
 using System.IdentityModel.Tokens;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
@@ -266,10 +267,17 @@ namespace Thinktecture.IdentityServer.Protocols
             return result;
         }
 
-        public void SetSessionToken(string userName, string authenticationMethod, bool isPersistent, int ttl, string resourceName)
+        public void SetSessionToken(string userName, string authenticationMethod, bool isPersistent, int ttl, string resourceName, IEnumerable<Claim> additionalClaims = null)
         {
             var principal = CreatePrincipal(userName, authenticationMethod);
             var transformedPrincipal = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(resourceName, principal);
+            
+            // add additional claims if present
+            if (additionalClaims != null)
+            {
+                additionalClaims.ToList().ForEach(c => transformedPrincipal.Identities.First().AddClaim(c));
+            }
+
             var sessionToken = new SessionSecurityToken(transformedPrincipal, TimeSpan.FromHours(ttl))
             {
                 IsPersistent = isPersistent
