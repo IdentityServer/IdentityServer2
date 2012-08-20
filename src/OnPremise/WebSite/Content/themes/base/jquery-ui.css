@@ -1,7 +1,7 @@
-/*! jQuery UI - v1.8.20 - 2012-04-30
+/*! jQuery UI - v1.8.23 - 2012-08-15
 * https://github.com/jquery/jquery-ui
 * Includes: jquery.ui.core.css, jquery.ui.accordion.css, jquery.ui.autocomplete.css, jquery.ui.button.css, jquery.ui.datepicker.css, jquery.ui.dialog.css, jquery.ui.progressbar.css, jquery.ui.resizable.css, jquery.ui.selectable.css, jquery.ui.slider.css, jquery.ui.tabs.css, jquery.ui.theme.css
-* Copyright (c) 2012 AUTHORS.txt; Licensed MIT, GPL */
+* Copyright (c) 2012 AUTHORS.txt; Licensed MIT */
 
 /* Layout helpers
 ----------------------------------*/
@@ -49,10 +49,10 @@
 * html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
 
 /*
- * jQuery UI Menu 1.8.20
+ * jQuery UI Menu 1.8.23
  *
  * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
- * Dual licensed under the MIT or GPL Version 2 licenses.
+ * Licensed under the MIT license.
  * http://jquery.org/license
  *
  * http://docs.jquery.com/UI/Menu#theming
@@ -167,8 +167,6 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 
 /* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
 .ui-datepicker-cover {
-    display: none; /*sorry for IE5*/
-    display/**/: block; /*sorry for IE5*/
     position: absolute; /*must have*/
     z-index: -1; /*must have*/
     filter: mask(); /*must have*/
