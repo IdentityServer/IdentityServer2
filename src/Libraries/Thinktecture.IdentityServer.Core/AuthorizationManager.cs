@@ -11,8 +11,9 @@ using Thinktecture.IdentityModel;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityServer.Repositories;
+using Thinktecture.IdentityServer.Web.Security;
 
-namespace Thinktecture.IdentityServer.Web.Security
+namespace Thinktecture.IdentityServer
 {
     public class AuthorizationManager : ClaimsAuthorizationManager
     {

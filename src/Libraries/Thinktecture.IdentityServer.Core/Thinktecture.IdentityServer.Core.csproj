@@ -102,7 +102,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthorizationManager.cs" />
     <Compile Include="ClaimsAuthorizeAttribute.cs" />
+    <Compile Include="ClaimsTransformer.cs" />
     <Compile Include="Configuration\RepositoryConfigurationSection.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Helper\X509Certificates.cs" />

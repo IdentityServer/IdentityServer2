@@ -8,7 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using Thinktecture.IdentityServer.Repositories;
 
-namespace Thinktecture.IdentityServer.Web.Security
+namespace Thinktecture.IdentityServer
 {
     public class ClaimsTransformer : ClaimsAuthenticationManager
     {
