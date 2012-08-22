@@ -61,7 +61,8 @@ namespace Thinktecture.IdentityServer.Protocols.JSNotify
             var auth = new AuthenticationHelper();
 
             TokenResponse response;
-            if (auth.TryIssueToken(endpoint, Thread.CurrentPrincipal as ClaimsPrincipal, tokenType, out response))
+            var sts = new STS();
+            if (sts.TryIssueToken(endpoint, Thread.CurrentPrincipal as ClaimsPrincipal, tokenType, out response))
             {
                 var jsresponse = new AccessTokenResponse
                 {

@@ -71,7 +71,8 @@ namespace Thinktecture.IdentityServer.Protocols.SimpleHttp
             }
 
             TokenResponse tokenResponse;
-            if (auth.TryIssueToken(endpoint, principal, tokenType, out tokenResponse))
+            var sts = new STS();
+            if (sts.TryIssueToken(endpoint, principal, tokenType, out tokenResponse))
             {
                 return new SimpleHttpResult(tokenResponse.TokenString, tokenType);
             }

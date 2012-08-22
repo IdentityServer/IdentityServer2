@@ -211,62 +211,6 @@ namespace Thinktecture.IdentityServer.Protocols
             return FederatedAuthentication.FederationConfiguration.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(string.Empty, principal);
         }
 
-        public bool TryIssueToken(EndpointAddress appliesTo, ClaimsPrincipal principal, string tokenType, out SecurityToken token)
-        {
-            token = null;
-
-            var rst = new RequestSecurityToken
-            {
-                RequestType = RequestTypes.Issue,
-                AppliesTo = new EndpointReference(appliesTo.Uri.AbsoluteUri),
-                KeyType = KeyTypes.Bearer,
-                TokenType = tokenType
-            };
-
-            var sts = TokenServiceConfiguration.Current.CreateSecurityTokenService();
-
-            try
-            {
-                var rstr = sts.Issue(principal, rst);
-                token = rstr.RequestedSecurityToken.SecurityToken;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public bool TryIssueToken(EndpointAddress appliesTo, ClaimsPrincipal principal, string tokenType, out TokenResponse response)
-        {
-            SecurityToken token = null;
-            response = new TokenResponse { TokenType = tokenType };
-
-            var result = TryIssueToken(appliesTo, principal, tokenType, out token);
-            if (result == false)
-            {
-                return false;
-            }
-
-            if (tokenType == TokenTypes.JsonWebToken || tokenType == TokenTypes.SimpleWebToken)
-            {
-                var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[tokenType];
-                response.TokenString = handler.WriteToken(token);
-                response.ContentType = "text";
-            }
-            else
-            {
-                var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers;
-                var sb = new StringBuilder(128);
-                handler.WriteToken(new XmlTextWriter(new StringWriter(sb)), token);
-
-                response.ContentType = "text/xml";
-                response.TokenString = sb.ToString();
-            }
-
-            return result;
-        }
-
         public void SetSessionToken(string userName, string authenticationMethod, bool isPersistent, int ttl, string resourceName, IEnumerable<Claim> additionalClaims = null)
         {
             var principal = CreatePrincipal(userName, authenticationMethod);

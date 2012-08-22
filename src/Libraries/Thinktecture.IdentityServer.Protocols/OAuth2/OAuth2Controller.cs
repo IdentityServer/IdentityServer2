@@ -72,7 +72,8 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                 }
 
                 SecurityToken token;
-                if (auth.TryIssueToken(new EndpointAddress(uri), principal, ConfigurationRepository.Global.DefaultHttpTokenType, out token))
+                var sts = new STS();
+                if (sts.TryIssueToken(new EndpointAddress(uri), principal, ConfigurationRepository.Global.DefaultHttpTokenType, out token))
                 {
                     var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[ConfigurationRepository.Global.DefaultHttpTokenType];
                     var response = new AccessTokenResponse
