@@ -25,6 +25,7 @@ using Thinktecture.IdentityServer.TokenService;
 using Thinktecture.IdentityModel.Tokens;
 using Thinktecture.IdentityModel;
 using Thinktecture.IdentityServer.Protocols.OAuth2;
+using System.Net.Http;
 
 namespace Thinktecture.IdentityServer.Protocols
 {
@@ -48,6 +49,25 @@ namespace Thinktecture.IdentityServer.Protocols
         }
 
         public bool TryGetPrincipalFromHttpRequest(HttpRequestBase request, out ClaimsPrincipal principal)
+        {
+            principal = null;
+
+            // first check for client certificate
+            if (TryGetClientCertificatePrinciaplFromRequest(request, out principal))
+            {
+                return true;
+            }
+
+            // then basic authentication
+            if (TryGetBasicAuthenticationPrincipalFromRequest(request, out principal))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool TryGetPrincipalFromHttpRequest(HttpRequestMessage request, out ClaimsPrincipal principal)
         {
             principal = null;
 
@@ -128,6 +148,24 @@ namespace Thinktecture.IdentityServer.Protocols
             return false;
         }
 
+        public bool TryGetClientCertificatePrinciaplFromRequest(HttpRequestMessage request, out ClaimsPrincipal principal)
+        {
+            X509Certificate2 clientCertificate = null;
+            principal = null;
+
+            if (TryGetClientCertificateFromRequest(request, out clientCertificate))
+            {
+                string userName;
+                if (UserRepository.ValidateUser(clientCertificate, out userName))
+                {
+                    principal = CreatePrincipal(userName, AuthenticationMethods.X509);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public bool TryGetClientCertificateFromRequest(HttpRequestBase request, out X509Certificate2 clientCertificate)
         {
             clientCertificate = null;
@@ -141,7 +179,36 @@ namespace Thinktecture.IdentityServer.Protocols
             return false;
         }
 
+        public bool TryGetClientCertificateFromRequest(HttpRequestMessage request, out X509Certificate2 clientCertificate)
+        {
+            clientCertificate = request.GetClientCertificate();
+
+            if (clientCertificate != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public bool TryGetBasicAuthenticationPrincipalFromRequest(HttpRequestBase request, out ClaimsPrincipal principal)
+        {
+            principal = null;
+            HttpListenerBasicIdentity identity = null;
+
+            if (TryGetBasicAuthenticationCredentialsFromRequest(request, out identity))
+            {
+                if (UserRepository.ValidateUser(identity.Name, identity.Password))
+                {
+                    principal = CreatePrincipal(identity.Name, AuthenticationMethods.Password);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool TryGetBasicAuthenticationPrincipalFromRequest(HttpRequestMessage request, out ClaimsPrincipal principal)
         {
             principal = null;
             HttpListenerBasicIdentity identity = null;
@@ -166,6 +233,30 @@ namespace Thinktecture.IdentityServer.Protocols
             if (header != null && header.StartsWith("Basic"))
             {
                 string encodedUserPass = header.Substring(6).Trim();
+
+                Encoding encoding = Encoding.GetEncoding("iso-8859-1");
+                string userPass = encoding.GetString(Convert.FromBase64String(encodedUserPass));
+                int separator = userPass.IndexOf(':');
+
+                string[] credentials = new string[2];
+                credentials[0] = userPass.Substring(0, separator);
+                credentials[1] = userPass.Substring(separator + 1);
+
+                identity = new HttpListenerBasicIdentity(credentials[0], credentials[1]);
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool TryGetBasicAuthenticationCredentialsFromRequest(HttpRequestMessage request, out HttpListenerBasicIdentity identity)
+        {
+            identity = null;
+
+            var header = request.Headers.Authorization;
+            if (header != null && header.Scheme.Equals("Basic"))
+            {
+                string encodedUserPass = header.Parameter;
 
                 Encoding encoding = Encoding.GetEncoding("iso-8859-1");
                 string userPass = encoding.GetString(Convert.FromBase64String(encodedUserPass));

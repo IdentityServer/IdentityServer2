@@ -30,14 +30,14 @@ namespace Thinktecture.IdentityServer.Protocols
             _sts = sts;
         }
 
-        public bool TryIssueToken(EndpointAddress appliesTo, ClaimsPrincipal principal, string tokenType, out SecurityToken token)
+        public bool TryIssueToken(EndpointReference appliesTo, ClaimsPrincipal principal, string tokenType, out SecurityToken token)
         {
             token = null;
 
             var rst = new RequestSecurityToken
             {
                 RequestType = RequestTypes.Issue,
-                AppliesTo = new EndpointReference(appliesTo.Uri.AbsoluteUri),
+                AppliesTo = appliesTo,
                 KeyType = KeyTypes.Bearer,
                 TokenType = tokenType
             };
@@ -54,7 +54,7 @@ namespace Thinktecture.IdentityServer.Protocols
             }
         }
 
-        public bool TryIssueToken(EndpointAddress appliesTo, ClaimsPrincipal principal, string tokenType, out TokenResponse response)
+        public bool TryIssueToken(EndpointReference appliesTo, ClaimsPrincipal principal, string tokenType, out TokenResponse response)
         {
             SecurityToken token = null;
             response = new TokenResponse { TokenType = tokenType };

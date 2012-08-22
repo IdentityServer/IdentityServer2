@@ -14,6 +14,7 @@ using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.Security;
 using Thinktecture.IdentityModel.Tokens;
 using System.IdentityModel.Services;
+using System.IdentityModel.Protocols.WSTrust;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {
@@ -73,7 +74,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
                 SecurityToken token;
                 var sts = new STS();
-                if (sts.TryIssueToken(new EndpointAddress(uri), principal, ConfigurationRepository.Global.DefaultHttpTokenType, out token))
+                if (sts.TryIssueToken(new EndpointReference(request.Scope), principal, ConfigurationRepository.Global.DefaultHttpTokenType, out token))
                 {
                     var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[ConfigurationRepository.Global.DefaultHttpTokenType];
                     var response = new AccessTokenResponse

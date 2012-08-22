@@ -5,6 +5,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.IdentityModel.Protocols.WSTrust;
 using System.Security.Claims;
 using System.ServiceModel;
 using System.Web.Mvc;
@@ -54,7 +55,7 @@ namespace Thinktecture.IdentityServer.Protocols.SimpleHttp
 
             Tracing.Information("Simple HTTP endpoint called for realm: " + uri.AbsoluteUri);
 
-            var endpoint = new EndpointAddress(uri);
+            var endpoint = new EndpointReference(realm);
             var auth = new AuthenticationHelper();
             
             ClaimsPrincipal principal;

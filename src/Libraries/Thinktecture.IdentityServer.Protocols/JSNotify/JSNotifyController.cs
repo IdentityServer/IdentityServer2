@@ -5,6 +5,7 @@
 
 using System;
 using System.ComponentModel.Composition;
+using System.IdentityModel.Protocols.WSTrust;
 using System.Security.Claims;
 using System.ServiceModel;
 using System.Threading;
@@ -57,7 +58,7 @@ namespace Thinktecture.IdentityServer.Protocols.JSNotify
                 return new HttpStatusCodeResult(400);
             }
 
-            var endpoint = new EndpointAddress(uri);
+            var endpoint = new EndpointReference(realm);
             var auth = new AuthenticationHelper();
 
             TokenResponse response;
