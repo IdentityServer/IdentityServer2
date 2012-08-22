@@ -21,6 +21,9 @@ namespace Thinktecture.IdentityServer.Web
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
+        [Import]
+        public IUserRepository UserRepository { get; set; }
+
         protected void Application_Start()
         {
             // create empty config database if it not exists
@@ -36,7 +39,7 @@ namespace Thinktecture.IdentityServer.Web
             AreaRegistration.RegisterAllAreas();
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes, ConfigurationRepository);
+            RouteConfig.RegisterRoutes(RouteTable.Routes, ConfigurationRepository, UserRepository);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
@@ -46,7 +49,7 @@ namespace Thinktecture.IdentityServer.Web
 
             if (context.Response.StatusCode == 401)
             {
-                var noRedirect = context.Items["NoRedirect"];
+                var noRedirect = context.Items[Thinktecture.IdentityModel.Constants.Internal.NoRedirectLabel];
 
                 if (noRedirect == null)
                 {

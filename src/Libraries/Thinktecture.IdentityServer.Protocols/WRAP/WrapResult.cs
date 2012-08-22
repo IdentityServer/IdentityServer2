@@ -6,7 +6,6 @@
 using System;
 using System.Web;
 using System.Web.Mvc;
-using Thinktecture.IdentityServer.Web.Security;
 
 namespace Thinktecture.IdentityServer.Protocols
 {

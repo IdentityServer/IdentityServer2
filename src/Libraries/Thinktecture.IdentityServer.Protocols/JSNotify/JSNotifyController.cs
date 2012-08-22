@@ -12,7 +12,6 @@ using System.Threading;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.Security;
 
 namespace Thinktecture.IdentityServer.Protocols.JSNotify
 {

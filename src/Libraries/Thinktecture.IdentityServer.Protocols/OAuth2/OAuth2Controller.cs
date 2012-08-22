@@ -11,7 +11,6 @@ using System.ServiceModel;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.Security;
 using Thinktecture.IdentityModel.Tokens;
 using System.IdentityModel.Services;
 using System.IdentityModel.Protocols.WSTrust;

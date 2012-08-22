@@ -11,7 +11,6 @@ using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
-using Thinktecture.IdentityServer.Web.Security;
 
 namespace Thinktecture.IdentityServer.Protocols.WSFederation
 {

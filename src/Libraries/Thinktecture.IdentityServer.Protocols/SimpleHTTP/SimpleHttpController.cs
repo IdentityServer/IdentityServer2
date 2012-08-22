@@ -10,7 +10,6 @@ using System.Security.Claims;
 using System.ServiceModel;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.Security;
 
 namespace Thinktecture.IdentityServer.Protocols.SimpleHttp
 {

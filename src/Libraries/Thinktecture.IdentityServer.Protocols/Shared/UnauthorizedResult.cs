@@ -46,7 +46,7 @@ namespace Thinktecture.IdentityServer.Protocols
 
             if (_responseAction == ResponseAction.Send401)
             {
-                context.HttpContext.Items["NoRedirect"] = true;
+                context.HttpContext.Items[Thinktecture.IdentityModel.Constants.Internal.NoRedirectLabel] = true;
             }
         }
     }

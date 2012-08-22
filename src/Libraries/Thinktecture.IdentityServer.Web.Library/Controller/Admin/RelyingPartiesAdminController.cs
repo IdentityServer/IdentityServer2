@@ -8,7 +8,6 @@ using System.ComponentModel.Composition;
 using System.Security.Cryptography;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.Security;
 using Thinktecture.IdentityServer.Web.ViewModels.Administration;
 
 namespace Thinktecture.IdentityServer.Web.Controllers

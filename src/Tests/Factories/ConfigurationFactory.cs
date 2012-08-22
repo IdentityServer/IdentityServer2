@@ -40,6 +40,7 @@ namespace Thinktecture.IdentityServer.Tests
                 DefaultWSTokenType = "urn:oasis:names:tc:SAML:2.0:assertion",
 
                 EnableClientCertificateAuthentication = true,
+                
                 //EnableDelegation = false,
 
                 RequireRelyingPartyRegistration = true,
@@ -61,18 +62,18 @@ namespace Thinktecture.IdentityServer.Tests
 
                 DefaultTokenLifetime = 10,
                 MaximumTokenLifetime = 24,
-                DefaultTokenType = "urn:oasis:names:tc:SAML:2.0:assertion",
+                //DefaultTokenType = "urn:oasis:names:tc:SAML:2.0:assertion",
 
-                EnableClientCertificates = true,
-                EnableDelegation = false,
+                //EnableClientCertificates = true,
+                //EnableDelegation = false,
 
-                AllowKnownRealmsOnly = true,
-                AllowReplyTo = true,
-                RequireReplyToWithinRealm = true,
+                //AllowKnownRealmsOnly = true,
+                //AllowReplyTo = true,
+                //RequireReplyToWithinRealm = true,
 
                 RequireEncryption = true,
-                RequireSsl = true,
-                RequireSignInConfirmation = false
+                //RequireSsl = true,
+                //RequireSignInConfirmation = false
             };
         }
     }

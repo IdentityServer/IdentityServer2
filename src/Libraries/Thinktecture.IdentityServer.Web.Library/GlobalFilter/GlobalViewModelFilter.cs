@@ -6,7 +6,6 @@
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.Security;
 
 namespace Thinktecture.IdentityServer.Web.GlobalFilter
 {

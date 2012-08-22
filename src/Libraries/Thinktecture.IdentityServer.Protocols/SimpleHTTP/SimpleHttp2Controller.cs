@@ -1,14 +1,17 @@
 ﻿using System.ComponentModel.Composition;
 using System.IdentityModel.Protocols.WSTrust;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.Security;
+using System.Linq;
+using System.Net;
+using System.Web;
 
 namespace Thinktecture.IdentityServer.Protocols.SimpleHTTP
 {
-    class SimpleHttp2Controller : ApiController
-    {  
+    public class SimpleHttp2Controller : ApiController
+    {
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
@@ -22,46 +25,60 @@ namespace Thinktecture.IdentityServer.Protocols.SimpleHTTP
             ConfigurationRepository = configurationRepository;
         }
 
-        public void Get([FromUri]string realm, [FromUri]string tokenType)
+        [ApiClaimsAuthorize(Constants.Actions.Issue, Constants.Resources.SimpleHttp)]
+        public HttpResponseMessage Get(HttpRequestMessage request)
         {
             Tracing.Information("Simple HTTP endpoint called.");
 
-            if (tokenType == null)
+            var query = request.GetQueryNameValuePairs();
+            var auth = new AuthenticationHelper();
+
+            var realm = query.FirstOrDefault(p => p.Key.Equals("realm", System.StringComparison.OrdinalIgnoreCase)).Value;
+            var tokenType = query.FirstOrDefault(p => p.Key.Equals("tokenType", System.StringComparison.OrdinalIgnoreCase)).Value;
+
+            if (string.IsNullOrWhiteSpace(realm))
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "realm parameter is missing.");
+            }
+
+            EndpointReference appliesTo;
+            try
+            {
+                appliesTo = new EndpointReference(realm);
+                Tracing.Information("Simple HTTP endpoint called for realm: " + realm);
+            }
+            catch
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "malformed realm name.");
+            }
+
+            if (string.IsNullOrWhiteSpace(tokenType))
             {
                 tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
             }
 
             Tracing.Verbose("Token type: " + tokenType);
 
-            var appliesTo = new EndpointReference(realm);
-            Tracing.Information("Simple HTTP endpoint called for realm: " + realm);
-
-
-            var auth = new AuthenticationHelper();
-
-            ClaimsPrincipal principal = null;
-            if (!auth.TryGetPrincipalFromHttpRequest(Request, out principal))
-            {
-                Tracing.Error("no or invalid credentials found.");
-                //return new UnauthorizedResult("Basic", UnauthorizedResult.ResponseAction.Send401);
-            }
-
-            if (!ClaimsAuthorize.CheckAccess(principal, Constants.Actions.Issue, Constants.Resources.SimpleHttp))
-            {
-                Tracing.Error("User not authorized");
-                //return new UnauthorizedResult("Basic", UnauthorizedResult.ResponseAction.Send401);
-            }
-
             TokenResponse tokenResponse;
             var sts = new STS();
-            if (sts.TryIssueToken(appliesTo, principal, tokenType, out tokenResponse))
+            if (sts.TryIssueToken(appliesTo, ClaimsPrincipal.Current, tokenType, out tokenResponse))
             {
-                //return new SimpleHttpResult(tokenResponse.TokenString, tokenType);
+                var jtr = new JTokenResponse
+                {
+                    AccessToken = tokenResponse.TokenString,
+                    TokenType = tokenResponse.TokenType,
+                    ExpiresIn = ConfigurationRepository.Global.DefaultTokenLifetime * 60
+                };
+
+                var resp = request.CreateResponse<JTokenResponse>(HttpStatusCode.OK, jtr);
+                return resp;
             }
             else
             {
-                //return new HttpStatusCodeResult(400);
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid request.");
             }
+
+            return null;
         }
     }
 }

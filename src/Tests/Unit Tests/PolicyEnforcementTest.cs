@@ -25,13 +25,13 @@ namespace Thinktecture.IdentityServer.Tests
         Request request;
         ClaimsPrincipal _alice;
 
-        [TestInitialize]
-        public void Setup()
-        {
-            config = ConfigurationFactory.Create(Constants.ConfigurationModes.LockedDown);
-            request = new Request(config, new TestRelyingPartyRepository(), null);
-            _alice = PrincipalFactory.Create(Constants.Principals.AliceUserName);
-        }
+        //[TestInitialize]
+        //public void Setup()
+        //{
+        //    config = ConfigurationFactory.Create(Constants.ConfigurationModes.LockedDown);
+        //    request = new Request(config, new TestRelyingPartyRepository(), null);
+        //    _alice = PrincipalFactory.Create(Constants.Principals.AliceUserName);
+        //}
 
         [TestMethod]
         //[ExpectedException(typeof(MissingAppliesToException))]

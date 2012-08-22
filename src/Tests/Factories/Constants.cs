@@ -18,7 +18,7 @@ namespace Thinktecture.IdentityServer.Tests
 
         static Constants()
         {
-            HostName = "adfs.leastprivilege.vm";
+            HostName = "roadie";
         }
 
         public static class Http

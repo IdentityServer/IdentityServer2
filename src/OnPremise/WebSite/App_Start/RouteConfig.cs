@@ -9,7 +9,7 @@ namespace Thinktecture.IdentityServer.Web
 {
     public class RouteConfig
     {
-        public static void RegisterRoutes(RouteCollection routes, IConfigurationRepository configuration)
+        public static void RegisterRoutes(RouteCollection routes, IConfigurationRepository configuration, IUserRepository userRepository)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
@@ -53,7 +53,7 @@ namespace Thinktecture.IdentityServer.Web
             );
             #endregion
 
-            ProtocolConfig.RegisterProtocols(routes, configuration);
+            ProtocolConfig.RegisterProtocols(routes, configuration, userRepository);
         }
 
     }

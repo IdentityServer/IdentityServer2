@@ -9,7 +9,6 @@ using System.Linq;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Web.Security;
 using Thinktecture.IdentityServer.Web.ViewModels.Administration;
 
 namespace Thinktecture.IdentityServer.Web.Controllers

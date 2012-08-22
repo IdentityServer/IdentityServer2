@@ -8,12 +8,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 using Thinktecture.IdentityModel.Authorization;
 
 namespace Thinktecture.IdentityServer
 {
-    public class ClaimsAuthorize : AuthorizeAttribute
+    public class ApiClaimsAuthorize : AuthorizeAttribute
     {
         private string _resource;
         private string _action;
@@ -34,7 +34,7 @@ namespace Thinktecture.IdentityServer
         /// </summary>
         public const string AdditionalResourceType = "http://application/claims/authorization/additionalresource";
 
-        public ClaimsAuthorize(string action, string resource, params string[] additionalResources)
+        public ApiClaimsAuthorize(string action, string resource, params string[] additionalResources)
         {
             _action = action; 
             _resource = resource;
@@ -61,7 +61,7 @@ namespace Thinktecture.IdentityServer
             return ClaimsAuthorization.CheckAccess(context);
         }
 
-        protected override bool AuthorizeCore(HttpContextBase httpContext)
+        protected override bool IsAuthorized(System.Web.Http.Controllers.HttpActionContext actionContext)
         {
             return CheckAccess(_action, _resource, _additionalResources);
         }
