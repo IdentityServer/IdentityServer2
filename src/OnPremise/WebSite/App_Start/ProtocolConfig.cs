@@ -58,9 +58,6 @@ namespace Thinktecture.IdentityServer.Web
 
             // simple http web api implementation
             // todo: add config check
-
-            // configure authentication
-
             routes.MapHttpRoute(
                 name: "simplehttp",
                 routeTemplate: "issue/simple",
@@ -114,7 +111,6 @@ namespace Thinktecture.IdentityServer.Web
             };
 
             authConfig.AddBasicAuthentication((userName, password) => userRepository.ValidateUser(userName, password));
-
             return authConfig;
         }
     }

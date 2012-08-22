@@ -63,22 +63,13 @@ namespace Thinktecture.IdentityServer.Protocols.SimpleHTTP
             var sts = new STS();
             if (sts.TryIssueToken(appliesTo, ClaimsPrincipal.Current, tokenType, out tokenResponse))
             {
-                var jtr = new JTokenResponse
-                {
-                    AccessToken = tokenResponse.TokenString,
-                    TokenType = tokenResponse.TokenType,
-                    ExpiresIn = ConfigurationRepository.Global.DefaultTokenLifetime * 60
-                };
-
-                var resp = request.CreateResponse<JTokenResponse>(HttpStatusCode.OK, jtr);
+                var resp = request.CreateResponse<TokenResponse>(HttpStatusCode.OK, tokenResponse);
                 return resp;
             }
             else
             {
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid request.");
             }
-
-            return null;
         }
     }
 }

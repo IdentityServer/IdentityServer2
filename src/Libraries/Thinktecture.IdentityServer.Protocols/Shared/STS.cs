@@ -5,7 +5,6 @@ using System.IdentityModel.Services;
 using System.IdentityModel.Tokens;
 using System.IO;
 using System.Security.Claims;
-using System.ServiceModel;
 using System.Text;
 using System.Xml;
 using Thinktecture.IdentityModel.Constants;
@@ -68,8 +67,7 @@ namespace Thinktecture.IdentityServer.Protocols
             if (tokenType == TokenTypes.JsonWebToken || tokenType == TokenTypes.SimpleWebToken)
             {
                 var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[tokenType];
-                response.TokenString = handler.WriteToken(token);
-                response.ContentType = "text";
+                response.AccessToken = handler.WriteToken(token);
             }
             else
             {
@@ -77,8 +75,7 @@ namespace Thinktecture.IdentityServer.Protocols
                 var sb = new StringBuilder(128);
                 handler.WriteToken(new XmlTextWriter(new StringWriter(sb)), token);
 
-                response.ContentType = "text/xml";
-                response.TokenString = sb.ToString();
+                response.AccessToken = sb.ToString();
             }
 
             return result;
