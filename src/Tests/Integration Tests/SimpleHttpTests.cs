@@ -28,6 +28,7 @@ namespace Thinktecture.IdentityServer.Tests
         public void NoRealm()
         {
             var client = new HttpClient();
+            client.SetBasicAuthenticationHeader(Constants.Credentials.ValidUserName, Constants.Credentials.ValidPassword);
 
             var result = client.GetAsync(new Uri(baseAddress)).Result;
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.BadRequest, result.StatusCode);
@@ -42,6 +43,7 @@ namespace Thinktecture.IdentityServer.Tests
             };
 
             var client = new HttpClient();
+            client.SetBasicAuthenticationHeader(Constants.Credentials.ValidUserName, Constants.Credentials.ValidPassword);
 
             var result = client.GetAsync(baseAddress + values.ToQueryString()).Result;
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.BadRequest, result.StatusCode);
@@ -75,7 +77,7 @@ namespace Thinktecture.IdentityServer.Tests
             var result = client.GetAsync(baseAddress + values.ToQueryString()).Result;
             
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, result.StatusCode);
-            Assert.AreEqual<string>(MediaTypeNames.Text.Plain, result.Content.Headers.ContentType.MediaType);
+            Assert.AreEqual<string>("application/json", result.Content.Headers.ContentType.MediaType);
         }
 
         //[TestMethod]
@@ -127,9 +129,9 @@ namespace Thinktecture.IdentityServer.Tests
             var result = client.GetAsync(baseAddress + values.ToQueryString()).Result;
             
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, result.StatusCode);
-            Assert.AreEqual<string>(MediaTypeNames.Text.Xml, result.Content.Headers.ContentType.MediaType);
-            
-            Trace.Write(XElement.Parse(result.Content.ReadAsStringAsync().Result).ToString());
+            Assert.AreEqual<string>("application/json", result.Content.Headers.ContentType.MediaType);
+
+            Trace.WriteLine(HttpUtility.UrlDecode(result.Content.ReadAsStringAsync().Result));
         }
 
         [TestMethod]
@@ -147,9 +149,9 @@ namespace Thinktecture.IdentityServer.Tests
             var result = client.GetAsync(baseAddress + values.ToQueryString()).Result;
             
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, result.StatusCode);
-            Assert.AreEqual<string>(MediaTypeNames.Text.Xml, result.Content.Headers.ContentType.MediaType);
+            Assert.AreEqual<string>("application/json", result.Content.Headers.ContentType.MediaType);
 
-            Trace.Write(XElement.Parse(result.Content.ReadAsStringAsync().Result).ToString());
+            Trace.WriteLine(HttpUtility.UrlDecode(result.Content.ReadAsStringAsync().Result));
         }
 
 
@@ -168,7 +170,7 @@ namespace Thinktecture.IdentityServer.Tests
             var result = client.GetAsync(baseAddress + values.ToQueryString()).Result;
             
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, result.StatusCode);
-            Assert.AreEqual<string>(MediaTypeNames.Text.Plain, result.Content.Headers.ContentType.MediaType);
+            Assert.AreEqual<string>("application/json", result.Content.Headers.ContentType.MediaType);
 
             Trace.WriteLine(HttpUtility.UrlDecode(result.Content.ReadAsStringAsync().Result));
         }
