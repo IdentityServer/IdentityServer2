@@ -49,6 +49,7 @@ namespace Thinktecture.IdentityServer.Protocols.SimpleHTTP
             }
             catch
             {
+                Tracing.Error("Malformed realm: " + realm);
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, "malformed realm name.");
             }
 
