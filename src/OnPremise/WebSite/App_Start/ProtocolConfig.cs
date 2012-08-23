@@ -61,7 +61,7 @@ namespace Thinktecture.IdentityServer.Web
             routes.MapHttpRoute(
                 name: "simplehttp",
                 routeTemplate: "issue/simple",
-                defaults: new { controller = "SimpleHttp2" },
+                defaults: new { controller = "SimpleHttp" },
                 constraints: null,
                 handler: new AuthenticationHandler(basicAuthConfig, GlobalConfiguration.Configuration)
             );

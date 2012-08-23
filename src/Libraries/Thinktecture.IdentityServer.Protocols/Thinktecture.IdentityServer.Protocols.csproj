@@ -80,8 +80,8 @@
     <Compile Include="Shared\STS.cs" />
     <Compile Include="Shared\TokenResponse_old.cs" />
     <Compile Include="Shared\UnauthorizedResult.cs" />
+    <Compile Include="SimpleHTTP\SimpleHttpController_old.cs" />
     <Compile Include="SimpleHTTP\SimpleHttpController.cs" />
-    <Compile Include="SimpleHTTP\SimpleHttp2Controller.cs" />
     <Compile Include="SimpleHTTP\SimpleHttpResult.cs" />
     <Compile Include="WRAP\WrapController.cs" />
     <Compile Include="WRAP\WrapResult.cs" />

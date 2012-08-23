@@ -1,85 +1,75 @@
-﻿///*
-// * Copyright (c) Dominick Baier.  All rights reserved.
-// * see license.txt
-// */
+﻿using System.ComponentModel.Composition;
+using System.IdentityModel.Protocols.WSTrust;
+using System.Net.Http;
+using System.Security.Claims;
+using System.Web.Http;
+using Thinktecture.IdentityServer.Repositories;
+using System.Linq;
+using System.Net;
+using System.Web;
 
-//using System;
-//using System.ComponentModel.Composition;
-//using System.IdentityModel.Protocols.WSTrust;
-//using System.Security.Claims;
-//using System.ServiceModel;
-//using System.Web.Mvc;
-//using Thinktecture.IdentityServer.Repositories;
+namespace Thinktecture.IdentityServer.Protocols.SimpleHTTP
+{
+    public class SimpleHttpController : ApiController
+    {
+        [Import]
+        public IConfigurationRepository ConfigurationRepository { get; set; }
 
-//namespace Thinktecture.IdentityServer.Protocols.SimpleHttp
-//{
-//    public class SimpleHttpController : Controller
-//    {
-//        [Import]
-//        public IConfigurationRepository ConfigurationRepository { get; set; }
+        public SimpleHttpController()
+        {
+            Container.Current.SatisfyImportsOnce(this);
+        }
 
-//        public SimpleHttpController()
-//        {
-//            Container.Current.SatisfyImportsOnce(this);
-//        }
+        public SimpleHttpController(IConfigurationRepository configurationRepository)
+        {
+            ConfigurationRepository = configurationRepository;
+        }
 
-//        public SimpleHttpController(IConfigurationRepository configurationRepository)
-//        {
-//            ConfigurationRepository = configurationRepository;
-//        }
+        [ApiClaimsAuthorize(Constants.Actions.Issue, Constants.Resources.SimpleHttp)]
+        public HttpResponseMessage Get(HttpRequestMessage request)
+        {
+            Tracing.Information("Simple HTTP endpoint called.");
 
-//        public ActionResult Issue(string realm, string tokenType)
-//        {
-//            Tracing.Verbose("Simple HTTP endpoint called.");
+            var query = request.GetQueryNameValuePairs();
+            var auth = new AuthenticationHelper();
 
-//            //if (!ConfigurationRepository.Endpoints.SimpleHttp)
-//            //{
-//            //    Tracing.Warning("Simple HTTP endpoint is disabled in configuration");
-//            //    return new HttpNotFoundResult();
-//            //}
+            var realm = query.FirstOrDefault(p => p.Key.Equals("realm", System.StringComparison.OrdinalIgnoreCase)).Value;
+            var tokenType = query.FirstOrDefault(p => p.Key.Equals("tokenType", System.StringComparison.OrdinalIgnoreCase)).Value;
 
-//            if (tokenType == null)
-//            {
-//                tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
-//            }
+            if (string.IsNullOrWhiteSpace(realm))
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "realm parameter is missing.");
+            }
 
-//            Tracing.Information("Token type: " + tokenType);
+            EndpointReference appliesTo;
+            try
+            {
+                appliesTo = new EndpointReference(realm);
+                Tracing.Information("Simple HTTP endpoint called for realm: " + realm);
+            }
+            catch
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "malformed realm name.");
+            }
 
-//            Uri uri;
-//            if (!Uri.TryCreate(realm, UriKind.Absolute, out uri))
-//            {
-//                Tracing.Error("Realm parameter is malformed.");
-//                return new HttpStatusCodeResult(400);
-//            }
+            if (string.IsNullOrWhiteSpace(tokenType))
+            {
+                tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
+            }
 
-//            Tracing.Information("Simple HTTP endpoint called for realm: " + uri.AbsoluteUri);
+            Tracing.Verbose("Token type: " + tokenType);
 
-//            var endpoint = new EndpointReference(realm);
-//            var auth = new AuthenticationHelper();
-            
-//            ClaimsPrincipal principal;
-//            if (!auth.TryGetPrincipalFromHttpRequest(Request, out principal))
-//            {
-//                Tracing.Error("no or invalid credentials found.");
-//                return new UnauthorizedResult("Basic",  UnauthorizedResult.ResponseAction.Send401);
-//            }
-
-//            if (!ClaimsAuthorize.CheckAccess(principal, Constants.Actions.Issue, Constants.Resources.SimpleHttp))
-//            {
-//                Tracing.Error("User not authorized");
-//                return new UnauthorizedResult("Basic", UnauthorizedResult.ResponseAction.Send401);
-//            }
-
-//            TokenResponse tokenResponse;
-//            var sts = new STS();
-//            if (sts.TryIssueToken(endpoint, principal, tokenType, out tokenResponse))
-//            {
-//                return new SimpleHttpResult(tokenResponse.TokenString, tokenType);
-//            }
-//            else
-//            {
-//                return new HttpStatusCodeResult(400);
-//            }
-//        }        
-//    }
-//}
+            TokenResponse tokenResponse;
+            var sts = new STS();
+            if (sts.TryIssueToken(appliesTo, ClaimsPrincipal.Current, tokenType, out tokenResponse))
+            {
+                var resp = request.CreateResponse<TokenResponse>(HttpStatusCode.OK, tokenResponse);
+                return resp;
+            }
+            else
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid request.");
+            }
+        }
+    }
+}
