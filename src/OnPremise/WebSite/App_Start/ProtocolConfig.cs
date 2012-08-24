@@ -57,14 +57,16 @@ namespace Thinktecture.IdentityServer.Web
             }
 
             // simple http web api implementation
-            // todo: add config check
-            routes.MapHttpRoute(
-                name: "simplehttp",
-                routeTemplate: "issue/simple",
-                defaults: new { controller = "SimpleHttp" },
-                constraints: null,
-                handler: new AuthenticationHandler(basicAuthConfig, GlobalConfiguration.Configuration)
-            );
+            if (configuration.SimpleHttp.Enabled)
+            {
+                routes.MapHttpRoute(
+                    name: "simplehttp",
+                    routeTemplate: "issue/simple",
+                    defaults: new { controller = "SimpleHttp" },
+                    constraints: null,
+                    handler: new AuthenticationHandler(basicAuthConfig, httpConfiguration)
+                );
+            }
 
             // ws-trust
             if (configuration.WSTrust.Enabled)
