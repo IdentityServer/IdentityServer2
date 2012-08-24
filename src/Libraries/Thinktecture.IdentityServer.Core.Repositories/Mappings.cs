@@ -190,6 +190,24 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         }
         #endregion
 
+        #region SimpleHttpConfiguration
+        public static Models.Configuration.SimpleHttpConfiguration ToDomainModel(this Entities.Configuration.SimpleHttpConfiguration entity)
+        {
+            return new Models.Configuration.SimpleHttpConfiguration
+            {
+                Enabled = entity.Enabled
+            };
+        }
+
+        public static Entities.Configuration.SimpleHttpConfiguration ToEntity(this Models.Configuration.SimpleHttpConfiguration model)
+        {
+            return new Entities.Configuration.SimpleHttpConfiguration
+            {
+                Enabled = model.Enabled
+            };
+        }
+        #endregion
+
         #region DiagnosticsConfiguration
         public static Models.Configuration.DiagnosticsConfiguration ToDomainModel(this Entities.Configuration.DiagnosticsConfiguration entity)
         {

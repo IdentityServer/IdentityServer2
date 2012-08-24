@@ -177,5 +177,28 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 }
             }
         }
+
+        public Models.Configuration.SimpleHttpConfiguration SimpleHttp
+        {
+            get
+            {
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.SimpleHttp.First<Entities.Configuration.SimpleHttpConfiguration>();
+                    return entity.ToDomainModel();
+                }
+            }
+            set
+            {
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.SimpleHttp.First<Entities.Configuration.SimpleHttpConfiguration>();
+                    entities.SimpleHttp.Remove(entity);
+
+                    entities.SimpleHttp.Add(value.ToEntity());
+                    entities.SaveChanges();
+                }
+            }
+        }
     }
 }

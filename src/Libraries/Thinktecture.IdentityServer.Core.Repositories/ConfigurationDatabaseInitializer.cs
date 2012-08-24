@@ -21,6 +21,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             context.WSTrust.Add(CreateDefaultWSTrustConfiguration());
             context.FederationMetadata.Add(CreateDefaultFederationMetadataConfiguration());
             context.OAuth2.Add(CreateDefaultOAuth2Configuration());
+            context.SimpleHttp.Add(CreateDefaultSimpleHttpConfiguration());
             context.Diagnostics.Add(CreateDefaultDiagnosticsConfiguration());
             
             // test data
@@ -94,6 +95,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         private OAuth2Configuration CreateDefaultOAuth2Configuration()
         {
             return new OAuth2Configuration
+            {
+                Enabled = true
+            };
+        }
+
+        private SimpleHttpConfiguration CreateDefaultSimpleHttpConfiguration()
+        {
+            return new SimpleHttpConfiguration
             {
                 Enabled = true
             };

@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationDatabaseInitializer.cs" />
+    <Compile Include="EntityModel\Configuration\SimpleHttpConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\DiagnosticsConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\FederationMetadataConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\OAuth2Configuration.cs" />
