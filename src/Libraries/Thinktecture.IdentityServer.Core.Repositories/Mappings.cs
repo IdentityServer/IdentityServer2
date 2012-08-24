@@ -7,10 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using Thinktecture.IdentityServer.Models;
-using Models = Thinktecture.IdentityServer.Models;
-using Entities = Thinktecture.IdentityServer.Repositories.Sql;
 using Thinktecture.IdentityModel;
+using Thinktecture.IdentityServer.Models;
+using Entities = Thinktecture.IdentityServer.Repositories.Sql;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
 {
@@ -217,6 +216,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Id = rpEntity.Id.ToString(),
                 Name = rpEntity.Name,
                 Realm = new Uri(rpEntity.Realm),
+                ClientId = rpEntity.ClientId,
+                ClientSecret = rpEntity.ClientSecret,
+                ClientAuthenticationRequired = rpEntity.ClientAuthenticationRequired,
                 ExtraData1 = rpEntity.ExtraData1,
                 ExtraData2 = rpEntity.ExtraData2,
                 ExtraData3 = rpEntity.ExtraData3
@@ -246,6 +248,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 Name = relyingParty.Name,
                 Realm = relyingParty.Realm.AbsoluteUri,
+                ClientId = relyingParty.ClientId,
+                ClientSecret = relyingParty.ClientSecret,
+                ClientAuthenticationRequired = relyingParty.ClientAuthenticationRequired,
                 ExtraData1 = relyingParty.ExtraData1,
                 ExtraData2 = relyingParty.ExtraData2,
                 ExtraData3 = relyingParty.ExtraData3,
