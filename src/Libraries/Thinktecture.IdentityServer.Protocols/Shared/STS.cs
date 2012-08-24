@@ -64,6 +64,9 @@ namespace Thinktecture.IdentityServer.Protocols
                 return false;
             }
 
+            var ts = token.ValidTo.Subtract(DateTime.UtcNow);
+            response.ExpiresIn = (int)ts.TotalSeconds;
+
             if (tokenType == TokenTypes.JsonWebToken || tokenType == TokenTypes.SimpleWebToken)
             {
                 var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[tokenType];
