@@ -11,9 +11,9 @@ namespace Thinktecture.IdentityServer.Web
 {
     public class ProtocolConfig
     {
-        public static void RegisterProtocols(RouteCollection routes, IConfigurationRepository configuration, IUserRepository userRepository)
+        public static void RegisterProtocols(HttpConfiguration httpConfiguration, RouteCollection routes, IConfigurationRepository configuration, IUserRepository users, IRelyingPartyRepository relyingParties)
         {
-            var basicAuthConfig = CreateBasicAuthConfig(userRepository);
+            var basicAuthConfig = CreateBasicAuthConfig(users);
 
             #region Protocols
             // federation metadata
@@ -100,7 +100,7 @@ namespace Thinktecture.IdentityServer.Web
             #endregion
         }
 
-        private static AuthenticationConfiguration CreateBasicAuthConfig(IUserRepository userRepository)
+        public static AuthenticationConfiguration CreateBasicAuthConfig(IUserRepository userRepository)
         {
             var authConfig = new AuthenticationConfiguration
             {

@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Data.Entity;
-using System.IdentityModel.Services;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Helpers;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Repositories.Sql;
-using Thinktecture.IdentityServer.TokenService;
 
 namespace Thinktecture.IdentityServer.Web
 {
@@ -23,6 +22,10 @@ namespace Thinktecture.IdentityServer.Web
 
         [Import]
         public IUserRepository UserRepository { get; set; }
+
+        [Import]
+        public IRelyingPartyRepository RelyingPartyRepository { get; set; }
+
 
         protected void Application_Start()
         {
@@ -40,6 +43,7 @@ namespace Thinktecture.IdentityServer.Web
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes, ConfigurationRepository, UserRepository);
+            ProtocolConfig.RegisterProtocols(GlobalConfiguration.Configuration, RouteTable.Routes, ConfigurationRepository, UserRepository, RelyingPartyRepository);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 

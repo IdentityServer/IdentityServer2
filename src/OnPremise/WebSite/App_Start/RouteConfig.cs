@@ -52,8 +52,6 @@ namespace Thinktecture.IdentityServer.Web
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
             #endregion
-
-            ProtocolConfig.RegisterProtocols(routes, configuration, userRepository);
         }
 
     }
