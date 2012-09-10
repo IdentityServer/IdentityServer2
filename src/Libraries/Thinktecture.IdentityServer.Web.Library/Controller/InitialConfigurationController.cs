@@ -6,7 +6,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel;
 using Thinktecture.IdentityServer.Repositories;
@@ -64,8 +66,24 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 ConfigurationRepository.Global = config;
 
                 var keys = ConfigurationRepository.Keys;
-                keys.SigningCertificate = X509.LocalMachine.My.SubjectDistinguishedName.Find(model.SigningCertificate).First();
+                try
+                {
+                    var cert = X509.LocalMachine.My.SubjectDistinguishedName.Find(model.SigningCertificate).First();
+                    
+                    // make sure we can access the private key
+                    var pk = cert.PrivateKey;
+                    
+                    keys.SigningCertificate = cert;
+                }
+                catch (CryptographicException)
+                {
+                    ModelState.AddModelError("", WindowsIdentity.GetCurrent().Name + " does not have read access to the private key of the signing certificate you selected (see http://technet.microsoft.com/en-us/library/ee662329.aspx).");
+                    model.AvailableCertificates = GetAvailableCertificatesFromStore();
+                    return View(model);
+                }
 
+
+                
                 // updates key material config
                 ConfigurationRepository.Keys = keys;
 
