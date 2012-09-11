@@ -3,21 +3,17 @@
  * see license.txt
  */
 
-using System;
 using System.ComponentModel.Composition;
-using System.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.ServiceModel;
-using System.Web.Mvc;
-using Thinktecture.IdentityModel.Constants;
-using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityModel.Tokens;
-using System.IdentityModel.Services;
 using System.IdentityModel.Protocols.WSTrust;
+using System.Net;
+using System.Net.Http;
+using System.Security.Claims;
+using System.Web.Http;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {
-    public class OAuth2Controller : Controller
+    public class OAuth2Controller : ApiController
     {
         [Import]
         public IUserRepository UserRepository { get; set; }
@@ -36,62 +32,50 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             ConfigurationRepository = configurationRepository;
         }
 
-        [HttpPost]
-        public ActionResult Token(ResourceOwnerCredentialRequest request)
+        public HttpResponseMessage Post(HttpRequestMessage request)
         {
-            Tracing.Verbose("OAuth2 endpoint called.");
+            Tracing.Information("OAuth2 endpoint called.");
 
-            if (!ConfigurationRepository.OAuth2.Enabled)
+            var tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
+            var tokenRequest = ResourceOwnerCredentialRequest.Parse(request.Content.ReadAsFormDataAsync().Result);
+
+            // todo: check grant_type
+
+            EndpointReference appliesTo;
+            try
             {
-                Tracing.Error("OAuth2 endpoint called, but disabled in configuration");
-                return new HttpNotFoundResult();
+                appliesTo = new EndpointReference(tokenRequest.Scope);
+                Tracing.Information("OAuth2 endpoint called for scope: " + tokenRequest.Scope);
             }
-
-            if (!ModelState.IsValid)
+            catch
             {
-                Tracing.Error("OAuth2 called with malformed request");
-                return new HttpStatusCodeResult(400);
+                Tracing.Error("Malformed scope: " + tokenRequest.Scope);
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "malformed scope name.");
             }
 
             var auth = new AuthenticationHelper();
-
-            Uri uri;
-            if (!Uri.TryCreate(request.Scope, UriKind.Absolute, out uri))
+            ClaimsPrincipal principal;
+            if (UserRepository.ValidateUser(tokenRequest.UserName, tokenRequest.Password))
             {
-                Tracing.Error("OAuth2 endpoint called with malformed realm: " + request.Scope);
-                return new HttpStatusCodeResult(400);
+                principal = auth.CreatePrincipal(tokenRequest.UserName, "OAuth2");
+            }
+            else
+            {
+                Tracing.Error("OAuth2 endpoint authentication failed for user: " + tokenRequest.UserName);
+                return request.CreateErrorResponse(HttpStatusCode.Unauthorized, "unauthorized.");
             }
 
-            ClaimsPrincipal principal = null;
-            if (auth.TryGetPrincipalFromOAuth2Request(Request, request, out principal))
+            var sts = new STS();
+            TokenResponse tokenResponse;
+            if (sts.TryIssueToken(appliesTo, principal, tokenType, out tokenResponse))
             {
-                if (!ClaimsAuthorize.CheckAccess(principal, Constants.Actions.Issue, Constants.Resources.OAuth2))
-                {
-                    Tracing.Error("User not authorized");
-                    return new UnauthorizedResult("OAuth2", UnauthorizedResult.ResponseAction.Send401);
-                }
-
-                SecurityToken token;
-                var sts = new STS();
-                if (sts.TryIssueToken(new EndpointReference(request.Scope), principal, ConfigurationRepository.Global.DefaultHttpTokenType, out token))
-                {
-                    var handler = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.SecurityTokenHandlers[ConfigurationRepository.Global.DefaultHttpTokenType];
-                    var response = new AccessTokenResponse
-                    {
-                        AccessToken = handler.WriteToken(token),
-                        TokenType = TokenTypes.JsonWebToken,
-                        ExpiresIn = ConfigurationRepository.Global.DefaultTokenLifetime * 60,
-                    };
-
-                    Tracing.Information("OAuth2 issue successful for user: " + request.UserName);
-                    return new OAuth2AccessTokenResult(response);
-                }
-
-                return new HttpStatusCodeResult(400);
+                var resp = request.CreateResponse<TokenResponse>(HttpStatusCode.OK, tokenResponse);
+                return resp;
             }
-
-            Tracing.Error("OAuth2 endpoint authentication failed for user: " + request.UserName);
-            return new UnauthorizedResult("OAuth2", UnauthorizedResult.ResponseAction.Send401);
+            else
+            {
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid request.");
+            }
         }
     }
 }
