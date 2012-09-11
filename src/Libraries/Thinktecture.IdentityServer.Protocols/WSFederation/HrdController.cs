@@ -44,11 +44,6 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             Tracing.Verbose("HRD endpoint called.");
 
-            if (!ConfigurationRepository.WSFederation.Enabled || ! ConfigurationRepository.WSFederation.EnableFederation)
-            {
-                return new HttpNotFoundResult();
-            }
-
             var message = WSFederationMessage.CreateFromUri(HttpContext.Request.Url);
 
             // sign in 

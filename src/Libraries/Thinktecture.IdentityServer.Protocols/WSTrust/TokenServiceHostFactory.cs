@@ -52,16 +52,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSTrust
             if (ConfigurationRepository.WSTrust.Enabled && ConfigurationRepository.WSTrust.EnableMixedModeSecurity)
             {
                 EndpointIdentity epi = null;
-                //if (ConfigurationRepository.Configuration.EnableStrongEpiForSsl)
-                //{
-                //    if (ConfigurationRepository.SslCertificate.Certificate == null)
-                //    {
-                //        throw new ServiceActivationException("No SSL certificate configured for strong endpoint identity.");
-                //    }
-
-                //    epi = EndpointIdentity.CreateX509CertificateIdentity(ConfigurationRepository.SslCertificate.Certificate);
-                //}
-
+                
                 if (ConfigurationRepository.WSTrust.EnableClientCertificateAuthentication)
                 {
                     var sep2 = host.AddServiceEndpoint(
