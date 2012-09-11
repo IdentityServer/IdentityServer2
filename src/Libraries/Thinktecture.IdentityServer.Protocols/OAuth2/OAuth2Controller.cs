@@ -8,7 +8,9 @@ using System.IdentityModel.Protocols.WSTrust;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
+using System.Web;
 using System.Web.Http;
+using Thinktecture.IdentityModel.Tokens.Http;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
@@ -41,6 +43,12 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
             // todo: check grant_type
 
+            if (string.IsNullOrWhiteSpace(tokenRequest.UserName))
+            {
+                Tracing.Error("Missung username: " + tokenRequest.Scope);
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "missing user name.");
+            }
+
             EndpointReference appliesTo;
             try
             {
@@ -62,6 +70,13 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             else
             {
                 Tracing.Error("OAuth2 endpoint authentication failed for user: " + tokenRequest.UserName);
+                
+                // todo: improve
+                if (HttpContext.Current != null)
+                {
+                    HttpContext.Current.Items[Thinktecture.IdentityModel.Constants.Internal.NoRedirectLabel] = true;
+                }
+                
                 return request.CreateErrorResponse(HttpStatusCode.Unauthorized, "unauthorized.");
             }
 
