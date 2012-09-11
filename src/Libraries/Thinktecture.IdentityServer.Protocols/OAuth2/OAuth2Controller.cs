@@ -41,14 +41,6 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             var tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
             var tokenRequest = ResourceOwnerCredentialRequest.Parse(request.Content.ReadAsFormDataAsync().Result);
 
-            // todo: check grant_type
-
-            if (string.IsNullOrWhiteSpace(tokenRequest.UserName))
-            {
-                Tracing.Error("Missung username: " + tokenRequest.Scope);
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "missing user name.");
-            }
-
             EndpointReference appliesTo;
             try
             {
@@ -59,6 +51,19 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             {
                 Tracing.Error("Malformed scope: " + tokenRequest.Scope);
                 return request.CreateErrorResponse(HttpStatusCode.BadRequest, "malformed scope name.");
+            }
+
+            // check for right grant type
+            if (!string.Equals(tokenRequest.GrantType, "password", System.StringComparison.Ordinal))
+            {
+                Tracing.Error("invalid grant type: " + tokenRequest.Scope);
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid grant type.");
+            }
+
+            if (string.IsNullOrWhiteSpace(tokenRequest.UserName))
+            {
+                Tracing.Error("Missung username: " + tokenRequest.Scope);
+                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "missing user name.");
             }
 
             var auth = new AuthenticationHelper();
