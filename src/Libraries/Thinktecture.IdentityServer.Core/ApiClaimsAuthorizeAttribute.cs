@@ -44,7 +44,7 @@ namespace Thinktecture.IdentityServer
         public static bool CheckAccess(string action, string resource, params string[] additionalResources)
         {
             return CheckAccess(
-                Thread.CurrentPrincipal as ClaimsPrincipal,
+                ClaimsPrincipal.Current,
                 action,
                 resource,
                 additionalResources);
