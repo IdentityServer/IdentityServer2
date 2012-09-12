@@ -140,6 +140,7 @@
     <Compile Include="Models\Configuration\GlobalConfiguration.cs" />
     <Compile Include="Models\Configuration\WSTrustConfiguration.cs" />
     <Compile Include="Models\Configuration\WSFederationConfiguration.cs" />
+    <Compile Include="Repositories\IUserManagementRepository.cs" />
     <Compile Include="Repositories\PassThruTransformationRuleRepository.cs" />
     <Compile Include="TokenService\IdentityProviderIssuerNameRegistry.cs" />
     <Compile Include="TokenService\SignInSessionsManager.cs" />
