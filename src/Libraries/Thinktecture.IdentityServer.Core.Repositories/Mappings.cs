@@ -100,7 +100,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 
             if (!string.IsNullOrWhiteSpace(entity.SigningCertificateName))
             {
-                var cert = X509.LocalMachine.My.SubjectDistinguishedName.Find(entity.SigningCertificateName).FirstOrDefault();
+                var cert = X509.LocalMachine.My.SubjectDistinguishedName.Find(entity.SigningCertificateName, false).FirstOrDefault();
 
                 if (cert == null)
                 {

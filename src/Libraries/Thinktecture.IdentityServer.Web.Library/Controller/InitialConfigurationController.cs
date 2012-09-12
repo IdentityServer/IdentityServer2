@@ -68,7 +68,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 var keys = ConfigurationRepository.Keys;
                 try
                 {
-                    var cert = X509.LocalMachine.My.SubjectDistinguishedName.Find(model.SigningCertificate).First();
+                    var cert = X509.LocalMachine.My.SubjectDistinguishedName.Find(model.SigningCertificate, false).First();
                     
                     // make sure we can access the private key
                     var pk = cert.PrivateKey;
