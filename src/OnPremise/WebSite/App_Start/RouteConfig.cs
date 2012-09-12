@@ -21,22 +21,28 @@ namespace Thinktecture.IdentityServer.Web
             );
 
             routes.MapRoute(
-                "RelyingPartiesAdmin",
-                "admin/relyingparties/{action}/{id}",
-                new { controller = "RelyingPartiesAdmin", action = "Index", id = UrlParameter.Optional }
+                "Admin",
+                "admin/{action}/{id}",
+                new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                "ClientCertificatesAdmin",
-                "admin/clientcertificates/{action}/{userName}",
-                new { controller = "ClientCertificatesAdmin", action = "Index", userName = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    "RelyingPartiesAdmin",
+            //    "admin/relyingparties/{action}/{id}",
+            //    new { controller = "RelyingPartiesAdmin", action = "Index", id = UrlParameter.Optional }
+            //);
 
-            routes.MapRoute(
-                "DelegationAdmin",
-                "admin/delegation/{action}/{userName}",
-                new { controller = "DelegationAdmin", action = "Index", userName = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    "ClientCertificatesAdmin",
+            //    "admin/clientcertificates/{action}/{userName}",
+            //    new { controller = "ClientCertificatesAdmin", action = "Index", userName = UrlParameter.Optional }
+            //);
+
+            //routes.MapRoute(
+            //    "DelegationAdmin",
+            //    "admin/delegation/{action}/{userName}",
+            //    new { controller = "DelegationAdmin", action = "Index", userName = UrlParameter.Optional }
+            //);
             #endregion
 
             #region Main UI

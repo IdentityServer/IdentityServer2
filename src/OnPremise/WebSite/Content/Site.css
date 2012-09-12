@@ -51,6 +51,38 @@ textarea
     width:400px
 }
 
+/* Brock's styles for forms */
+fieldset.editor
+{
+    width:610px;
+}
+fieldset.editor > div
+{
+    margin:5px;
+}
+fieldset.editor > div > label
+{
+    display:inline-block;
+    width:200px;
+    font-weight:bold;
+    text-align:right;
+    margin-right:10px;
+}
+fieldset.editor > div > label:after{
+    content:':';
+}
+fieldset.editor > div > input[type=text]
+{
+    width:350px;
+}
+fieldset.editor > div.buttons{
+    padding-top:10px;
+    text-align:right;
+}
+fieldset.editor img.error
+{
+    margin-left:3px;
+}
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error

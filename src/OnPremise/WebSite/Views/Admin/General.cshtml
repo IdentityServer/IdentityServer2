@@ -1,0 +1,20 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.AdminConfigurationGeneralViewModel
+
+@{
+    ViewBag.Title = "General Configuration";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary("Error updating configuration:")
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        @Html.EditorForModel()
+
+        <div class="buttons">
+            <button type="submit">Save Changes</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

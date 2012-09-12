@@ -148,12 +148,16 @@
     <Compile Include="App_Start\ProtocolConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AdminConfigurationGeneralViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\error.png" />
+    <Content Include="Content\images\help.png" />
     <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\resources\jsnotify.htm" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -219,6 +223,11 @@
     <Content Include="Configuration\tracing.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\_Layout.cshtml" />
+    <Content Include="Views\Admin\_ViewStart.cshtml" />
+    <Content Include="Views\Admin\General.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\Object.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -264,7 +273,7 @@
     <Content Include="Views\Admin\Certificates.cshtml" />
     <Content Include="Views\Admin\Configuration.cshtml" />
     <Content Include="Views\Admin\Endpoints.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\_Index.cshtml" />
     <Content Include="Views\Admin\MyClaims.cshtml" />
     <Content Include="Views\ClientCertificatesAdmin\Add.cshtml" />
     <Content Include="Views\ClientCertificatesAdmin\Delete.cshtml" />

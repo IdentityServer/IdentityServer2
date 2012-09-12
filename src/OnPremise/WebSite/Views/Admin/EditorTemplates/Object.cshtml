@@ -1,0 +1,26 @@
+﻿
+@{
+    foreach(var prop in this.ViewData.ModelMetadata.Properties)
+    {
+        if (!prop.IsReadOnly)
+        {
+            var id = ViewData.TemplateInfo.GetFullHtmlFieldId(prop.PropertyName);
+            var name = ViewData.TemplateInfo.GetFullHtmlFieldName(prop.PropertyName);
+            <div>
+                <label for="@id">@prop.GetDisplayName()</label>
+                @Html.Editor(prop.PropertyName)
+                @if(ViewData.ModelState.IsValidField(name))
+                {
+                    if (!String.IsNullOrWhiteSpace(prop.Description))
+                    {
+                        <img src="~/Content/Images/help.png" title="@prop.Description" />
+                    }
+                }
+                else
+                {
+                        <img class="error" src="~/Content/Images/error.png" title="@(ViewData.ModelState[name].Errors.First().ErrorMessage + "\n\n" +  prop.Description)" />
+                }
+            </div>            
+        }
+    }
+}

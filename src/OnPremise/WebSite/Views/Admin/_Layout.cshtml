@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav>
+    <h1>Configuration</h1>
+    <ul>
+        <li>@Html.ActionLink("General Configuration", "General")</li>
+        <li>@Html.ActionLink("IDP", "IDP")</li>
+        <li>@Html.ActionLink("RP", "RP")</li>
+        <li>@Html.ActionLink("IDP", "IDP")</li>
+    </ul>
+</nav>
+
+<section>
+    @RenderBody()
+</section>
