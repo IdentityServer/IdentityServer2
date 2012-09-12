@@ -25,20 +25,17 @@ namespace Thinktecture.IdentityServer.TokenService
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
-        public IConfigurationRepository GlobalConfiguration { get; protected set; }
-
         public TokenServiceConfiguration() : base()
         {
             Tracing.Information("Configuring token service");
             Container.Current.SatisfyImportsOnce(this);
-            GlobalConfiguration = ConfigurationRepository;
 
             SecurityTokenService = typeof(TokenService);
-            DefaultTokenLifetime = TimeSpan.FromHours(GlobalConfiguration.Global.DefaultTokenLifetime);
-            MaximumTokenLifetime = TimeSpan.FromDays(GlobalConfiguration.Global.MaximumTokenLifetime);
-            DefaultTokenType = GlobalConfiguration.Global.DefaultWSTokenType;
+            DefaultTokenLifetime = TimeSpan.FromHours(ConfigurationRepository.Global.DefaultTokenLifetime);
+            MaximumTokenLifetime = TimeSpan.FromDays(ConfigurationRepository.Global.MaximumTokenLifetime);
+            DefaultTokenType = ConfigurationRepository.Global.DefaultWSTokenType;
 
-            TokenIssuerName = GlobalConfiguration.Global.IssuerUri;
+            TokenIssuerName = ConfigurationRepository.Global.IssuerUri;
             SigningCredentials = new X509SigningCredentials(ConfigurationRepository.Keys.SigningCertificate);
 
             if (ConfigurationRepository.WSTrust.EnableDelegation)
@@ -48,7 +45,7 @@ namespace Thinktecture.IdentityServer.TokenService
                 try
                 {
                     var actAsRegistry = new ConfigurationBasedIssuerNameRegistry();
-                    actAsRegistry.AddTrustedIssuer(ConfigurationRepository.Keys.SigningCertificate.Thumbprint, GlobalConfiguration.Global.IssuerUri);
+                    actAsRegistry.AddTrustedIssuer(ConfigurationRepository.Keys.SigningCertificate.Thumbprint, ConfigurationRepository.Global.IssuerUri);
 
                     var actAsHandlers = SecurityTokenHandlerCollectionManager["ActAs"];
                     actAsHandlers.Configuration.IssuerNameRegistry = actAsRegistry;

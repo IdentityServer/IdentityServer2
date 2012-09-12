@@ -17,9 +17,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Xml;
 using Thinktecture.IdentityModel;
-using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityServer.Models;
-using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.TokenService
@@ -41,28 +39,23 @@ namespace Thinktecture.IdentityServer.TokenService
         [Import]
         public IClaimsTransformationRulesRepository ClaimsTransformationRulesRepository { get; set; }
 
+        [Import]
+        public IConfigurationRepository ConfigurationRepository { get; set; }
+
         public TokenService(SecurityTokenServiceConfiguration configuration)
             : base(configuration)
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public TokenService(SecurityTokenServiceConfiguration configuration, IUserRepository userRepository, IClaimsRepository claimsRepository, IIdentityProviderRepository identityProviderRepository, IClaimsTransformationRulesRepository claimsTransformationRulesRepository)
+        public TokenService(SecurityTokenServiceConfiguration configuration, IConfigurationRepository configurationRepository, IUserRepository userRepository, IClaimsRepository claimsRepository, IIdentityProviderRepository identityProviderRepository, IClaimsTransformationRulesRepository claimsTransformationRulesRepository)
             : base(configuration)
         {
             UserRepository = userRepository;
             ClaimsRepository = claimsRepository;
             IdentityProviderRepository = identityProviderRepository;
             ClaimsTransformationRulesRepository = claimsTransformationRulesRepository;
-        }
-
-        protected IConfigurationRepository ConfigurationRepository
-        {
-            get
-            {
-                var config = SecurityTokenServiceConfiguration as TokenServiceConfiguration;
-                return config.GlobalConfiguration;
-            }
+            ConfigurationRepository = configurationRepository;
         }
 
         /// <summary>
