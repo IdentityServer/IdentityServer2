@@ -150,9 +150,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Name = "OAuth2 Test (URN)",
                     Realm = "https://test/oauth2/",
                     SymmetricSigningKey = "3ihK5qGVhp8ptIk9+TDucXQW4Aaengg3d5m6gU8nzc8=",
-                    ClientId = "testid",
-                    ClientSecret = "testsecret",
-                    ClientAuthenticationRequired = true
                 }
             };
         }

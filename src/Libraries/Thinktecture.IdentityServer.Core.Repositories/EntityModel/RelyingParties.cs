@@ -22,10 +22,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public string EncryptingCertificate { get; set; }
         public string SymmetricSigningKey { get; set; }
 
-        public string ClientId { get; set; }
-        public string ClientSecret { get; set; }
-        public bool ClientAuthenticationRequired { get; set; }
-
         public string ExtraData1 { get; set; }
         public string ExtraData2 { get; set; }
         public string ExtraData3 { get; set; }
