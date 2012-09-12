@@ -2,7 +2,6 @@ bin/
 obj/
 packages/
 build/
-_bin_deployableAssemblies/
 
 *.suo
 *.csproj.user
