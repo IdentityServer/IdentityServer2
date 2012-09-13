@@ -34,12 +34,12 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             ConfigurationRepository = configurationRepository;
         }
 
-        public HttpResponseMessage Post(HttpRequestMessage request)
+        public HttpResponseMessage Post(ResourceOwnerCredentialRequest tokenRequest)
         {
             Tracing.Information("OAuth2 endpoint called.");
 
             var tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
-            var tokenRequest = ResourceOwnerCredentialRequest.Parse(request.Content.ReadAsFormDataAsync().Result);
+            //var tokenRequest = ResourceOwnerCredentialRequest.Parse(request.Content.ReadAsFormDataAsync().Result);
 
             EndpointReference appliesTo;
             try
@@ -50,20 +50,20 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             catch
             {
                 Tracing.Error("Malformed scope: " + tokenRequest.Scope);
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "malformed scope name.");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "malformed scope name.");
             }
 
             // check for right grant type
             if (!string.Equals(tokenRequest.GrantType, "password", System.StringComparison.Ordinal))
             {
                 Tracing.Error("invalid grant type: " + tokenRequest.Scope);
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid grant type.");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid grant type.");
             }
 
             if (string.IsNullOrWhiteSpace(tokenRequest.UserName))
             {
                 Tracing.Error("Missung username: " + tokenRequest.Scope);
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "missing user name.");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "missing user name.");
             }
 
             var auth = new AuthenticationHelper();
@@ -82,19 +82,19 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                     HttpContext.Current.Items[Thinktecture.IdentityModel.Constants.Internal.NoRedirectLabel] = true;
                 }
                 
-                return request.CreateErrorResponse(HttpStatusCode.Unauthorized, "unauthorized.");
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "unauthorized.");
             }
 
             var sts = new STS();
             TokenResponse tokenResponse;
             if (sts.TryIssueToken(appliesTo, principal, tokenType, out tokenResponse))
             {
-                var resp = request.CreateResponse<TokenResponse>(HttpStatusCode.OK, tokenResponse);
+                var resp = Request.CreateResponse<TokenResponse>(HttpStatusCode.OK, tokenResponse);
                 return resp;
             }
             else
             {
-                return request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid request.");
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid request.");
             }
         }
     }
