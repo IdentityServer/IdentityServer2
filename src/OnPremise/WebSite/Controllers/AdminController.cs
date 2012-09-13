@@ -60,5 +60,40 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             return View("General", model);
         }
 
+        public ActionResult Protocols()
+        {
+            var vm = new ProtocolsViewModel(ConfigurationRepository);
+            return View("Protocols", vm);
+        }
+        
+        [HttpPost]
+        public ActionResult Protocols(ProtocolsInputModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Update(this.ConfigurationRepository);
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Error updating protocols.");
+                }
+                return RedirectToAction("Protocols");
+            }
+
+            var vm = new ProtocolsViewModel(ConfigurationRepository);
+            return View("Protocols", vm);
+        }
+        
+        public ActionResult RPs()
+        {
+            return View();
+        }
+
     }
 }

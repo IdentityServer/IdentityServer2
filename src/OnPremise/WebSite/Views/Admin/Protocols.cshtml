@@ -1,0 +1,31 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.ProtocolsViewModel
+
+@{
+    ViewBag.Title = "Protocols";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary("Error updating protocols:")
+
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+        @foreach (var protocol in Model.Protocols)
+        {
+            <div>
+                @{
+                    var name = "protocols[" + protocol.ID + "]";
+                    var id = name.Replace("[", "_").Replace("]", "_");
+                }
+                <label for="@id">@protocol.Name</label>
+                @Html.CheckBox(name, protocol.Enabled)
+            </div>
+        }
+
+        <div class="buttons">
+            <button type="submit">Save Changes</button>
+            <button type="reset">Cancel</button>
+        </div>
+
+    </fieldset>
+}

@@ -153,6 +153,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ProtocolsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\error.png" />
@@ -227,6 +228,8 @@
     <Content Include="Views\Admin\_ViewStart.cshtml" />
     <Content Include="Views\Admin\General.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\Object.cshtml" />
+    <Content Include="Views\Admin\RPs.cshtml" />
+    <Content Include="Views\Admin\Protocols.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -302,7 +305,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

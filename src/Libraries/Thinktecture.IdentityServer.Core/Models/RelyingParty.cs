@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Thinktecture.IdentityServer.Models
@@ -14,7 +15,10 @@ namespace Thinktecture.IdentityServer.Models
         public string Name { get; set; }
         public Uri Realm { get; set; }
         public Uri ReplyTo { get; set; }
+        
         public X509Certificate2 EncryptingCertificate { get; set; }
+
+        [UIHint("Base64")]
         public byte[] SymmetricSigningKey { get; set; }
 
         public string ExtraData1 { get; set; }
