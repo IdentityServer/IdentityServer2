@@ -52,6 +52,10 @@ textarea
 }
 
 /* Brock's styles for forms */
+#main-section
+{
+    margin:15px;
+}
 fieldset.editor
 {
     width:610px;
@@ -79,9 +83,24 @@ fieldset.editor > div.buttons{
     padding-top:10px;
     text-align:right;
 }
+fieldset.editor img{
+    vertical-align:middle;
+    position:relative;
+    top:-2px;
+}
 fieldset.editor img.error
 {
-    margin-left:3px;
+    margin-left:5px;
+}
+
+.config-menu {
+    vertical-align:top;
+    display:inline-block;
+    width:300px;
+}
+.config-editor{
+    margin-left:20px;
+    display:inline-block;
 }
 /* Styles for validation helpers
 -----------------------------------------------------------*/

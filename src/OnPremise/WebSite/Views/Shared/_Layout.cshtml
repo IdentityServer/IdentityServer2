@@ -11,9 +11,7 @@
 <body>
 
     <div class="masterHeader">
-        <br />
         <img src="@Url.Content("~/Content/images/logo.jpg")" alt="Logo" />
-
         <h2 class="masterHeaderText">@ViewBag.SiteName</h2>
     </div>
 
@@ -41,10 +39,10 @@
             @Html.ActionLink("[sign in]", "signin", "account")
         }
     </div>
-        
-    <br />
 
-    @RenderBody()
+    <section id="main-section">
+        @RenderBody()
+    </section>
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)

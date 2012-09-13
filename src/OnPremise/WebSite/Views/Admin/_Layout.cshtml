@@ -2,7 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<nav>
+<nav class="config-menu">
     <h1>Configuration</h1>
     <ul>
         <li>@Html.ActionLink("General Configuration", "General")</li>
@@ -12,6 +12,6 @@
     </ul>
 </nav>
 
-<section>
+<section class="config-editor">
     @RenderBody()
 </section>

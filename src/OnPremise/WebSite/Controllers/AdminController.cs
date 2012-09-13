@@ -33,19 +33,18 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
         public ActionResult General()
         {
-            var config = ConfigurationRepository.Global;
-            var vm = new AdminConfigurationGeneralViewModel(config);
-            return View("General", vm);
+            var model = ConfigurationRepository.Global;
+            return View("General", model);
         }
         
         [HttpPost]
-        public ActionResult General(AdminConfigurationGeneralViewModel model)
+        public ActionResult General(GlobalConfiguration model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    ConfigurationRepository.Global = model.ToModel();
+                    ConfigurationRepository.Global = model;
                     return RedirectToAction("General");
                 }
                 catch (ValidationException ex)
