@@ -119,6 +119,7 @@
     <Compile Include="Helper\X509Certificates.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ClientCertificate.cs" />
+    <Compile Include="Models\Configuration\AdfsBridgeConfiguration.cs" />
     <Compile Include="Models\Configuration\SimpleHttpConfiguration.cs" />
     <Compile Include="Models\Configuration\KeyMaterialConfiguration.cs" />
     <Compile Include="Models\Configuration\OAuth2Configuration.cs" />
