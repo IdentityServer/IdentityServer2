@@ -192,7 +192,8 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         {
             if (IsTopRequestFor("RPs"))
             {
-                var list = RelyingPartyRepository.List(-1, -1);
+                var vm = new RelyingPartiesViewModel(RelyingPartyRepository);
+                var list = vm.RPs.Where(x=>x.Enabled);
                 if (list.Any())
                 {
                     return PartialView("_RPs_Navigation", list);
@@ -203,7 +204,21 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
         public ActionResult RPs()
         {
-            return View();
+            var vm = new RelyingPartiesViewModel(RelyingPartyRepository);
+            return View("RPs", vm);
+        }
+        
+        [HttpPost]
+        public ActionResult RPs(IEnumerable<RelyingPartyViewModel> list)
+        {
+            var vm = new RelyingPartiesViewModel(RelyingPartyRepository);
+            if (ModelState.IsValid)
+            {
+
+                return RedirectToAction("RPs");
+            }
+
+            return View("RPs", vm);
         }
 
     }

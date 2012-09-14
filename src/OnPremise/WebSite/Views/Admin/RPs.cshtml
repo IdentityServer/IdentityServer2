@@ -1,8 +1,31 @@
-﻿@{
-    ViewBag.Title = "Relying Parties";
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.RelyingPartiesViewModel
+
+@{
+    ViewBag.Title = "Enabled Relying Parties";
 }
 
-<fieldset class="editor">
-    <legend>@ViewBag.Title</legend>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary("Error updating relying parties:")
 
-</fieldset>
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+        @{
+            var list = Model.RPs.ToArray();
+        }
+        @for (int i = 0; i < list.Length; i++)
+        {
+            <div>
+                @Html.HiddenFor(x=>list[i].ID)
+                @Html.LabelFor(x => list[i].Enabled, list[i].DisplayName)
+                @Html.CheckBoxFor(x=>list[i].Enabled)
+            </div>
+        }
+
+        <div class="buttons">
+            <button type="submit">Save Changes</button>
+            <button type="reset">Cancel</button>
+        </div>
+
+    </fieldset>
+}

@@ -1,8 +1,8 @@
-﻿@model IEnumerable<Thinktecture.IdentityServer.Models.RelyingParty>
+﻿@model IEnumerable<Thinktecture.IdentityServer.Web.ViewModels.RelyingPartyViewModel>
 
 <ul>
     @foreach (var item in Model)
     {
-        <li>@item.Name</li>
+        <li>@item.DisplayName</li>
     }
 </ul>
