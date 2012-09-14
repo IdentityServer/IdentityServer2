@@ -14,6 +14,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 
         [Required]
         public string Name { get; set; }
+
+        [Required]
+        public bool Enabled { get; set; }
         
         [Required]
         public string Realm { get; set; }

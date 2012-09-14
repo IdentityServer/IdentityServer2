@@ -19,7 +19,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             using (var entities = IdentityServerConfigurationContext.Get())
             {
                 var match = (from rp in entities.RelyingParties
-                             where rp.Realm.StartsWith(realm)
+                             where rp.Realm.StartsWith(realm) &&
+                                   rp.Enabled == true
                              orderby rp.Realm descending
                              select rp)
                             .FirstOrDefault();

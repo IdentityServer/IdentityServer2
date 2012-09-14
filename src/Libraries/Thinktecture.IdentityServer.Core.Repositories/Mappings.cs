@@ -233,6 +233,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 Id = rpEntity.Id.ToString(),
                 Name = rpEntity.Name,
+                Enabled = rpEntity.Enabled,
                 Realm = new Uri(rpEntity.Realm),
                 ExtraData1 = rpEntity.ExtraData1,
                 ExtraData2 = rpEntity.ExtraData2,
@@ -262,6 +263,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             var rpEntity = new RelyingParties
             {
                 Name = relyingParty.Name,
+                Enabled = relyingParty.Enabled,
                 Realm = relyingParty.Realm.AbsoluteUri,
                 ExtraData1 = relyingParty.ExtraData1,
                 ExtraData2 = relyingParty.ExtraData2,
