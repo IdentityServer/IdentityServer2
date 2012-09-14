@@ -153,9 +153,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\RelyingPartyViewModel.cs" />
     <Compile Include="ViewModels\ProtocolsInputModel.cs" />
     <Compile Include="ViewModels\ProtocolsViewModel.cs" />
     <Compile Include="ViewModels\ProtocolViewModel.cs" />
+    <Compile Include="ViewModels\RelyingPartiesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\error.png" />
@@ -235,6 +237,7 @@
     <Content Include="Views\Admin\_Navigation.cshtml" />
     <Content Include="Views\Admin\_Protocols_Navigation.cshtml" />
     <Content Include="Views\Admin\Protocol.cshtml" />
+    <Content Include="Views\Admin\_RPs_Navigation.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

@@ -11,18 +11,36 @@ namespace Thinktecture.IdentityServer.Models
 {
     public class RelyingParty
     {
+        [Required]
+        [Display(Name = "ID", Description = "")]
         public string Id { get; set; }
-        public string Name { get; set; }
-        public Uri Realm { get; set; }
-        public Uri ReplyTo { get; set; }
         
+        [Display(Name = "Enabled", Description = "")]
+        public bool Enabled { get; set; }
+        
+        [Required]
+        [Display(Name = "Display Name", Description = "")]
+        public string Name { get; set; }
+        
+        [Required]
+        [Display(Name = "Realm", Description = "")]
+        public Uri Realm { get; set; }
+
+        [Display(Name = "Reply To", Description = "URL to return once a token is issued.")]
+        public Uri ReplyTo { get; set; }
+
+        [Display(Name = "Encrypting Certificate", Description = "")]
         public X509Certificate2 EncryptingCertificate { get; set; }
 
         [UIHint("Base64")]
+        [Display(Name = "Symmetric Signing Key", Description = "Base64 encoded key used for symmetric signing of tokens.")]
         public byte[] SymmetricSigningKey { get; set; }
 
+        [Display(Name = "Extra Data 1", Description = "")]
         public string ExtraData1 { get; set; }
+        [Display(Name = "Extra Data 2", Description = "")]
         public string ExtraData2 { get; set; }
+        [Display(Name = "Extra Data 3", Description = "")]
         public string ExtraData3 { get; set; }
     }
 }

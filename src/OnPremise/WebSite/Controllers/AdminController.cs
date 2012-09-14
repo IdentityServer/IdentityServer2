@@ -15,15 +15,18 @@ namespace Thinktecture.IdentityServer.Web.Controllers
     {
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
+        [Import]
+        public IRelyingPartyRepository RelyingPartyRepository { get; set; }
 
         public AdminController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public AdminController(IConfigurationRepository configuration)
+        public AdminController(IConfigurationRepository configuration, IRelyingPartyRepository relyingPartyRepository)
         {
             ConfigurationRepository = configuration;
+            RelyingPartyRepository = relyingPartyRepository;
         }
         
         public ActionResult Index()
@@ -171,7 +174,6 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             ModelBindingContext bindingContext = context2;
             binder.BindModel(base.ControllerContext, bindingContext);
             return this.ModelState.IsValid;
-
         }
 
         internal static bool IsPropertyAllowed(string propertyName, string[] includeProperties, string[] excludeProperties)
@@ -180,7 +182,18 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             bool flag2 = (excludeProperties != null) && excludeProperties.Contains<string>(propertyName, StringComparer.OrdinalIgnoreCase);
             return (flag && !flag2);
         }
-        
+
+        [ChildActionOnly]
+        public ActionResult RPs_Navigation()
+        {
+            var list = RelyingPartyRepository.List(-1, -1); 
+            if (list.Any())
+            {
+                return PartialView("_RPs_Navigation", list);
+            }
+            return new EmptyResult();
+        }
+
         public ActionResult RPs()
         {
             return View();
