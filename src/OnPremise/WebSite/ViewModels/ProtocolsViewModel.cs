@@ -4,47 +4,37 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Web.ViewModels
 {
-    public class ProtocolsInputModel
-    {
-        [Required]
-        public bool[] Protocols { get; set; }
-
-        public void Update(Repositories.IConfigurationRepository configurationRepository)
-        {
-            new ProtocolsViewModel(configurationRepository).Update(this.Protocols);
-        }
-    }
-
     public class ProtocolsViewModel
     {
-        static List<Tuple<string, Func<IConfigurationRepository, bool>, Action<IConfigurationRepository, bool>>> protocolMap =
-            new List<Tuple<string, Func<IConfigurationRepository, bool>, Action<IConfigurationRepository, bool>>>();
+        static List<Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>> protocolMap =
+            new List<Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>>();
         static ProtocolsViewModel()
         {
-            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, bool>, Action<IConfigurationRepository, bool>>(
+            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
                 "WS-Federation",
-                x => x.WSFederation.Enabled,
-                (c, v) => { var data = c.WSFederation; data.Enabled = v; c.WSFederation = data; }));
-            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, bool>, Action<IConfigurationRepository, bool>>(
+                x => x.WSFederation,
+                (c, v) => { c.WSFederation = (WSFederationConfiguration)v; }));
+            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
                 "Federation Metadata",
-                x => x.FederationMetadata.Enabled,
-                (c, v) => { var data = c.FederationMetadata; data.Enabled = v; c.FederationMetadata = data; }));
-            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, bool>, Action<IConfigurationRepository, bool>>(
+                x => x.FederationMetadata,
+                (c, v) => { c.FederationMetadata = (FederationMetadataConfiguration)v; }));
+            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
                 "WS-Trust",
-                x => x.WSTrust.Enabled,
-                (c, v) => { var data = c.WSTrust; data.Enabled = v; c.WSTrust = data; }));
-            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, bool>, Action<IConfigurationRepository, bool>>(
+                x => x.WSTrust,
+                (c, v) => { c.WSTrust = (WSTrustConfiguration)v; }));
+            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
                 "Simple HTTP",
-                x => x.SimpleHttp.Enabled,
-                (c, v) => { var data = c.SimpleHttp; data.Enabled = v; c.SimpleHttp = data; }));
-            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, bool>, Action<IConfigurationRepository, bool>>(
+                x => x.SimpleHttp,
+                (c, v) => { c.SimpleHttp = (SimpleHttpConfiguration)v; }));
+            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
                 "OAuth2",
-                x => x.OAuth2.Enabled,
-                (c, v) => { var data= c.OAuth2; data.Enabled = v; c.OAuth2 = data; }));
+                x => x.OAuth2,
+                (c, v) => { c.OAuth2 = (OAuth2Configuration)v; }));
         }
 
         private Repositories.IConfigurationRepository ConfigurationRepository;
@@ -58,7 +48,7 @@ namespace Thinktecture.IdentityServer.Web.ViewModels
                 var item = protocolMap[i];
                 var id = i;
                 var name = item.Item1;
-                var enabled = item.Item2(this.ConfigurationRepository);
+                var enabled = item.Item2(this.ConfigurationRepository).Enabled;
                 protocols.Add(new Protocol { ID = id, Name = name, Enabled = enabled });
             }
         }
@@ -68,6 +58,10 @@ namespace Thinktecture.IdentityServer.Web.ViewModels
             public int ID { get; set; }
             public string Name { get; set; }
             public bool Enabled { get; set; }
+            public string NameWithoutSpaces
+            {
+                get { return this.Name.Replace(" ", ""); }
+            }
         }
 
         List<Protocol> protocols = new List<Protocol>();
@@ -83,7 +77,39 @@ namespace Thinktecture.IdentityServer.Web.ViewModels
         {
             for (int i = 0; i < values.Length; i++)
             {
-                protocolMap[i].Item3(ConfigurationRepository, values[i]);
+                var protocol = protocolMap[i].Item2(this.ConfigurationRepository);
+                protocol.Enabled = values[i];
+                protocolMap[i].Item3(ConfigurationRepository, protocol);
+            }
+        }
+
+        internal ProtocolViewModel GetProtocol(string id)
+        {
+            var p = this.protocols.Where(x => x.NameWithoutSpaces == id).SingleOrDefault();
+            if (p != null)
+            {
+                return new ProtocolViewModel
+                {
+                    DisplayName = p.Name,
+                    ID = p.NameWithoutSpaces,
+                    Protocol = protocolMap[p.ID].Item2(this.ConfigurationRepository)
+                };
+            }
+
+            return null;
+        }
+
+        internal void UpdateProtocol(ProtocolViewModel protocol)
+        {
+            var p = this.protocols.Where(x => x.NameWithoutSpaces == protocol.ID).SingleOrDefault();
+            if (p != null)
+            {
+                var mapping = protocolMap[p.ID];
+                mapping.Item3(this.ConfigurationRepository, protocol.Protocol);
+            }
+            else
+            {
+                throw new ValidationException("Invalid Protocol Identifier.");
             }
         }
     }

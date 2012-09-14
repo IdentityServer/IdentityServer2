@@ -2,14 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<nav class="config-menu">
-    <h1>Configuration</h1>
-    <ul>
-        <li>@Html.ActionLink("General Configuration", "General")</li>
-        <li>@Html.ActionLink("Protocols", "Protocols")</li>
-        <li>@Html.ActionLink("Relying Parties", "RPs")</li>
-    </ul>
-</nav>
+@Html.Partial("_Navigation")
 
 <section class="config-editor">
     @RenderBody()

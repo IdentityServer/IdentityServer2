@@ -58,7 +58,7 @@ textarea
 }
 fieldset.editor
 {
-    width:610px;
+    xwidth:610px;
 }
 fieldset.editor > div
 {
@@ -67,7 +67,7 @@ fieldset.editor > div
 fieldset.editor > div > label
 {
     display:inline-block;
-    width:200px;
+    width:230px;
     font-weight:bold;
     text-align:right;
     margin-right:10px;

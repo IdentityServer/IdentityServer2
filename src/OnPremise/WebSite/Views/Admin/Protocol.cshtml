@@ -1,0 +1,20 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.ProtocolViewModel
+
+@{
+    ViewBag.Title = "Protocol Configuration : " + Model.DisplayName;
+}
+
+@using (Html.BeginForm("UpdateProtocol", "Admin", new { id=Model.ID }))
+{
+    @Html.ValidationSummary("Error updating protocol:")
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        @Html.EditorFor(x => x.Protocol)
+
+        <div class="buttons">
+            <button type="submit">Save Changes</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}
