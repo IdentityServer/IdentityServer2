@@ -214,7 +214,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             var vm = new RelyingPartiesViewModel(RelyingPartyRepository);
             if (ModelState.IsValid)
             {
-
+                vm.Update(list);
                 return RedirectToAction("RPs");
             }
 

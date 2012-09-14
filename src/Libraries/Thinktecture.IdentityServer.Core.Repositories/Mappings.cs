@@ -301,7 +301,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                  {
                      Id = rp.Id.ToString(),
                      Name = rp.Name,
-                     Realm = new Uri(rp.Realm)
+                     Realm = new Uri(rp.Realm),
+                     Enabled = rp.Enabled
                  }).ToList();
         }
         #endregion
