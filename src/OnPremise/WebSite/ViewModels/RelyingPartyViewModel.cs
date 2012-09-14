@@ -7,7 +7,8 @@ namespace Thinktecture.IdentityServer.Web.ViewModels
 {
     public class RelyingPartyViewModel
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string DisplayName { get; set; }
+        public bool Enabled { get; set; }
     }
 }
