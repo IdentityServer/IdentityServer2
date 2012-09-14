@@ -63,17 +63,21 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             return View("General", model);
         }
 
-        [ChildActionOnly]
-        public ActionResult Protocols_Navigation()
+        bool IsTopRequestFor(params string[] actions)
         {
             ControllerContext ctx = this.ControllerContext;
             while (ctx.ParentActionViewContext != null)
             {
                 ctx = ctx.ParentActionViewContext;
             }
-            
             var action = (string)ctx.RouteData.Values["action"];
-            if (new string[]{"Protocols", "Protocol"}.Contains(action, StringComparer.OrdinalIgnoreCase))
+            return actions.Contains(action, StringComparer.OrdinalIgnoreCase);
+        }
+
+        [ChildActionOnly]
+        public ActionResult Protocols_Navigation()
+        {
+            if (IsTopRequestFor("Protocols", "Protocol"))
             {
                 var vm = new ProtocolsViewModel(ConfigurationRepository);
                 var list = vm.Protocols.Where(x => x.Enabled).ToArray();
@@ -186,10 +190,13 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         [ChildActionOnly]
         public ActionResult RPs_Navigation()
         {
-            var list = RelyingPartyRepository.List(-1, -1); 
-            if (list.Any())
+            if (IsTopRequestFor("RPs"))
             {
-                return PartialView("_RPs_Navigation", list);
+                var list = RelyingPartyRepository.List(-1, -1);
+                if (list.Any())
+                {
+                    return PartialView("_RPs_Navigation", list);
+                }
             }
             return new EmptyResult();
         }
