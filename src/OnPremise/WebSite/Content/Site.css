@@ -64,6 +64,18 @@ fieldset.editor > div
 {
     margin:5px;
 }
+fieldset.editor > div > div
+{
+    margin-left:245px;
+}
+fieldset.editor > div > div label
+{
+    font-weight:bold;
+}
+fieldset.editor > div > div label:after
+{
+    content:':';
+}
 fieldset.editor > div > label
 {
     display:inline-block;
@@ -101,6 +113,13 @@ fieldset.editor img.error
 .config-editor{
     margin-left:20px;
     display:inline-block;
+}
+fieldset.editor .inline-editor
+{
+    vertical-align:top;
+    display:inline-block;
+    xborder:1px solid red;
+    margin-left:0;
 }
 /* Styles for validation helpers
 -----------------------------------------------------------*/

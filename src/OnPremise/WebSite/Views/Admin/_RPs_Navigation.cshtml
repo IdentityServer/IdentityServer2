@@ -3,6 +3,6 @@
 <ul>
     @foreach (var item in Model)
     {
-        <li>@item.DisplayName</li>
+        <li>@Html.ActionLink(item.DisplayName, "RP", new { id = item.ID })</li>
     }
 </ul>

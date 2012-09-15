@@ -1,0 +1,20 @@
+﻿@model Thinktecture.IdentityServer.Models.RelyingParty
+
+@{
+    ViewBag.Title = "Relying Party : " + Model.Name;
+}
+
+@using (Html.BeginForm("RP", "Admin", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary("Error updating relying party:")
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        @Html.EditorForModel()
+
+        <div class="buttons">
+            <button type="submit">Save Changes</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

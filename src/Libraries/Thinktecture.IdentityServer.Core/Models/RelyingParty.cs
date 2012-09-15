@@ -12,7 +12,8 @@ namespace Thinktecture.IdentityServer.Models
     public class RelyingParty
     {
         [Required]
-        [Display(Name = "ID", Description = "")]
+        [Editable(false)]
+        //[Display(Name = "ID", Description = "")]
         public string Id { get; set; }
         
         [Display(Name = "Enabled", Description = "")]
@@ -29,11 +30,11 @@ namespace Thinktecture.IdentityServer.Models
         [Display(Name = "Reply To", Description = "URL to return once a token is issued.")]
         public Uri ReplyTo { get; set; }
 
-        [Display(Name = "Encrypting Certificate", Description = "")]
+        [Display(Order=10002, Name = "Encrypting Certificate", Description = "")]
         public X509Certificate2 EncryptingCertificate { get; set; }
 
         [UIHint("Base64")]
-        [Display(Name = "Symmetric Signing Key", Description = "Base64 encoded key used for symmetric signing of tokens.")]
+        [Display(Order = 10001, Name = "Symmetric Signing Key", Description = "Base64 encoded key used for symmetric signing of tokens.")]
         public byte[] SymmetricSigningKey { get; set; }
 
         [Display(Name = "Extra Data 1", Description = "")]

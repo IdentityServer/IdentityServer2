@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
+using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.ViewModels;
@@ -190,7 +193,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         [ChildActionOnly]
         public ActionResult RPs_Navigation()
         {
-            if (IsTopRequestFor("RPs"))
+            if (IsTopRequestFor("RPs", "RP"))
             {
                 var vm = new RelyingPartiesViewModel(RelyingPartyRepository);
                 var list = vm.RPs.Where(x=>x.Enabled);
@@ -219,6 +222,66 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             }
 
             return View("RPs", vm);
+        }
+
+        public ActionResult RP(string id)
+        {
+            var rp = this.RelyingPartyRepository.Get(id);
+            if (rp == null) return HttpNotFound();
+            return View("RP", rp);
+        }
+        
+
+        [HttpPost]
+        public ActionResult RP(string id, 
+            [Bind(Exclude = "EncryptingCertificate")] RelyingParty rp, 
+            RPCertInputModel cert)
+        {
+            if (cert.RemoveCert == true)
+            {
+                rp.EncryptingCertificate = null;
+            }
+            else if (cert.EncryptingCertificate != null && cert.EncryptingCertificate.ContentLength > 0)
+            {
+                try
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        cert.EncryptingCertificate.InputStream.CopyTo(ms);
+                        var bytes = ms.ToArray();
+                        var val = new X509Certificate2(bytes);
+                        rp.EncryptingCertificate = val;
+                    }
+                }
+                catch
+                {
+                    ModelState.AddModelError("EncryptingCertificate", "Error processing certificate.");
+                }
+            }
+            else
+            {
+                var origRP = this.RelyingPartyRepository.Get(id);
+                rp.EncryptingCertificate = origRP.EncryptingCertificate;
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.RelyingPartyRepository.Update(rp);
+                    return RedirectToAction("RP", new { id });
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Error updating relying party.");
+                }
+            }
+
+            return View("RP", rp);
         }
 
     }

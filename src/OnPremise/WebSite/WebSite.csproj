@@ -158,6 +158,7 @@
     <Compile Include="ViewModels\ProtocolsViewModel.cs" />
     <Compile Include="ViewModels\ProtocolViewModel.cs" />
     <Compile Include="ViewModels\RelyingPartiesViewModel.cs" />
+    <Compile Include="ViewModels\RPCertInputModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\error.png" />
@@ -238,6 +239,9 @@
     <Content Include="Views\Admin\_Protocols_Navigation.cshtml" />
     <Content Include="Views\Admin\Protocol.cshtml" />
     <Content Include="Views\Admin\_RPs_Navigation.cshtml" />
+    <Content Include="Views\Admin\RP.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\X509Certificate2.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\Byte[].cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
