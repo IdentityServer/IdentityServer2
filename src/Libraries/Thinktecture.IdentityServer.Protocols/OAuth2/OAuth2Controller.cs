@@ -54,7 +54,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             }
 
             // check for right grant type
-            if (!string.Equals(tokenRequest.GrantType, "password", System.StringComparison.Ordinal))
+            if (!string.Equals(tokenRequest.Grant_Type, "password", System.StringComparison.Ordinal))
             {
                 Tracing.Error("invalid grant type: " + tokenRequest.Scope);
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid grant type.");
@@ -62,7 +62,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
             if (string.IsNullOrWhiteSpace(tokenRequest.UserName))
             {
-                Tracing.Error("Missung username: " + tokenRequest.Scope);
+                Tracing.Error("Missing username: " + tokenRequest.Scope);
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "missing user name.");
             }
 

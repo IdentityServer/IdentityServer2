@@ -3,18 +3,24 @@
  * see license.txt
  */
 
-using System.Collections.Specialized;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Http.Formatting;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {
     public class ResourceOwnerCredentialRequest
     {
         [Required]
-        public string GrantType { get; set; }
+        [JsonProperty(PropertyName = "grant_type")]
+        public string Grant_Type { get; set; }
+
+        [JsonProperty(PropertyName = "scope")]
         public string Scope { get; set; }
+
+        [JsonProperty(PropertyName = "username")]
         public string UserName { get; set; }
+
+        [JsonProperty(PropertyName = "password")]
         public string Password { get; set; }
     }
 }
