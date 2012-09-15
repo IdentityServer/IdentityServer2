@@ -212,30 +212,130 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         }
         
         [HttpPost]
-        public ActionResult RPs(IEnumerable<RelyingPartyViewModel> list)
+        public ActionResult RPs(string action, IEnumerable<RelyingPartyViewModel> list)
         {
-            var vm = new RelyingPartiesViewModel(RelyingPartyRepository);
-            if (ModelState.IsValid)
+            if (action == "save")
             {
-                vm.Update(list);
-                return RedirectToAction("RPs");
+                var vm = new RelyingPartiesViewModel(RelyingPartyRepository);
+                if (ModelState.IsValid)
+                {
+                    vm.Update(list);
+                    return RedirectToAction("RPs");
+                }
+
+                return View("RPs", vm);
             }
 
-            return View("RPs", vm);
+            if (action == "new")
+            {
+                return RedirectToAction("RP");
+            }
+
+            ModelState.AddModelError("", "Invalid action.");
+            return View("RPs", new RelyingPartiesViewModel(RelyingPartyRepository));
         }
 
         public ActionResult RP(string id)
         {
-            var rp = this.RelyingPartyRepository.Get(id);
+            RelyingParty rp = null;
+            if (id == null) rp = new RelyingParty();
+            else rp = this.RelyingPartyRepository.Get(id);
             if (rp == null) return HttpNotFound();
             return View("RP", rp);
         }
-        
 
         [HttpPost]
         public ActionResult RP(string id, 
+            string action,
             [Bind(Exclude = "EncryptingCertificate")] RelyingParty rp, 
             RPCertInputModel cert)
+        {
+            if (action == "create")
+            {
+                return CreateRP(rp, cert);
+            }
+            if (action == "save")
+            {
+                return SaveRP(id, rp, cert);
+            }
+            if (action == "delete")
+            {
+                return DeleteRP(id);
+            }
+            
+            var origRP = this.RelyingPartyRepository.Get(id);
+            rp.EncryptingCertificate = origRP.EncryptingCertificate;
+            
+            ModelState.AddModelError("", "Invalid action.");
+            return View("RP", rp);
+        }
+
+        private ActionResult DeleteRP(string id)
+        {
+            try
+            {
+                this.RelyingPartyRepository.Delete(id);
+                return RedirectToAction("RPs");
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Error updating relying party.");
+
+            }
+            
+            var rp = this.RelyingPartyRepository.Get(id);
+            return View("RP", rp);
+        }
+
+        private ActionResult CreateRP(RelyingParty rp, RPCertInputModel cert)
+        {
+            // ID is not required for create
+            ModelState["ID"].Errors.Clear();
+
+            rp.Id = null;
+            if (cert.EncryptingCertificate != null && cert.EncryptingCertificate.ContentLength > 0)
+            {
+                try
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        cert.EncryptingCertificate.InputStream.CopyTo(ms);
+                        var bytes = ms.ToArray();
+                        var val = new X509Certificate2(bytes);
+                        rp.EncryptingCertificate = val;
+                    }
+                }
+                catch
+                {
+                    ModelState.AddModelError("EncryptingCertificate", "Error processing certificate.");
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.RelyingPartyRepository.Add(rp);
+                    return RedirectToAction("RPs");
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Error updating relying party.");
+                }
+            }
+
+            return View("RP", rp);
+        }
+
+        private ActionResult SaveRP(string id, RelyingParty rp, RPCertInputModel cert)
         {
             if (cert.RemoveCert == true)
             {

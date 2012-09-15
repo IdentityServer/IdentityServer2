@@ -1,7 +1,7 @@
 ﻿
 @{
     var bytes = (byte[])Model;
-    var val = Convert.ToBase64String(bytes);
+    var val = bytes != null ? Convert.ToBase64String(bytes) : "";
 }
 
 @Html.TextBox("", val)
