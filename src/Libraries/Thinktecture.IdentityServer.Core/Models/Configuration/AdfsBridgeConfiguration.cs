@@ -10,6 +10,6 @@ namespace Thinktecture.IdentityServer.Models.Configuration
     {
         public string MixedUserNameEndpointAddress { get; set; }
         public string IssuerThumbprint { get; set; }
-        // test
+        public bool PassThroughIssuerName { get; set; }
     }
 }
