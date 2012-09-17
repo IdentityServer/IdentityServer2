@@ -15,27 +15,27 @@ using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.TokenService;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Tests
 {
     [TestClass]
     public class PolicyEnforcementTest
     {
-        GlobalConfiguration config;
+        IConfigurationRepository repo;
         Request request;
         ClaimsPrincipal _alice;
 
-        //[TestInitialize]
-        //public void Setup()
-        //{
-        //    config = ConfigurationFactory.Create(Constants.ConfigurationModes.LockedDown);
-        //    request = new Request(config, new TestRelyingPartyRepository(), null);
-        //    _alice = PrincipalFactory.Create(Constants.Principals.AliceUserName);
-        //}
+        [TestInitialize]
+        public void Setup()
+        {
+            repo = ConfigurationRepositoryFactory.Create(Constants.ConfigurationModes.LockedDown);
+            request = new Request(repo, new TestRelyingPartyRepository(), null);
+            _alice = PrincipalFactory.Create(Constants.Principals.AliceUserName);
+        }
 
         [TestMethod]
-        //[ExpectedException(typeof(MissingAppliesToException))]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void Validate_NoRealm()
         {
             var rst = new RequestSecurityToken { RequestType = RequestTypes.Issue };

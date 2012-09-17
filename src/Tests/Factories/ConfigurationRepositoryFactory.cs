@@ -10,12 +10,14 @@
 using System;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Models.Configuration;
+using Thinktecture.IdentityServer.Repositories;
+using Thinktecture.IdentityServer.Tests.Repositories;
 
 namespace Thinktecture.IdentityServer.Tests
 {
-    internal static class ConfigurationFactory
+    internal static class ConfigurationRepositoryFactory
     {
-        public static GlobalConfiguration Create(string mode)
+        public static IConfigurationRepository Create(string mode)
         {
             switch (mode)
             {
@@ -28,9 +30,11 @@ namespace Thinktecture.IdentityServer.Tests
             }
         }
 
-        public static GlobalConfiguration CreateLockedDownConfiguration()
+        public static IConfigurationRepository CreateLockedDownConfiguration()
         {
-            return new GlobalConfiguration
+            var repo = new InMemoryConfigurationRepository();
+
+            repo.Global = new GlobalConfiguration
             {
                 SiteName = "Unit Test",
                 IssuerUri = "http://test.identityserver.thinktecture.com",
@@ -38,7 +42,7 @@ namespace Thinktecture.IdentityServer.Tests
                 DefaultTokenLifetime = 10,
                 MaximumTokenLifetime = 24,
                 DefaultWSTokenType = "urn:oasis:names:tc:SAML:2.0:assertion",
-
+                
                 EnableClientCertificateAuthentication = true,
                 
                 //EnableDelegation = false,
@@ -51,30 +55,29 @@ namespace Thinktecture.IdentityServer.Tests
                 //RequireSsl = true,
                 //RequireSignInConfirmation = false
             };
+
+            repo.WSFederation = new WSFederationConfiguration
+            {
+                AllowReplyTo = false,
+                RequireReplyToWithinRealm = true,
+                RequireSslForReplyTo = true
+            };
+
+            return repo;
         }
 
-        private static GlobalConfiguration CreateLockedDownAllowReplyToConfiguration()
+        private static IConfigurationRepository CreateLockedDownAllowReplyToConfiguration()
         {
-            return new GlobalConfiguration
+            var repo = CreateLockedDownConfiguration();
+
+            repo.WSFederation = new WSFederationConfiguration
             {
-                SiteName = "Unit Test",
-                IssuerUri = "http://test.identityserver.thinktecture.com",
-
-                DefaultTokenLifetime = 10,
-                MaximumTokenLifetime = 24,
-                //DefaultTokenType = "urn:oasis:names:tc:SAML:2.0:assertion",
-
-                //EnableClientCertificates = true,
-                //EnableDelegation = false,
-
-                //AllowKnownRealmsOnly = true,
-                //AllowReplyTo = true,
-                //RequireReplyToWithinRealm = true,
-
-                RequireEncryption = true,
-                //RequireSsl = true,
-                //RequireSignInConfirmation = false
+                AllowReplyTo = true,
+                RequireReplyToWithinRealm = true,
+                RequireSslForReplyTo = true
             };
+
+            return repo;
         }
     }
 }

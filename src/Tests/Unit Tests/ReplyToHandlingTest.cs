@@ -12,23 +12,24 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.TokenService;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Tests
 {
     [TestClass]
     public class ReplyToHandlingTest
     {
-        GlobalConfiguration config;
+        IConfigurationRepository repo;
         Request request;
         ClaimsPrincipal _alice;
 
-        //[TestInitialize]
-        //public void Setup()
-        //{
-        //    config = ConfigurationFactory.Create(Constants.ConfigurationModes.LockedDownAllowReplyTo);
-        //    request = new Request(config, new TestRelyingPartyRepository(), null);
-        //    _alice = PrincipalFactory.Create(Constants.Principals.AliceUserName);
-        //}
+        [TestInitialize]
+        public void Setup()
+        {
+            repo = ConfigurationRepositoryFactory.Create(Constants.ConfigurationModes.LockedDownAllowReplyTo);
+            request = new Request(repo, new TestRelyingPartyRepository(), null);
+            _alice = PrincipalFactory.Create(Constants.Principals.AliceUserName);
+        }
 
         [TestMethod]
         public void IgnoreReplyToForRegisteredRPwithReplyTo()

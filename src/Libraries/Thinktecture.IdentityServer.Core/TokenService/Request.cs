@@ -334,7 +334,7 @@ namespace Thinktecture.IdentityServer.TokenService
             // check realm
             if (rst.AppliesTo == null || rst.AppliesTo.Uri == null)
             {
-                throw new Exception("AppliesTo is missing");
+                throw new ArgumentNullException("AppliesTo");
                 //throw new MissingAppliesToException("AppliesTo is missing");
             }
 
