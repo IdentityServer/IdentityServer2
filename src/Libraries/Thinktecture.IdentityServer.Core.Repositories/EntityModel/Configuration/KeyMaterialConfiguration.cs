@@ -15,5 +15,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql.Configuration
         public string SigningCertificateName { get; set; }
         public string DecryptionCertificateName { get; set; }
         public string RSASigningKey { get; set; }
+        public string SymmetricSigningKey { get; set; }
     }
 }

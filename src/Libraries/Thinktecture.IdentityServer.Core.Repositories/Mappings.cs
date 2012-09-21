@@ -110,6 +110,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 model.SigningCertificate = cert;
             }
 
+            model.SymmetricSigningKey = entity.SymmetricSigningKey;
+
             return model;
         }
 
@@ -121,6 +123,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 entity.SigningCertificateName = model.SigningCertificate.Subject;
             }
+
+            entity.SymmetricSigningKey = model.SymmetricSigningKey;
 
             return entity;
         }
