@@ -84,11 +84,11 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new WSTrustConfiguration
             {
                 EnableClientCertificateAuthentication = false,
-                Enabled = false,
+                Enabled = true,
                 EnableDelegation = false,
                 EnableFederatedAuthentication = false,
                 EnableMessageSecurity = false,
-                EnableMixedModeSecurity = false
+                EnableMixedModeSecurity = true
             };
         }
 
