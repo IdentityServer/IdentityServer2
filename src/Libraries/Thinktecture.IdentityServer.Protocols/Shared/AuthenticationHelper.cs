@@ -86,7 +86,7 @@ namespace Thinktecture.IdentityServer.Protocols
             return false;
         }
 
-        public bool TryGetPrincipalFromOAuth2Request(HttpRequestBase request, ResourceOwnerCredentialRequest tokenRequest, out ClaimsPrincipal principal)
+        public bool TryGetPrincipalFromOAuth2Request(HttpRequestBase request, TokenRequest tokenRequest, out ClaimsPrincipal principal)
         {
             principal = null;
 
