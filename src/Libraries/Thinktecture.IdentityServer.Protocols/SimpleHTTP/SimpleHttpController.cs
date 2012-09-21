@@ -10,6 +10,7 @@ using System.Web;
 
 namespace Thinktecture.IdentityServer.Protocols.SimpleHTTP
 {
+    [ApiClaimsAuthorize(Constants.Actions.Issue, Constants.Resources.SimpleHttp)]
     public class SimpleHttpController : ApiController
     {
         [Import]
