@@ -3,7 +3,6 @@
  * see license.txt
  */
 
-using System;
 using System.ComponentModel.Composition;
 using System.IdentityModel.Protocols.WSTrust;
 using System.Net;
@@ -11,7 +10,6 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
-using Thinktecture.IdentityModel.Tokens.Http;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
@@ -40,7 +38,6 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             Tracing.Information("OAuth2 endpoint called.");
 
             var tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
-            //var tokenRequest = ResourceOwnerCredentialRequest.Parse(request.Content.ReadAsFormDataAsync().Result);
 
             EndpointReference appliesTo;
             try
@@ -54,7 +51,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "malformed scope name.");
             }
 
-            // check for right grant type
+            // check grant type
             if (string.Equals(tokenRequest.Grant_Type, "password", System.StringComparison.Ordinal))
             {
                 return ProcessResourceOwnerCredentialRequest(tokenRequest.UserName, tokenRequest.Password, appliesTo, tokenType);
