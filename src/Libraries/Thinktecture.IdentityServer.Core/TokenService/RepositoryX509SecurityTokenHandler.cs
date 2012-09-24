@@ -53,7 +53,7 @@ namespace Thinktecture.IdentityServer.TokenService
                 new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.X509)
             };
 
-            var id = new ClaimsIdentity(claims);
+            var id = new ClaimsIdentity(claims, "Client Certificate");
             return new List<ClaimsIdentity> { id }.AsReadOnly();
         }
     }
