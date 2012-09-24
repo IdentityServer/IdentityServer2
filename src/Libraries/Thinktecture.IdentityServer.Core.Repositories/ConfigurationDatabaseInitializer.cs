@@ -36,6 +36,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     {
                         CreateTestRelyingParties().ForEach(rp => context.RelyingParties.Add(rp));
                         CreateTestIdentityProviders().ForEach(idp => context.IdentityProviders.Add(idp));
+                        CreateTestDelegationSettings().ForEach(d => context.Delegation.Add(d));
                     }
                 }
             }
@@ -85,7 +86,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 EnableClientCertificateAuthentication = false,
                 Enabled = true,
-                EnableDelegation = false,
+                EnableDelegation = true,
                 EnableFederatedAuthentication = false,
                 EnableMessageSecurity = false,
                 EnableMixedModeSecurity = true
@@ -153,6 +154,26 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Enabled = true,
                     Realm = "https://test/oauth2/",
                     SymmetricSigningKey = "3ihK5qGVhp8ptIk9+TDucXQW4Aaengg3d5m6gU8nzc8=",
+                },
+                new RelyingParties
+                {
+                    Name = "Local Test RP",
+                    Enabled = true,
+                    Realm = "https://samples.thinktecture.com/mvc/",
+                    ReplyTo = "https://roadie/idsrvrp/"
+                }
+            };
+        }
+
+        private List<Delegation> CreateTestDelegationSettings()
+        {
+            return new List<Delegation>
+            {
+                new Delegation
+                {
+                    Description = "Test for Local RP",
+                    UserName = "middletier",
+                    Realm = "https://samples.thinktecture.com/mvc/"
                 }
             };
         }
