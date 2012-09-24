@@ -103,9 +103,9 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 principal,
                 TokenServiceConfiguration.Current.CreateSecurityTokenService());
 
-            //// set cookie for single-sign-out
-            //new SignInSessionsManager(HttpContext, ConfigurationRepository.Configuration.MaximumTokenLifetime)
-            //    .AddRealm(response.BaseUri.AbsoluteUri);
+            // set cookie for single-sign-out
+            //new SignInSessionsManager(HttpContext, ConfigurationRepository.Global.MaximumTokenLifetime)
+            //    .AddRealm("signout url of idp??");
 
             return new WSFederationResult(wsFedResponse, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
@@ -155,7 +155,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             var j = JObject.FromObject(new Context { Wctx = wctx, Realm = realm });
 
-            var cookie = new HttpCookie("rdwcontext", j.ToString());
+            var cookie = new HttpCookie("idsrvcontext", j.ToString());
             cookie.Secure = true;
             cookie.HttpOnly = true;
 
@@ -164,7 +164,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
 
         private Context GetContextCookie()
         {
-            var cookie = Request.Cookies["rdwcontext"];
+            var cookie = Request.Cookies["idsrvcontext"];
             if (cookie == null)
             {
                 throw new InvalidOperationException("cookie");
