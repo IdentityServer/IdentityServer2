@@ -203,7 +203,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     DisplayName = "LeastPrivilege ADFS Server",
                     Type = Models.IdentityProviderTypes.WS,
                     WSFederationEndpoint = "https://adfs.leastprivilege.vm/adfs/ls/",
-                    IssuerThumbprint = "8EC7F962CC083FF7C5997D8A4D5ED64B12E4C174"
+                    IssuerThumbprint = "DD4F4E11A52701FB98F4B55AAC406EB5D96C059B"
                 }
             };
         }
