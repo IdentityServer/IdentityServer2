@@ -82,7 +82,7 @@ namespace Thinktecture.IdentityServer.Tests
         public static class Credentials
         {
             public const string ValidUserName = "dominick";
-            public const string UnauthorizedUserName = "internal";
+            public const string UnauthorizedUserName = "unauthorized";
 
             public const string ValidPassword = "abc!123";
         }

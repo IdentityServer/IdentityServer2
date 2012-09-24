@@ -61,14 +61,14 @@ namespace Thinktecture.IdentityServer.Tests
             Assert.IsTrue(token != null);
         }
 
-        //        [TestMethod]
-        //        public void ValidClientCertificateCredential()
-        //        {
-        //            RequestSecurityTokenResponse rstr;
-        //            var token = _mixedCertificateClient.Issue(_rst, out rstr);
+        [TestMethod]
+        public void ValidClientCertificateCredential()
+        {
+            RequestSecurityTokenResponse rstr;
+            var token = _mixedCertificateClient.Issue(_rst, out rstr);
 
-        //            Assert.IsTrue(token != null);
-        //        }
+            Assert.IsTrue(token != null);
+        }
 
         [TestMethod]
         public void ValidUserNameCredentialSaml11()
@@ -204,18 +204,18 @@ namespace Thinktecture.IdentityServer.Tests
             var token = client.Issue(_rst, out rstr);
         }
 
-        //        [TestMethod]
-        //        [ExpectedException(typeof(FaultException))]
-        //        public void UnauthorizedUser()
-        //        {
-        //            var client = WSTrustClientFactory.CreateMixedUserNameClient(
-        //                Constants.Credentials.UnauthorizedUserName,
-        //                Constants.Credentials.ValidPassword,
-        //                baseAddressUserName);
+        [TestMethod]
+        [ExpectedException(typeof(FaultException))]
+        public void UnauthorizedUser()
+        {
+            var client = WSTrustClientFactory.CreateMixedUserNameClient(
+                Constants.Credentials.UnauthorizedUserName,
+                Constants.Credentials.ValidPassword,
+                baseAddressUserName);
 
-        //            RequestSecurityTokenResponse rstr;
-        //            var token = client.Issue(_rst, out rstr);
-        //        }
+            RequestSecurityTokenResponse rstr;
+            var token = client.Issue(_rst, out rstr);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(FaultException))]
