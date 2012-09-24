@@ -37,6 +37,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                         CreateTestRelyingParties().ForEach(rp => context.RelyingParties.Add(rp));
                         CreateTestIdentityProviders().ForEach(idp => context.IdentityProviders.Add(idp));
                         CreateTestDelegationSettings().ForEach(d => context.Delegation.Add(d));
+                        CreateTestClientCertificateSettings().ForEach(cc => context.ClientCertificates.Add(cc));
                     }
                 }
             }
@@ -84,8 +85,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             return new WSTrustConfiguration
             {
-                EnableClientCertificateAuthentication = false,
                 Enabled = true,
+                
+                EnableClientCertificateAuthentication = true,
                 EnableDelegation = true,
                 EnableFederatedAuthentication = false,
                 EnableMessageSecurity = false,
@@ -174,6 +176,19 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Description = "Test for Local RP",
                     UserName = "middletier",
                     Realm = "https://samples.thinktecture.com/mvc/"
+                }
+            };
+        }
+
+        private List<ClientCertificates> CreateTestClientCertificateSettings()
+        {
+            return new List<ClientCertificates>
+            {
+                new ClientCertificates
+                {
+                    Description = "Test Client Cert Mapping",
+                    UserName = "dominick",
+                    Thumbprint = "D19126617D55DFB5952F5A86C4EB80C5A00CC917"
                 }
             };
         }
