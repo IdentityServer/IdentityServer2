@@ -104,8 +104,8 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 TokenServiceConfiguration.Current.CreateSecurityTokenService());
 
             // set cookie for single-sign-out
-            //new SignInSessionsManager(HttpContext, ConfigurationRepository.Global.MaximumTokenLifetime)
-            //    .AddRealm("signout url of idp??");
+            new SignInSessionsManager(HttpContext, ConfigurationRepository.Global.MaximumTokenLifetime)
+                .AddRealm(context.WsFedEndpoint);
 
             return new WSFederationResult(wsFedResponse, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
@@ -146,14 +146,14 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         private ActionResult RedirectToIdentityProvider(IdentityProvider identityProvider, SignInRequestMessage request)
         {
             var message = new SignInRequestMessage(new Uri(identityProvider.WSFederationEndpoint), ConfigurationRepository.Global.IssuerUri);
-            SetContextCookie(request.Context, request.Realm);
+            SetContextCookie(request.Context, request.Realm, identityProvider.WSFederationEndpoint);
 
             return new RedirectResult(message.WriteQueryString());
         }
 
-        private void SetContextCookie(string wctx, string realm)
+        private void SetContextCookie(string wctx, string realm, string wsfedEndpoint)
         {
-            var j = JObject.FromObject(new Context { Wctx = wctx, Realm = realm });
+            var j = JObject.FromObject(new Context { Wctx = wctx, Realm = realm, WsFedEndpoint = wsfedEndpoint });
 
             var cookie = new HttpCookie("idsrvcontext", j.ToString());
             cookie.Secure = true;
@@ -178,6 +178,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             public string Wctx { get; set; }
             public string Realm { get; set; }
+            public string WsFedEndpoint { get; set; }
         }
 
         #endregion
