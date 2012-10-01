@@ -16,7 +16,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Xml;
-using Thinktecture.IdentityModel;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 
