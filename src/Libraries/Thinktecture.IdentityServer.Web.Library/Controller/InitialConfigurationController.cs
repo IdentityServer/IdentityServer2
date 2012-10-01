@@ -3,6 +3,7 @@
  * see license.txt
  */
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -82,7 +83,10 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                     return View(model);
                 }
 
-
+                if (string.IsNullOrWhiteSpace(keys.SymmetricSigningKey))
+                {
+                    keys.SymmetricSigningKey = Convert.ToBase64String(CryptoRandom.CreateRandomKey(32));
+                }
                 
                 // updates key material config
                 ConfigurationRepository.Keys = keys;
