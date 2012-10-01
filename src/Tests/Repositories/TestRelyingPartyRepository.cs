@@ -22,18 +22,21 @@ namespace Thinktecture.IdentityServer.Tests
             new RelyingParty
             {
                 Id = "1",
+                Enabled = true,
                 Name = "Plain text, no encryption",
                 Realm = new Uri(Constants.Realms.PlainTextNoEncryption)
             },
             new RelyingParty
             {
                 Id = "2",
+                Enabled = true,
                 Name = "SSL, no encryption",
                 Realm = new Uri(Constants.Realms.SslNoEncryption)
             },
             new RelyingParty
             {
                 Id = "3",
+                Enabled = true,
                 Name = "Plain text, encryption",
                 Realm = new Uri(Constants.Realms.PlainTextEncryption),
                 EncryptingCertificate = Constants.Certificates.DefaultEncryptionCertificate
@@ -41,6 +44,7 @@ namespace Thinktecture.IdentityServer.Tests
             new RelyingParty
             {
                 Id = "4",
+                Enabled = true,
                 Name = "SSL, encryption",
                 Realm = new Uri(Constants.Realms.SslEncryption),
                 EncryptingCertificate = Constants.Certificates.DefaultEncryptionCertificate
@@ -48,9 +52,18 @@ namespace Thinktecture.IdentityServer.Tests
             new RelyingParty
             {
                 Id = "4",
+                Enabled = true,
                 Name = "Explicit replyTo",
                 Realm = new Uri(Constants.Realms.ExplicitReplyTo),
                 ReplyTo = new Uri(Constants.Realms.ExplicitReplyTo),
+                EncryptingCertificate = Constants.Certificates.DefaultEncryptionCertificate
+            },
+            new RelyingParty
+            {
+                Id = "5",
+                Enabled = false,
+                Name = "Disabled RP",
+                Realm = new Uri(Constants.Realms.DisabledRP),
                 EncryptingCertificate = Constants.Certificates.DefaultEncryptionCertificate
             }
         };

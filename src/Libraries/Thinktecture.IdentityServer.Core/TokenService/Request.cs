@@ -114,6 +114,7 @@ namespace Thinktecture.IdentityServer.TokenService
             Tracing.Information("Starting policy validation");
 
             ValidateKnownRealm(details);
+            ValidateRelyingParty(details);
             ValidateTokenType(details);
             ValidateReplyTo(details);
             ValidateEncryption(details);
@@ -406,8 +407,20 @@ namespace Thinktecture.IdentityServer.TokenService
             {
                 Tracing.Error("Configuration requires a known realm - but realm is not registered");
 
-                throw new Exception(details.Realm.Uri.AbsoluteUri);
-                //throw new InvalidScopeException(details.Realm.Uri.AbsoluteUri);
+                throw new InvalidRequestException("Invalid realm: " + details.Realm.Uri.AbsoluteUri);
+            }
+        }
+
+        protected virtual void ValidateRelyingParty(RequestDetails details)
+        {
+            if (details.RelyingPartyRegistration != null)
+            {
+                if (details.RelyingPartyRegistration.Enabled == false)
+                {
+                    Tracing.Error("Relying party is disabled");
+
+                    throw new InvalidRequestException("Invalid realm: " + details.Realm.Uri.AbsoluteUri);
+                }
             }
         }
         #endregion

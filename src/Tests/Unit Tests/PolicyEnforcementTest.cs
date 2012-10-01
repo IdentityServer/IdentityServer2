@@ -56,7 +56,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception))]
+        [ExpectedException(typeof(InvalidRequestException))]
         public void Validate_UnknownRealm()
         {
             var rst = RstFactory.Create(Constants.Realms.UnknownRealm);
@@ -178,6 +178,18 @@ namespace Thinktecture.IdentityServer.Tests
             var rst = RstFactory.Create(Constants.Realms.PlainTextNoEncryption);
             rst.TokenType = TokenTypes.SimpleWebToken;
             
+            var details = request.Analyze(rst, _alice);
+
+            request.Validate();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidRequestException))]
+        public void Validate_DisabledRelyingParty()
+        {
+            var rst = RstFactory.Create(Constants.Realms.DisabledRP);
+            rst.TokenType = TokenTypes.SimpleWebToken;
+
             var details = request.Analyze(rst, _alice);
 
             request.Validate();
