@@ -27,6 +27,7 @@ namespace Thinktecture.IdentityServer.Models
         [Display(Name = "Realm Name", Description = "Realm identifier.")]
         public Uri Realm { get; set; }
 
+        [Required]
         [Display(Name = "Token life time (in minutes)", Description = "Can be used to override the default token lifetime (a value of 0 uses the global default).")]
         public int TokenLifeTime { get; set; }
 

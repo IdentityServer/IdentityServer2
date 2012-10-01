@@ -95,6 +95,20 @@ namespace Thinktecture.IdentityServer.TokenService
             return scope;
         }
 
+        protected override Lifetime GetTokenLifetime(Lifetime requestLifetime)
+        {
+            var scope = Scope as RequestDetailsScope;
+            var rp = scope.RequestDetails.RelyingPartyRegistration;
+
+            if (!scope.RequestDetails.IsKnownRealm || rp.TokenLifeTime == 0)
+            {
+                return base.GetTokenLifetime(requestLifetime);
+            }
+
+            var lifetime = new Lifetime(DateTime.UtcNow, DateTime.UtcNow.AddMinutes(rp.TokenLifeTime));
+            return lifetime;
+        }
+
         /// <summary>
         /// Produces the output identity that gets transformed into a token
         /// </summary>
@@ -130,21 +144,6 @@ namespace Thinktecture.IdentityServer.TokenService
 
         public static List<Claim> GetOutputClaims(ClaimsPrincipal principal, RequestDetails requestDetails, IClaimsRepository claimsRepository)
         {
-            //var name = principal.FindAll(ClaimTypes.Name).First().Value;
-            //var nameId = new Claim(ClaimTypes.NameIdentifier, name);
-
-            //var userClaims = new List<Claim> 
-            //{
-            //    new Claim(ClaimTypes.Name, name),
-            //    nameId,
-            //    new Claim(ClaimTypes.AuthenticationMethod, principal.FindAll(ClaimTypes.AuthenticationMethod).First().Value),
-            //    AuthenticationInstantClaim.Now
-            //};
-
-            //userClaims.AddRange(claimsRepository.GetClaims(principal, requestDetails));
-
-            //return userClaims;
-
             return claimsRepository.GetClaims(principal, requestDetails).ToList();
         }
 
