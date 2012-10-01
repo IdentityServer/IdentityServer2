@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Models.Configuration
 {
@@ -22,7 +18,7 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         [Required]
         public String IssuerContactEmail { get; set; }
 
-        [Display(Name = "Default WS Token", Description = "Default token type to be issues for WS-Federation and WS-Trust token requests.")]
+        [Display(Name = "Default WS* Token", Description = "Default token type to be issues for WS-Federation and WS-Trust token requests.")]
         [Required]
         public string DefaultWSTokenType { get; set; }
 
@@ -42,16 +38,16 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         [Range(0, Int32.MaxValue)]
         public int SsoCookieLifetime { get; set; }
 
-        [Display(Name = "Require Token Encryption", Description = "When enabled this setting requires tokens to be encrypted.")]
+        [Display(Name = "Require Token Encryption", Description = "When enabled this setting requires all outgoing tokens to be encrypted.")]
         public Boolean RequireEncryption { get; set; }
 
-        [Display(Name = "Require RP Regitration", Description = "When enabled this will only issue tokens for relying parties that are registed with this STS.")]
+        [Display(Name = "Require RP Registration", Description = "When enabled the STS will only issue tokens for relying parties that are registed.")]
         public Boolean RequireRelyingPartyRegistration { get; set; }
 
-        [Display(Name = "Enable Client Certificates", Description = "Allow users to authenticate with client certificates.")]
+        [Display(Name = "Enable Client Certificates", Description = "Allow users to authenticate in the web frontend with client certificates.")]
         public Boolean EnableClientCertificateAuthentication { get; set; }
 
-        [Display(Name = "Enforce Users in 'Users' Role", Description = "When enabled this setting will cause the STS to only issue tokens for users that are in the '" + Constants.Roles.IdentityServerUsers + "' role.")]
+        [Display(Name = "Only Users in the '" + Constants.Roles.IdentityServerUsers + "' role can request tokens", Description = "When enabled this setting will cause the STS to only issue tokens for users that are in the '" + Constants.Roles.IdentityServerUsers + "' role.")]
         public Boolean EnforceUsersGroupMembership { get; set; }
 
         [Display(Name = "HTTP Port", Description = "Port number the STS using for HTTP.")]

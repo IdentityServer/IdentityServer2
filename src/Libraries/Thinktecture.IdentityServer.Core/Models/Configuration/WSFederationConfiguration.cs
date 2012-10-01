@@ -1,30 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Models.Configuration
 {
     public class WSFederationConfiguration : ProtocolConfiguration
     {
-        [Display(Name = "Enable Authentication", Description = "")]
+        [Display(Name = "Enable Sign-in", Description = "Enable sign-in via WS-Federation.")]
         public bool EnableAuthentication { get; set; }
         
-        [Display(Name = "Enable Federation", Description = "")]
+        [Display(Name = "Enable Federation", Description = "Enable federated sign-in via WS-Federation (see Identity Providers).")]
         public bool EnableFederation { get; set; }
         
-        [Display(Name = "Enable HRD", Description = "Enables Home Realm Discovery (HRD).")]
+        [Display(Name = "Enable Home Realm Discovery", Description = "Enables the identity provider selection screen for federated sign-in.")]
         public bool EnableHrd { get; set; }
 
-        [Display(Name = "Allow ReplyTo", Description = "")]
+        [Display(Name = "Allow ReplyTo parameter", Description = "Allows specifying a WS-Federation replyto parameter. Otherwise this parameter is always ignored.")]
         public bool AllowReplyTo { get; set; }
         
-        [Display(Name = "Require ReplyTo Within Realm", Description = "")]
+        [Display(Name = "Require ReplyTo within Realm", Description = "Makes sure that the replyto parameter is a sub-URL of the realm.")]
         public Boolean RequireReplyToWithinRealm { get; set; }
         
-        [Display(Name = "Require SSL For ReplyTo", Description = "")]
+        [Display(Name = "Require SSL", Description = "Enforces SSL for the replyto address. Should always be enabled.")]
         public Boolean RequireSslForReplyTo { get; set; }
     }
 }

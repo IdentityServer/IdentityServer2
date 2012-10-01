@@ -20,6 +20,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         
         [Required]
         public string Realm { get; set; }
+
+        public int TokenLifeTime { get; set; }
         
         public string ReplyTo { get; set; }
         public string EncryptingCertificate { get; set; }

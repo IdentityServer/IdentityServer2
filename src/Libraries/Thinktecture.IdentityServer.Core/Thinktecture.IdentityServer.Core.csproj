@@ -137,7 +137,6 @@
     <Compile Include="Repositories\ICacheRepository.cs" />
     <Compile Include="Repositories\IDelegationRepository.cs" />
     <Compile Include="Repositories\IIdentityProviderRepository.cs" />
-    <Compile Include="Models\Configuration\OAuthWrapConfiguration.cs" />
     <Compile Include="Models\Configuration\GlobalConfiguration.cs" />
     <Compile Include="Models\Configuration\WSTrustConfiguration.cs" />
     <Compile Include="Models\Configuration\WSFederationConfiguration.cs" />
