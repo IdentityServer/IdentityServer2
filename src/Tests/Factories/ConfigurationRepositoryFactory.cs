@@ -44,16 +44,8 @@ namespace Thinktecture.IdentityServer.Tests
                 DefaultWSTokenType = "urn:oasis:names:tc:SAML:2.0:assertion",
                 
                 EnableClientCertificateAuthentication = true,
-                
-                //EnableDelegation = false,
-
                 RequireRelyingPartyRegistration = true,
-                //AllowReplyTo = false,
-                //RequireReplyToWithinRealm = true,
-                
                 RequireEncryption = true,
-                //RequireSsl = true,
-                //RequireSignInConfirmation = false
             };
 
             repo.WSFederation = new WSFederationConfiguration

@@ -151,7 +151,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
-        public void ValidUserNameCredentialSwtSymmetric()
+        public void ValidUserNameCredentialJwtSymmetric()
         {
             var rst = new RequestSecurityToken
             {
@@ -159,7 +159,7 @@ namespace Thinktecture.IdentityServer.Tests
                 RequestType = RequestTypes.Issue,
                 KeyType = KeyTypes.Symmetric,
 
-                TokenType = TokenTypes.SimpleWebToken
+                TokenType = TokenTypes.JsonWebToken
             };
 
             RequestSecurityTokenResponse rstr;
@@ -167,11 +167,11 @@ namespace Thinktecture.IdentityServer.Tests
 
             Assert.IsTrue(token != null);
             Assert.IsTrue(token.ProofToken != null);
-            Assert.AreEqual(TokenTypes.SimpleWebToken, rstr.TokenType);
+            Assert.AreEqual(TokenTypes.JsonWebToken, rstr.TokenType);
         }
 
         [TestMethod]
-        public void ValidUserNameCredentialSwtBearer()
+        public void ValidUserNameCredentialJwtBearer()
         {
             var rst = new RequestSecurityToken
             {
@@ -179,7 +179,7 @@ namespace Thinktecture.IdentityServer.Tests
                 RequestType = RequestTypes.Issue,
                 KeyType = KeyTypes.Bearer,
 
-                TokenType = TokenTypes.SimpleWebToken
+                TokenType = TokenTypes.JsonWebToken
             };
 
             RequestSecurityTokenResponse rstr;
@@ -187,7 +187,7 @@ namespace Thinktecture.IdentityServer.Tests
 
             Assert.IsTrue(token != null);
             Assert.IsTrue(token.ProofToken == null);
-            Assert.AreEqual(TokenTypes.SimpleWebToken, rstr.TokenType);
+            Assert.AreEqual(TokenTypes.JsonWebToken, rstr.TokenType);
         }
 
 

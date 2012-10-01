@@ -156,12 +156,12 @@ namespace Thinktecture.IdentityServer.Tests
 
 
         [TestMethod]
-        public void ValidUserNameCredentialSwt()
+        public void ValidUserNameCredentialJwt()
         {
             var values = new Dictionary<string, string>
             {
                 { "realm", rp },
-                { "tokentype", TokenTypes.SimpleWebToken }
+                { "tokentype", TokenTypes.JsonWebToken }
             };
 
             var client = new HttpClient();

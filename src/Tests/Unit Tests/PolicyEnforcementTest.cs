@@ -56,7 +56,6 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
-        //[ExpectedException(typeof(InvalidScopeException))]
         [ExpectedException(typeof(Exception))]
         public void Validate_UnknownRealm()
         {
@@ -142,16 +141,6 @@ namespace Thinktecture.IdentityServer.Tests
             // security settings
             Assert.IsFalse(details.UsesSsl);
             Assert.IsTrue(details.UsesEncryption);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(InvalidRequestException))]
-        public void Validate_PlainTextEncryption()
-        {
-            var rst = RstFactory.Create(Constants.Realms.PlainTextEncryption);
-            var details = request.Analyze(rst, _alice);
-
-            request.Validate();
         }
 
         [TestMethod]
