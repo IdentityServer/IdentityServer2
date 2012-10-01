@@ -37,16 +37,16 @@ namespace Thinktecture.IdentityServer.Web
             }
 
             // ws-federation HRD
-            if (configuration.WSFederation.Enabled && configuration.WSFederation.EnableFederation)
-            {
-                routes.MapRoute(
-                    "hrd",
-                    "issue/hrd",
-                    new { controller = "Hrd", action = "issue" }
-                );
-            }
+            //if (configuration.WSFederation.Enabled && configuration.WSFederation.EnableFederation)
+            //{
+            //    routes.MapRoute(
+            //        "hrd",
+            //        "issue/hrd",
+            //        new { controller = "Hrd", action = "issue" }
+            //    );
+            //}
 
-            // oauth2
+            // oauth2 endpoint
             if (configuration.OAuth2.Enabled)
             {
                 routes.MapHttpRoute(
@@ -54,15 +54,9 @@ namespace Thinktecture.IdentityServer.Web
                     routeTemplate: "issue/oauth2",
                     defaults: new { controller = "OAuth2" }
                 );
-
-                //routes.MapRoute(
-                //    "oauth2",
-                //    "issue/oauth2/{action}",
-                //    new { controller = "OAuth2", action = "token" }
-                //);
             }
 
-            // simple http web api implementation
+            // simple http endpoint
             if (configuration.SimpleHttp.Enabled)
             {
                 routes.MapHttpRoute(
@@ -83,28 +77,6 @@ namespace Thinktecture.IdentityServer.Web
                     typeof(TokenServiceConfiguration))
                 );
             }
-
-
-            //// jsnotify (mvc)
-            //routes.MapRoute(
-            //    "jsnotify",
-            //    "issue/jsnotify",
-            //    new { controller = "JSNotify", action = "issue" }
-            //);
-
-            //// simple http (mvc)
-            //routes.MapRoute(
-            //    "simplehttp",
-            //    "issue/simple",
-            //    new { controller = "SimpleHttp", action = "issue" }
-            //);
-
-            //// oauth wrap (mvc)
-            //routes.MapRoute(
-            //    "wrap",
-            //    "issue/wrap",
-            //    new { controller = "Wrap", action = "issue" }
-            //);
             #endregion
         }
 
