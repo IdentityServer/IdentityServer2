@@ -71,8 +71,7 @@ namespace Thinktecture.IdentityServer.TokenService
                 Tracing.Error(string.Format("token request from {0} - but no realm specified.",
                     principal.Identity.Name));
 
-                throw new Exception();
-                //throw new MissingAppliesToException();
+                throw new InvalidRequestException();
             }
 
             Tracing.Information(string.Format("Starting token request from {0} for {1}",
@@ -132,20 +131,22 @@ namespace Thinktecture.IdentityServer.TokenService
 
         public static List<Claim> GetOutputClaims(ClaimsPrincipal principal, RequestDetails requestDetails, IClaimsRepository claimsRepository)
         {
-            var name = principal.FindAll(ClaimTypes.Name).First().Value;
-            var nameId = new Claim(ClaimTypes.NameIdentifier, name);
+            //var name = principal.FindAll(ClaimTypes.Name).First().Value;
+            //var nameId = new Claim(ClaimTypes.NameIdentifier, name);
 
-            var userClaims = new List<Claim> 
-            {
-                new Claim(ClaimTypes.Name, name),
-                nameId,
-                new Claim(ClaimTypes.AuthenticationMethod, principal.FindAll(ClaimTypes.AuthenticationMethod).First().Value),
-                AuthenticationInstantClaim.Now
-            };
+            //var userClaims = new List<Claim> 
+            //{
+            //    new Claim(ClaimTypes.Name, name),
+            //    nameId,
+            //    new Claim(ClaimTypes.AuthenticationMethod, principal.FindAll(ClaimTypes.AuthenticationMethod).First().Value),
+            //    AuthenticationInstantClaim.Now
+            //};
 
-            userClaims.AddRange(claimsRepository.GetClaims(principal, requestDetails));
+            //userClaims.AddRange(claimsRepository.GetClaims(principal, requestDetails));
 
-            return userClaims;
+            //return userClaims;
+
+            return claimsRepository.GetClaims(principal, requestDetails).ToList();
         }
 
         protected virtual ClaimsIdentity GetExternalOutputClaims(ClaimsPrincipal principal, RequestDetails requestDetails)
