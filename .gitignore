@@ -5,6 +5,7 @@ build/
 
 *.suo
 *.csproj.user
+*.pubxml.user
 *.sdf
 *.mdf
 *.ldf
