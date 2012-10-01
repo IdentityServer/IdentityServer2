@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.Composition;
 using System.IdentityModel.Protocols.WSTrust;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using Thinktecture.IdentityServer.Repositories;
-using System.Linq;
-using System.Net;
-using System.Web;
 
 namespace Thinktecture.IdentityServer.Protocols.SimpleHTTP
 {
@@ -26,7 +25,6 @@ namespace Thinktecture.IdentityServer.Protocols.SimpleHTTP
             ConfigurationRepository = configurationRepository;
         }
 
-        [ApiClaimsAuthorize(Constants.Actions.Issue, Constants.Resources.SimpleHttp)]
         public HttpResponseMessage Get(HttpRequestMessage request)
         {
             Tracing.Information("Simple HTTP endpoint called.");
