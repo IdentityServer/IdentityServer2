@@ -6,26 +6,19 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Services;
 using System.IdentityModel.Tokens;
-using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
-using System.ServiceModel;
 using System.Text;
 using System.Web;
-using System.Xml;
-using Thinktecture.IdentityModel.Constants;
-using Thinktecture.IdentityServer.Models;
-using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.TokenService;
-using Thinktecture.IdentityModel.Tokens;
 using Thinktecture.IdentityModel;
+using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Protocols.OAuth2;
-using System.Net.Http;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols
 {
@@ -289,7 +282,7 @@ namespace Thinktecture.IdentityServer.Protocols
             return true;
         }
 
-        public ClaimsPrincipal CreatePrincipal(string username, string authenticationMethod)
+        public ClaimsPrincipal CreatePrincipal(string username, string authenticationMethod, IEnumerable<Claim> additionalClaims = null)
         {
             var claims = new List<Claim>
                     {
@@ -299,21 +292,21 @@ namespace Thinktecture.IdentityServer.Protocols
                     };
 
             var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, Constants.AuthenticationType));
+
+            // add additional claims if present
+            if (additionalClaims != null)
+            {
+                additionalClaims.ToList().ForEach(c => principal.Identities.First().AddClaim(c));
+            }
+
             return FederatedAuthentication.FederationConfiguration.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(string.Empty, principal);
         }
 
         public void SetSessionToken(string userName, string authenticationMethod, bool isPersistent, int ttl, string resourceName, IEnumerable<Claim> additionalClaims = null)
         {
             var principal = CreatePrincipal(userName, authenticationMethod);
-            var transformedPrincipal = FederatedAuthentication.FederationConfiguration.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(resourceName, principal);
-            
-            // add additional claims if present
-            if (additionalClaims != null)
-            {
-                additionalClaims.ToList().ForEach(c => transformedPrincipal.Identities.First().AddClaim(c));
-            }
 
-            var sessionToken = new SessionSecurityToken(transformedPrincipal, TimeSpan.FromHours(ttl))
+            var sessionToken = new SessionSecurityToken(principal, TimeSpan.FromHours(ttl))
             {
                 IsPersistent = isPersistent
             };
