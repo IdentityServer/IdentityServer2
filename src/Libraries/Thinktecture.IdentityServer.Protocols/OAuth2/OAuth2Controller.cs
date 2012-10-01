@@ -74,18 +74,15 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             if (UserRepository.ValidateUser(userName, password))
             {
                 principal = auth.CreatePrincipal(userName, "OAuth2");
+
+                if (!ApiClaimsAuthorize.CheckAccess(principal, Constants.Actions.Issue, Constants.Resources.OAuth2))
+                {
+                    return UnauthorizedResponse(userName);
+                }
             }
             else
             {
-                Tracing.Error("OAuth2 endpoint authentication failed for user: " + userName);
-
-                // todo: improve
-                if (HttpContext.Current != null)
-                {
-                    HttpContext.Current.Items[Thinktecture.IdentityModel.Constants.Internal.NoRedirectLabel] = true;
-                }
-
-                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "unauthorized.");
+                return UnauthorizedResponse(userName);
             }
 
             var sts = new STS();
@@ -99,6 +96,19 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid request.");
             }
+        }
+
+        private HttpResponseMessage UnauthorizedResponse(string userName)
+        {
+            Tracing.Error("OAuth2 endpoint authorization failed for user: " + userName);
+
+            // todo: improve
+            if (HttpContext.Current != null)
+            {
+                HttpContext.Current.Items[Thinktecture.IdentityModel.Constants.Internal.NoRedirectLabel] = true;
+            }
+
+            return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "unauthorized.");
         }
     }
 }
