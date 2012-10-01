@@ -352,7 +352,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 {
                     Name = idp.Name,
                     DisplayName = idp.DisplayName,
-                    Type = idp.Type,
+                    //Type = idp.Type,
                     WSFederationEndpoint = idp.WSFederationEndpoint,
                     IssuerThumbprint = idp.IssuerThumbprint
                 });
@@ -369,7 +369,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 Name = idp.Name,
                 DisplayName = idp.DisplayName,
-                Type = idp.Type,
+                //Type = idp.Type,
                 WSFederationEndpoint = idp.WSFederationEndpoint,
                 IssuerThumbprint = idp.IssuerThumbprint
             };
