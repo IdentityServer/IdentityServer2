@@ -1,19 +1,16 @@
-﻿using System;
-using System.Linq;
-using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Repositories.Sql;
+﻿using System.Linq;
 using Entities = Thinktecture.IdentityServer.Repositories.Sql;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
 {
     public class ConfigurationRepository : IConfigurationRepository
     {
-        public bool SupportsWriteAccess
+        public virtual bool SupportsWriteAccess
         {
             get { return true; }
         }
 
-        public Models.Configuration.GlobalConfiguration Global
+        public virtual Models.Configuration.GlobalConfiguration Global
         {
             get
             {
@@ -36,7 +33,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
         }
 
-        public Models.Configuration.DiagnosticsConfiguration Diagnostics
+        public virtual Models.Configuration.DiagnosticsConfiguration Diagnostics
         {
             get
             {
@@ -59,7 +56,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
         }
 
-        public Models.Configuration.KeyMaterialConfiguration Keys
+        public virtual Models.Configuration.KeyMaterialConfiguration Keys
         {
             get
             {
@@ -86,7 +83,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
         }
 
-        public Models.Configuration.WSFederationConfiguration WSFederation
+        public virtual Models.Configuration.WSFederationConfiguration WSFederation
         {
             get
             {
@@ -109,7 +106,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
         }
 
-        public Models.Configuration.FederationMetadataConfiguration FederationMetadata
+        public virtual Models.Configuration.FederationMetadataConfiguration FederationMetadata
         {
             get
             {
@@ -132,7 +129,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
         }
 
-        public Models.Configuration.WSTrustConfiguration WSTrust
+        public virtual Models.Configuration.WSTrustConfiguration WSTrust
         {
             get
             {
@@ -155,7 +152,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
         }
 
-        public Models.Configuration.OAuth2Configuration OAuth2
+        public virtual Models.Configuration.OAuth2Configuration OAuth2
         {
             get
             {
@@ -178,7 +175,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             }
         }
 
-        public Models.Configuration.SimpleHttpConfiguration SimpleHttp
+        public virtual Models.Configuration.SimpleHttpConfiguration SimpleHttp
         {
             get
             {
