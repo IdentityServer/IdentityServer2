@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Repositories
 {
-    // prototype
-    public interface IUserManagementRepository
+    public interface ISimpleUserManagementRepository
     {
-        void CreateUser(string userName, string password, string displayName, string email);
+        void CreateUser(string userName, string password, string email = null);
         void DeleteUser(string userName);
         void SetRolesForUser(string userName, IEnumerable<string> roles);
         IEnumerable<string> GetRolesForUser(string userName);
 
+        IEnumerable<string> GetRoles();
         void CreateRole(string roleName);
         void DeleteRole(string roleName);
     }
