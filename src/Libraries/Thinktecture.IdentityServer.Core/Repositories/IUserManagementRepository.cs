@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Repositories
 {
-    public interface ISimpleUserManagementRepository
+    public interface IUserManagementRepository
     {
         void CreateUser(string userName, string password, string email = null);
         void DeleteUser(string userName);

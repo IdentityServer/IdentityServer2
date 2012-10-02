@@ -47,7 +47,7 @@ namespace Thinktecture.IdentityServer.Configuration
         /// <summary>
         /// Gets or sets type of the class that provides encryption certificates
         /// </summary>
-        [global::System.Configuration.ConfigurationProperty(UserManagementPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.ProviderUserRepository, Thinktecture.IdentityServer.Core.Repositories")]
+        [global::System.Configuration.ConfigurationProperty(UserManagementPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.ProviderUserManagementRepository, Thinktecture.IdentityServer.Core.Repositories")]
         public global::System.String UserManagement
         {
             get
@@ -57,6 +57,31 @@ namespace Thinktecture.IdentityServer.Configuration
             set
             {
                 base[UserManagementPropertyName] = value;
+            }
+        }
+
+        #endregion
+
+        #region UserValidation Property
+
+        /// <summary>
+        /// The XML name of the <see cref="ConfigurationProvider"/> property.
+        /// </summary>
+        internal const global::System.String UserValidationPropertyName = "userValidation";
+
+        /// <summary>
+        /// Gets or sets type of the class that provides encryption certificates
+        /// </summary>
+        [global::System.Configuration.ConfigurationProperty(UserValidationPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.ProviderUserRepository, Thinktecture.IdentityServer.Core.Repositories")]
+        public global::System.String UserValidation
+        {
+            get
+            {
+                return (global::System.String)base[UserValidationPropertyName];
+            }
+            set
+            {
+                base[UserValidationPropertyName] = value;
             }
         }
 

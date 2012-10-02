@@ -4,7 +4,7 @@ using System.Web.Security;
 
 namespace Thinktecture.IdentityServer.Repositories
 {
-    public class ProviderUserManagementRepository : ISimpleUserManagementRepository
+    public class ProviderUserManagementRepository : IUserManagementRepository
     {
         public void CreateUser(string userName, string password, string email = null)
         {

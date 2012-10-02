@@ -23,7 +23,8 @@ namespace Thinktecture.IdentityServer.Repositories
             _mappings = new Dictionary<string, string>
             {
                 { typeof(IConfigurationRepository).FullName, section.TokenServiceConfiguration },
-                { typeof(IUserRepository).FullName, section.UserManagement },
+                { typeof(IUserRepository).FullName, section.UserValidation },
+                { typeof(IUserManagementRepository).FullName, section.UserManagement },
                 { typeof(IClaimsRepository).FullName, section.ClaimsRepository },
                 { typeof(IRelyingPartyRepository).FullName, section.RelyingParties },
                 { typeof(IClientCertificatesRepository).FullName, section.ClientCertificates},
