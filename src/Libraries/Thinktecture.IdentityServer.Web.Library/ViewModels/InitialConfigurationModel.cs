@@ -27,6 +27,16 @@ namespace Thinktecture.IdentityServer.Web.ViewModels
 
         public List<string> AvailableCertificates { get; set; }
 
+        [DisplayName("Create default roles and admin account?")]
+        public bool CreateDefaultAccounts { get; set; }
+
+        [DisplayName("User name")]
+        public string UserName { get; set; }
+
+        [DisplayName("Password")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
         public List<SelectListItem> AvailableCertificatesList
         {
             get

@@ -22,14 +22,18 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
+        [Import]
+        public IUserManagementRepository UserManagement { get; set; }
+
         public InitialConfigurationController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public InitialConfigurationController(IConfigurationRepository configuration)
+        public InitialConfigurationController(IConfigurationRepository configuration, IUserManagementRepository userManagement)
         {
             ConfigurationRepository = configuration;
+            UserManagement = userManagement;
         }
 
         public ActionResult Index()
@@ -63,6 +67,19 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 config.SiteName = model.SiteName;
                 config.IssuerUri = model.IssuerUri;
 
+                // create default IdentityServer groups and admin user.
+                if (model.CreateDefaultAccounts)
+                {
+                    var errors = CreateDefaultAccounts(model.UserName, model.Password);
+
+                    if (errors.Count != 0)
+                    {
+                        errors.ForEach(e => ModelState.AddModelError("", e));
+                        model.AvailableCertificates = GetAvailableCertificatesFromStore();
+                        return View(model);
+                    }
+                }
+
                 // update global config
                 ConfigurationRepository.Global = config;
 
@@ -91,12 +108,63 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 // updates key material config
                 ConfigurationRepository.Keys = keys;
 
+
+                
                 return RedirectToAction("index", "home");
             }
 
             ModelState.AddModelError("", "Errors ocurred...");
             model.AvailableCertificates = GetAvailableCertificatesFromStore();
             return View(model);
+        }
+
+        private List<string> CreateDefaultAccounts(string userName, string password)
+        {
+            var errors = new List<string>();
+
+            try
+            {
+                UserManagement.CreateRole(Constants.Roles.IdentityServerUsers);
+            }
+            catch (Exception ex)
+            {
+                errors.Add(ex.Message);
+            }
+
+            try
+            {
+                UserManagement.CreateRole(Constants.Roles.IdentityServerAdministrators);
+            }
+            catch (Exception ex)
+            {
+                errors.Add(ex.Message);
+            }
+
+            if (errors.Count != 0)
+            {
+                return errors;
+            }
+
+
+            try
+            {
+                UserManagement.CreateUser("administrator", "abc!123");
+            }
+            catch (Exception ex)
+            {
+                errors.Add(ex.Message);
+            }
+
+            try
+            {
+                UserManagement.SetRolesForUser("administrator", new string[] { Constants.Roles.IdentityServerAdministrators, Constants.Roles.IdentityServerUsers });
+            }
+            catch (Exception ex)
+            {
+                errors.Add(ex.Message);
+            }
+
+            return errors;
         }
 
         #region Helper

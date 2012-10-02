@@ -40,10 +40,35 @@
         <div class="editor-field">
             @Html.DropDownList("SigningCertificate", Model.AvailableCertificatesList)
         </div>
+    </fieldset>
+    
+     <fieldset>
+        <legend>Default accounts</legend>
+        <div class="editor-label">
+            <b>@Html.LabelFor(model => model.CreateDefaultAccounts)</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateDefaultAccounts)
+        </div>
 
+        <div class="editor-label">
+            <b>@Html.LabelFor(model => model.UserName)</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+        </div>
+
+        <div class="editor-label">
+            <b>@Html.LabelFor(model => model.Password)</b>
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password)
+        </div>
+    </fieldset>
+    
          <p>
             <input type="submit" value="Save" />
         </p>
-    </fieldset>
+    
 
 }

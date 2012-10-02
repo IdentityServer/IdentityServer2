@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration.Provider;
 using System.Linq;
 using System.Web.Security;
 
@@ -8,14 +9,7 @@ namespace Thinktecture.IdentityServer.Repositories
     {
         public void CreateUser(string userName, string password, string email = null)
         {
-            if (email != null)
-            {
-                Membership.CreateUser(userName, password);
-            }
-            else
-            {
-                Membership.CreateUser(userName, password, email);
-            }
+            Membership.CreateUser(userName, password, email);
         }
 
         public void DeleteUser(string userName)
@@ -26,7 +20,11 @@ namespace Thinktecture.IdentityServer.Repositories
         public void SetRolesForUser(string userName, IEnumerable<string> roles)
         {
             var userRoles = Roles.GetRolesForUser(userName);
-            Roles.RemoveUserFromRoles(userName, userRoles);
+
+            if (userRoles.Length != 0)
+            {
+                Roles.RemoveUserFromRoles(userName, userRoles);
+            }
 
             Roles.AddUserToRoles(userName, roles.ToArray());
         }
@@ -43,12 +41,22 @@ namespace Thinktecture.IdentityServer.Repositories
 
         public void CreateRole(string roleName)
         {
-            Roles.CreateRole(roleName);
+            try
+            {
+                Roles.CreateRole(roleName);
+            }
+            catch (ProviderException)
+            { }
         }
 
         public void DeleteRole(string roleName)
         {
-            Roles.DeleteRole(roleName);
+            try
+            {
+                Roles.DeleteRole(roleName);
+            }
+            catch (ProviderException)
+            { }
         }
     }
 }
