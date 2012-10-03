@@ -148,7 +148,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
             try
             {
-                UserManagement.CreateUser("administrator", "abc!123");
+                UserManagement.CreateUser(userName, password);
             }
             catch (Exception ex)
             {
@@ -157,7 +157,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
             try
             {
-                UserManagement.SetRolesForUser("administrator", new string[] { Constants.Roles.IdentityServerAdministrators, Constants.Roles.IdentityServerUsers });
+                UserManagement.SetRolesForUser(userName, new string[] { Constants.Roles.IdentityServerAdministrators, Constants.Roles.IdentityServerUsers });
             }
             catch (Exception ex)
             {
