@@ -91,7 +91,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             var issuerName = principal.Claims.First().Issuer;
 
             principal.Identities.First().AddClaim(
-                new Claim(Constants.Claims.IdentityProvider, issuerName, ClaimValueTypes.String, Constants.LocalIssuer));
+                new Claim(Constants.Claims.IdentityProvider, issuerName, ClaimValueTypes.String, Constants.InternalIssuer));
 
             var context = GetContextCookie();
             var message = new SignInRequestMessage(new Uri("http://foo"), context.Realm);

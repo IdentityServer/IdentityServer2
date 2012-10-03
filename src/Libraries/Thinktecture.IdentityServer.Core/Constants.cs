@@ -8,7 +8,7 @@ namespace Thinktecture.IdentityServer
     public static class Constants
     {
         public const string AuthenticationType = "IdentityServer";
-        public const string LocalIssuer = "IdentityServer";
+        public const string InternalIssuer = "IdentityServerInternal";
 
         public static class Claims
         {

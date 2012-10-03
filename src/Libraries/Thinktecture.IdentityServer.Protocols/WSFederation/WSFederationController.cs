@@ -45,7 +45,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             var signinMessage = message as SignInRequestMessage;
             if (signinMessage != null)
             {
-                return ProcessWSFederationSignIn(signinMessage, HttpContext.User);
+                return ProcessWSFederationSignIn(signinMessage, ClaimsPrincipal.Current);
             }
 
             // sign out
@@ -59,7 +59,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         }
 
         #region Helper
-        private ActionResult ProcessWSFederationSignIn(SignInRequestMessage message, IPrincipal principal)
+        private ActionResult ProcessWSFederationSignIn(SignInRequestMessage message, ClaimsPrincipal principal)
         {
             // issue token and create ws-fed response
             var response = FederatedPassiveSecurityTokenServiceOperations.ProcessSignInRequest(

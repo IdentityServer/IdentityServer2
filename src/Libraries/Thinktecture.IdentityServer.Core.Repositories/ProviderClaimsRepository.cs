@@ -22,7 +22,7 @@ namespace Thinktecture.IdentityServer.Repositories
         public IEnumerable<Claim> GetClaims(ClaimsPrincipal principal, RequestDetails requestDetails)
         {
             var userName = principal.Identity.Name;
-            var claims = new List<Claim>();
+            var claims = new List<Claim>(from c in principal.Claims select c);
 
             // email address
             string email = Membership.FindUsersByName(userName)[userName].Email;

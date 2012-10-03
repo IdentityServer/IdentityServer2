@@ -121,7 +121,7 @@ namespace Thinktecture.IdentityServer.TokenService
             var requestDetails = (scope as RequestDetailsScope).RequestDetails;
 
             // externally authenticated user
-            if (principal.HasClaim(c => c.Type == Constants.Claims.IdentityProvider && c.Issuer == Constants.LocalIssuer))
+            if (principal.HasClaim(c => c.Type == Constants.Claims.IdentityProvider && c.Issuer == Constants.InternalIssuer))
             {
                 Tracing.Information("Issuing a token for an external user.");
                 return GetExternalOutputClaims(principal, requestDetails);
@@ -144,12 +144,12 @@ namespace Thinktecture.IdentityServer.TokenService
 
         public static List<Claim> GetOutputClaims(ClaimsPrincipal principal, RequestDetails requestDetails, IClaimsRepository claimsRepository)
         {
-            return claimsRepository.GetClaims(principal, requestDetails).ToList();
+            return claimsRepository.GetClaims(SanitizeInternalClaims(principal), requestDetails).ToList();
         }
 
         protected virtual ClaimsIdentity GetExternalOutputClaims(ClaimsPrincipal principal, RequestDetails requestDetails)
         {
-            var idpClaim = principal.FindFirst(c => c.Type == Constants.Claims.IdentityProvider && c.Issuer == Constants.LocalIssuer);
+            var idpClaim = principal.FindFirst(c => c.Type == Constants.Claims.IdentityProvider && c.Issuer == Constants.InternalIssuer);
 
             if (idpClaim == null)
             {
@@ -186,6 +186,16 @@ namespace Thinktecture.IdentityServer.TokenService
 
             // return the actAsIdentity instead of the caller's identity in this case
             return actAsIdentity;
+        }
+
+        protected static ClaimsPrincipal SanitizeInternalClaims(ClaimsPrincipal incomingPrincipal)
+        {
+            var userClaims = from c in incomingPrincipal.Claims
+                             where !c.Issuer.Equals(Constants.InternalIssuer, StringComparison.Ordinal)
+                             select c;
+
+            var id = new ClaimsIdentity(userClaims, Constants.AuthenticationType);
+            return new ClaimsPrincipal(id);
         }
 
         #region FederationMessageTracing
