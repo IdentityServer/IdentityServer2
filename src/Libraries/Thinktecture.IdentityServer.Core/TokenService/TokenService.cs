@@ -159,7 +159,7 @@ namespace Thinktecture.IdentityServer.TokenService
             IdentityProvider idp = null;
             if (IdentityProviderRepository.TryGet(idpClaim.Value, out idp))
             {
-                var transformedClaims = ClaimsTransformationRulesRepository.ProcessClaims(principal, idp, requestDetails);
+                var transformedClaims = ClaimsTransformationRulesRepository.ProcessClaims(SanitizeInternalClaims(principal), idp, requestDetails);
                 return new ClaimsIdentity(transformedClaims, "External");
             }
 
