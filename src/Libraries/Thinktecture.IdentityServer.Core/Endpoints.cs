@@ -13,6 +13,7 @@ namespace Thinktecture.IdentityServer
     public class Endpoints
     {
         public Uri WSFederation { get; set; }
+        public Uri WSFederationHRD { get; set; }
         public Uri WSFederationMetadata { get; set; }
         public Uri WSTrustMex { get; set; }
         public Uri PrivacyNotice { get; set; }
@@ -30,6 +31,7 @@ namespace Thinktecture.IdentityServer
         public static class Paths
         {
             public const string WSFedIssuePage = "/issue/wsfed";
+            public const string WSFedHRD = "/issue/hrd";
             public const string WSFedMetadata = "/FederationMetadata/2007-06/FederationMetadata.xml";
             public const string PrivacyNotice = "/privacyNotice.txt";
             public const string WSTrustBase = "/issue/wstrust";
@@ -72,6 +74,12 @@ namespace Thinktecture.IdentityServer
             builder.Scheme = Uri.UriSchemeHttps;
             builder.Port = httpsPort;
             ep.WSFederation = builder.Uri;
+
+            var hrd = new Uri(baseUriString + Paths.WSFedHRD);
+            builder = new UriBuilder(passive);
+            builder.Scheme = Uri.UriSchemeHttps;
+            builder.Port = httpsPort;
+            ep.WSFederationHRD = builder.Uri;
 
             // construct various http and https URIs
             var privacy = new Uri(baseUriString + Paths.PrivacyNotice);
