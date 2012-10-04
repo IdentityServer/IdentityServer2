@@ -43,7 +43,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             // federation metadata
             if (Configuration.FederationMetadata.Enabled)
             {
-                list.Add("WS-Federation metadata", endpoints.WSFederation.AbsoluteUri);
+                list.Add("WS-Federation metadata", endpoints.WSFederationMetadata.AbsoluteUri);
             }
 
             // ws-federation
