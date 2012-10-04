@@ -50,8 +50,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             return new GlobalConfiguration
             {
-                SiteName = "thinktecture identity server for .NET 4.5",
-                IssuerUri = "http://identityserver45.thinktecture.com/trust/changethis",
+                SiteName = "thinktecture identity server v2",
+                IssuerUri = "http://identityserver.v2.thinktecture.com/trust/changethis",
                 IssuerContactEmail = "office@thinktecture.com",
                 DefaultWSTokenType = TokenTypes.Saml2TokenProfile11,
                 DefaultHttpTokenType = TokenTypes.JsonWebToken,
