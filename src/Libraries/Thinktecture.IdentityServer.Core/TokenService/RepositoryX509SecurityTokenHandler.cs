@@ -50,7 +50,8 @@ namespace Thinktecture.IdentityServer.TokenService
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, userName),
-                new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.X509)
+                new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.X509),
+                new Claim(ClaimTypes.AuthenticationInstant, identity.FindFirst(ClaimTypes.AuthenticationInstant).Value)
             };
 
             var id = new ClaimsIdentity(claims, "Client Certificate");
