@@ -76,7 +76,7 @@ namespace Thinktecture.IdentityServer
             ep.WSFederation = builder.Uri;
 
             var hrd = new Uri(baseUriString + Paths.WSFedHRD);
-            builder = new UriBuilder(passive);
+            builder = new UriBuilder(hrd);
             builder.Scheme = Uri.UriSchemeHttps;
             builder.Port = httpsPort;
             ep.WSFederationHRD = builder.Uri;
