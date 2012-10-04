@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using AutoMapper;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Models.Configuration;
 
@@ -15,17 +14,6 @@ namespace Thinktecture.IdentityServer.Web.ViewModels.Administration
 {
     internal static class Extensions
     {
-        static Extensions()
-        {
-            //Mapper.CreateMap<EndpointConfiguration, EndpointConfigurationModel>();
-            //Mapper.CreateMap<EndpointConfigurationModel, EndpointConfiguration>();
-
-            //Mapper.CreateMap<GlobalConfigurationModel, GlobalConfiguration>();
-            //Mapper.CreateMap<GlobalConfiguration, GlobalConfigurationModel>();
-
-            //Mapper.AssertConfigurationIsValid();
-        }
-
         #region RelyingParty
         public static RelyingPartyModel ToViewModel(this RelyingParty relyingParty)
         {
@@ -104,34 +92,6 @@ namespace Thinktecture.IdentityServer.Web.ViewModels.Administration
 
             return model;
         }
-        #endregion
-
-        #region GlobalConfiguration
-        public static GlobalConfigurationModel ToViewModel(this GlobalConfiguration configuration)
-        {
-            return null;
-            //return Mapper.Map<GlobalConfiguration, GlobalConfigurationModel>(configuration);
-        }
-
-        public static GlobalConfiguration ToDomainModel(this GlobalConfigurationModel model)
-        {
-            return null;
-            //return Mapper.Map<GlobalConfigurationModel, GlobalConfiguration>(model);
-        }
-        #endregion
-
-        #region EndpointConfiguration
-        //public static EndpointConfigurationModel ToViewModel(this EndpointConfiguration endpoints)
-        //{
-        //    return null;
-        //    //return Mapper.Map<EndpointConfiguration, EndpointConfigurationModel>(endpoints);
-        //}
-
-        //public static EndpointConfiguration ToDomainModel(this EndpointConfigurationModel model)
-        //{
-        //    return null;
-        //    //return Mapper.Map<EndpointConfigurationModel, EndpointConfiguration>(model);
-        //}
         #endregion
     }
 }
