@@ -1,65 +1,113 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>thinktecture identityserver 1.0</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Thinktecture.identityserver.45 : Thinktecture IdentityServer is a light-weight security token service built with .NET 4.5, MVC 4 and WCF." />
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style type="text/css">
+            body {
+              padding-top: 60px;
+              padding-bottom: 40px;
+            }
+        </style>
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+    </head>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <body>
+        <div class="container">
 
-    <title>Thinktecture.identityserver.45</title>
-  </head>
+            <div class="hero-unit">
+                <h1>thinktecture identityserver 2.0</h1>
+                <p>Light-weight, .NET based security token service that supports various protocols and token formats.</p>
+                <a href="http://www.thinktecture.com" target="_blank">company website</a>
 
-  <body>
+            </div>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/thinktecture/Thinktecture.IdentityServer.45">View on GitHub</a>
+            <div class="row">
+                <div class="span10">
+                    <p>
+                        <a class="btn btn-primary" href="https://github.com/thinktecture/Thinktecture.IdentityServer.v2">Source code</a>
+                        <a class="btn btn-primary" href="https://github.com/thinktecture/Thinktecture.IdentityServer.v2/downloads">Download</a>
+                        <a class="btn btn-primary" href="https://github.com/thinktecture/Thinktecture.IdentityServer.v2/wiki">Documentation</a>
+                        <a class="btn btn-primary" href="https://github.com/thinktecture/Thinktecture.IdentityServer.v2/issues">Issue Tracker</a>
+                    </p>
+                </div>
+            </div>
 
-          <h1 id="project_title">Thinktecture.identityserver.45</h1>
-          <h2 id="project_tagline">Thinktecture IdentityServer is a light-weight security token service built with .NET 4.5, MVC 4 and WCF.</h2>
+            <div class="row" style="padding-top: 30px">
+                <div class="span10">
+                    <h2>Overview</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/thinktecture/Thinktecture.IdentityServer.45/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/thinktecture/Thinktecture.IdentityServer.45/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+                    <p>
+                        IdentityServer consists of two major parts: <strong>front-end and engine</strong>.
+                    </p>
+                    <p>
+                        The <strong>front-end</strong> includes hosting support for web hosting in IIS/ASP.NET and self-hosting for endpoints that don't
+                        require a UI. Furthermore IdSrv ships with a number of built-in protocol implementations that sit on top of the host.
+                        These protocols handle requests, make use of the IdSrv engine for token issuance and emit the corresponding response.
+                        Protocol support can be extended by adding new implementations to the host and using the common engine for the heavy lifting.
+                    </p>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>Thinktecture.IdentityServer.45</h1>
+                    <p>
+                        The IdSrv <strong>engine</strong> consists of the core runtime and configuration, data and user management.
+                        The core runtime takes care of enforcing security policy and token issuance whereas the data repositories abstract
+                        the underlying user and configuratin store. By providing custom implementations of these repositories, IdSrv can be
+                        adapted to arbitrary user management and configuration systems.
+                    </p>
 
-<p>Thinktecture IdentityServer is a light-weight security token service built with .NET 4.5, MVC 4 and WCF.</p>
+                    <img src="img/overview.png" alt="overview" />
+                </div>
+            </div>
 
-<h2>High level features</h2>
+            <div class="row">
+                <div class="span10">
+                    <h2>Features</h2>
 
-<ul>
-<li>Multiple protocols support (WS-Trust, WS-Federation, OAuth2, WRAP, JSNotify, HTTP GET)</li>
-<li>Multiple token support (SAML 1.1/2.0, SWT)</li>
-<li>Out of the box integration with ASP.NET membership, roles and profile</li>
-<li>Support for username/password and client certificates authentication</li>
-<li>Support for WS-Federation metadata</li>
-<li>Support for WS-Trust identity delegation</li>
-<li>Extensibility points to customize configuration and user management handling</li>
-</ul><p><a href="http://claudioasanchez.blogspot.de/2011/12/walk-though-of-provisioning-identity.html">Setup walkthrough</a></p>
+                    <ul>
+                        <li>Multiple protocols support (WS-Trust, WS-Federation, OAuth2, HTTP GET)</li>
+                        <li>Multiple token support (SAML 1.1/2.0, JWT)</li>
+                        <li>Out of the box integration with ASP.NET membership, roles and profile</li>
+                        <li>Support for username/password and client certificates authentication</li>
+                        <li>Support for WS-Federation metadata</li>
+                        <li>Support for WS-Trust identity delegation</li>
+                        <li>Extensibility points to customize configuration and user management handling</li>
+                    </ul>
+                </div>
+            </div>
 
-<p><a href="http://wiki.thinktecture.com/IdentityServer.MainPage.ashx">Preliminary Docs</a></p>
-      </section>
-    </div>
+            <div class="row">
+                <div class="span10">
+                    <h2>Requirements</h2>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Thinktecture.identityserver.45 maintained by <a href="https://github.com/thinktecture">thinktecture</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+                    <ul>
+                        <li>.NET Framework 4.5</li>
+                        <li>IIS 7 or above</li>
+                        <li>SSL</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="row" style="padding-top: 30px">
+                <div class="span10">
+                    <p>
+                        <a href="http://www.leastprivilege.com" target="_blank">Dominick's Blog</a>
+                    </p>
+                    <p>
+                        <a href="http://www.brockallen.com" target="_blank">Brock's Blog</a>
+                    </p>
+                </div>
+            </div>
 
-    
+            <hr>
 
-  </body>
+            <footer>
+                <p>&copy; thinktecture 2012</p>
+            </footer>
+
+        </div> <!-- /container -->
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body>
 </html>
