@@ -41,6 +41,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     model.Update(this.ConfigurationRepository);
+                    return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
                 {
@@ -50,7 +51,6 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("", "Error updating protocols.");
                 }
-                return RedirectToAction("Index");
             }
 
             var vm = new ProtocolsViewModel(ConfigurationRepository);

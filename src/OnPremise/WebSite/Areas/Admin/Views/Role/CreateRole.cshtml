@@ -1,0 +1,17 @@
+﻿@model RoleInputModel
+@using (Html.BeginForm("Create", "Role"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error creating role:")
+    
+        <fieldset class="editor small">
+        <legend>Create Role</legend>
+
+        @Html.EditorForModel()
+
+        <div class="buttons">
+            <button type="submit">Create</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

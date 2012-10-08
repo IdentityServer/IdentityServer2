@@ -1,0 +1,25 @@
+﻿@model RolesViewModel
+
+@{
+    ViewBag.Title = "Roles";
+}
+
+@Html.Partial("CreateRole", new RoleInputModel())
+
+<ul>
+    @foreach (var role in Model.Roles)
+    {
+        <li>
+            @role.Name
+            @if (role.CanDelete)
+            {
+                using(Html.BeginForm("Delete", "Role", FormMethod.Post, new{@class="inline"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="name" value="@role.Name" />
+                    <button>Delete</button>
+                }
+            }
+        </li>
+    }
+</ul>

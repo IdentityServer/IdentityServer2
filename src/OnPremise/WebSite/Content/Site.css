@@ -84,6 +84,11 @@ fieldset.editor > div > label
     text-align:right;
     margin-right:10px;
 }
+fieldset.editor.small > div > label
+{
+    width:auto;
+}
+
 fieldset.editor > div > label:after{
     content:':';
 }
@@ -120,6 +125,9 @@ fieldset.editor .inline-editor
     display:inline-block;
     xborder:1px solid red;
     margin-left:0;
+}
+form.inline{
+    display:inline;
 }
 /* Styles for validation helpers
 -----------------------------------------------------------*/
