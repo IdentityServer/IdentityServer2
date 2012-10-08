@@ -48,7 +48,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
                 catch
                 {
-                    ModelState.AddModelError("", "Error updating protocols.");
+                    ModelState.AddModelError("", "Error creating role.");
                 }
             }
 
@@ -72,7 +72,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
                 catch
                 {
-                    ModelState.AddModelError("", "Error updating protocols.");
+                    ModelState.AddModelError("", "Error deleting role.");
                 }
             }
 

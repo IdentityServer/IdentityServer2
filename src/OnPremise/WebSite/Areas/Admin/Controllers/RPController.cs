@@ -131,7 +131,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             }
             catch
             {
-                ModelState.AddModelError("", "Error updating relying party.");
+                ModelState.AddModelError("", "Error deleting relying party.");
 
             }
 
@@ -176,7 +176,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
                 catch
                 {
-                    ModelState.AddModelError("", "Error updating relying party.");
+                    ModelState.AddModelError("", "Error creating relying party.");
                 }
             }
 
