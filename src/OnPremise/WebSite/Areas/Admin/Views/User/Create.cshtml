@@ -1,0 +1,22 @@
+﻿@model UserInputModel
+
+@{
+    ViewBag.Title = "Create User";
+}
+
+@using (Html.BeginForm("Create", "User"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error creating user:")
+    
+        <fieldset class="editor small">
+        <legend>Create User</legend>
+
+        @Html.EditorForModel()
+
+        <div class="buttons">
+            <button type="submit">Create</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

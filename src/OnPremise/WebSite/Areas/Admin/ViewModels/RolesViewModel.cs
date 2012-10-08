@@ -17,6 +17,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
                 UserManagementRepository
                     .GetRoles()
                     .Select(x => new RoleInputModel { Name = x })
+                    .OrderBy(x=>x.CanDelete)
                     .ToArray();
         }
     }

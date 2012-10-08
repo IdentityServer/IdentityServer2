@@ -5,6 +5,12 @@ body
     background-color: #fff;
 }
 
+#main-section
+{
+    margin:15px;
+}
+
+
 /* Styles for basic forms
 -----------------------------------------------------------*/
 
@@ -41,94 +47,15 @@ textarea
     margin:0.5em 0 0 0;
 }
 
-.editor-field input[type=text]
-{
-    width:400px
-}
-
+.editor-field input[type=text],
+.editor-field input[type=password],
 .editor-field input[type=file]
 {
     width:400px
 }
 
 /* Brock's styles for forms */
-#main-section
-{
-    margin:15px;
-}
-fieldset.editor
-{
-    xwidth:610px;
-}
-fieldset.editor > div
-{
-    margin:5px;
-}
-fieldset.editor > div > div
-{
-    margin-left:245px;
-}
-fieldset.editor > div > div label
-{
-    font-weight:bold;
-}
-fieldset.editor > div > div label:after
-{
-    content:':';
-}
-fieldset.editor > div > label
-{
-    display:inline-block;
-    width:230px;
-    font-weight:bold;
-    text-align:right;
-    margin-right:10px;
-}
-fieldset.editor.small > div > label
-{
-    width:auto;
-}
 
-fieldset.editor > div > label:after{
-    content:':';
-}
-fieldset.editor > div > input[type=text]
-{
-    width:350px;
-}
-fieldset.editor > div.buttons{
-    padding-top:10px;
-    text-align:right;
-}
-fieldset.editor img{
-    vertical-align:middle;
-    position:relative;
-    top:-2px;
-}
-fieldset.editor img.error
-{
-    margin-left:5px;
-}
-
-.config-menu {
-    vertical-align:top;
-    display:inline-block;
-    width:300px;
-}
-.config-editor{
-    margin-left:20px;
-    display:inline-block;
-}
-fieldset.editor .inline-editor
-{
-    vertical-align:top;
-    display:inline-block;
-    xborder:1px solid red;
-    margin-left:0;
-}
-form.inline{
-    display:inline;
-}
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error

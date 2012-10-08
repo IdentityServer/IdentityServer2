@@ -1,0 +1,84 @@
+﻿.config-menu {
+    vertical-align: top;
+    display: inline-block;
+    width: 300px;
+}
+
+.config-editor {
+    margin-left: 20px;
+    display: inline-block;
+}
+
+fieldset.editor {
+    > div {
+        margin: 5px;
+
+        > input[type=text],
+        > input[type=password],
+        > input[type=file] {
+            width: 350px;
+        }
+
+        > label {
+            display: inline-block;
+            width: 230px;
+            font-weight: bold;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+            > label:after {
+                content: ':';
+            }
+
+        > div {
+            margin-left: 245px;
+
+            label {
+                font-weight: bold;
+            }
+
+                label:after {
+                    content: ':';
+                }
+        }
+    }
+
+        > div.buttons {
+            padding-top: 10px;
+            text-align: right;
+        }
+
+    .inline-editor {
+        vertical-align: top;
+        display: inline-block;
+        width: 353px;
+        margin-left: 0;
+    }
+
+    img {
+        vertical-align: middle;
+        position: relative;
+        top: -2px;
+    }
+
+        img.error {
+            margin-left: 5px;
+        }
+}
+
+
+    fieldset.editor.small {
+        > div {
+            > label {
+                width: 130px;
+            }
+        }
+    }
+
+.roleList {
+	form {
+		display:inline;
+		margin-left:200px;
+	}
+}

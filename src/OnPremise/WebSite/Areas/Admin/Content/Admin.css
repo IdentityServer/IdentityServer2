@@ -1,0 +1,61 @@
+.config-menu {
+  vertical-align: top;
+  display: inline-block;
+  width: 300px;
+}
+.config-editor {
+  margin-left: 20px;
+  display: inline-block;
+}
+fieldset.editor > div {
+  margin: 5px;
+}
+fieldset.editor > div > input[type=text],
+fieldset.editor > div > input[type=password],
+fieldset.editor > div > input[type=file] {
+  width: 350px;
+}
+fieldset.editor > div > label {
+  display: inline-block;
+  width: 230px;
+  font-weight: bold;
+  text-align: right;
+  margin-right: 10px;
+}
+fieldset.editor > div > label:after {
+  content: ':';
+}
+fieldset.editor > div > div {
+  margin-left: 245px;
+}
+fieldset.editor > div > div label {
+  font-weight: bold;
+}
+fieldset.editor > div > div label:after {
+  content: ':';
+}
+fieldset.editor > div.buttons {
+  padding-top: 10px;
+  text-align: right;
+}
+fieldset.editor .inline-editor {
+  vertical-align: top;
+  display: inline-block;
+  width: 353px;
+  margin-left: 0;
+}
+fieldset.editor img {
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+}
+fieldset.editor img.error {
+  margin-left: 5px;
+}
+fieldset.editor.small > div > label {
+  width: 130px;
+}
+.roleList form {
+  display: inline;
+  margin-left: 200px;
+}

@@ -6,14 +6,15 @@
 
 @Html.Partial("CreateRole", new RoleInputModel())
 
-<ul>
+<h1>Roles</h1>
+<ul class="roleList">
     @foreach (var role in Model.Roles)
     {
         <li>
-            @role.Name
+            <span>@role.Name</span>
             @if (role.CanDelete)
             {
-                using(Html.BeginForm("Delete", "Role", FormMethod.Post, new{@class="inline"}))
+                using(Html.BeginForm("Delete", "Role"))
                 {
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="name" value="@role.Name" />

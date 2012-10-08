@@ -155,9 +155,12 @@
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\RPController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ChildMenuViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RoleInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RolesViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserInputModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UsersViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\dummy.txt" />
+    <None Include="Areas\Admin\Content\Admin.less" />
+    <Content Include="Areas\Admin\Content\Admin.css">
+      <DependentUpon>Admin.less</DependentUpon>
+    </Content>
     <Content Include="Content\images\error.png" />
     <Content Include="Content\images\help.png" />
     <Content Include="Content\images\logo.jpg" />
@@ -254,6 +261,8 @@
     <Content Include="Areas\Admin\Views\Shared\ChildMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Role\CreateRole.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
