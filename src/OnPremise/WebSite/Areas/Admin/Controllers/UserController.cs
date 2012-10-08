@@ -25,17 +25,10 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             UserManagementRepository = userManagementRepository;
         }
 
-        public ActionResult Index(string filter)
+        public ActionResult Index(string filter = null)
         {
-            //var vm = new UsersViewModel(UserManagementRepository);
-            //var users = vm.Search(filter);
-
-            return View("Index");
-        }
-
-        public ActionResult Create()
-        {
-            return View();
+            var vm = new UsersViewModel(UserManagementRepository, filter);
+            return View("Index", vm);
         }
 
         [HttpPost]
@@ -58,7 +51,35 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Error creating user.");
                 }                
             }
-            return Create();
+            return Index();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(string name)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                ModelState.AddModelError("name", "Name is required.");
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.UserManagementRepository.DeleteUser(name);
+                    return RedirectToAction("Index");
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Error deleting user.");
+                }
+            }
+            return Index();
         }
     }
 }

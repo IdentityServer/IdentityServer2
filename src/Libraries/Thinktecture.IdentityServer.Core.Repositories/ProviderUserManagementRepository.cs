@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration.Provider;
 using System.Linq;
 using System.Web.Security;
@@ -9,7 +10,14 @@ namespace Thinktecture.IdentityServer.Repositories
     {
         public void CreateUser(string userName, string password, string email = null)
         {
-            Membership.CreateUser(userName, password, email);
+            try
+            {
+                Membership.CreateUser(userName, password, email);
+            }
+            catch (MembershipCreateUserException ex)
+            {
+                throw new ValidationException(ex.Message);
+            }
         }
 
         public void DeleteUser(string userName)
@@ -57,6 +65,23 @@ namespace Thinktecture.IdentityServer.Repositories
             }
             catch (ProviderException)
             { }
+        }
+
+        public IEnumerable<string> GetUsers()
+        {
+            var items = Membership.GetAllUsers().OfType<MembershipUser>();
+            return items.Select(x => x.UserName);
+        }
+
+        public IEnumerable<string> GetUsers(string filter)
+        {
+            var items = Membership.GetAllUsers().OfType<MembershipUser>();
+            var query =
+                from user in items
+                where user.UserName.Contains(filter) ||
+                      (user.Email != null && user.Email.Contains(filter))
+                select user.UserName;
+            return query;
         }
     }
 }

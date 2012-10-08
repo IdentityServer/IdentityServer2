@@ -4,4 +4,23 @@
     ViewBag.Title = "Users";
 }
 
+@Html.Partial("Create", new UserInputModel())
+
 <h2>Users</h2>
+@using(Html.BeginForm("Index", "User", FormMethod.Get))
+{
+<fieldset>
+    <legend>Filter Users</legend>
+    <div>
+        @Html.LabelFor(x=>x.Filter)
+        @Html.TextBoxFor(x=>x.Filter)
+        <button>Filter</button>
+    </div>
+</fieldset>
+}
+<ul>
+    @foreach (var name in Model.Users)
+    {
+        <li>@name</li>
+    }
+</ul>
