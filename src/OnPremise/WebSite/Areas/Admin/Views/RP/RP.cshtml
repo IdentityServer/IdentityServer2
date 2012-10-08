@@ -11,8 +11,9 @@
     }
 }
 
-@using (Html.BeginForm("RP", "Admin", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("RP", "RP", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary("Error updating relying party:")
     <fieldset class="editor">
         <legend>@ViewBag.Title</legend>

@@ -1,8 +1,0 @@
-﻿@model IEnumerable<Thinktecture.IdentityServer.Web.ViewModels.ProtocolsViewModel.Protocol>
-
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>@Html.ActionLink(item.Name, "Protocol", new { id=item.NameWithoutSpaces })</li>
-    }
-</ul>

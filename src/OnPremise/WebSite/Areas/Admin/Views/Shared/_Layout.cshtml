@@ -2,7 +2,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("_Navigation")
+<nav class="config-menu">
+    @Html.Action("Index", "Menu")
+</nav>
 
 <section class="config-editor">
     @RenderBody()

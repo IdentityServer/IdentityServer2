@@ -7,7 +7,7 @@ using System.Web;
 using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.Repositories;
 
-namespace Thinktecture.IdentityServer.Web.ViewModels
+namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
     public class ProtocolsViewModel
     {

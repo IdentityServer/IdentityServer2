@@ -1,8 +1,0 @@
-﻿@model IEnumerable<Thinktecture.IdentityServer.Web.ViewModels.RelyingPartyViewModel>
-
-<ul>
-    @foreach (var item in Model)
-    {
-        <li>@Html.ActionLink(item.DisplayName, "RP", new { id = item.ID })</li>
-    }
-</ul>

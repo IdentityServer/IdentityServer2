@@ -1,0 +1,8 @@
+﻿@model ChildMenuViewModel
+
+<ul>
+    @foreach (var item in Model.Items)
+    {
+        <li>@Html.ActionLink(item.Title, item.Action, item.Controller, item.RouteValues, null)</li>
+    }
+</ul>

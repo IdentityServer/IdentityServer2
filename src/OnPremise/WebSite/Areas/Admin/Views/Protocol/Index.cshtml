@@ -1,4 +1,4 @@
-﻿@model Thinktecture.IdentityServer.Web.ViewModels.ProtocolsViewModel
+﻿@model ProtocolsViewModel
 
 @{
     ViewBag.Title = "Protocols";
@@ -6,6 +6,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary("Error updating protocols:")
 
     <fieldset class="editor">

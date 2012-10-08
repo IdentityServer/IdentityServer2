@@ -1,4 +1,4 @@
-﻿@model Thinktecture.IdentityServer.Web.ViewModels.RelyingPartiesViewModel
+﻿@model RelyingPartiesViewModel
 
 @{
     ViewBag.Title = "Enabled Relying Parties";
@@ -6,6 +6,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary("Error updating relying parties:")
 
     <fieldset class="editor">

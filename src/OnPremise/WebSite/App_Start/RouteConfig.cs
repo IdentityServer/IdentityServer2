@@ -20,11 +20,11 @@ namespace Thinktecture.IdentityServer.Web
                 new { controller = "InitialConfiguration", action = "Index" }
             );
 
-            routes.MapRoute(
-                "Admin",
-                "admin/{action}/{id}",
-                new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    "Admin",
+            //    "admin/{action}/{id}",
+            //    new { controller = "Admin", action = "Index", id = UrlParameter.Optional }
+            //);
 
             //routes.MapRoute(
             //    "RelyingPartiesAdmin",
@@ -55,7 +55,8 @@ namespace Thinktecture.IdentityServer.Web
             routes.MapRoute(
                 "Home",
                 "{action}",
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                new string[]{"Thinktecture.IdentityServer.Web.Controllers"}
             );
             #endregion
         }

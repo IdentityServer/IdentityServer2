@@ -18,7 +18,7 @@
     <div class="menu">
         @if (ViewBag.IsAdministrator)
         {
-            @Html.ActionLink("[administration]", "index", "admin")
+            @Html.ActionLink("[administration]", "index", "home", new{area="Admin"}, null)
             @: &nbsp;
             <a href="http://wiki.thinktecture.com/IdentityServer.MainPage.ashx" target="_blank">[docs]</a>
             @: &nbsp;

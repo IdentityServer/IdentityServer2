@@ -1,0 +1,14 @@
+﻿
+
+<h1>Configuration</h1>
+<ul>
+    <li>@Html.ActionLink("General Configuration", "Index", "General")</li>
+    <li>
+        @Html.ActionLink("Protocols", "Index", "Protocol")
+        @Html.Action("ChildMenu", "Menu", new{controllerName="Protocol"})
+    </li>
+    <li>
+        @Html.ActionLink("Relying Parties", "Index", "RP")
+        @Html.Action("ChildMenu", "Menu", new{controllerName="RP"})
+    </li>
+</ul>

@@ -148,17 +148,23 @@
     <Compile Include="App_Start\ProtocolConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GeneralController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProtocolController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RPController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ChildMenuViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\RelyingPartyViewModel.cs" />
-    <Compile Include="ViewModels\ProtocolsInputModel.cs" />
-    <Compile Include="ViewModels\ProtocolsViewModel.cs" />
-    <Compile Include="ViewModels\ProtocolViewModel.cs" />
-    <Compile Include="ViewModels\RelyingPartiesViewModel.cs" />
-    <Compile Include="ViewModels\RPCertInputModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\RelyingPartyViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ProtocolsInputModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ProtocolsViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ProtocolViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\RelyingPartiesViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\RPCertInputModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\dummy.txt" />
@@ -229,20 +235,20 @@
     <Content Include="Configuration\tracing.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\_Layout.cshtml" />
-    <Content Include="Views\Admin\_ViewStart.cshtml" />
-    <Content Include="Views\Admin\General.cshtml" />
-    <Content Include="Views\Admin\EditorTemplates\Object.cshtml" />
-    <Content Include="Views\Admin\RPs.cshtml" />
-    <Content Include="Views\Admin\Protocols.cshtml" />
-    <Content Include="Views\Admin\_Navigation.cshtml" />
-    <Content Include="Views\Admin\_Protocols_Navigation.cshtml" />
-    <Content Include="Views\Admin\Protocol.cshtml" />
-    <Content Include="Views\Admin\_RPs_Navigation.cshtml" />
-    <Content Include="Views\Admin\RP.cshtml" />
-    <Content Include="Views\Admin\EditorTemplates\X509Certificate2.cshtml" />
-    <Content Include="Views\Admin\EditorTemplates\Byte[].cshtml" />
+    <Content Include="Areas\Admin\Views\Protocol\Protocol.cshtml" />
+    <Content Include="Areas\Admin\Views\RP\RP.cshtml" />
+    <Content Include="Areas\Admin\Views\General\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Byte[].cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Object.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\X509Certificate2.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\RP\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Protocol\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Menu\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Menu\LoadChildMenu.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\ChildMenu.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
@@ -291,7 +297,6 @@
     <Content Include="Views\Admin\Certificates.cshtml" />
     <Content Include="Views\Admin\Configuration.cshtml" />
     <Content Include="Views\Admin\Endpoints.cshtml" />
-    <Content Include="Views\Admin\_Index.cshtml" />
     <Content Include="Views\Admin\MyClaims.cshtml" />
     <Content Include="Views\ClientCertificatesAdmin\Add.cshtml" />
     <Content Include="Views\ClientCertificatesAdmin\Delete.cshtml" />
@@ -317,7 +322,10 @@
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
