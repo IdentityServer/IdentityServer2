@@ -33,6 +33,20 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public ActionResult Index(string action, UserDeleteModel[] list)
+        {
+            if (action == "new") return Create();
+            if (action == "delete") return Delete(list);
+            return HttpNotFound();
+        }
+
+        public ActionResult Create()
+        {
+            return View("Create", new UserInputModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(UserInputModel model)
         {
             if (ModelState.IsValid)
@@ -51,23 +65,19 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Error creating user.");
                 }                
             }
-            return Index();
+            return View("Create");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(string name)
+        private ActionResult Delete(UserDeleteModel[] list)
         {
-            if (String.IsNullOrWhiteSpace(name))
-            {
-                ModelState.AddModelError("name", "Name is required.");
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    this.UserManagementRepository.DeleteUser(name);
+                    foreach (var name in list.Where(x=>x.Delete).Select(x=>x.Username))
+                    {
+                        this.UserManagementRepository.DeleteUser(name);
+                    }
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
@@ -80,6 +90,12 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
             }
             return Index();
+        }
+
+        public ActionResult Roles(string id)
+        {
+            var vm = new UserRolesViewModel(this.UserManagementRepository, id);
+            return View("Roles", vm);
         }
     }
 }

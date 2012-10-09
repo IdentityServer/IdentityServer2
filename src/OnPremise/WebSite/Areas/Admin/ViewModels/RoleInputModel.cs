@@ -8,15 +8,18 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
     public class RoleInputModel
     {
+        static readonly string[] ReservedRoles = { "IdentityServerUsers", "IdentityServerAdministrators" };
+
         [Required]
         public string Name { get; set; }
-
-        [ScaffoldColumn(false)]
+        
+        [System.ComponentModel.DataAnnotations.Editable(false)]
+        public bool Delete { get; set; }
         public bool CanDelete
         {
             get
             {
-                return Name != "IdentityServerAdministrators";
+                return !ReservedRoles.Contains(Name);
             }
         }
     }

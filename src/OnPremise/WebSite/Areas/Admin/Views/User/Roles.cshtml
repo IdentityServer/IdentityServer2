@@ -1,0 +1,22 @@
+﻿@model UserRolesViewModel
+@{
+    ViewBag.Title = "Roles for " + Model.Username;
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+        @foreach (var role in Model.AllRoles)
+        {
+            <div>
+                @Html.Label(role)
+                @Html.CheckBox(role, Model.IsInRole(role))
+            </div>
+        }
+        <div class="buttons">
+            <button type="submit">Update</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

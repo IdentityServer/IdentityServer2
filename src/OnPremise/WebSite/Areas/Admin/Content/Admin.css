@@ -55,7 +55,10 @@ fieldset.editor img.error {
 fieldset.editor.small > div > label {
   width: 130px;
 }
-.roleList form {
+.nameList span {
+  display: inline-block;
+  width: 200px;
+}
+.nameList form {
   display: inline;
-  margin-left: 200px;
 }

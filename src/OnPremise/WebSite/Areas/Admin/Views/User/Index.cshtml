@@ -3,24 +3,29 @@
 @{
     ViewBag.Title = "Users";
 }
-
-@Html.Partial("Create", new UserInputModel())
-
-<h2>Users</h2>
-@using(Html.BeginForm("Index", "User", FormMethod.Get))
+@using (Html.BeginForm())
 {
-<fieldset>
-    <legend>Filter Users</legend>
-    <div>
-        @Html.LabelFor(x=>x.Filter)
-        @Html.TextBoxFor(x=>x.Filter)
-        <button>Filter</button>
-    </div>
-</fieldset>
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error deleting users:")
+
+    <fieldset class="editor">
+        <legend>Users</legend>
+        @{
+            var list = Model.UsersDeleteList;
+        }
+        @for (int i = 0; i < list.Length; i++)
+        {
+            <div>
+                @Html.HiddenFor(x => list[i].Username)
+                @Html.LabelFor(x => list[i].Delete, list[i].Username)
+                @Html.CheckBoxFor(x => list[i].Delete)
+                @Html.ActionLink("roles", "Roles", new{id=list[i].Username})
+            </div>
+        }
+        <div class="buttons">
+            <button type="submit" name="action" value="delete">Delete Selected</button>
+            <button type="submit" name="action" value="new">New</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
 }
-<ul>
-    @foreach (var name in Model.Users)
-    {
-        <li>@name</li>
-    }
-</ul>

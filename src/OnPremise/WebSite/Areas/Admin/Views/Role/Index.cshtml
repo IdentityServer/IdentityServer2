@@ -4,23 +4,38 @@
     ViewBag.Title = "Roles";
 }
 
-@Html.Partial("CreateRole", new RoleInputModel())
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error deleting roles:")
 
-<h1>Roles</h1>
-<ul class="roleList">
-    @foreach (var role in Model.Roles)
-    {
-        <li>
-            <span>@role.Name</span>
-            @if (role.CanDelete)
-            {
-                using(Html.BeginForm("Delete", "Role"))
-                {
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="name" value="@role.Name" />
-                    <button>Delete</button>
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+        @{
+            var list = Model.Roles.ToArray();
+        }
+        @for (int i = 0; i < list.Length; i++)
+        {
+            <div>
+                @Html.HiddenFor(x=>list[i].Name)
+                @Html.LabelFor(x => list[i].Delete, list[i].Name)
+                @{
+                    Dictionary<string, object> attrs = new Dictionary<string,object>();
+                    if (!list[i].CanDelete)
+                    {
+                        attrs.Add("disabled", "disabled");
+                    }
                 }
-            }
-        </li>
-    }
-</ul>
+                @Html.CheckBoxFor(x => list[i].Delete, attrs)
+            </div>
+        }
+
+        <div class="buttons">
+            <button type="submit" name="action" value="delete">Delete Selected</button>
+            <button type="submit" name="action" value="new">New</button>
+            <button type="reset">Cancel</button>
+        </div>
+
+    </fieldset>
+}
+

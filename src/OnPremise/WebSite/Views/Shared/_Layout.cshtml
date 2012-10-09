@@ -27,17 +27,17 @@
         
         @if (ViewBag.IsSignedIn)
         { 
-            @Html.ActionLink("[home]", "index", "home")
+            @Html.ActionLink("[home]", "index", "home", new{area=""}, null)
             @: &nbsp;
-            @Html.ActionLink("[sign out]", "signout", "account")
+            @Html.ActionLink("[sign out]", "signout", "account", new{area=""}, null)
             @: &nbsp;
             @:(signed in as @Context.User.Identity.Name)
         }
         else
         {
-            @Html.ActionLink("[home]", "index", "home")
+            @Html.ActionLink("[home]", "index", "home", new{area=""}, null)
             @: &nbsp;
-            @Html.ActionLink("[sign in]", "signin", "account")
+            @Html.ActionLink("[sign in]", "signin", "account", new{area=""}, null)
         }
     </div>
 

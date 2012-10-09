@@ -30,6 +30,20 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             var vm = new RolesViewModel(UserManagementRepository);
             return View("Index", vm);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(string action, RoleInputModel[] list)
+        {
+            if (action == "new") return Create();
+            if (action == "delete") return Delete(list);
+            return HttpNotFound();
+        }
+
+        public ActionResult Create()
+        {
+            return View("Create", new RoleInputModel());
+        }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -52,18 +66,27 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
             }
 
-            return Index();
+            return View("Create");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(RoleInputModel model)
+        private ActionResult Delete(RoleInputModel[] list)
         {
+            var query = from item in list
+                        where item.Delete && !item.CanDelete
+                        select item.Name;
+            foreach(var name in query)
+            {
+                ModelState.AddModelError("", "Can't delete role " + name + ".");
+            }
+            
             if (ModelState.IsValid)
             {
                 try
                 {
-                    UserManagementRepository.DeleteRole(model.Name);
+                    foreach (var item in list.Where(x=>x.Delete && x.CanDelete).Select(x=>x.Name))
+                    {
+                        UserManagementRepository.DeleteRole(item);
+                    }
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
@@ -76,7 +99,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
             }
 
-            return Index();
+            return View("Index");
         }
     }
 }

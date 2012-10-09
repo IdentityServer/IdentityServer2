@@ -160,6 +160,7 @@
     <Compile Include="Areas\Admin\ViewModels\RoleInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RolesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserInputModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserRolesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UsersViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,9 +261,10 @@
     <Content Include="Areas\Admin\Views\Menu\LoadChildMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\ChildMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Role\CreateRole.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Roles.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
