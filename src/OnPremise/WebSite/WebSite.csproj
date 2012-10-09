@@ -148,6 +148,7 @@
     <Compile Include="App_Start\ProtocolConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\Controllers\DelegationController.cs" />
     <Compile Include="Areas\Admin\Controllers\GeneralController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ChildMenuViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DelegationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RoleInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RolesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserInputModel.cs" />
@@ -265,6 +267,7 @@
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Roles.cshtml" />
+    <Content Include="Areas\Admin\Views\Delegation\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />

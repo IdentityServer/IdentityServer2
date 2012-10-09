@@ -8,8 +8,6 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
     public class RoleInputModel
     {
-        static readonly string[] ReservedRoles = { "IdentityServerUsers", "IdentityServerAdministrators" };
-
         [Required]
         public string Name { get; set; }
         
@@ -19,7 +17,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         {
             get
             {
-                return !ReservedRoles.Contains(Name);
+                return !Name.StartsWith(Thinktecture.IdentityServer.Constants.Roles.InternalRolesPrefix);
             }
         }
     }
