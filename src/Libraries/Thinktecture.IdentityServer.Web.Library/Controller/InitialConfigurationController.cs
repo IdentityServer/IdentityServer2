@@ -157,7 +157,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
             try
             {
-                UserManagement.SetRolesForUser(userName, new string[] { Constants.Roles.IdentityServerAdministrators, Constants.Roles.IdentityServerUsers });
+                UserManagement.SetRolesForUser(userName, new string[] { Constants.Roles.IdentityServerAdministrators });
             }
             catch (Exception ex)
             {
