@@ -61,10 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\Admin\AdminController.cs" />
-    <Compile Include="Controller\Admin\ClientCertificatesAdminController.cs" />
-    <Compile Include="Controller\Admin\DelegationAdminController.cs" />
-    <Compile Include="Controller\Admin\RelyingPartiesAdminController.cs" />
     <Compile Include="Controller\AccountController.cs" />
     <Compile Include="Controller\AccountControllerBase.cs" />
     <Compile Include="Controller\HomeController.cs" />
@@ -73,17 +69,6 @@
     <Compile Include="GlobalFilter\InitialConfigurationFilter.cs" />
     <Compile Include="GlobalFilter\SslRedirectFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\Administration\AddClientCertificateModel.cs" />
-    <Compile Include="ViewModels\Administration\AddDelegationModel.cs" />
-    <Compile Include="ViewModels\Administration\EditCertificatesModel.cs" />
-    <Compile Include="ViewModels\Administration\EditClientCertificatesModel.cs" />
-    <Compile Include="ViewModels\Administration\EditDelegationModel.cs" />
-    <Compile Include="ViewModels\Administration\EndpointConfigurationModel.cs" />
-    <Compile Include="ViewModels\Administration\Extensions.cs" />
-    <Compile Include="ViewModels\Administration\GlobalConfigurationModel.cs" />
-    <Compile Include="ViewModels\Administration\MyModel.cs" />
-    <Compile Include="ViewModels\Administration\RelyingPartiesModel.cs" />
-    <Compile Include="ViewModels\Administration\RelyingPartyModel.cs" />
     <Compile Include="ViewModels\InitialConfigurationModel.cs" />
     <Compile Include="ViewModels\SignInModel.cs" />
   </ItemGroup>

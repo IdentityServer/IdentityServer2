@@ -310,25 +310,9 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Account\SignIn.cshtml" />
-    <Content Include="Views\Admin\Certificates.cshtml" />
-    <Content Include="Views\Admin\Configuration.cshtml" />
-    <Content Include="Views\Admin\Endpoints.cshtml" />
-    <Content Include="Views\Admin\MyClaims.cshtml" />
-    <Content Include="Views\ClientCertificatesAdmin\Add.cshtml" />
-    <Content Include="Views\ClientCertificatesAdmin\Delete.cshtml" />
-    <Content Include="Views\ClientCertificatesAdmin\Edit.cshtml" />
-    <Content Include="Views\ClientCertificatesAdmin\Index.cshtml" />
-    <Content Include="Views\DelegationAdmin\Add.cshtml" />
-    <Content Include="Views\DelegationAdmin\Delete.cshtml" />
-    <Content Include="Views\DelegationAdmin\Edit.cshtml" />
-    <Content Include="Views\DelegationAdmin\Index.cshtml" />
     <Content Include="Views\Home\AppIntegration.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\InitialConfiguration\Index.cshtml" />
-    <Content Include="Views\RelyingPartiesAdmin\Add.cshtml" />
-    <Content Include="Views\RelyingPartiesAdmin\Delete.cshtml" />
-    <Content Include="Views\RelyingPartiesAdmin\Edit.cshtml" />
-    <Content Include="Views\RelyingPartiesAdmin\Index.cshtml" />
     <Content Include="Views\Shared\Confirm.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\SignedOut.cshtml" />
