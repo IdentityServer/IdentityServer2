@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,32 +10,36 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
     {
         private Repositories.IUserManagementRepository userManagementRepository;
         public string Username { get; set; }
-        public IEnumerable<string> AllRoles { get; set; }
-        public IEnumerable<string> Roles { get; set; }
-        public bool IsInRole(string role)
+        public IEnumerable<string> UserRoles { get; set; }
+        public bool IsUserInRole(string role)
         {
-            return Roles.Contains(role);
+            return UserRoles.Contains(role);
+        }
+        public UserRoleAssignment[] RoleAssignments
+        {
+            get
+            {
+                var allRoles = this.userManagementRepository.GetRoles();
+                return (from role in allRoles
+                        select new UserRoleAssignment
+                        {
+                            Role = role,
+                            InRole = IsUserInRole(role)
+                        }).ToArray();
+            }
         }
 
         public UserRolesViewModel(Repositories.IUserManagementRepository userManagementRepository, string username)
         {
             this.userManagementRepository = userManagementRepository;
             this.Username = username;
-            this.AllRoles = this.userManagementRepository.GetRoles();
-            this.Roles = this.userManagementRepository.GetRolesForUser(this.Username);
+            this.UserRoles = this.userManagementRepository.GetRolesForUser(this.Username);
         }
-
-
     }
 
-    public class UserRolesInputModel
-    {
-        public string Username { get; set; }
-
-    }
-    
     public class UserRoleAssignment
     {
+        [Required]
         public string Role { get; set; }
         public bool InRole { get; set; }
     }

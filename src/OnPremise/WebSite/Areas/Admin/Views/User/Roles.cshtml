@@ -5,13 +5,17 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error updating role assignments");
+    
     <fieldset class="editor">
         <legend>@ViewBag.Title</legend>
-        @foreach (var role in Model.AllRoles)
+        @for (int i = 0; i < Model.RoleAssignments.Length; i++)
         {
             <div>
-                @Html.Label(role)
-                @Html.CheckBox(role, Model.IsInRole(role))
+                @Html.HiddenFor(x => Model.RoleAssignments[i].Role)
+                @Html.LabelFor(x => Model.RoleAssignments[i].InRole, Model.RoleAssignments[i].Role)
+                @Html.CheckBoxFor(x => Model.RoleAssignments[i].InRole)
             </div>
         }
         <div class="buttons">

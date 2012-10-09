@@ -97,5 +97,21 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             var vm = new UserRolesViewModel(this.UserManagementRepository, id);
             return View("Roles", vm);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Roles(string id, UserRoleAssignment[] roleAssignments)
+        {
+            var vm = new UserRolesViewModel(this.UserManagementRepository, id);
+            if (ModelState.IsValid)
+            {
+                var currentRoles = 
+                    roleAssignments.Where(x=>x.InRole).Select(x=>x.Role);
+                this.UserManagementRepository.SetRolesForUser(id, currentRoles);
+                return RedirectToAction("Roles", new { id });
+            }
+            
+            return View("Roles", vm);
+        }
     }
 }

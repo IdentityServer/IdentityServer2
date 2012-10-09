@@ -1,5 +1,6 @@
 ﻿
 @{
+    var isTheFirst = true;
     foreach(var prop in this.ViewData.ModelMetadata.Properties)
     {
         if (!prop.IsReadOnly)
@@ -9,6 +10,10 @@
             <div>
                 <label for="@id">@prop.GetDisplayName()</label>
                 @Html.Editor(prop.PropertyName)
+                @if(isTheFirst)
+                {
+                    <script>document.getElementById('@id').focus();</script>
+                }
                 @if(ViewData.ModelState.IsValidField(name))
                 {
                     if (!String.IsNullOrWhiteSpace(prop.Description))
@@ -22,5 +27,6 @@
                 }
             </div>
         }
+        isTheFirst = false;
     }
 }
