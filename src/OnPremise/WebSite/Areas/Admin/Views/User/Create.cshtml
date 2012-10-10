@@ -7,7 +7,7 @@
 @using (Html.BeginForm("Create", "User"))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary("Error creating user:")
+    @Html.ValidationSummary("Error creating user")
     
         <fieldset class="editor small">
         <legend>Create User</legend>

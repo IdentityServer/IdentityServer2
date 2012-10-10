@@ -1,10 +1,31 @@
 ﻿@model DelegationViewModel
 
 @{
-    ViewBag.Title = "Delegation";
+    ViewBag.Title = "Delegation Accounts";
 }
 
-<fieldset>
-    <legend>Delegation</legend>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error deleting delegation users")
 
-</fieldset>
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        @for (int i = 0; i < Model.Users.Length; i++)
+        {
+            <div>
+                @Html.HiddenFor(x => Model.Users[i].Username)
+                @Html.LabelFor(x => Model.Users[i].Delete, Model.Users[i].Username)
+                @Html.CheckBoxFor(x => Model.Users[i].Delete)
+                @Html.ActionLink("configure", "Configure", new { id = Model.Users[i].Username })
+            </div>
+        }
+
+        <div class="buttons">
+            <button type="submit" name="action" value="delete">Delete Selected</button>
+            <button type="submit" name="action" value="new">New</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

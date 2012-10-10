@@ -158,6 +158,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ChildMenuViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DelegationSettingsForUserInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DelegationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RoleInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RolesViewModel.cs" />
@@ -268,6 +269,7 @@
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Roles.cshtml" />
     <Content Include="Areas\Admin\Views\Delegation\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Delegation\Configure.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />

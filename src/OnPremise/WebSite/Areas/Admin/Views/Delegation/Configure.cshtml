@@ -1,0 +1,77 @@
+﻿@model DelegationSettingsForUserInputModel
+
+@{
+    if (Model.UserName == null)
+    {
+        ViewBag.Title = "New Delegation Configuration";
+    }
+    else
+    {
+        ViewBag.Title = "Delegation Configuration for " + Model.UserName;
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error saving delegation configuration")
+
+    <fieldset class="editor small">
+        <legend>@ViewBag.Title</legend>
+
+        @if (Model.UserName == null)
+        {
+            <div>
+                @Html.LabelFor(x=>x.UserName)
+                @Html.EditorFor(x=>x.UserName)
+                @Html.ValidationMessageFor(x=>x.UserName)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(x=>x.UserName)
+        }
+        <hr />
+
+        @for (int i = 0; i < Model.Settings.Length; i++)
+        {
+            <div>
+                @Html.LabelFor(x=>Model.Settings[i].Description)
+                @Html.TextBoxFor(x=>Model.Settings[i].Description)
+                <br />
+                @Html.LabelFor(x=>Model.Settings[i].Realm)
+                @Html.TextBoxFor(x=>Model.Settings[i].Realm)
+                <hr />
+                @Html.HiddenFor(x=>Model.Settings[i].Delete)
+            </div>
+        }
+
+            <div>
+                <p>Add Another Delegation Setting</p>
+                <label for="newDesc">Description</label>
+                <input id="newDesc" type="text" />
+                <br />
+                <label for="newRealm">Realm</label>
+                <input id="newRealm" type="text"  />
+                <br />
+                <div class="newDelegationSettingButton">
+                    <button type="button">Add</button>
+                </div>
+                <hr />
+            </div>
+
+
+        <div class="buttons">
+            @if (Model.UserName != null)
+            {
+                <button type="submit" name="action" value="save">Save Changes</button>
+            }
+            else
+            {
+                <button type="submit" name="action" value="create">Create</button>
+            }
+            <button type="reset">Cancel</button>
+        </div>
+
+    </fieldset>
+}

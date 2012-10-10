@@ -62,3 +62,6 @@ fieldset.editor.small > div > label {
 .nameList form {
   display: inline;
 }
+.newDelegationSettingButton {
+  text-align: right;
+}

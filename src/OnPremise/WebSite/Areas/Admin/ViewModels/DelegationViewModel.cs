@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,11 +12,30 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 
         public DelegationViewModel(Repositories.IDelegationRepository delegationRepository)
         {
-            // TODO: Complete member initialization
             this.delegationRepository = delegationRepository;
-            this.Users = delegationRepository.GetAllUsers(-1, -1);
         }
 
-        public IEnumerable<string> Users { get; set; }
+        DelegationUser[] users;
+        public DelegationUser[] Users
+        {
+            get
+            {
+                if (users == null)
+                {
+                    users = delegationRepository
+                        .GetAllUsers(-1, -1)
+                        .Select(x => new DelegationUser { Username = x })
+                        .ToArray();
+                }
+                return users;
+            }
+        }
+    }
+
+    public class DelegationUser
+    {
+        public string Username { get; set; }
+        [Editable(false)]
+        public bool Delete { get; set; }
     }
 }

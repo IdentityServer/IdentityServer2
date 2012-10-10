@@ -7,7 +7,7 @@
 @using (Html.BeginForm("UpdateProtocol", "Protocol", new { id = Model.ID }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary("Error updating protocol:")
+    @Html.ValidationSummary("Error updating protocol")
     <fieldset class="editor">
         <legend>@ViewBag.Title</legend>
 
