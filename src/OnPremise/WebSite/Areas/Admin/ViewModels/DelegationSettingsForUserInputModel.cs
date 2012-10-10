@@ -3,55 +3,57 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Thinktecture.IdentityServer.Models;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
-    public class DelegationSettingsForUserInputModel
+    public class DelegationSettingsForUserViewModel
     {
         private Repositories.IDelegationRepository delegationRepository;
-
-        public DelegationSettingsForUserInputModel(Repositories.IDelegationRepository delegationRepository, string username)
-        {
-            this.delegationRepository = delegationRepository;
-            this.UserName = username;
-        }
-
+        IUserManagementRepository userManagementRepository;
+        
         [Required]
         public string UserName { get; set; }
-        DelegationSettingInputModel[] settings;
-        public DelegationSettingInputModel[] Settings
+        public IEnumerable<DelegationSetting> DelegationSettings { get; set; }
+
+        public bool IsNew
         {
             get
             {
-                if (settings == null)
-                {
-                    if (this.UserName == null)
-                    {
-                        settings = Enumerable.Empty<DelegationSettingInputModel>().ToArray();
-                    }
-                    else
-                    {
-                        settings =
-                            this
-                                .delegationRepository
-                                .GetDelegationSettingsForUser(this.UserName)
-                                .Select(x => new DelegationSettingInputModel { Description = x.Description, Realm = x.Realm })
-                                .ToArray();
-                    }
-                }
-                return settings;
+                return this.UserName == null;
             }
         }
-    }
 
-    public class DelegationSettingInputModel
-    {
-        [Required]
-        public string Description { get; set; }
-        [Required]
-        public Uri Realm { get; set; }
+        public IEnumerable<SelectListItem> AllUserNames { get; set; }
 
-        public bool Delete { get; set; }
+        public DelegationSettingsForUserViewModel(Repositories.IDelegationRepository delegationRepository, IUserManagementRepository userManagementRepository, string username)
+        {
+            this.delegationRepository = delegationRepository;
+            this.userManagementRepository = userManagementRepository;
+            var allnames =
+                userManagementRepository.GetUsers()
+                .Select(x => new SelectListItem
+                {
+                    Text = x
+                }).ToList();
+            allnames.Insert(0, new SelectListItem { Text = "-Choose-", Value = "" });
+            this.AllUserNames = allnames;
+            
+            this.UserName = username;
+            if (!IsNew)
+            {
+                var realmSettings =
+                        this.delegationRepository
+                            .GetDelegationSettingsForUser(this.UserName)
+                            .ToArray();
+                this.DelegationSettings = realmSettings;
+            }
+            else
+            {
+                this.DelegationSettings = new DelegationSetting[0];
+            }
+        }
     }
 }

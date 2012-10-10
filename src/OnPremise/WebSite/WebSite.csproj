@@ -148,6 +148,7 @@
     <Compile Include="App_Start\ProtocolConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClientCertificateController.cs" />
     <Compile Include="Areas\Admin\Controllers\DelegationController.cs" />
     <Compile Include="Areas\Admin\Controllers\GeneralController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />

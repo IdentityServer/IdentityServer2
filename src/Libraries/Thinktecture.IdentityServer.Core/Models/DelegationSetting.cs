@@ -19,7 +19,7 @@ namespace Thinktecture.IdentityServer.Models
         public string UserName { get; set; }
 
         [Required]
-        [Display(Name = "Description", Description = "Realm identifier where the identity can be delegated to.")]
+        [Display(Name = "Realm", Description = "Realm identifier where the identity can be delegated to.")]
         public Uri Realm { get; set; }
         
     }

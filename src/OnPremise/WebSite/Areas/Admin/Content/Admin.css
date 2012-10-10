@@ -7,34 +7,43 @@
   margin-left: 20px;
   display: inline-block;
 }
-fieldset.editor > div {
+fieldset.editor > div,
+fieldset.editor div.edit-prop {
   margin: 5px;
 }
 fieldset.editor > div > input[type=text],
+fieldset.editor div.edit-prop > input[type=text],
 fieldset.editor > div > input[type=password],
-fieldset.editor > div > input[type=file] {
+fieldset.editor div.edit-prop > input[type=password],
+fieldset.editor > div > input[type=file],
+fieldset.editor div.edit-prop > input[type=file] {
   width: 350px;
 }
-fieldset.editor > div > label {
+fieldset.editor > div > label,
+fieldset.editor div.edit-prop > label {
   display: inline-block;
   width: 230px;
   font-weight: bold;
   text-align: right;
   margin-right: 10px;
 }
-fieldset.editor > div > label:after {
+fieldset.editor > div > label:after,
+fieldset.editor div.edit-prop > label:after {
   content: ':';
 }
-fieldset.editor > div > div {
+fieldset.editor > div > div,
+fieldset.editor div.edit-prop > div {
   margin-left: 245px;
 }
-fieldset.editor > div > div label {
+fieldset.editor > div > div label,
+fieldset.editor div.edit-prop > div label {
   font-weight: bold;
 }
-fieldset.editor > div > div label:after {
+fieldset.editor > div > div label:after,
+fieldset.editor div.edit-prop > div label:after {
   content: ':';
 }
-fieldset.editor > div.buttons {
+fieldset.editor div.buttons {
   padding-top: 10px;
   text-align: right;
 }
@@ -52,7 +61,8 @@ fieldset.editor img {
 fieldset.editor img.error {
   margin-left: 5px;
 }
-fieldset.editor.small > div > label {
+fieldset.editor.small > div > label,
+fieldset.editor.small div.edit-prop > label {
   width: 130px;
 }
 .nameList span {

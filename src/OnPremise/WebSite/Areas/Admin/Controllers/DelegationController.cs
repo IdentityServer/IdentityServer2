@@ -14,16 +14,19 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
     public class DelegationController : Controller
     {
         [Import]
+        public IUserManagementRepository userManagementRepository { get; set; }
+        [Import]
         public IDelegationRepository delegationRepository { get; set; }
-        
+
         public DelegationController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public DelegationController(IDelegationRepository delegationRepository)
+        public DelegationController(IDelegationRepository delegationRepository, IUserManagementRepository userManagementRepository)
         {
             this.delegationRepository = delegationRepository;
+            this.userManagementRepository = userManagementRepository;
         }
 
         public ActionResult Index()
@@ -31,7 +34,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             var vm = new DelegationViewModel(this.delegationRepository);
             return View("Index", vm);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(string action, DelegationUser[] users)
@@ -72,42 +75,55 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
         public ActionResult Configure(string id = null)
         {
-            var vm = new DelegationSettingsForUserInputModel(this.delegationRepository, id);
+            var vm = new DelegationSettingsForUserViewModel(this.delegationRepository, this.userManagementRepository, id);
             return View("Configure", vm);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Configure(string action, DelegationSettingsForUserInputModel model)
-        {
-            if (action == "create") return Create(model);
-            if (action == "save") return Save(model);
-            
-            return RedirectToAction("Index");
-        }
-
-        private ActionResult Create(DelegationSettingsForUserInputModel model)
+        public ActionResult Add(DelegationSetting model)
         {
             if (ModelState.IsValid)
             {
-                foreach (var item in model.Settings)
+                try
                 {
-                    
+                    this.delegationRepository.Add(model);
+                    return RedirectToAction("Configure", new { id = model.UserName });
                 }
-                return RedirectToAction("Index");
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Error updating protocols.");
+                }
             }
 
-            return Configure(model.UserName);
+            var vm = new DelegationSettingsForUserViewModel(this.delegationRepository, this.userManagementRepository, model.UserName);
+            return View("Configure", vm);
         }
 
-        private ActionResult Save(DelegationSettingsForUserInputModel model)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Remove(DelegationSetting model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                return RedirectToAction("Index");
+                this.delegationRepository.Delete(model);
+                return RedirectToAction("Configure", new { id = model.UserName });
             }
-            
-            return Configure(model.UserName);
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Error updating protocols.");
+            }
+
+            var vm = new DelegationSettingsForUserViewModel(this.delegationRepository, this.userManagementRepository, model.UserName);
+            return View("Configure", vm);
         }
     }
 }

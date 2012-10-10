@@ -1,7 +1,7 @@
-﻿@model DelegationSettingsForUserInputModel
+﻿@model DelegationSettingsForUserViewModel
 
 @{
-    if (Model.UserName == null)
+    if (Model.IsNew)
     {
         ViewBag.Title = "New Delegation Configuration";
     }
@@ -11,67 +11,70 @@
     }
 }
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary("Error saving delegation configuration")
+@Html.ValidationSummary("Error creating delegation configuration")
 
-    <fieldset class="editor small">
-        <legend>@ViewBag.Title</legend>
-
-        @if (Model.UserName == null)
+<fieldset class="editor small">
+    <legend>@ViewBag.Title</legend>
+    @using (Html.BeginForm("Add", "Delegation"))
+    {
+        @Html.AntiForgeryToken()
+        var model = new Thinktecture.IdentityServer.Models.DelegationSetting()
         {
-            <div>
-                @Html.LabelFor(x=>x.UserName)
-                @Html.EditorFor(x=>x.UserName)
-                @Html.ValidationMessageFor(x=>x.UserName)
-            </div>
+            UserName = Model.UserName
+        };
+
+        if (Model.IsNew)
+        {
+        <div class="edit-prop">
+            @Html.LabelFor(x => model.UserName)
+            @Html.DropDownListFor(x => model.UserName, Model.AllUserNames)
+            @Html.ValidationMessageFor(x => model.UserName)
+        </div>
         }
         else
         {
-            @Html.HiddenFor(x=>x.UserName)
+        <div class="edit-prop">
+            @Html.HiddenFor(x => model.UserName)
+            @Html.LabelFor(x => model.UserName)
+            @Html.DisplayFor(x => model.UserName)
+        </div>
         }
-        <hr />
-
-        @for (int i = 0; i < Model.Settings.Length; i++)
-        {
-            <div>
-                @Html.LabelFor(x=>Model.Settings[i].Description)
-                @Html.TextBoxFor(x=>Model.Settings[i].Description)
-                <br />
-                @Html.LabelFor(x=>Model.Settings[i].Realm)
-                @Html.TextBoxFor(x=>Model.Settings[i].Realm)
-                <hr />
-                @Html.HiddenFor(x=>Model.Settings[i].Delete)
-            </div>
-        }
-
-            <div>
-                <p>Add Another Delegation Setting</p>
-                <label for="newDesc">Description</label>
-                <input id="newDesc" type="text" />
-                <br />
-                <label for="newRealm">Realm</label>
-                <input id="newRealm" type="text"  />
-                <br />
-                <div class="newDelegationSettingButton">
-                    <button type="button">Add</button>
-                </div>
-                <hr />
-            </div>
-
-
+        
+        <div class="edit-prop">
+            @Html.LabelFor(x => model.Description)
+            @Html.EditorFor(x => model.Description)
+        </div>
+        <div class="edit-prop">
+            @Html.LabelFor(x => model.Realm)
+            @Html.EditorFor(x => model.Realm)
+        </div>
         <div class="buttons">
-            @if (Model.UserName != null)
-            {
-                <button type="submit" name="action" value="save">Save Changes</button>
-            }
-            else
-            {
-                <button type="submit" name="action" value="create">Create</button>
-            }
+            <button type="submit">Add Realm</button>
             <button type="reset">Cancel</button>
         </div>
+    }
+    <hr />
 
-    </fieldset>
-}
+    @foreach (var model in Model.DelegationSettings)
+    {
+        using (Html.BeginForm("Remove", "Delegation"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => model.UserName)
+            <div class="edit-prop">
+                @Html.LabelFor(x => model.Description)
+                @Html.DisplayFor(x => model.Description)
+                @Html.HiddenFor(x => model.Description)
+            </div>
+            <div class="edit-prop">
+                @Html.LabelFor(x => model.Realm)
+                @Html.DisplayFor(x => model.Realm)
+                @Html.HiddenFor(x => model.Realm)
+            </div>
+            <div class="buttons">
+                <button type="submit">Delete Realm</button>
+            </div>            
+        }
+    }
+
+</fieldset>
