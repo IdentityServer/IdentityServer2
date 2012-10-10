@@ -43,6 +43,10 @@ fieldset.editor > div > div label:after,
 fieldset.editor div.edit-prop > div label:after {
   content: ':';
 }
+fieldset.editor > div .cert-helper,
+fieldset.editor div.edit-prop .cert-helper {
+  margin-left: 140px;
+}
 fieldset.editor div.buttons {
   padding-top: 10px;
   text-align: right;

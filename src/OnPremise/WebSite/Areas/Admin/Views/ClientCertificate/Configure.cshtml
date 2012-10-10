@@ -1,0 +1,83 @@
+﻿@model ClientCertificatesForUserViewModel
+@{
+    if (Model.IsNew)
+    {
+        ViewBag.Title = "New Client Certificates";
+    }
+    else
+    {
+        ViewBag.Title = "Client Certificates for " + Model.UserName;
+    }
+}
+
+@Html.ValidationSummary("Error with client certificates")
+
+<fieldset class="editor small">
+    <legend>@ViewBag.Title</legend>
+    
+    @using (Html.BeginForm("Add", "ClientCertificate", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        
+        if (Model.IsNew)
+        {
+        <div class="edit-prop">
+            @Html.LabelFor(x => Model.NewCertificate.UserName)
+            @Html.DropDownListFor(x => Model.NewCertificate.UserName, Model.AllUserNames)
+            @Html.ValidationMessageFor(x => Model.NewCertificate.UserName)
+        </div>
+        }
+        else
+        {
+        <div class="edit-prop">
+            @Html.HiddenFor(x => Model.NewCertificate.UserName)
+            @Html.LabelFor(x => Model.NewCertificate.UserName)
+            @Html.DisplayFor(x => Model.NewCertificate.UserName)
+        </div>
+        }
+        
+        <div class="edit-prop">
+            @Html.LabelFor(x => Model.NewCertificate.Description)
+            @Html.EditorFor(x => Model.NewCertificate.Description)
+            @Html.ValidationMessageFor(x=>Model.NewCertificate.Description)
+        </div>
+        <div class="edit-prop">
+            @Html.LabelFor(x => Model.NewCertificate.Thumbprint)
+            @Html.EditorFor(x => Model.NewCertificate.Thumbprint)
+            @Html.ValidationMessageFor(x=>Model.NewCertificate.Thumbprint)
+            <div class="cert-helper">
+                <label for="cert">Choose Certificate</label>
+                <input type="file" name="cert"  id="cert"/>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button type="submit">Add Certificate</button>
+            <button type="reset">Cancel</button>
+        </div>
+    }
+    <hr />
+
+    @foreach (var model in Model.Certificates)
+    {
+        using (Html.BeginForm("Remove", "ClientCertificate"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => model.UserName)
+            <div class="edit-prop">
+                @Html.LabelFor(x => model.Description)
+                @Html.DisplayFor(x => model.Description)
+                @Html.HiddenFor(x => model.Description)
+            </div>
+            <div class="edit-prop">
+                @Html.LabelFor(x => model.Thumbprint)
+                @Html.DisplayFor(x => model.Thumbprint)
+                @Html.HiddenFor(x => model.Thumbprint)
+            </div>
+            <div class="buttons">
+                <button type="submit">Delete Certificate</button>
+            </div>            
+        }
+    }
+
+</fieldset>

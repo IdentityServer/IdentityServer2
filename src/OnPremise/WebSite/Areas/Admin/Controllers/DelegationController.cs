@@ -66,7 +66,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Error deleting delegation setting.");
+                    ModelState.AddModelError("", "Error deleting delegation users.");
                 }
             }
 
@@ -96,7 +96,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
                 catch
                 {
-                    ModelState.AddModelError("", "Error updating protocols.");
+                    ModelState.AddModelError("", "Error adding delegation setting.");
                 }
             }
 
@@ -119,7 +119,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             }
             catch
             {
-                ModelState.AddModelError("", "Error updating protocols.");
+                ModelState.AddModelError("", "Error deleting delegation setting.");
             }
 
             var vm = new DelegationSettingsForUserViewModel(this.delegationRepository, this.userManagementRepository, model.UserName);
