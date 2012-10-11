@@ -1,0 +1,37 @@
+﻿@model KeyConfigurationViewModel
+@using Thinktecture.IdentityServer.Web.Utility
+
+@{
+    ViewBag.Title = "Key Configuration";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary("Error updating keys")
+
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        <div>
+            @Html.LabelFor(x=>x.Keys.SigningCertificate)
+            @Html.DropDownListFor(x=>x.Keys.SigningCertificate, Model.AllCerts)
+            @Html.ValidatorFor(x=>x.Keys.SigningCertificate)
+        </div>
+        <div>
+            @Html.LabelFor(x=>x.Keys.DecryptionCertificate)
+            @Html.DropDownListFor(x=>x.Keys.DecryptionCertificate, Model.AllCerts)
+            @Html.ValidatorFor(x=>x.Keys.DecryptionCertificate)
+        </div>
+        <div>
+            @Html.LabelFor(x=>x.Keys.SymmetricSigningKey)
+            @Html.EditorFor(x=>x.Keys.SymmetricSigningKey)
+            @Html.ValidatorFor(x=>x.Keys.SymmetricSigningKey)
+        </div>
+
+        <div class="buttons">
+            <button type="submit">Update</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

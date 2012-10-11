@@ -81,3 +81,6 @@ fieldset.editor.small div.edit-prop > label {
 .newDelegationSettingButton {
   text-align: right;
 }
+.validation-summary-errors {
+  max-width: 800px;
+}

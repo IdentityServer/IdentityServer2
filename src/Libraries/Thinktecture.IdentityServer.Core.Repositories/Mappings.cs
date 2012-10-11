@@ -110,6 +110,22 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 model.SigningCertificate = cert;
             }
 
+            if (!string.IsNullOrWhiteSpace(entity.DecryptionCertificateName))
+            {
+                var cert = X509.LocalMachine.My.SubjectDistinguishedName.Find(entity.DecryptionCertificateName, false).FirstOrDefault();
+
+                if (cert == null)
+                {
+                    throw new InvalidOperationException("Decryption certificate not found: " + entity.DecryptionCertificateName);
+                }
+
+                model.DecryptionCertificate = cert;
+            }
+            else
+            {
+                model.DecryptionCertificate = null;
+            }
+
             model.SymmetricSigningKey = entity.SymmetricSigningKey;
 
             return model;
@@ -122,6 +138,15 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             if (model.SigningCertificate != null)
             {
                 entity.SigningCertificateName = model.SigningCertificate.Subject;
+            }
+
+            if (model.DecryptionCertificate != null)
+            {
+                entity.DecryptionCertificateName = model.DecryptionCertificate.Subject;
+            }
+            else
+            {
+                entity.DecryptionCertificateName = null;
             }
 
             entity.SymmetricSigningKey = model.SymmetricSigningKey;

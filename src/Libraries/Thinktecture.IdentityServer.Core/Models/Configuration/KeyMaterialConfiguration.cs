@@ -11,6 +11,7 @@ namespace Thinktecture.IdentityServer.Models.Configuration
     public class KeyMaterialConfiguration
     {
         [Display(Name = "Signing Certificate", Description = "The X.509 certificate to sign outgoing SAML tokens")]
+        [Required]
         public X509Certificate2 SigningCertificate { get; set; }
 
         [Display(Name = "Decryption Certificate", Description = "The X.509 certificate to decrypt incoming SAML tokens")]
