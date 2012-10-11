@@ -37,7 +37,11 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
         {
             if (action == "new") return Create();
             if (action == "delete") return Delete(list);
-            return RedirectToAction("Index");
+            
+            ModelState.AddModelError("", "Invalid action.");
+            var vm = new UsersViewModel(UserManagementRepository, null);
+            return View("Index", vm);
+
         }
 
         public ActionResult Create()

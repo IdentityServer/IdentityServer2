@@ -399,6 +399,23 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 IssuerThumbprint = idp.IssuerThumbprint
             };
         }
+
+        public static Entities.IdentityProvider ToEntity(this Models.IdentityProvider idp)
+        {
+            if (idp == null)
+            {
+                return null;
+            }
+
+            return new Entities.IdentityProvider
+            {
+                Name = idp.Name,
+                DisplayName = idp.DisplayName,
+                Type = "WS*",
+                WSFederationEndpoint = idp.WSFederationEndpoint,
+                IssuerThumbprint = idp.IssuerThumbprint
+            };
+        }
         #endregion
     }
 }

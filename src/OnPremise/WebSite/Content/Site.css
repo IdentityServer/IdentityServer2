@@ -49,7 +49,8 @@ textarea
 
 .editor-field input[type=text],
 .editor-field input[type=password],
-.editor-field input[type=file]
+.editor-field input[type=file],
+.editor-field input[type=url]
 {
     width:400px
 }

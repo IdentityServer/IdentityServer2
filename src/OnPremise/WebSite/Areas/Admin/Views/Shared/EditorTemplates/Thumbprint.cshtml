@@ -1,0 +1,11 @@
+﻿@{
+    var id = ViewData.TemplateInfo.GetFullHtmlFieldId("")+"file";
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("")+"file";
+}
+<div class="inline-editor">
+    @Html.TextBox("", Model as string)
+    <div>
+        <label for="@id">Upload Certificate</label>
+        <input type="file" id="@id" name="@name" />
+    </div>
+</div>

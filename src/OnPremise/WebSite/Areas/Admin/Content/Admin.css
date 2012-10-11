@@ -14,72 +14,74 @@
   position: relative;
   display: none;
 }
-fieldset.editor > div,
-fieldset.editor div.edit-prop {
+.editor > div,
+.editor div.edit-prop {
   margin: 5px;
 }
-fieldset.editor > div > input[type=text],
-fieldset.editor div.edit-prop > input[type=text],
-fieldset.editor > div > input[type=password],
-fieldset.editor div.edit-prop > input[type=password],
-fieldset.editor > div > input[type=file],
-fieldset.editor div.edit-prop > input[type=file],
-fieldset.editor > div > select,
-fieldset.editor div.edit-prop > select {
+.editor > div > input[type=text],
+.editor div.edit-prop > input[type=text],
+.editor > div > input[type=password],
+.editor div.edit-prop > input[type=password],
+.editor > div > input[type=file],
+.editor div.edit-prop > input[type=file],
+.editor > div > input[type=url],
+.editor div.edit-prop > input[type=url],
+.editor > div > select,
+.editor div.edit-prop > select {
   width: 350px;
 }
-fieldset.editor > div > input.base64,
-fieldset.editor div.edit-prop > input.base64 {
+.editor > div > input.base64,
+.editor div.edit-prop > input.base64 {
   width: 275px;
 }
-fieldset.editor > div > button.base64,
-fieldset.editor div.edit-prop > button.base64 {
+.editor > div > button.base64,
+.editor div.edit-prop > button.base64 {
   width: 70px;
 }
-fieldset.editor > div > label,
-fieldset.editor div.edit-prop > label {
+.editor > div > label,
+.editor div.edit-prop > label {
   display: inline-block;
   width: 230px;
   font-weight: bold;
   text-align: right;
   margin-right: 10px;
 }
-fieldset.editor > div > label:after,
-fieldset.editor div.edit-prop > label:after {
+.editor > div > label:after,
+.editor div.edit-prop > label:after {
   content: ':';
 }
-fieldset.editor > div > div,
-fieldset.editor div.edit-prop > div {
+.editor > div > div,
+.editor div.edit-prop > div {
   margin-left: 245px;
 }
-fieldset.editor > div > div label,
-fieldset.editor div.edit-prop > div label {
+.editor > div > div label,
+.editor div.edit-prop > div label {
   font-weight: bold;
 }
-fieldset.editor > div > div label:after,
-fieldset.editor div.edit-prop > div label:after {
+.editor > div > div label:after,
+.editor div.edit-prop > div label:after {
   content: ':';
 }
-fieldset.editor > div .cert-helper,
-fieldset.editor div.edit-prop .cert-helper {
+.editor > div .cert-helper,
+.editor div.edit-prop .cert-helper {
   margin-left: 140px;
 }
-fieldset.editor div.buttons {
+.editor div.buttons {
   padding-top: 10px;
   text-align: right;
 }
-fieldset.editor .inline-editor {
+.editor .inline-editor {
   vertical-align: top;
   display: inline-block;
   width: 353px;
   margin-left: 0;
 }
-fieldset.editor img {
+.editor img {
   vertical-align: middle;
   position: relative;
   top: -2px;
 }
-fieldset.editor img.error {
+.editor img.error {
   margin-left: 5px;
 }
 fieldset.editor.small > div > label,

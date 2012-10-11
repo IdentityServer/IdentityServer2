@@ -1,0 +1,56 @@
+﻿@model Thinktecture.IdentityServer.Models.IdentityProvider
+@using Thinktecture.IdentityServer.Web.Utility
+
+@{
+    if (Model.Name == null)
+    {
+        ViewBag.Title = "New Identity Provider";
+    }
+    else
+    {
+        ViewBag.Title = "Identity Provider : " + Model.Name;
+    }
+}
+@{
+    var action = Model.Name == null ? "Create" : "Update";
+}
+@using (Html.BeginForm(action, "IP", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error updating identity provider")
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        <div>
+            @Html.LabelFor(x => x.Name)
+            @if (Model.Name == null)
+            {
+                @Html.EditorFor(x => x.Name)
+            }
+            else
+            {
+                @Html.HiddenFor(x => x.Name)
+                @Html.DisplayFor(x => x.Name)
+            }
+            @Html.ValidatorFor(x => x.Name)
+        </div>
+
+        @Html.EditorForModel()
+
+        <div class="buttons">
+            @if (Model.Name != null)
+            {
+                <button type="submit" name="action" value="save">Save Changes</button>
+                <button type="submit" name="action" value="delete">Delete</button>
+            }
+            else
+            {
+                <button type="submit" name="action" value="create">Create</button>
+            }
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}
+@section scripts{
+    <script src="~/Areas/Admin/Scripts/RP.js"></script>
+}

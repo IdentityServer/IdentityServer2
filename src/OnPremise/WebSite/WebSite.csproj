@@ -156,6 +156,7 @@
     <Compile Include="Areas\Admin\Controllers\DiagnosticsController.cs" />
     <Compile Include="Areas\Admin\Controllers\GeneralController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\IPController.cs" />
     <Compile Include="Areas\Admin\Controllers\KeyConfigurationController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProtocolController.cs" />
@@ -166,8 +167,11 @@
     <Compile Include="Areas\Admin\ViewModels\ChildMenuViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ClientCertificatesForUserViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ClientCertificatesViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CertInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DelegationSettingsForUserInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DelegationViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\IdentityProvidersViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\IPCertInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\KeyConfigurationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RoleInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RolesViewModel.cs" />
@@ -287,6 +291,9 @@
     <Content Include="Areas\Admin\Views\KeyConfiguration\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Base64.cshtml" />
     <Content Include="Areas\Admin\Views\Diagnostics\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\IP\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\IP\IP.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Thumbprint.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />

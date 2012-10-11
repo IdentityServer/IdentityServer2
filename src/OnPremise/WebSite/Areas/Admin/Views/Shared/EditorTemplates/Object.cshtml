@@ -9,7 +9,8 @@
             var id = ViewData.TemplateInfo.GetFullHtmlFieldId(prop.PropertyName);
             var name = ViewData.TemplateInfo.GetFullHtmlFieldName(prop.PropertyName);
             <div>
-                <label for="@id">@prop.GetDisplayName()</label>
+                @Html.Label(prop.PropertyName)
+                @*<label for="@id">@prop.GetDisplayName()</label>*@
                 @Html.Editor(prop.PropertyName)
                 @if(isTheFirst)
                 {

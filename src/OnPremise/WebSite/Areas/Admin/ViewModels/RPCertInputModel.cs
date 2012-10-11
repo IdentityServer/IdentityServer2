@@ -8,51 +8,15 @@ using System.Web;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
-    public class RPCertInputModel : IValidatableObject
+    public class RPCertInputModel : CertInputModel
     {
         public HttpPostedFileBase EncryptingCertificate { get; set; }
-        public bool? RemoveCert { get; set; }
-
-        bool certProcessed;
-        X509Certificate2 cert;
-        public X509Certificate2 Cert
+        public override HttpPostedFileBase File
         {
             get
             {
-                ProcessCert();
-                return cert;
+                return EncryptingCertificate;
             }
         }
-
-        private void ProcessCert()
-        {
-            if (certProcessed) return;
-            certProcessed = true;
-
-            if (EncryptingCertificate != null && EncryptingCertificate.ContentLength > 0)
-            {
-                using (var ms = new MemoryStream())
-                {
-                    EncryptingCertificate.InputStream.CopyTo(ms);
-                    var bytes = ms.ToArray();
-                    var val = new X509Certificate2(bytes);
-                    cert = val;
-                }
-            }
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            var errors = new List<ValidationResult>();
-            try
-            {
-                ProcessCert();
-            }
-            catch
-            {
-                errors.Add(new ValidationResult("Error processing certificate.", new string[]{"EncryptingCertificate"}));
-            }
-            return errors;
-        }
-    }
+   }
 }

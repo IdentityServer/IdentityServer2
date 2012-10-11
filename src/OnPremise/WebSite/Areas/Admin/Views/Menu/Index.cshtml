@@ -13,6 +13,10 @@
         @Html.ActionLink("Relying Parties", "Index", "RP")
         @Html.Action("ChildMenu", "Menu", new{controllerName="RP"})
     </li>
+    <li>
+        @Html.ActionLink("Identity Providers", "Index", "IP")
+        @Html.Action("ChildMenu", "Menu", new{controllerName="IP"})
+    </li>
     <li>@Html.ActionLink("Roles", "Index", "Role")</li>
     <li>@Html.ActionLink("Users", "Index", "User")</li>
     <li>@Html.ActionLink("Client Certificates", "Index", "ClientCertificate")</li>
