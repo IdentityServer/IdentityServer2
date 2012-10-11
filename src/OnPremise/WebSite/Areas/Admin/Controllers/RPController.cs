@@ -123,7 +123,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             try
             {
                 this.RelyingPartyRepository.Delete(id);
-                return RedirectToAction("RPs");
+                return RedirectToAction("Index");
             }
             catch (ValidationException ex)
             {
@@ -168,7 +168,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.RelyingPartyRepository.Add(rp);
-                    return RedirectToAction("RPs");
+                    return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
                 {
