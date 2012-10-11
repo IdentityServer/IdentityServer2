@@ -1,4 +1,5 @@
 ﻿@model ClientCertificatesForUserViewModel
+@using Thinktecture.IdentityServer.Web.Utility
 @{
     if (Model.IsNew)
     {
@@ -21,30 +22,30 @@
         
         if (Model.IsNew)
         {
-        <div class="edit-prop">
-            @Html.LabelFor(x => Model.NewCertificate.UserName)
-            @Html.DropDownListFor(x => Model.NewCertificate.UserName, Model.AllUserNames)
-            @Html.ValidationMessageFor(x => Model.NewCertificate.UserName)
-        </div>
+            <div class="edit-prop">
+                @Html.LabelFor(x => Model.NewCertificate.UserName)
+                @Html.DropDownListFor(x => Model.NewCertificate.UserName, Model.AllUserNames)
+                @Html.ValidatorFor(x => Model.NewCertificate.UserName)
+            </div>
         }
         else
         {
-        <div class="edit-prop">
-            @Html.HiddenFor(x => Model.NewCertificate.UserName)
-            @Html.LabelFor(x => Model.NewCertificate.UserName)
-            @Html.DisplayFor(x => Model.NewCertificate.UserName)
-        </div>
+            <div class="edit-prop">
+                @Html.HiddenFor(x => Model.NewCertificate.UserName)
+                @Html.LabelFor(x => Model.NewCertificate.UserName)
+                @Html.DisplayFor(x => Model.NewCertificate.UserName)
+            </div>
         }
         
         <div class="edit-prop">
             @Html.LabelFor(x => Model.NewCertificate.Description)
             @Html.EditorFor(x => Model.NewCertificate.Description)
-            @Html.ValidationMessageFor(x=>Model.NewCertificate.Description)
+            @Html.ValidatorFor(x=>Model.NewCertificate.Description)
         </div>
         <div class="edit-prop">
             @Html.LabelFor(x => Model.NewCertificate.Thumbprint)
             @Html.EditorFor(x => Model.NewCertificate.Thumbprint)
-            @Html.ValidationMessageFor(x=>Model.NewCertificate.Thumbprint)
+            @Html.ValidatorFor(x=>Model.NewCertificate.Thumbprint)
             <div class="cert-helper">
                 <label for="cert">Choose Certificate</label>
                 <input type="file" name="cert"  id="cert"/>

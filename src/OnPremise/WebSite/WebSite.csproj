@@ -178,6 +178,7 @@
     <Compile Include="Areas\Admin\ViewModels\ProtocolViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RelyingPartiesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RPCertInputModel.cs" />
+    <Compile Include="Utility\HtmlHelpers.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\dummy.txt" />

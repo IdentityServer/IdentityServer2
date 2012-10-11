@@ -16,7 +16,9 @@ fieldset.editor div.edit-prop > input[type=text],
 fieldset.editor > div > input[type=password],
 fieldset.editor div.edit-prop > input[type=password],
 fieldset.editor > div > input[type=file],
-fieldset.editor div.edit-prop > input[type=file] {
+fieldset.editor div.edit-prop > input[type=file],
+fieldset.editor > div > select,
+fieldset.editor div.edit-prop > select {
   width: 350px;
 }
 fieldset.editor > div > label,
