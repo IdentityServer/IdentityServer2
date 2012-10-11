@@ -24,6 +24,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public int TokenLifeTime { get; set; }
         
         public string ReplyTo { get; set; }
+
+        [MaxLength]
         public string EncryptingCertificate { get; set; }
         public string SymmetricSigningKey { get; set; }
 
