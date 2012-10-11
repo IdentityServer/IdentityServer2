@@ -57,7 +57,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                 return ProcessResourceOwnerCredentialRequest(tokenRequest.UserName, tokenRequest.Password, appliesTo, tokenType);
             }
 
-            Tracing.Error("invalid grant type: " + tokenRequest.Scope);
+            Tracing.Error("invalid grant type: " + tokenRequest.Grant_Type);
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid grant type.");
         }
 
