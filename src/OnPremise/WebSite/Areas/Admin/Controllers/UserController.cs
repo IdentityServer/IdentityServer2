@@ -108,7 +108,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 var currentRoles = 
                     roleAssignments.Where(x=>x.InRole).Select(x=>x.Role);
                 this.UserManagementRepository.SetRolesForUser(id, currentRoles);
-                return RedirectToAction("Roles", new { id });
+                return RedirectToAction("Index");
             }
             
             return View("Roles", vm);
