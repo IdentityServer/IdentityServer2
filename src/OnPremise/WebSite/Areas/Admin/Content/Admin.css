@@ -21,6 +21,14 @@ fieldset.editor > div > select,
 fieldset.editor div.edit-prop > select {
   width: 350px;
 }
+fieldset.editor > div > input.base64,
+fieldset.editor div.edit-prop > input.base64 {
+  width: 275px;
+}
+fieldset.editor > div > button.base64,
+fieldset.editor div.edit-prop > button.base64 {
+  width: 70px;
+}
 fieldset.editor > div > label,
 fieldset.editor div.edit-prop > label {
   display: inline-block;

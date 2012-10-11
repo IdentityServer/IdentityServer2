@@ -188,6 +188,7 @@
     <Content Include="Areas\Admin\Content\Admin.css">
       <DependentUpon>Admin.less</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Scripts\RP.js" />
     <Content Include="Content\images\error.png" />
     <Content Include="Content\images\help.png" />
     <Content Include="Content\images\logo.jpg" />
@@ -279,6 +280,7 @@
     <Content Include="Areas\Admin\Views\ClientCertificate\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ClientCertificate\Configure.cshtml" />
     <Content Include="Areas\Admin\Views\KeyConfiguration\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Base64.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />

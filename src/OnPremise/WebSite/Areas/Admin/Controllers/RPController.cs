@@ -7,6 +7,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
+using Thinktecture.IdentityModel;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels;
@@ -202,5 +203,12 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
             return View("RP", rp);
         }
+        
+        public ActionResult CreateRandom()
+        {
+            return Content(Convert.ToBase64String(CryptoRandom.CreateRandomKey(32)), "text/plain");
+        }
     }
 }
+
+
