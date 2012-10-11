@@ -61,7 +61,8 @@ namespace Thinktecture.IdentityServer.Web
                         {
                             { "Controller", "Account" },
                             { "Action", "SignIn" },
-                            { "ReturnUrl", HttpUtility.UrlEncode(context.Request.RawUrl, context.Request.ContentEncoding) }
+                            { "ReturnUrl", HttpUtility.UrlEncode(context.Request.RawUrl, context.Request.ContentEncoding) },
+                            { "Area", "" }
                         });
 
                     Response.RedirectToRoute(route);
