@@ -17,6 +17,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         {
             get
             {
+                if (Name == null) return false;
                 return !Name.StartsWith(Thinktecture.IdentityServer.Constants.Roles.InternalRolesPrefix);
             }
         }

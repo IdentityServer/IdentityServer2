@@ -66,13 +66,13 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
             }
 
-            return View("Create");
+            return View("Create", model);
         }
 
         private ActionResult Delete(RoleInputModel[] list)
         {
             var query = from item in list
-                        where item.Delete && !item.CanDelete
+                        where item.Delete && !(item.CanDelete)
                         select item.Name;
             foreach(var name in query)
             {
@@ -98,8 +98,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Error deleting role.");
                 }
             }
-
-            return View("Index");
+            
+            var vm = new RolesViewModel(UserManagementRepository);
+            return View("Index", vm);
         }
     }
 }
