@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 {
+    [ClaimsAuthorize(Constants.Actions.Administration, Constants.Resources.Configuration)]
     public class HomeController : Controller
     {
         //
