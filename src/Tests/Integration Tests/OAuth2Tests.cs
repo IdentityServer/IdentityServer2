@@ -61,11 +61,11 @@ namespace Thinktecture.IdentityServer.Tests
 
             var config = new SecurityTokenHandlerConfiguration();
             var registry = new WebTokenIssuerNameRegistry();
-            registry.AddTrustedIssuer("http://identityserver45.thinktecture.com/trust/changethis", "http://identityserver45.thinktecture.com/trust/initial");
+            registry.AddTrustedIssuer("http://identityserver.v2.thinktecture.com/trust/changethis", "http://identityserver45.thinktecture.com/trust/initial");
             config.IssuerNameRegistry = registry;
 
             var issuerResolver = new WebTokenIssuerTokenResolver();
-            issuerResolver.AddSigningKey("http://identityserver45.thinktecture.com/trust/changethis", "3ihK5qGVhp8ptIk9+TDucXQW4Aaengg3d5m6gU8nzc8=");
+            issuerResolver.AddSigningKey("http://identityserver.v2.thinktecture.com/trust/changethis", "3ihK5qGVhp8ptIk9+TDucXQW4Aaengg3d5m6gU8nzc8=");
             config.IssuerTokenResolver = issuerResolver;
 
             config.AudienceRestriction.AllowedAudienceUris.Add(new Uri(scope));
@@ -77,23 +77,6 @@ namespace Thinktecture.IdentityServer.Tests
 
             var id = handler.ValidateToken(jwt);
         }
-
-        //[TestMethod]
-        //public void ValidClientCertificateCredential()
-        //{
-        //    var client = new OAuth2Client(new Uri(baseAddress));
-
-        //    var response = client.RequestAccessTokenCertificate(
-        //        HttpClientFactory.GetValidClientCertificate(),
-        //        scope);
-
-        //    Assert.IsTrue(response != null, "response is null");
-        //    Assert.IsTrue(!string.IsNullOrWhiteSpace(response.AccessToken), "access token is null");
-        //    Assert.IsTrue(!string.IsNullOrWhiteSpace(response.TokenType), "token type is null");
-        //    Assert.IsTrue(response.ExpiresIn > 0, "expiresIn is 0");
-
-        //    Trace.WriteLine(response.AccessToken);
-        //}
 
         [TestMethod]
         public void InvalidUserNameCredential()

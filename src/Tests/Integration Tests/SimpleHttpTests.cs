@@ -80,25 +80,6 @@ namespace Thinktecture.IdentityServer.Tests
             Assert.AreEqual<string>("application/json", result.Content.Headers.ContentType.MediaType);
         }
 
-        //[TestMethod]
-        //public void ValidClientCertificateCredential()
-        //{
-        //    var values = new Dictionary<string, string>
-        //    {
-        //        { "realm", rp }
-        //    };
-
-        //    var handler = new WebRequestHandler();
-        //    handler.ClientCertificates.Add(HttpClientFactory.GetValidClientCertificate());
-
-        //    var client = new HttpClient(handler);
-            
-        //    var result = client.GetAsync(baseAddress + values.ToQueryString()).Result;
-
-        //    Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, result.StatusCode);
-        //    Assert.AreEqual<string>(MediaTypeNames.Text.Xml, result.Content.Headers.ContentType.MediaType);
-        //}
-
         [TestMethod]
         public void UnAuthorizedUser()
         {

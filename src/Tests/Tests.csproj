@@ -87,7 +87,6 @@
     <Compile Include="Factories\WSTrustClientFactory.cs" />
     <Compile Include="Integration Tests\OAuth2Tests.cs" />
     <Compile Include="Integration Tests\SimpleHttpTests.cs" />
-    <Compile Include="Integration Tests\WrapTests.cs" />
     <Compile Include="Integration Tests\WSTrustTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\InMemoryConfigurationRepository.cs" />

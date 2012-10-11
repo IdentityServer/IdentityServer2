@@ -18,33 +18,33 @@ namespace Thinktecture.IdentityServer.Tests
 
         static Constants()
         {
-            HostName = "roadie";
+            HostName = "idsrv";
         }
 
         public static class Http
         {
-            public static readonly string LocalBaseAddress = "https://" + HostName + "/idsrv/issue/simple";
+            public static readonly string LocalBaseAddress = "https://" + HostName + "/issue/simple";
             public static string CloudBaseAddress = "https://idp.thinktecture.com/issue/simple";
         }
 
         public static class Wrap
         {
-            public static string LocalBaseAddress = "https://" + HostName + "/idsrv/issue/wrap";
+            public static string LocalBaseAddress = "https://" + HostName + "/issue/wrap";
             public static string CloudBaseAddress = "https://idp.thinktecture.com/issue/wrap";
         }
 
         public static class OAuth2
         {
-            public static string LocalBaseAddress = "https://" + HostName + "/idsrv/issue/oauth2";
+            public static string LocalBaseAddress = "https://" + HostName + "/issue/oauth2";
             public static string CloudBaseAddress = "https://idp.thinktecture.com/issue/oauth2";
         }
 
         public static class WSTrust
         {
-            public static string LocalMixedUserName = "https://" + HostName + "/idsrv/issue/wstrust/mixed/username";
+            public static string LocalMixedUserName = "https://" + HostName + "/issue/wstrust/mixed/username";
             public static string CloudMixedUserName = "https://idp.thinktecture.com/issue/wstrust/mixed/username";
 
-            public static string LocalMixedCertificate = "https://" + HostName + "/idsrv/issue/wstrust/mixed/certificate";
+            public static string LocalMixedCertificate = "https://" + HostName + "/issue/wstrust/mixed/certificate";
             public static string CloudMixedCertificate = "https://idp.thinktecture.com/issue/wstrust/mixed/certificate";
         }
 
