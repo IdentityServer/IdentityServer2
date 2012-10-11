@@ -7,113 +7,111 @@
 .config-editor {
     margin-left: 20px;
     display: inline-block;
-	.message{
-		font-size:140%;
-		font-weight:bold;
-		margin:10px;
-		position:relative;
-		display:none;
-	}
+
+    .message {
+        font-size: 140%;
+        font-weight: bold;
+        margin: 10px;
+        position: relative;
+        display: none;
+    }
 }
 
 .editor {
-    > div, div.edit-prop {
-        margin: 5px;
 
-        > input[type=text],
-        > input[type=password],
-        > input[type=file],
-		> input[type=url],
-		> select {
-            width: 350px;
-        }
-
-		> input.base64 
-		{
-			width:275px;
-		}
-		> button.base64{
-			width:70px;
-		}
-
-        > label {
-            display: inline-block;
-            width: 230px;
-            font-weight: bold;
-            text-align: right;
-            margin-right: 10px;
-        }
-
-            > label:after {
-                content: ':';
-            }
-
-        > div {
-            margin-left: 245px;
-
-            label {
-                font-weight: bold;
-            }
-
-                label:after {
-                    content: ':';
-                }
-        }
-
-		.cert-helper{
-			margin-left:140px;
-		}
+    > div, > form > div {
+		margin:5px;
     }
 
-        div.buttons {
-            padding-top: 10px;
-            text-align: right;
-        }
 
-    .inline-editor {
-        vertical-align: top;
+    label {
         display: inline-block;
-        width: 353px;
-        margin-left: 0;
+        width: 230px;
+        font-weight: bold;
+        text-align: right;
+        margin-right: 10px;
+
+        &:after {
+            content: ':';
+        }
+    }
+
+	&.small {
+		label {
+            width: 130px;
+        }
+    }
+
+    input[type=text],
+    input[type=password],
+    input[type=file],
+    input[type=url] {
+        width: 350px;
+    }
+	select {
+        width: 352px;
+		padding:1px;
+		margin-right:1px;
+	}
+
+    input.base64 {
+        width: 275px;
+    }
+
+    button.base64 {
+        width: 70px;
     }
 
     img {
         vertical-align: middle;
         position: relative;
         top: -2px;
-    }
 
-        img.error {
+        &.error {
             margin-left: 5px;
         }
-}
+    }
 
+    .inline-editor {
+        vertical-align: top;
+        text-align: left;
+        display: inline-block;
+        width: 353px;
+        margin-left: 0;
+        margin-right: 2px;
 
-    fieldset.editor.small {
-        > div, div.edit-prop {
-            > label {
-                width: 130px;
+        * {
+            label, input {
+                width: auto;
             }
         }
     }
 
+    div.buttons {
+        padding-top: 10px;
+        text-align: right;
+    }
+}
+
+
+
+
 .nameList {
-	span{
-		display:inline-block;
-		width:200px;
-	}
-	form {
-		display:inline;
-	}
+    span {
+        display: inline-block;
+        width: 200px;
+    }
+
+    form {
+        display: inline;
+    }
 }
 
 
-.newDelegationSettingButton
-{
-	text-align:right;
+.newDelegationSettingButton {
+    text-align: right;
 }
 
-.validation-summary-errors
-{
-	max-width:800px;
+.validation-summary-errors {
+    max-width: 800px;
 }

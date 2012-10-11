@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
-    public abstract class CertInputModel : IValidatableObject
+    public abstract class CertificateInputModel : IValidatableObject
     {
         public abstract HttpPostedFileBase File { get; }
         public bool? RemoveCert { get; set; }

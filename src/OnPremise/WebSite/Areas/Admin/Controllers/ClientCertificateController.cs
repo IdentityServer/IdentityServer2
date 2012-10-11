@@ -81,15 +81,15 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(ClientCertificate newCertificate, CertificateInputModel file)
+        public ActionResult Add(ClientCertificate newCertificate, ClientCertificateInputModel file)
         {
-            if (String.IsNullOrEmpty(newCertificate.Thumbprint) && file != null)
+            if (String.IsNullOrEmpty(newCertificate.Thumbprint) && file != null && file.Cert != null)
             {
-                newCertificate.Thumbprint = file.Thumbprint;
+                newCertificate.Thumbprint = file.Cert.Thumbprint;
                 if (newCertificate.Thumbprint != null)
                 {
                     ModelState["newCertificate.Thumbprint"].Errors.Clear();
-                    ModelState["newCertificate.Thumbprint"].Value = new ValueProviderResult(file.Thumbprint, file.Thumbprint, ModelState["newCertificate.Thumbprint"].Value.Culture);
+                    ModelState["newCertificate.Thumbprint"].Value = new ValueProviderResult(newCertificate.Thumbprint, newCertificate.Thumbprint, ModelState["newCertificate.Thumbprint"].Value.Culture);
                 }
             }
             

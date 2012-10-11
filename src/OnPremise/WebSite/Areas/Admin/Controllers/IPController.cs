@@ -113,8 +113,12 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             if (cert != null && cert.Cert != null)
             {
                 model.IssuerThumbprint = cert.Cert.Thumbprint;
-                ModelState["IssuerThumbprint"].Errors.Clear();
-            }
+                if (model.IssuerThumbprint != null)
+                {
+                    ModelState["IssuerThumbprint"].Errors.Clear();
+                    ModelState["IssuerThumbprint"].Value = new ValueProviderResult(model.IssuerThumbprint, model.IssuerThumbprint, ModelState["IssuerThumbprint"].Value.Culture);
+                }
+            } 
 
             if (ModelState.IsValid)
             {
@@ -122,7 +126,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 {
                     this.identityProviderRepository.Add(model);
                     TempData["Message"] = "Identity Provider Created";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IP", new { id=model.Name });
                 }
                 catch (ValidationException ex)
                 {
@@ -153,7 +157,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 {
                     this.identityProviderRepository.Update(model);
                     TempData["Message"] = "Identity Provider Updated"; ;
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IP", new { id = model.Name });
                 }
                 catch (ValidationException ex)
                 {

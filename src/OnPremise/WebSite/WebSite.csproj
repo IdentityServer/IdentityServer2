@@ -165,9 +165,10 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ChildMenuViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ClientCertificateInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ClientCertificatesForUserViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ClientCertificatesViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\CertInputModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CertificateInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DelegationSettingsForUserInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DelegationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\IdentityProvidersViewModel.cs" />

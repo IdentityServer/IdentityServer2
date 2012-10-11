@@ -15,66 +15,38 @@
   display: none;
 }
 .editor > div,
-.editor div.edit-prop {
+.editor > form > div {
   margin: 5px;
 }
-.editor > div > input[type=text],
-.editor div.edit-prop > input[type=text],
-.editor > div > input[type=password],
-.editor div.edit-prop > input[type=password],
-.editor > div > input[type=file],
-.editor div.edit-prop > input[type=file],
-.editor > div > input[type=url],
-.editor div.edit-prop > input[type=url],
-.editor > div > select,
-.editor div.edit-prop > select {
-  width: 350px;
-}
-.editor > div > input.base64,
-.editor div.edit-prop > input.base64 {
-  width: 275px;
-}
-.editor > div > button.base64,
-.editor div.edit-prop > button.base64 {
-  width: 70px;
-}
-.editor > div > label,
-.editor div.edit-prop > label {
+.editor label {
   display: inline-block;
   width: 230px;
   font-weight: bold;
   text-align: right;
   margin-right: 10px;
 }
-.editor > div > label:after,
-.editor div.edit-prop > label:after {
+.editor label:after {
   content: ':';
 }
-.editor > div > div,
-.editor div.edit-prop > div {
-  margin-left: 245px;
+.editor.small label {
+  width: 130px;
 }
-.editor > div > div label,
-.editor div.edit-prop > div label {
-  font-weight: bold;
+.editor input[type=text],
+.editor input[type=password],
+.editor input[type=file],
+.editor input[type=url] {
+  width: 350px;
 }
-.editor > div > div label:after,
-.editor div.edit-prop > div label:after {
-  content: ':';
+.editor select {
+  width: 352px;
+  padding: 1px;
+  margin-right: 1px;
 }
-.editor > div .cert-helper,
-.editor div.edit-prop .cert-helper {
-  margin-left: 140px;
+.editor input.base64 {
+  width: 275px;
 }
-.editor div.buttons {
-  padding-top: 10px;
-  text-align: right;
-}
-.editor .inline-editor {
-  vertical-align: top;
-  display: inline-block;
-  width: 353px;
-  margin-left: 0;
+.editor button.base64 {
+  width: 70px;
 }
 .editor img {
   vertical-align: middle;
@@ -84,9 +56,21 @@
 .editor img.error {
   margin-left: 5px;
 }
-fieldset.editor.small > div > label,
-fieldset.editor.small div.edit-prop > label {
-  width: 130px;
+.editor .inline-editor {
+  vertical-align: top;
+  text-align: left;
+  display: inline-block;
+  width: 353px;
+  margin-left: 0;
+  margin-right: 2px;
+}
+.editor .inline-editor * label,
+.editor .inline-editor * input {
+  width: auto;
+}
+.editor div.buttons {
+  padding-top: 10px;
+  text-align: right;
 }
 .nameList span {
   display: inline-block;

@@ -17,6 +17,7 @@ namespace Thinktecture.IdentityServer.Models
         [Display(Name = "User Name", Description = "Name of the user to map the certificate to.")]
         public string UserName { get; set; }
 
+        [UIHint("Thumbprint")]
         [Required]
         [Display(Name = "Client Certificate Thumbprint", Description = "Thumbprint of the client certificate.")]
         public string Thumbprint { get; set; }

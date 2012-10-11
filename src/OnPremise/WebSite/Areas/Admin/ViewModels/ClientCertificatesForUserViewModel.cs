@@ -11,33 +11,6 @@ using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
-    public class CertificateInputModel
-    {
-        public HttpPostedFileBase Cert { get; set; }
-
-        string thumbprint;
-        public string Thumbprint
-        {
-            get
-            {
-                if (Cert == null || Cert.ContentLength == 0) return null;
-
-                if (thumbprint == null)
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        this.Cert.InputStream.CopyTo(ms);
-                        var bytes = ms.ToArray();
-                        var val = new X509Certificate2(bytes);
-                        thumbprint = val.Thumbprint;
-                    }
-                }
-                return thumbprint;
-            }
-        }
-
-    }
-
     public class ClientCertificatesForUserViewModel
     {
         private Repositories.IClientCertificatesRepository clientCertificatesRepository;
