@@ -90,12 +90,20 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 
     public class KeyConfigurationViewModel
     {
-        public IEnumerable<SelectListItem> AllCerts
+        public IEnumerable<SelectListItem> AvailableSigningCerts
         {
             get
             {
                 var allCerts = GetAvailableCertificatesFromStore().Select(x => new SelectListItem { Text = x }).ToList();
-                allCerts.Insert(0, new SelectListItem { Text = "-Choose-", Value = "" });
+                return allCerts;
+            }
+        }
+        public IEnumerable<SelectListItem> AvailableDecryptionCerts
+        {
+            get
+            {
+                var allCerts = GetAvailableCertificatesFromStore().Select(x => new SelectListItem { Text = x }).ToList();
+                allCerts.Insert(0, new SelectListItem { Text = "-None Selected-", Value = "" });
                 return allCerts;
             }
         }

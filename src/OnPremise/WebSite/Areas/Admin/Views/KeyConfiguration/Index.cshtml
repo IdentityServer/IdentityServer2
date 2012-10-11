@@ -15,12 +15,12 @@
 
         <div>
             @Html.LabelFor(x=>x.Keys.SigningCertificate)
-            @Html.DropDownListFor(x=>x.Keys.SigningCertificate, Model.AllCerts)
+            @Html.DropDownListFor(x=>x.Keys.SigningCertificate, Model.AvailableSigningCerts)
             @Html.ValidatorFor(x=>x.Keys.SigningCertificate)
         </div>
         <div>
             @Html.LabelFor(x=>x.Keys.DecryptionCertificate)
-            @Html.DropDownListFor(x=>x.Keys.DecryptionCertificate, Model.AllCerts)
+            @Html.DropDownListFor(x=>x.Keys.DecryptionCertificate, Model.AvailableDecryptionCerts)
             @Html.ValidatorFor(x=>x.Keys.DecryptionCertificate)
         </div>
         <div>
