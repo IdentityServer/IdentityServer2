@@ -74,14 +74,22 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             using (var entities = IdentityServerConfigurationContext.Get())
             {
-                var entity = new ClientCertificates
+                var record =
+                    (from entry in entities.ClientCertificates
+                     where entry.UserName.Equals(certificate.UserName, StringComparison.OrdinalIgnoreCase) &&
+                           entry.Thumbprint.Equals(certificate.Thumbprint, StringComparison.OrdinalIgnoreCase)
+                     select entry)
+                    .SingleOrDefault();
+                if (record == null)
                 {
-                    UserName = certificate.UserName,
-                    Thumbprint = certificate.Thumbprint,
-                    Description = certificate.Description
-                };
-
-                entities.ClientCertificates.Add(entity);
+                    record = new ClientCertificates
+                    {
+                        UserName = certificate.UserName,
+                        Thumbprint = certificate.Thumbprint,
+                    };
+                    entities.ClientCertificates.Add(record);
+                }
+                record.Description = certificate.Description;
                 entities.SaveChanges();
             }
         }
@@ -95,10 +103,12 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                      where entry.UserName.Equals(certificate.UserName, StringComparison.OrdinalIgnoreCase) &&
                            entry.Thumbprint.Equals(certificate.Thumbprint, StringComparison.OrdinalIgnoreCase)
                      select entry)
-                    .Single();
-
-                entities.ClientCertificates.Remove(record);
-                entities.SaveChanges();
+                    .SingleOrDefault();
+                if (record != null)
+                {
+                    entities.ClientCertificates.Remove(record);
+                    entities.SaveChanges();
+                }
             }
         }
         #endregion
