@@ -145,23 +145,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             ModelState["ID"].Errors.Clear();
 
             rp.Id = null;
-            if (cert.EncryptingCertificate != null && cert.EncryptingCertificate.ContentLength > 0)
-            {
-                try
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        cert.EncryptingCertificate.InputStream.CopyTo(ms);
-                        var bytes = ms.ToArray();
-                        var val = new X509Certificate2(bytes);
-                        rp.EncryptingCertificate = val;
-                    }
-                }
-                catch
-                {
-                    ModelState.AddModelError("EncryptingCertificate", "Error processing certificate.");
-                }
-            }
+            rp.EncryptingCertificate = cert.Cert;
 
             if (ModelState.IsValid)
             {
@@ -189,22 +173,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             {
                 rp.EncryptingCertificate = null;
             }
-            else if (cert.EncryptingCertificate != null && cert.EncryptingCertificate.ContentLength > 0)
+            else if (cert.Cert != null)
             {
-                try
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        cert.EncryptingCertificate.InputStream.CopyTo(ms);
-                        var bytes = ms.ToArray();
-                        var val = new X509Certificate2(bytes);
-                        rp.EncryptingCertificate = val;
-                    }
-                }
-                catch
-                {
-                    ModelState.AddModelError("EncryptingCertificate", "Error processing certificate.");
-                }
+                rp.EncryptingCertificate = cert.Cert;
             }
             else
             {
