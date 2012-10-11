@@ -10,36 +10,36 @@ using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 {
-    public class GeneralController : Controller
+    public class DiagnosticsController : Controller
     {
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
-        public GeneralController()
+        public DiagnosticsController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public GeneralController(IConfigurationRepository configuration)
+        public DiagnosticsController(IConfigurationRepository configuration)
         {
             ConfigurationRepository = configuration;
         }
 
         public ActionResult Index()
         {
-            var model = ConfigurationRepository.Global;
-            return View("Index", model);
+            var vm = this.ConfigurationRepository.Diagnostics;
+            return View(vm);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(GlobalConfiguration model)
+        public ActionResult Index(DiagnosticsConfiguration model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    ConfigurationRepository.Global = model;
+                    ConfigurationRepository.Diagnostics = model;
                     TempData["Message"] = "Update Successful";
                     return RedirectToAction("Index");
                 }
@@ -49,11 +49,12 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
                 catch
                 {
-                    ModelState.AddModelError("", "Error updating configuration.");
+                    ModelState.AddModelError("", "Error updating diagnostics.");
                 }
             }
 
             return View("Index", model);
         }
+
     }
 }

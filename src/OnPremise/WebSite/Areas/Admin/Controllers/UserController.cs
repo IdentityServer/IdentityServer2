@@ -54,6 +54,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.UserManagementRepository.CreateUser(model.Username, model.Password, model.Email);
+                    TempData["Message"] = "User Created";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
@@ -78,6 +79,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                     {
                         this.UserManagementRepository.DeleteUser(name);
                     }
+                    TempData["Message"] = "Users Deleted";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
@@ -108,6 +110,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 var currentRoles = 
                     roleAssignments.Where(x=>x.InRole).Select(x=>x.Role);
                 this.UserManagementRepository.SetRolesForUser(id, currentRoles);
+                TempData["Message"] = "Roles Assigned Successfully";
                 return RedirectToAction("Index");
             }
             

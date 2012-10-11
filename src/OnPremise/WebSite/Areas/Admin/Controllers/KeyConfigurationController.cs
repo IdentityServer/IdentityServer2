@@ -42,6 +42,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     keys.Update(this.ConfigurationRepository);
+                    TempData["Message"] = "Update Successful";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)

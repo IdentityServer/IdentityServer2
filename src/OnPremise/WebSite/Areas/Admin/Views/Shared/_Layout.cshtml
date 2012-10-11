@@ -7,6 +7,10 @@
 </nav>
 
 <section class="config-editor">
+    @if (TempData["Message"] != null)
+    {
+        <div class="message">@TempData["Message"]</div>
+    }
     @RenderBody()
 </section>
 
@@ -16,5 +20,6 @@
 }
 @section scripts
 {
+    <script src="~/Areas/Admin/Scripts/Admin.js"></script>
     @RenderSection("scripts", false)
 }

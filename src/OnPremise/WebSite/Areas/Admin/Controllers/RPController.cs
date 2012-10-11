@@ -45,6 +45,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 if (ModelState.IsValid)
                 {
                     vm.Update(list);
+                    TempData["Message"] = "Update Successful";
                     return RedirectToAction("Index");
                 }
 
@@ -124,6 +125,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             try
             {
                 this.RelyingPartyRepository.Delete(id);
+                TempData["Message"] = "RP Deleted";
                 return RedirectToAction("Index");
             }
             catch (ValidationException ex)
@@ -153,6 +155,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.RelyingPartyRepository.Add(rp);
+                    TempData["Message"] = "RP Created";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
@@ -189,6 +192,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.RelyingPartyRepository.Update(rp);
+                    TempData["Message"] = "Update Successful";
                     return RedirectToAction("RP", new { id });
                 }
                 catch (ValidationException ex)

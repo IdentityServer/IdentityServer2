@@ -57,6 +57,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                             this.clientCertificatesRepository.Delete(setting);
                         }
                     }
+                    TempData["Message"] = "User Certificates Deleted";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
@@ -97,6 +98,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.clientCertificatesRepository.Add(newCertificate);
+                    TempData["Message"] = "Certificate Added";
                     return RedirectToAction("Configure", new { id = newCertificate.UserName });
                 }
                 catch (ValidationException ex)
@@ -123,6 +125,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.clientCertificatesRepository.Delete(model);
+                    TempData["Message"] = "Certificate Removed";
                     return RedirectToAction("Configure", new { id = model.UserName });
                 }
                 catch (ValidationException ex)

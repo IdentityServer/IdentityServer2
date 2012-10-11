@@ -1,0 +1,21 @@
+﻿@model Thinktecture.IdentityServer.Models.Configuration.DiagnosticsConfiguration
+
+@{
+    ViewBag.Title = "Diagnostics";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error updating diagnostics")
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        @Html.EditorForModel()
+
+        <div class="buttons">
+            <button type="submit">Save Changes</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

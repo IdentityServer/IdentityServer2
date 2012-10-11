@@ -54,6 +54,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     UserManagementRepository.CreateRole(model.Name);
+                    TempData["Message"] = "Role Created";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
@@ -87,6 +88,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                     {
                         UserManagementRepository.DeleteRole(item);
                     }
+                    TempData["Message"] = "Roles Deleted";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)

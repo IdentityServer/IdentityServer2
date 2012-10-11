@@ -58,6 +58,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                             this.delegationRepository.Delete(setting);
                         }
                     }
+                    TempData["Message"] = "Delegation Users Deleted";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
@@ -88,6 +89,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.delegationRepository.Add(model);
+                    TempData["Message"] = "Realm Added";
                     return RedirectToAction("Configure", new { id = model.UserName });
                 }
                 catch (ValidationException ex)
@@ -111,6 +113,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             try
             {
                 this.delegationRepository.Delete(model);
+                TempData["Message"] = "Realm Deleted";
                 return RedirectToAction("Configure", new { id = model.UserName });
             }
             catch (ValidationException ex)

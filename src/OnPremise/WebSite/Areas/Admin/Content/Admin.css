@@ -7,6 +7,13 @@
   margin-left: 20px;
   display: inline-block;
 }
+.config-editor .message {
+  font-size: 140%;
+  font-weight: bold;
+  margin: 10px;
+  position: relative;
+  display: none;
+}
 fieldset.editor > div,
 fieldset.editor div.edit-prop {
   margin: 5px;

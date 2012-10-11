@@ -41,6 +41,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     model.Update(this.ConfigurationRepository);
+                    TempData["Message"] = "Update Successful";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
@@ -97,6 +98,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     vm.UpdateProtocol(protocol);
+                    TempData["Message"] = "Update Successful";
                     return RedirectToAction("Protocol", new { id });
                 }
                 catch (ValidationException ex)

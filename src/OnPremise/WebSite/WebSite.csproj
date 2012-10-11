@@ -45,6 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="BrockAllen.CookieTempData">
+      <HintPath>..\..\..\packages\BrockAllen.CookieTempData.dll.1.1.0\lib\net45\BrockAllen.CookieTempData.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -150,6 +153,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\ClientCertificateController.cs" />
     <Compile Include="Areas\Admin\Controllers\DelegationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DiagnosticsController.cs" />
     <Compile Include="Areas\Admin\Controllers\GeneralController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\KeyConfigurationController.cs" />
@@ -188,6 +192,7 @@
     <Content Include="Areas\Admin\Content\Admin.css">
       <DependentUpon>Admin.less</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Scripts\Admin.js" />
     <Content Include="Areas\Admin\Scripts\RP.js" />
     <Content Include="Content\images\error.png" />
     <Content Include="Content\images\help.png" />
@@ -281,6 +286,7 @@
     <Content Include="Areas\Admin\Views\ClientCertificate\Configure.cshtml" />
     <Content Include="Areas\Admin\Views\KeyConfiguration\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Base64.cshtml" />
+    <Content Include="Areas\Admin\Views\Diagnostics\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
