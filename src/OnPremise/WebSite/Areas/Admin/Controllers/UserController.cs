@@ -37,7 +37,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
         {
             if (action == "new") return Create();
             if (action == "delete") return Delete(list);
-            return HttpNotFound();
+            return RedirectToAction("Index");
         }
 
         public ActionResult Create()
@@ -65,7 +65,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Error creating user.");
                 }                
             }
-            return View("Create");
+            return View("Create", model);
         }
 
         private ActionResult Delete(UserDeleteModel[] list)
