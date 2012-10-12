@@ -3,6 +3,8 @@
  * see license.txt
  */
 
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography.X509Certificates;
 
@@ -21,6 +23,7 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         //public RSA RSASigningKey { get; set; }
 
         [Display(Name = "Symmetric Signing Key", Description = "Default symmetric signing key")]
+        [Required]
         public string SymmetricSigningKey { get; set; }
     }
 }

@@ -37,7 +37,6 @@ namespace Thinktecture.IdentityServer.Models
         [Display(Order=10002, Name = "Encrypting Certificate", Description = "Optional X.509 certificate to encrypt outgoing tokens.")]
         public X509Certificate2 EncryptingCertificate { get; set; }
 
-        [UIHint("Base64")]
         [Display(Order = 10001, Name = "Symmetric Signing Key", Description = "Base64 encoded key used for symmetric signing of tokens.")]
         public byte[] SymmetricSigningKey { get; set; }
 

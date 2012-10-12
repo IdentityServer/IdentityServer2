@@ -13,7 +13,7 @@ using Thinktecture.IdentityServer.Models.Configuration;
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
     [MetadataType(typeof(KeyMaterialConfiguration))]
-    public class KeyConfigurationInputModel
+    public class KeyConfigurationInputModel : IValidatableObject
     {
         public KeyConfigurationInputModel()
         {
@@ -34,6 +34,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 
         public string SigningCertificate { get; set; }
         public string DecryptionCertificate { get; set; }
+        [UIHint("SymmetricKey")]
         public string SymmetricSigningKey { get; set; }
 
         public void Update(Repositories.IConfigurationRepository ConfigurationRepository)
@@ -74,17 +75,28 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(SymmetricSigningKey))
-            {
-                keys.SymmetricSigningKey = Convert.ToBase64String(CryptoRandom.CreateRandomKey(32));
-            }
-            else
-            {
-                keys.SymmetricSigningKey = SymmetricSigningKey;
-            }
+            keys.SymmetricSigningKey = SymmetricSigningKey;
 
             // updates key material config
             ConfigurationRepository.Keys = keys;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var errors = new List<ValidationResult>();
+            try
+            {
+                var bytes = Convert.FromBase64String(this.SymmetricSigningKey);
+                if (bytes.Length != 32)
+                {
+                    errors.Add(new ValidationResult("Invalid length (32 bytes expected).", new string[] { "SymmetricSigningKey" }));
+                }
+            }
+            catch(FormatException ex)
+            {
+                errors.Add(new ValidationResult(ex.Message, new string[] { "SymmetricSigningKey" }));
+            }
+            return errors;
         }
     }
 

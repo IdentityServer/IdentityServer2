@@ -198,7 +198,6 @@
       <DependentUpon>Admin.less</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Scripts\Admin.js" />
-    <Content Include="Areas\Admin\Scripts\RP.js" />
     <Content Include="Content\images\error.png" />
     <Content Include="Content\images\help.png" />
     <Content Include="Content\images\logo.jpg" />
@@ -290,7 +289,7 @@
     <Content Include="Areas\Admin\Views\ClientCertificate\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ClientCertificate\Configure.cshtml" />
     <Content Include="Areas\Admin\Views\KeyConfiguration\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Base64.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\SymmetricKey.cshtml" />
     <Content Include="Areas\Admin\Views\Diagnostics\Index.cshtml" />
     <Content Include="Areas\Admin\Views\IP\Index.cshtml" />
     <Content Include="Areas\Admin\Views\IP\IP.cshtml" />

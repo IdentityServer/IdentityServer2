@@ -1,8 +1,7 @@
-﻿@model byte[]
-@using Thinktecture.IdentityServer.Web.Utility
+﻿@using Thinktecture.IdentityServer.Web.Utility
 
 @{
-    var value = Model != null ? Convert.ToBase64String(Model) : String.Empty;
+    var value = Model as string;
     var id = this.ViewData.TemplateInfo.GetFullHtmlFieldId("");
 }
 @Html.TextBox("", value, new { @class="base64" })

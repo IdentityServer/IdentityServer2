@@ -20,6 +20,9 @@
 }
 @section scripts
 {
+    <script>
+        var cryptoRandomUrl = '@Url.Action("Random", "Home")';
+    </script>
     <script src="~/Areas/Admin/Scripts/Admin.js"></script>
     @RenderSection("scripts", false)
 }

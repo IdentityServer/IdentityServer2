@@ -10,10 +10,7 @@
         ViewBag.Title = "Relying Party : " + Model.Name;
     }
 }
-@{
-    var genUrl = Url.Action("CreateRandom", "RP");
-}
-@using (Html.BeginForm("RP", "RP", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data", data_base64url = genUrl }))
+@using (Html.BeginForm("RP", "RP", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("Error updating relying party")
@@ -35,7 +32,4 @@
             <button type="reset">Cancel</button>
         </div>
     </fieldset>
-}
-@section scripts{
-    <script src="~/Areas/Admin/Scripts/RP.js"></script>
 }

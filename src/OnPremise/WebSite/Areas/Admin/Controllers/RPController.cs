@@ -208,11 +208,6 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
             return View("RP", rp);
         }
-        
-        public ActionResult CreateRandom()
-        {
-            return Content(Convert.ToBase64String(CryptoRandom.CreateRandomKey(32)), "text/plain");
-        }
     }
 }
 
