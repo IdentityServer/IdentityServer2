@@ -25,6 +25,7 @@ namespace Thinktecture.IdentityServer.Models
         
         [Required]
         [Display(Name = "Realm Name", Description = "Realm identifier.")]
+        [AbsoluteUri]
         public Uri Realm { get; set; }
 
         [Required]
@@ -32,6 +33,7 @@ namespace Thinktecture.IdentityServer.Models
         public int TokenLifeTime { get; set; }
 
         [Display(Name = "Reply To", Description = "URL to return to once a token is issued.")]
+        [Url]
         public Uri ReplyTo { get; set; }
 
         [Display(Order=10002, Name = "Encrypting Certificate", Description = "Optional X.509 certificate to encrypt outgoing tokens.")]

@@ -160,6 +160,7 @@
     <Compile Include="TokenService\TokenServiceConfiguration.cs" />
     <Compile Include="TokenService\X509CertificateSessionSecurityTokenHandler.cs" />
     <Compile Include="Tracing\Tracing.cs" />
+    <Compile Include="AbsoluteUriAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\Configuration\" />

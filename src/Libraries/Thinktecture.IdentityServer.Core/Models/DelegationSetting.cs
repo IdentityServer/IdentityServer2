@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Thinktecture.IdentityServer.Models
@@ -20,7 +21,7 @@ namespace Thinktecture.IdentityServer.Models
 
         [Required]
         [Display(Name = "Realm", Description = "Realm identifier where the identity can be delegated to.")]
+        [AbsoluteUri]
         public Uri Realm { get; set; }
-        
     }
 }
