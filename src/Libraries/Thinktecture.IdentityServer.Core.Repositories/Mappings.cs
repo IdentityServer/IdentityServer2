@@ -411,7 +411,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 Name = idp.Name,
                 DisplayName = idp.DisplayName,
-                Type = "WS*",
+                Type = IdentityProviderTypes.WS,
                 WSFederationEndpoint = idp.WSFederationEndpoint,
                 IssuerThumbprint = idp.IssuerThumbprint
             };
