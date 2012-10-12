@@ -5,6 +5,16 @@
     ViewBag.Meta = "<meta name=\"viewport\" content=\"width=320\" />";
 }
 
+@if (User.Identity.IsAuthenticated)
+{
+    <h2>
+        You are currenty logged in as @User.Identity.Name, but you requested a resource
+        that you were not authorized for. Either provide credentials that do have access
+        or contact your administrator to grant you access.
+    </h2>
+}
+
+
 <h2>Username / Password Sign In</h2>
 
 @Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
