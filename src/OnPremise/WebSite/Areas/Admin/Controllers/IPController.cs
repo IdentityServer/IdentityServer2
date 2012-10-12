@@ -139,6 +139,8 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
             }
             
+            // if we're here, then we should clear name so the view thinks it's new
+            model.Name = null;
             return View("IP", model);
         }
         
