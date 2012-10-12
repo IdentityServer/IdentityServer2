@@ -16,5 +16,8 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         public string Password { get; set; }
         
         public string Email { get; set; }
+
+        [Editable(false)]
+        public UserRoleAssignment[] Roles { get; set; }
     }
 }

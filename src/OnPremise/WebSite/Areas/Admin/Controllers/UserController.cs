@@ -38,7 +38,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
         {
             if (action == "new") return Create();
             if (action == "delete") return Delete(list);
-            
+
             ModelState.AddModelError("", "Invalid action.");
             var vm = new UsersViewModel(UserManagementRepository, null);
             return View("Index", vm);
@@ -47,7 +47,10 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            return View("Create", new UserInputModel());
+            var rolesvm = new UserRolesViewModel(UserManagementRepository, String.Empty);
+            var vm = new UserInputModel();
+            vm.Roles = rolesvm.RoleAssignments;
+            return View("Create", vm);
         }
 
         [HttpPost]
@@ -59,6 +62,11 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.UserManagementRepository.CreateUser(model.Username, model.Password, model.Email);
+                    var roles = model.Roles.Where(x => x.InRole).Select(x => x.Role);
+                    if (roles.Any())
+                    {
+                        this.UserManagementRepository.SetRolesForUser(model.Username, roles);
+                    }
                     TempData["Message"] = "User Created";
                     return RedirectToAction("Index");
                 }
@@ -69,7 +77,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 catch
                 {
                     ModelState.AddModelError("", "Error creating user.");
-                }                
+                }
             }
             return View("Create", model);
         }
@@ -80,7 +88,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             {
                 try
                 {
-                    foreach (var name in list.Where(x=>x.Delete).Select(x=>x.Username))
+                    foreach (var name in list.Where(x => x.Delete).Select(x => x.Username))
                     {
                         this.UserManagementRepository.DeleteUser(name);
                     }
@@ -112,13 +120,24 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             var vm = new UserRolesViewModel(this.UserManagementRepository, id);
             if (ModelState.IsValid)
             {
-                var currentRoles = 
-                    roleAssignments.Where(x=>x.InRole).Select(x=>x.Role);
-                this.UserManagementRepository.SetRolesForUser(id, currentRoles);
-                TempData["Message"] = "Roles Assigned Successfully";
-                return RedirectToAction("Index");
+                try
+                {
+                    var currentRoles =
+                        roleAssignments.Where(x => x.InRole).Select(x => x.Role);
+                    this.UserManagementRepository.SetRolesForUser(id, currentRoles);
+                    TempData["Message"] = "Roles Assigned Successfully";
+                    return RedirectToAction("Roles", new { id });
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Error deleting user.");
+                }
             }
-            
+
             return View("Roles", vm);
         }
     }

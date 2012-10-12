@@ -68,6 +68,9 @@
 .editor .inline-editor * input {
   width: auto;
 }
+.editor .inline-editor.create-user-roles * label {
+  width: 230px;
+}
 .editor div.buttons {
   padding-top: 10px;
   text-align: right;
