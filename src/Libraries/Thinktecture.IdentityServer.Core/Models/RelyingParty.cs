@@ -13,7 +13,6 @@ namespace Thinktecture.IdentityServer.Models
     {
         [Required]
         [Editable(false)]
-        //[Display(Name = "ID", Description = "")]
         public string Id { get; set; }
         
         [Display(Name = "Enabled", Description = "Enabled or disable this RP.")]
@@ -24,7 +23,7 @@ namespace Thinktecture.IdentityServer.Models
         public string Name { get; set; }
         
         [Required]
-        [Display(Name = "Realm Name", Description = "Realm identifier.")]
+        [Display(Name = "Realm/Scope Name", Description = "Realm/Scope identifier URI.")]
         [AbsoluteUri]
         public Uri Realm { get; set; }
 
@@ -32,7 +31,7 @@ namespace Thinktecture.IdentityServer.Models
         [Display(Name = "Token life time (in minutes)", Description = "Can be used to override the default token lifetime (a value of 0 uses the global default).")]
         public int TokenLifeTime { get; set; }
 
-        [Display(Name = "Reply To", Description = "URL to return to once a token is issued.")]
+        [Display(Name = "Redirect URL", Description = "URL to return to once a token is issued.")]
         [Url]
         public Uri ReplyTo { get; set; }
 
