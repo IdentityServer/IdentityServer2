@@ -126,7 +126,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             try
             {
                 this.RelyingPartyRepository.Delete(id);
-                TempData["Message"] = "RP Deleted";
+                TempData["Message"] = "Delete Successful";
                 return RedirectToAction("Index");
             }
             catch (ValidationException ex)
@@ -156,7 +156,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.RelyingPartyRepository.Add(rp);
-                    TempData["Message"] = "RP Created";
+                    TempData["Message"] = "Create Successful";
                     return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
