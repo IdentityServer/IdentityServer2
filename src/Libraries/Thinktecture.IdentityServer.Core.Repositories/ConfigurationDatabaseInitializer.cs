@@ -39,6 +39,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                         CreateTestIdentityProviders().ForEach(idp => context.IdentityProviders.Add(idp));
                         CreateTestDelegationSettings().ForEach(d => context.Delegation.Add(d));
                         CreateTestClientCertificateSettings().ForEach(cc => context.ClientCertificates.Add(cc));
+                        CreateTestClients().ForEach(c => context.Clients.Add(c));
 
                         return;
                     }
@@ -293,6 +294,20 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Type = Models.IdentityProviderTypes.WS,
                     WSFederationEndpoint = "https://adfs.leastprivilege.vm/adfs/ls/",
                     IssuerThumbprint = "DD4F4E11A52701FB98F4B55AAC406EB5D96C059B"
+                }
+            };
+        }
+
+        private List<Client> CreateTestClients()
+        {
+            return new List<Client>
+            {
+                new Client
+                {
+                    Name = "Test Client",
+                    Description = "Test Client",
+                    ClientId = "test",
+                    ClientSecret = "secret"
                 }
             };
         }
