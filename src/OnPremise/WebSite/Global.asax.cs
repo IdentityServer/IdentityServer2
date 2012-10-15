@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Thinktecture.IdentityModel.Web;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Repositories.Sql;
 
@@ -53,9 +54,9 @@ namespace Thinktecture.IdentityServer.Web
 
             if (context.Response.StatusCode == 401)
             {
-                var noRedirect = context.Items[Thinktecture.IdentityModel.Constants.Internal.NoRedirectLabel];
+                var marker = NoRedirectMarker.Get();
 
-                if (noRedirect == null)
+                if (!marker.HasValue || marker == false)
                 {
                     var route = new RouteValueDictionary(new Dictionary<string, object>
                         {
