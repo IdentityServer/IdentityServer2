@@ -5,6 +5,7 @@
 
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
+using Thinktecture.IdentityModel.Authorization;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Web.GlobalFilter
@@ -19,7 +20,7 @@ namespace Thinktecture.IdentityServer.Web.GlobalFilter
             Container.Current.SatisfyImportsOnce(this);
 
             filterContext.Controller.ViewBag.SiteName = ConfigurationRepository.Global.SiteName;
-            filterContext.Controller.ViewBag.IsAdministrator = ClaimsAuthorize.CheckAccess(Constants.Actions.Administration, Constants.Resources.UI);
+            filterContext.Controller.ViewBag.IsAdministrator = ClaimsAuthorization.CheckAccess(Constants.Actions.Administration, Constants.Resources.UI);
             filterContext.Controller.ViewBag.IsSignedIn = filterContext.HttpContext.User.Identity.IsAuthenticated;
 
             base.OnActionExecuting(filterContext);
