@@ -31,6 +31,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             using (var entities = IdentityServerConfigurationContext.Get())
             {
+                item.IssuerThumbprint = item.IssuerThumbprint.Replace(" ", "");
                 entities.IdentityProviders.Add(item.ToEntity());
                 entities.SaveChanges();
             }

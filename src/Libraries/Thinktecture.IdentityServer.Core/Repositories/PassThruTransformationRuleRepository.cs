@@ -9,7 +9,6 @@ namespace Thinktecture.IdentityServer.Repositories
     {
         public IEnumerable<Claim> ProcessClaims(ClaimsPrincipal incomingPrincipal, IdentityProvider identityProvider, RequestDetails details)
         {
-            //var claims = incomingPrincipal.FindAll(c => c.Type != Constants.Claims.IdentityProvider);
             return incomingPrincipal.Claims;
         }
     }

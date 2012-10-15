@@ -17,6 +17,7 @@ using Newtonsoft.Json.Linq;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
+using Thinktecture.IdentityModel.Web;
 
 namespace Thinktecture.IdentityServer.Protocols.WSFederation
 {
