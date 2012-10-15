@@ -23,19 +23,16 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public DbSet<SimpleHttpConfiguration> SimpleHttp { get; set; }
         public DbSet<DiagnosticsConfiguration> Diagnostics { get; set; }
         
-
         public DbSet<ClientCertificates> ClientCertificates { get; set; }
         public DbSet<Delegation> Delegation { get; set; }
         public DbSet<RelyingParties> RelyingParties { get; set; }
         public DbSet<IdentityProvider> IdentityProviders { get; set; }
-
-
+        public DbSet<Client> Clients { get; set; }
 
         public static Func<IdentityServerConfigurationContext> FactoryMethod { get; set; }
 
         public IdentityServerConfigurationContext()
-        {            
-        }
+        { }
 
         public IdentityServerConfigurationContext(DbConnection conn) : base(conn, true)
         {
