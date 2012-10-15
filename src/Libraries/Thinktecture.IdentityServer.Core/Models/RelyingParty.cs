@@ -32,7 +32,7 @@ namespace Thinktecture.IdentityServer.Models
         public int TokenLifeTime { get; set; }
 
         [Display(Name = "Redirect URL", Description = "URL to return to once a token is issued.")]
-        [Url]
+        [UrlValidator]
         public Uri ReplyTo { get; set; }
 
         [Display(Order=10002, Name = "Encrypting Certificate", Description = "Optional X.509 certificate to encrypt outgoing tokens.")]
