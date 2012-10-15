@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Thinktecture.IdentityModel.Authorization.Mvc;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels;
 

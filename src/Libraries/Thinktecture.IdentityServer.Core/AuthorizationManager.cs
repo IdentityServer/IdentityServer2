@@ -8,6 +8,7 @@ using System.ComponentModel.Composition;
 using System.Linq;
 using System.Security.Claims;
 using Thinktecture.IdentityModel;
+using Thinktecture.IdentityModel.Authorization;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityServer.Repositories;
@@ -35,7 +36,7 @@ namespace Thinktecture.IdentityServer
             var id = context.Principal.Identities.First();
 
             // if application authorization request
-            if (action.Type.Equals(ClaimsAuthorize.ActionType))
+            if (action.Type.Equals(ClaimsAuthorization.ActionType))
             {
                 return AuthorizeCore(action, context.Resource, context.Principal.Identity as ClaimsIdentity);
             }
@@ -43,7 +44,7 @@ namespace Thinktecture.IdentityServer
             // if ws-trust issue request
             if (action.Value.Equals(WSTrust13Constants.Actions.Issue))
             {
-                return AuthorizeTokenIssuance(new Collection<Claim> { new Claim(ClaimsAuthorize.ResourceType, Constants.Resources.WSTrust) }, id);
+                return AuthorizeTokenIssuance(new Collection<Claim> { new Claim(ClaimsAuthorization.ResourceType, Constants.Resources.WSTrust) }, id);
             }
 
             return base.CheckAccess(context);

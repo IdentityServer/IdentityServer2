@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel;
+using Thinktecture.IdentityModel.Authorization.Mvc;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 {

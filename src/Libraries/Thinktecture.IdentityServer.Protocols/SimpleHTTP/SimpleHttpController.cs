@@ -5,11 +5,12 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using Thinktecture.IdentityModel.Authorization.WebApi;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.SimpleHTTP
 {
-    [ApiClaimsAuthorize(Constants.Actions.Issue, Constants.Resources.SimpleHttp)]
+    [ClaimsAuthorize(Constants.Actions.Issue, Constants.Resources.SimpleHttp)]
     public class SimpleHttpController : ApiController
     {
         [Import]

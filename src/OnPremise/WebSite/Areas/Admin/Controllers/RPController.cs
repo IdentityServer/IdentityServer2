@@ -8,6 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel;
+using Thinktecture.IdentityModel.Authorization.Mvc;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels;

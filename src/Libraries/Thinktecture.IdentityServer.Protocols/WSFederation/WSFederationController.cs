@@ -9,6 +9,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using Thinktecture.IdentityModel.Authorization.Mvc;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
 
