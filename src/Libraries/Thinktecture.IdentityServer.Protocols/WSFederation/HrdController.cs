@@ -119,6 +119,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             var registry = new IdentityProviderIssuerNameRegistry(IdentityProviderRepository.GetAll());
             config.IssuerNameRegistry = registry;
             config.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
+            config.CertificateValidator = X509CertificateValidator.None;
 
             var handler = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(config);
             var identity = handler.ValidateToken(token).First();

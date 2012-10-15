@@ -37,14 +37,14 @@ namespace Thinktecture.IdentityServer.Web
             }
 
             // ws-federation HRD
-            //if (configuration.WSFederation.Enabled && configuration.WSFederation.EnableFederation)
-            //{
-            //    routes.MapRoute(
-            //        "hrd",
-            //        "issue/hrd",
-            //        new { controller = "Hrd", action = "issue" }
-            //    );
-            //}
+            if (configuration.WSFederation.Enabled && configuration.WSFederation.EnableFederation)
+            {
+                routes.MapRoute(
+                    "hrd",
+                    "issue/hrd",
+                    new { controller = "Hrd", action = "issue" }
+                );
+            }
 
             // oauth2 endpoint
             if (configuration.OAuth2.Enabled)
