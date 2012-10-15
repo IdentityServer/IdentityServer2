@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
+using Thinktecture.IdentityModel.Authorization;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
@@ -75,7 +76,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             {
                 principal = auth.CreatePrincipal(userName, "OAuth2");
 
-                if (!ApiClaimsAuthorize.CheckAccess(principal, Constants.Actions.Issue, Constants.Resources.OAuth2))
+                if (!ClaimsAuthorization.CheckAccess(principal, Constants.Actions.Issue, Constants.Resources.OAuth2))
                 {
                     return UnauthorizedResponse(userName);
                 }
