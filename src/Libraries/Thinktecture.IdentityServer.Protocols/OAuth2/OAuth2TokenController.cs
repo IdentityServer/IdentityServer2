@@ -53,12 +53,12 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             }
 
             // check grant type
-            if (string.Equals(tokenRequest.Grant_Type, OAuthConstants.GrantTypes.Password, System.StringComparison.Ordinal))
+            if (string.Equals(tokenRequest.GrantType, OAuth2Constants.GrantTypes.Password, System.StringComparison.Ordinal))
             {
                 return ProcessResourceOwnerCredentialRequest(tokenRequest.UserName, tokenRequest.Password, appliesTo, tokenType);
             }
 
-            Tracing.Error("invalid grant type: " + tokenRequest.Grant_Type);
+            Tracing.Error("invalid grant type: " + tokenRequest.GrantType);
             return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid grant type.");
         }
 

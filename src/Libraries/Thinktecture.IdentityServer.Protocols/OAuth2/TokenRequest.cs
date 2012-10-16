@@ -12,7 +12,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
     {
         [Required]
         [JsonProperty(PropertyName = "grant_type")]
-        public string Grant_Type { get; set; }
+        public string GrantType { get; set; }
 
         [JsonProperty(PropertyName = "scope")]
         public string Scope { get; set; }
