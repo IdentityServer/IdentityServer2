@@ -306,6 +306,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 {
                     Name = "Test Client",
                     Description = "Test Client",
+                    RedirectUri = "ms-app://s-1-15-2-756967155-51850-665164220-3494723435-3400456802-3915619528-546309680/",
                     ClientId = "test",
                     ClientSecret = "secret"
                 }

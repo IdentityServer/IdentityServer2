@@ -353,6 +353,20 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         }
         #endregion
 
+        #region Clients
+        public static Models.Client ToDomainModel(this Entities.Client client)
+        {
+            return new Models.Client
+            {
+                ClientId = client.ClientId,
+                ClientSecret = client.ClientSecret,
+                Description = client.Description,
+                Name = client.Name,
+                RedirectUri = new Uri(client.RedirectUri)
+            };
+        }
+        #endregion
+
         #region Delegation
         public static List<DelegationSetting> ToDomainModel(this List<Delegation> entities)
         {

@@ -55,6 +55,8 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             // check grant type
             if (string.Equals(tokenRequest.GrantType, OAuth2Constants.GrantTypes.Password, System.StringComparison.Ordinal))
             {
+                // todo: check if that flow is enabled, and if client auth is required
+
                 return ProcessResourceOwnerCredentialRequest(tokenRequest.UserName, tokenRequest.Password, appliesTo, tokenType);
             }
 

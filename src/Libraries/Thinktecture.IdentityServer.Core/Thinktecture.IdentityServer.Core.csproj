@@ -128,6 +128,7 @@
     <Compile Include="Models\IdentityProvider.cs" />
     <Compile Include="Models\IdentityProviderTypes.cs" />
     <Compile Include="Models\Configuration\DiagnosticsConfiguration.cs" />
+    <Compile Include="Repositories\IClientsRepository.cs" />
     <Compile Include="Repositories\IConfigurationRepository.cs" />
     <Compile Include="Repositories\IClaimsRepository.cs" />
     <Compile Include="Repositories\IClaimsTransformationRulesRepository.cs" />
@@ -161,9 +162,7 @@
     <Compile Include="AbsoluteUriAttribute.cs" />
     <Compile Include="UrlValidatorAttribute.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\Configuration\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
