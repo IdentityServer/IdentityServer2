@@ -131,7 +131,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
        
         private ActionResult ShowHomeRealmSelection()
         {
-            throw new System.NotImplementedException();
+            return View("HRD");
         }
 
         private ActionResult RedirectToIdentityProvider(SignInRequestMessage request)
