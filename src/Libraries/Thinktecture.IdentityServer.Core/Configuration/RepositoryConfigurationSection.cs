@@ -181,6 +181,31 @@ namespace Thinktecture.IdentityServer.Configuration
 
         #endregion
 
+        #region ClientsRepository Property
+
+        /// <summary>
+        /// The XML name of the <see cref="ConfigurationProvider"/> property.
+        /// </summary>
+        internal const global::System.String ClientsRepositoryPropertyName = "clientsRepository";
+
+        /// <summary>
+        /// Gets or sets type of the class that provides encryption certificates
+        /// </summary>
+        [global::System.Configuration.ConfigurationProperty(ClientsRepositoryPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.Sql.ClientCertificatesRepository, Thinktecture.IdentityServer.Core.Repositories")]
+        public global::System.String Clients
+        {
+            get
+            {
+                return (global::System.String)base[ClientsRepositoryPropertyName];
+            }
+            set
+            {
+                base[ClientsRepositoryPropertyName] = value;
+            }
+        }
+
+        #endregion
+
         #region IdentityProvider Property
 
         /// <summary>
