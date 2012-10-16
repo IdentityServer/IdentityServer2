@@ -408,6 +408,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 Name = idp.Name,
                 DisplayName = idp.DisplayName,
+                ShowInHrdSelection = idp.ShowInHrdSelection,
                 //Type = idp.Type,
                 WSFederationEndpoint = idp.WSFederationEndpoint,
                 IssuerThumbprint = idp.IssuerThumbprint
