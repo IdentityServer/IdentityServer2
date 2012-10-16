@@ -35,7 +35,7 @@ namespace Thinktecture.IdentityServer.Tests
 
         public static class OAuth2
         {
-            public static string LocalBaseAddress = "https://" + HostName + "/issue/oauth2";
+            public static string LocalBaseAddress = "https://" + HostName + "/issue/oauth2/token";
             public static string CloudBaseAddress = "https://idp.thinktecture.com/issue/oauth2";
         }
 

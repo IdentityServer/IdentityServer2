@@ -49,10 +49,18 @@ namespace Thinktecture.IdentityServer.Web
             // oauth2 endpoint
             if (configuration.OAuth2.Enabled)
             {
+                // token endpoint
                 routes.MapHttpRoute(
-                    name: "oauth2",
-                    routeTemplate: "issue/oauth2",
-                    defaults: new { controller = "OAuth2" }
+                    name: "oauth2token",
+                    routeTemplate: "issue/oauth2/token",
+                    defaults: new { controller = "OAuth2Token" }
+                );
+
+                // authorize endpoint
+                routes.MapRoute(
+                    "oauth2authorize",
+                    "issue/oauth2/token",
+                    new { controller = "OAuth2Authorize", action = "index" }
                 );
             }
 

@@ -15,7 +15,7 @@ using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {
-    public class OAuth2Controller : ApiController
+    public class OAuth2TokenController : ApiController
     {
         [Import]
         public IUserRepository UserRepository { get; set; }
@@ -23,12 +23,12 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
-        public OAuth2Controller()
+        public OAuth2TokenController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public OAuth2Controller(IUserRepository userRepository, IConfigurationRepository configurationRepository)
+        public OAuth2TokenController(IUserRepository userRepository, IConfigurationRepository configurationRepository)
         {
             UserRepository = userRepository;
             ConfigurationRepository = configurationRepository;

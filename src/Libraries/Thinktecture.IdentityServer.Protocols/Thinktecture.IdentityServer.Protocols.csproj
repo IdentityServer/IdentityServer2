@@ -68,10 +68,11 @@
   <ItemGroup>
     <Compile Include="JSNotify\JSNotifyController.cs" />
     <Compile Include="JSNotify\JSNotifyResult.cs" />
+    <Compile Include="OAuth2\OAuth2AuthorizeController.cs" />
     <Compile Include="Shared\AuthenticationHelper.cs" />
     <Compile Include="FederationMetadata\FederationMetadataController.cs" />
     <Compile Include="FederationMetadata\WSFederationMetadataGenerator.cs" />
-    <Compile Include="OAuth2\OAuth2Controller.cs" />
+    <Compile Include="OAuth2\OAuth2TokenController.cs" />
     <Compile Include="OAuth2\TokenRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\OAuthConstants.cs" />
