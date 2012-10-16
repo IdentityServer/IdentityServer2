@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Thinktecture.IdentityModel.Tokens.Http;
+using Thinktecture.IdentityServer.Protocols.OAuth2;
 using Thinktecture.IdentityServer.Protocols.WSTrust;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
@@ -14,6 +15,7 @@ namespace Thinktecture.IdentityServer.Web
         public static void RegisterProtocols(HttpConfiguration httpConfiguration, RouteCollection routes, IConfigurationRepository configuration, IUserRepository users, IRelyingPartyRepository relyingParties)
         {
             var basicAuthConfig = CreateBasicAuthConfig(users);
+            var clientAuthConfig = CreateClientAuthConfig();
 
             #region Protocols
             // federation metadata
@@ -49,12 +51,13 @@ namespace Thinktecture.IdentityServer.Web
             // oauth2 endpoint
             if (configuration.OAuth2.Enabled)
             {
-                // todo: add client auth handler
                 // token endpoint
                 routes.MapHttpRoute(
                     name: "oauth2token",
                     routeTemplate: "issue/oauth2/token",
-                    defaults: new { controller = "OAuth2Token" }
+                    defaults: new { controller = "OAuth2Token" },
+                    constraints: null,
+                    handler: new AuthenticationHandler(clientAuthConfig, httpConfiguration)
                 );
 
                 // authorize endpoint
@@ -100,6 +103,20 @@ namespace Thinktecture.IdentityServer.Web
             };
 
             authConfig.AddBasicAuthentication((userName, password) => userRepository.ValidateUser(userName, password));
+            return authConfig;
+        }
+
+        public static AuthenticationConfiguration CreateClientAuthConfig()
+        {
+            var authConfig = new AuthenticationConfiguration
+            {
+                InheritHostClientIdentity = false,
+                DefaultAuthenticationScheme = "Basic",
+                SetNoRedirectMarker = true,
+            };
+
+            var validator = new ClientValidator();
+            authConfig.AddBasicAuthentication((id, secret) => validator.ValidateClient(id, secret));
             return authConfig;
         }
     }

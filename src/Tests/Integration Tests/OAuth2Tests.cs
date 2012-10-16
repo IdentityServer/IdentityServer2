@@ -43,6 +43,25 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(HttpRequestException))]
+        public void ValidUserNameCredentialInvalidClientCredential()
+        {
+            var client = new OAuth2Client(new Uri(baseAddress), "invalid", "invalid");
+
+            var response = client.RequestAccessTokenUserName(
+                Constants.Credentials.ValidUserName,
+                Constants.Credentials.ValidPassword,
+                scope);
+
+            Assert.IsTrue(response != null, "response is null");
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(response.AccessToken), "access token is null");
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(response.TokenType), "token type is null");
+            Assert.IsTrue(response.ExpiresIn > 0, "expiresIn is 0");
+
+            Trace.WriteLine(response.AccessToken);
+        }
+
+        [TestMethod]
         public void ValidUserNameCredentialWithTokenValidation()
         {
             var client = new OAuth2Client(new Uri(baseAddress));
