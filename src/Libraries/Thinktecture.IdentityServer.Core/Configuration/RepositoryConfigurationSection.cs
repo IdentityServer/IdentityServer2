@@ -192,7 +192,7 @@ namespace Thinktecture.IdentityServer.Configuration
         /// Gets or sets type of the class that provides encryption certificates
         /// </summary>
         [global::System.Configuration.ConfigurationProperty(ClientsRepositoryPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "Thinktecture.IdentityServer.Repositories.Sql.ClientCertificatesRepository, Thinktecture.IdentityServer.Core.Repositories")]
-        public global::System.String Clients
+        public global::System.String ClientsRepository
         {
             get
             {
