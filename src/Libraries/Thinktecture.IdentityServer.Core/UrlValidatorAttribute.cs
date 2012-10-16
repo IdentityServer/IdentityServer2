@@ -23,6 +23,7 @@ namespace Thinktecture.IdentityServer
 
         public override bool IsValid(object value)
         {
+            return true;
             if (value == null) return true;
             var url = value.ToString();
             var isValid = _regex.IsMatch(url);
