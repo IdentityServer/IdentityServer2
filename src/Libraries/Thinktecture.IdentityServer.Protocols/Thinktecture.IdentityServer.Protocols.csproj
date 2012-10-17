@@ -85,6 +85,7 @@
     <Compile Include="WRAP\WrapController.cs" />
     <Compile Include="WRAP\WrapResult.cs" />
     <Compile Include="WSFederation\HrdController.cs" />
+    <Compile Include="WSFederation\HrdViewModel.cs" />
     <Compile Include="WSFederation\WSFederationController.cs" />
     <Compile Include="WSFederation\WSFederationResult.cs" />
     <Compile Include="WSTrust\TokenServiceHostFactory.cs" />

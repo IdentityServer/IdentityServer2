@@ -133,29 +133,44 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             //Tracing.Verbose("HRD selection screen displayed.");
             var idps = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection);
-            ViewData["signin"] = message.WriteQueryString();
-            return View("HRD", idps);
+            if (idps.Count() == 1)
+            {
+                message.HomeRealm = idps.First().Name;
+                return ProcessSignInRequest(message);
+            }
+            else
+            {
+                var vm = new HrdViewModel(message, idps);
+                return View("HRD", vm);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Select")]
-        public ActionResult ProcessHRDSelection(string idp, string signin)
+        public ActionResult ProcessHRDSelection(string idp, string originalSigninUrl)
         {
             //Tracing.Verbose("HRD selected.");
 
             var ip = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Name == idp).FirstOrDefault();
             if (ip == null) return View("Error");
 
-            var uri = new Uri(signin);
-            var message = WSFederationMessage.CreateFromUri(uri);
-
-            // sign in 
-            var signinMessage = message as SignInRequestMessage;
-            if (signinMessage != null)
+            try
             {
-                signinMessage.HomeRealm = idp;
-                return ProcessSignInRequest(signinMessage);
+                var uri = new Uri(originalSigninUrl);
+                var message = WSFederationMessage.CreateFromUri(uri);
+
+                // sign in 
+                var signinMessage = message as SignInRequestMessage;
+                if (signinMessage != null)
+                {
+                    signinMessage.HomeRealm = idp;
+                    return ProcessSignInRequest(signinMessage);
+                }
+            }
+            catch(Exception ex)
+            {
+                Tracing.Error(ex.ToString());
             }
 
             return View("Error");

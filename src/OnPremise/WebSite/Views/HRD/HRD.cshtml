@@ -1,21 +1,21 @@
-﻿@model IEnumerable<Thinktecture.IdentityServer.Models.IdentityProvider>
+﻿@model Thinktecture.IdentityServer.Protocols.WSFederation.HrdViewModel
 
 @{
     ViewBag.Title = "HRD";
 }
 
 <h2>Choose an Identity Provider to Login</h2>
-@if(Model.Any())
+@if(Model.Providers.Any())
 {
     using(Html.BeginForm("Select", "HRD"))
     {
         @Html.AntiForgeryToken()
-        @Html.Hidden("signin", ViewData["signin"])
+        @Html.HiddenFor(x=>x.OriginalSigninUrl)
         <ul>
-            @foreach (var ip in Model)
+            @foreach (var provider in Model.Providers)
             {
                 <li>
-                    <button type="submit" name="idp" value="@ip.Name">@ip.DisplayName</button>
+                    <button type="submit" name="idp" value="@provider.ID">@provider.DisplayName</button>
                 </li>
             }
         </ul>
