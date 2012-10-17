@@ -115,8 +115,9 @@ namespace Thinktecture.IdentityServer.Web
                 SetNoRedirectMarker = true,
             };
 
-            var validator = new ClientValidator();
-            authConfig.AddBasicAuthentication((id, secret) => validator.ValidateClient(id, secret));
+            // accept arbitrary credentials on basic auth header,
+            // validation will be done in the protocol endpoint
+            authConfig.AddBasicAuthentication((id, secret) => true, retainPassword: true);
             return authConfig;
         }
     }

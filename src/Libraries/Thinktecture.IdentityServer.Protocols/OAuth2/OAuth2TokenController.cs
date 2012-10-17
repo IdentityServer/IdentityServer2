@@ -23,15 +23,19 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
+        [Import]
+        public IClientsRepository ClientsRepository { get; set; }
+
         public OAuth2TokenController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public OAuth2TokenController(IUserRepository userRepository, IConfigurationRepository configurationRepository)
+        public OAuth2TokenController(IUserRepository userRepository, IConfigurationRepository configurationRepository, IClientsRepository clientsRepository)
         {
             UserRepository = userRepository;
             ConfigurationRepository = configurationRepository;
+            ClientsRepository = clientsRepository;
         }
 
         public HttpResponseMessage Post(TokenRequest tokenRequest)
