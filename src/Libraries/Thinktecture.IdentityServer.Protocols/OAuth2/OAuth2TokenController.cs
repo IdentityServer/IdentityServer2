@@ -42,8 +42,19 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         {
             Tracing.Information("OAuth2 endpoint called.");
 
+            // client authentication needed?
+            if (ConfigurationRepository.OAuth2.RequireClientAuthentication)
+            {
+                if (!ValidateClient())
+                {
+                    Tracing.Error("Invalid client credentials: " + ClaimsPrincipal.Current.Identity.Name);
+                    return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidClient);
+                }
+            }
+
             var tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
 
+            // validate scope
             EndpointReference appliesTo;
             try
             {
@@ -53,27 +64,28 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             catch
             {
                 Tracing.Error("Malformed scope: " + tokenRequest.Scope);
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "malformed scope name.");
+                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidScope);
             }
 
             // check grant type
             if (string.Equals(tokenRequest.Grant_Type, OAuth2Constants.GrantTypes.Password, System.StringComparison.Ordinal))
             {
-                // todo: check if that flow is enabled, and if client auth is required
-
-                return ProcessResourceOwnerCredentialRequest(tokenRequest.UserName, tokenRequest.Password, appliesTo, tokenType);
+                if (ConfigurationRepository.OAuth2.EnableResourceOwnerFlow)
+                {
+                    return ProcessResourceOwnerCredentialRequest(tokenRequest.UserName, tokenRequest.Password, appliesTo, tokenType);
+                }
             }
 
             Tracing.Error("invalid grant type: " + tokenRequest.Grant_Type);
-            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid grant type.");
+            return OAuthErrorResponseMessage(OAuth2Constants.Errors.UnsupportedGrantType);
         }
 
         private HttpResponseMessage ProcessResourceOwnerCredentialRequest(string userName, string password, EndpointReference appliesTo, string tokenType)
         {
-            if (string.IsNullOrWhiteSpace(userName))
+            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
             {
-                Tracing.Error("Missing username: " + appliesTo.Uri.AbsoluteUri);
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "missing user name.");
+                Tracing.Error("Invalid credentials for: " + appliesTo.Uri.AbsoluteUri);
+                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
             }
 
             var auth = new AuthenticationHelper();
@@ -84,12 +96,14 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
                 if (!ClaimsAuthorization.CheckAccess(principal, Constants.Actions.Issue, Constants.Resources.OAuth2))
                 {
-                    return UnauthorizedResponse(userName);
+                    Tracing.Error("OAuth2 endpoint authorization failed for user: " + userName);
+                    return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
                 }
             }
             else
             {
-                return UnauthorizedResponse(userName);
+                Tracing.Error("Resource owner credential validation failed: " + userName);
+                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
             }
 
             var sts = new STS();
@@ -101,21 +115,34 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             }
             else
             {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "invalid request.");
+                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidRequest);
             }
         }
 
-        private HttpResponseMessage UnauthorizedResponse(string userName)
+        private HttpResponseMessage OAuthErrorResponseMessage(string error)
         {
-            Tracing.Error("OAuth2 endpoint authorization failed for user: " + userName);
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest,
+                string.Format("{{ \"{0}\": \"{1}\" }}", OAuth2Constants.Errors.Error, error));
+        }
 
-            // todo: improve
-            if (HttpContext.Current != null)
+        private bool ValidateClient()
+        {
+            if (!ClaimsPrincipal.Current.Identity.IsAuthenticated)
             {
-                HttpContext.Current.Items[Thinktecture.IdentityModel.Constants.Internal.NoRedirectLabel] = true;
+                Tracing.Error("Anonymous client.");
+                return false;
             }
 
-            return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "unauthorized.");
+            var passwordClaim = ClaimsPrincipal.Current.FindFirst("password");
+            if (passwordClaim == null)
+            {
+                Tracing.Error("No password provided.");
+                return false;
+            }
+
+            return ClientsRepository.ValidateClient(
+                ClaimsPrincipal.Current.Identity.Name,
+                passwordClaim.Value);
         }
     }
 }

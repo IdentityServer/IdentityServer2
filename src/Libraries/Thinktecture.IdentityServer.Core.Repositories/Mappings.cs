@@ -206,7 +206,10 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             return new Models.Configuration.OAuth2Configuration
             {
-                Enabled = entity.Enabled
+                Enabled = entity.Enabled, 
+                EnableImplicitFlow = entity.EnableImplicitFlow,
+                EnableResourceOwnerFlow = entity.EnableResourceOwnerFlow,
+                RequireClientAuthentication = entity.RequireClientAuthentication
             };
         }
         
@@ -214,7 +217,10 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             return new Entities.Configuration.OAuth2Configuration
             {
-                Enabled = model.Enabled
+                Enabled = model.Enabled,
+                EnableImplicitFlow = model.EnableImplicitFlow,
+                EnableResourceOwnerFlow = model.EnableResourceOwnerFlow,
+                RequireClientAuthentication = model.RequireClientAuthentication
             };
         }
         #endregion
