@@ -57,10 +57,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 var dbitem = entities.IdentityProviders.Where(idp => idp.Name == item.Name).FirstOrDefault();
                 if (dbitem != null)
                 {
-                    dbitem.IssuerThumbprint = item.IssuerThumbprint;
-                    dbitem.DisplayName = item.DisplayName;
-                    dbitem.ShowInHrdSelection = item.ShowInHrdSelection;
-                    dbitem.WSFederationEndpoint = item.WSFederationEndpoint;
+                    item.UpdateEntity(dbitem);
                     entities.SaveChanges();
                 }
             }

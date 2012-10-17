@@ -10,16 +10,19 @@ namespace Thinktecture.IdentityServer.Models
     public class IdentityProvider
     {
         [Required]
-        [Display(Name = "Identifier", Description = "Unique identifier of the identity provider.")]
+        [Display(Order=1, Name = "Identifier", Description = "Unique identifier of the identity provider.")]
         [Editable(false)]
         public string Name { get; set; }
         
         [Required]
-        [Display(Name = "Display Name", Description = "Descriptive Name of the identity provider (for logging).")]
+        [Display(Order=2, Name = "Display Name", Description = "Descriptive Name of the identity provider (for logging).")]
         public string DisplayName { get; set; }
         
         [Display(Name = "Include in Home Realm Discovery", Description = "Specifies whether this provider will be shown in the HRD screen.")]
         public bool ShowInHrdSelection { get; set; }
+
+        [Display(Order=3,Name = "Enabled", Description = "Specifies whether this provider will used.")]
+        public bool Enabled { get; set; }
 
         [Display(Name = "WS-Federation Endpoint", Description = "Specifies the endpoint of for the WS-Federation protocol.")]
         [UrlValidator]

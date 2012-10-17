@@ -18,5 +18,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 
         public string WSFederationEndpoint { get; set; }
         public string IssuerThumbprint { get; set; }
+
+        public bool Enabled { get; set; }
     }
 }

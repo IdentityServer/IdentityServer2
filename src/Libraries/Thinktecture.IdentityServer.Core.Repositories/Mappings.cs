@@ -396,6 +396,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 select new Models.IdentityProvider
                 {
                     Name = idp.Name,
+                    Enabled = idp.Enabled,
                     DisplayName = idp.DisplayName,
                     //Type = idp.Type,
                     ShowInHrdSelection = idp.ShowInHrdSelection,
@@ -414,6 +415,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new Models.IdentityProvider
             {
                 Name = idp.Name,
+                Enabled = idp.Enabled,
                 DisplayName = idp.DisplayName,
                 ShowInHrdSelection = idp.ShowInHrdSelection,
                 //Type = idp.Type,
@@ -429,15 +431,27 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 return null;
             }
 
-            return new Entities.IdentityProvider
-            {
-                Name = idp.Name,
-                DisplayName = idp.DisplayName,
-                Type = IdentityProviderTypes.WS,
-                WSFederationEndpoint = idp.WSFederationEndpoint,
-                IssuerThumbprint = idp.IssuerThumbprint
-            };
+            var entity = new Entities.IdentityProvider();
+            idp.UpdateEntity(entity);
+            return entity;
         }
+
+        public static void UpdateEntity(this Models.IdentityProvider idp, Entities.IdentityProvider entity)
+        {
+            if (idp == null || entity == null)
+            {
+                return;
+            }
+
+            entity.Name = idp.Name;
+            entity.Enabled = idp.Enabled;
+            entity.ShowInHrdSelection = idp.ShowInHrdSelection;
+            entity.DisplayName = idp.DisplayName;
+            entity.Type = IdentityProviderTypes.WS;
+            entity.WSFederationEndpoint = idp.WSFederationEndpoint;
+            entity.IssuerThumbprint = idp.IssuerThumbprint;
+        }
+
         #endregion
     }
 }

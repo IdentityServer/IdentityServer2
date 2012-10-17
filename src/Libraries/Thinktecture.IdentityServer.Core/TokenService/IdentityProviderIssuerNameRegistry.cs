@@ -22,6 +22,7 @@ namespace Thinktecture.IdentityServer.TokenService
             {
                 var idp = (from i in _idps
                            where i.IssuerThumbprint.Equals(x509token.Certificate.Thumbprint, StringComparison.OrdinalIgnoreCase)
+                                 && i.Enabled
                            select i).FirstOrDefault();
 
                 if (idp != null)
