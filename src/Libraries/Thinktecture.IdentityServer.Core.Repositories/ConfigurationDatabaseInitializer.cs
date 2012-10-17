@@ -113,7 +113,10 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             return new OAuth2Configuration
             {
-                Enabled = false
+                Enabled = false,
+                EnableImplicitFlow = false,
+                EnableResourceOwnerFlow = false,
+                RequireClientAuthentication = true
             };
         }
 
@@ -196,7 +199,10 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             return new OAuth2Configuration
             {
-                Enabled = true
+                Enabled = true,
+                EnableImplicitFlow = true,
+                EnableResourceOwnerFlow = true,
+                RequireClientAuthentication = true
             };
         }
 
@@ -294,6 +300,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Type = Models.IdentityProviderTypes.WS,
                     WSFederationEndpoint = "https://adfs.leastprivilege.vm/adfs/ls/",
                     IssuerThumbprint = "DD4F4E11A52701FB98F4B55AAC406EB5D96C059B"
+                },
+                new IdentityProvider
+                {
+                    Name = "web",
+                    DisplayName = "ACS Namespace to integrate web identities",
+                    Type = Models.IdentityProviderTypes.WS,
+                    WSFederationEndpoint = "https://idsrvwebids.accesscontrol.windows.net/v2/wsfederation",
+                    IssuerThumbprint = "5AAD3C5CC1A5A715E791BEA85B4445D3CB29F33F"
                 }
             };
         }
@@ -304,8 +318,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 new Client
                 {
-                    Name = "Test Client",
-                    Description = "Test Client",
+                    Name = "Win8 Test Client",
+                    Description = "Test Client for Windows Store App",
                     RedirectUri = "ms-app://s-1-15-2-756967155-51850-665164220-3494723435-3400456802-3915619528-546309680/",
                     ClientId = "test",
                     ClientSecret = "secret"
