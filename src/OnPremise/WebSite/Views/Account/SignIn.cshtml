@@ -3,6 +3,10 @@
 @{
     ViewBag.Title = "Username / Password Sign In";
     ViewBag.Meta = "<meta name=\"viewport\" content=\"width=320\" />";
+    if (Model.IsSigninRequest)
+    {
+        Layout = "~/Views/Shared/_BrandingLayout.cshtml";
+    }
 }
 
 @if (User.Identity.IsAuthenticated)
@@ -53,9 +57,9 @@
 
         <br />
         
-        @if ((ViewBag.ShowClientCertificateLink != null) && (ViewBag.ShowClientCertificateLink))
+        @if (Model.ShowClientCertificateLink)
         { 
-            @Html.ActionLink("Use client certificate", "CertificateSignIn", new { returnUrl = ViewBag.ReturnUrl }) 
+            @Html.ActionLink("Use client certificate", "CertificateSignIn", new { returnUrl = Model.ReturnUrl }) 
         }
     </div>
 }

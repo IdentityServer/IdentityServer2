@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    @RenderSection("styles", false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+
+    <div class="masterHeader">
+        <img src="@Url.Content("~/Content/images/logo.jpg")" alt="Logo" />
+        <h2 class="masterHeaderText">@ViewBag.SiteName</h2>
+    </div>
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

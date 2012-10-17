@@ -32,15 +32,17 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         {
             // you can call AuthenticationHelper.GetRelyingPartyDetailsFromReturnUrl to get more information about the requested relying party
 
-            ViewBag.ReturnUrl = returnUrl;
-            ViewBag.ShowClientCertificateLink = ConfigurationRepository.Global.EnableClientCertificateAuthentication;
-
-            return View();
+            var vm = new SignInModel()
+            {
+                ReturnUrl = returnUrl,
+                ShowClientCertificateLink = ConfigurationRepository.Global.EnableClientCertificateAuthentication
+            };
+            return View(vm);
         }
 
         // handles the signin
         [HttpPost]
-        public ActionResult SignIn(SignInModel model, string returnUrl)
+        public ActionResult SignIn(SignInModel model)
         {
             if (ModelState.IsValid)
             {
@@ -52,7 +54,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                     return SignIn(
                         model.UserName, 
                         AuthenticationMethods.Password, 
-                        returnUrl, 
+                        model.ReturnUrl, 
                         model.EnableSSO, 
                         ConfigurationRepository.Global.SsoCookieLifetime);
                 }
@@ -60,7 +62,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
             ModelState.AddModelError("", "Incorrect credentials or no authorization.");
 
-            ViewBag.ShowClientCertificateLink = ConfigurationRepository.Global.EnableClientCertificateAuthentication;
+            model.ShowClientCertificateLink = ConfigurationRepository.Global.EnableClientCertificateAuthentication;
             return View(model);
         }
 
