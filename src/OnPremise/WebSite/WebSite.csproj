@@ -202,6 +202,9 @@
     <Content Include="Content\images\help.png" />
     <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\resources\jsnotify.htm" />
+    <Content Include="Content\Site.css">
+      <DependentUpon>Site.less</DependentUpon>
+    </Content>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -331,7 +334,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Content\Site.css" />
+    <None Include="Content\Site.less" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

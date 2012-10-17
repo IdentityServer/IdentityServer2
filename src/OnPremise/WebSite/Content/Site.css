@@ -1,178 +1,92 @@
-body
-{
-    font-family: Calibri, Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
+body {
+  font-family: Calibri, Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
+  color: #232323;
+  background-color: #fff;
 }
-
-#main-section
-{
-    margin:15px;
+#main-section {
+  margin: 15px;
 }
-
 /* Styles for basic forms
 -----------------------------------------------------------*/
-
-fieldset 
-{
-    border:1px solid #ddd;
-    padding:0 1.4em 1.4em 1.4em;
-    margin:0 0 1.5em 0;
+fieldset {
+  border: 1px solid #ddd;
+  padding: 0 1.4em 1.4em 1.4em;
+  margin: 0 0 1.5em 0;
 }
-
-legend 
-{
-    font-size:1.2em;
-    font-weight: bold;
+fieldset legend {
+  font-size: 1.2em;
+  font-weight: bold;
 }
-
-textarea 
-{
-    min-height: 75px;
+fieldset textarea {
+  min-height: 75px;
 }
-
-.editor-label 
-{
-    margin: 1em 0 0 0;
+fieldset .editor-label {
+  margin: 1em 0 0 0;
 }
-
-.editor-field 
-{
-    margin:0.5em 0 0 0;
+fieldset .editor-field {
+  margin: 0.5em 0 0 0;
 }
-
-.editor-field-slim
-{
-    margin:0.5em 0 0 0;
+fieldset .editor-field-slim {
+  margin: 0.5em 0 0 0;
 }
-
-.editor-field input[type=text],
-.editor-field input[type=password],
-.editor-field input[type=file],
-.editor-field input[type=url]
-{
-    width:400px
+fieldset .editor-field input[type=text],
+fieldset .editor-field input[type=password],
+fieldset .editor-field input[type=file],
+fieldset .editor-field input[type=url] {
+  width: 400px;
 }
-
 /* Styles for validation helpers
 -----------------------------------------------------------*/
-.field-validation-error
-{
-    color: #ff0000;
+.field-validation-error {
+  color: #ff0000;
 }
-
-.field-validation-valid
-{
-    display: none;
+.field-validation-valid {
+  display: none;
 }
-
-.input-validation-error
-{
-    border: 1px solid #ff0000;
-    background-color: #ffeeee;
+.input-validation-error {
+  border: 1px solid #ff0000;
+  background-color: #ffeeee;
 }
-
-.validation-summary-errors
-{
-    font-weight: bold;
-    color: #ff0000;
+.validation-summary-errors {
+  font-weight: bold;
+  color: #ff0000;
 }
-
-.validation-summary-valid
-{
-    display: none;
+.validation-summary-valid {
+  display: none;
 }
-
 /* Styles for the web frontent
 -----------------------------------------------------------*/
-
-
-a:link
-{
-    color: Black;
-    text-decoration: none;
+a {
+  color: black;
+  text-decoration: none;
 }
-
-a:visited
-{
-    color: Black;
-    text-decoration: none;
+a:hover {
+  text-decoration: underline;
 }
-a:hover
-{
-    color: Black;
-    text-decoration: overline underline;
+a.bodyLink {
+  color: #7285a3;
 }
-a:active
-{
-    color: Black;
-    text-decoration: none;
+.masterHeader {
+  background-color: #606060;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
-
-.masterHeader
-{
-    background-color: #606060;
-    padding-top: 5px;
-    padding-bottom: 5px;
+.masterHeaderText {
+  padding-left: 15px;
+  font-weight: bold;
+  color: White;
 }
-
-.masterHeaderText
-{
-    padding-left: 15px;
-    font-weight: bold;
-    color: White;
+.menu {
+  background-color: #7285a3;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #000000;
+  padding-left: 15px;
 }
-
-.menu
-{
-    background-color: #7285a3;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    color: #000000;
-    padding-left: 15px;
+.menu a {
+  color: #FFFFFF;
+  text-decoration: none;
 }
-
-.menu a:link
-{
-    color: #FFFFFF;
-    text-decoration: none;
+.menu a:hover {
+  text-decoration: underline;
 }
-
-.menu a:visited
-{
-    color: #FFFFFF;
-    text-decoration: none;
-}
-.menu a:hover
-{
-    color: #FFFFFF;
-    text-decoration: overline underline;
-}
-.menu a:active
-{
-    color: #FFFFFF;
-    text-decoration: none;
-}
-
-a.bodyLink:link
-{
-    color: #7285a3;
-    text-decoration: none;
-}
-a.bodyLink:visited
-{
-    color: #7285a3;
-    text-decoration: none;
-}
-
-a.bodyLink:hover
-{
-    color: #7285a3;
-    text-decoration: overline underline;
-}
-a.bodyLink:active
-{
-    color: #7285a3;
-    text-decoration: none;
-}
-
