@@ -28,7 +28,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         { }
         
         // shows the signin screen
-        public ActionResult SignIn(string returnUrl)
+        public ActionResult SignIn(string returnUrl, bool mobile=false)
         {
             // you can call AuthenticationHelper.GetRelyingPartyDetailsFromReturnUrl to get more information about the requested relying party
 
@@ -37,6 +37,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 ReturnUrl = returnUrl,
                 ShowClientCertificateLink = ConfigurationRepository.Global.EnableClientCertificateAuthentication
             };
+            if (mobile) vm.IsSigninRequest = true;
             return View(vm);
         }
 

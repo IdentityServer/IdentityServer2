@@ -18,50 +18,41 @@
     </h2>
 }
 
-
-<h2>Username / Password Sign In</h2>
-
-@Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
-
 @using (Html.BeginForm())
 {
-    <div>
-        <fieldset>
-            <legend>Account Information</legend>
+@Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
+    <fieldset>
+        <legend>Login</legend>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.UserName)
+        </div>
+        <div class="editor-field-slim">
+            @Html.TextBoxFor(m => m.UserName)
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
                 
-            <div class="editor-label">
-                @Html.LabelFor(m => m.UserName)
-            </div>
-            <div class="editor-field-slim">
-                @Html.TextBoxFor(m => m.UserName)
-                @Html.ValidationMessageFor(m => m.UserName)
-            </div>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.Password)
+        </div>
+        <div class="editor-field-slim">
+            @Html.PasswordFor(m => m.Password)
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
                 
-            <div class="editor-label">
-                @Html.LabelFor(m => m.Password)
-            </div>
-            <div class="editor-field-slim">
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </div>
+        <div class="editor-label">
+            @Html.CheckBoxFor(m => m.EnableSSO)
+            @Html.LabelFor(m => m.EnableSSO)
+        </div>
                 
-            <div class="editor-label">
-                @Html.CheckBoxFor(m => m.EnableSSO)
-                @Html.LabelFor(m => m.EnableSSO)
-            </div>
-                
-            <p>
-                <input type="submit" value="Sign In" />
-            </p>
-        </fieldset>
-
-        <br />
+        <p>
+            <input type="submit" value="Sign In" />
+        </p>
+    </fieldset>
         
-        @if (Model.ShowClientCertificateLink)
-        { 
-            @Html.ActionLink("Use client certificate", "CertificateSignIn", new { returnUrl = Model.ReturnUrl }) 
-        }
-    </div>
+    if (Model.ShowClientCertificateLink)
+    { 
+        @Html.ActionLink("Use client certificate", "CertificateSignIn", new { returnUrl = Model.ReturnUrl }) 
+    }
 }
 
 @section scripts

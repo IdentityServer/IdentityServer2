@@ -1,7 +1,10 @@
 ﻿@{
-Layout = "_BrandingLayout.cshtml";
+    Layout = "_BrandingLayout.cshtml";
+    ViewBag.SetContainerID = false;
 }
 
+@section menu
+{
 <div class="menu">
     @if (ViewBag.IsAdministrator)
     {
@@ -24,10 +27,7 @@ Layout = "_BrandingLayout.cshtml";
         @Html.ActionLink("[sign in]", "signin", "account", new{area=""}, null)
     }
 </div>
-
-<section id="main-section">
-    @RenderBody()
-</section>
+}
 
 @section styles
 {
@@ -38,3 +38,5 @@ Layout = "_BrandingLayout.cshtml";
 {
     @RenderSection("scripts", required: false)
 }
+
+@RenderBody()

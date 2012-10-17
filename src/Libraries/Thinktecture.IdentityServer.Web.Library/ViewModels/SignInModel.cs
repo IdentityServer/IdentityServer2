@@ -23,12 +23,21 @@ namespace Thinktecture.IdentityServer.Web.ViewModels
         [DisplayName("Remember me?")]
         public bool EnableSSO { get; set; }
 
+        bool? isSigninRequest;
         public bool IsSigninRequest
         {
             get
             {
-                var rp = new AuthenticationHelper().GetRelyingPartyDetailsFromReturnUrl(this.ReturnUrl);
-                return rp != null;
+                if (isSigninRequest == null)
+                {
+                    var rp = new AuthenticationHelper().GetRelyingPartyDetailsFromReturnUrl(this.ReturnUrl);
+                    isSigninRequest = rp != null;
+                }
+                return isSigninRequest.Value;
+            }
+            set
+            {
+                isSigninRequest = value;
             }
         }
         public string ReturnUrl { get; set; }

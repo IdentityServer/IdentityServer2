@@ -16,8 +16,12 @@
         <img src="@Url.Content("~/Content/images/logo.jpg")" alt="Logo" />
         <h2 class="masterHeaderText">@ViewBag.SiteName</h2>
     </div>
+    
+    @RenderSection("menu", false)
 
-    @RenderBody()
+    <section id="main-section">
+        @RenderBody()
+    </section>
 
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
