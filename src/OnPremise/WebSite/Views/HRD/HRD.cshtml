@@ -1,5 +1,27 @@
-﻿@{
+﻿@model IEnumerable<Thinktecture.IdentityServer.Models.IdentityProvider>
+
+@{
     ViewBag.Title = "HRD";
 }
 
-<h2>HRD</h2>
+<h2>Choose an Identity Provider to Login</h2>
+@if(Model.Any())
+{
+    using(Html.BeginForm("Select", "HRD"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("signin", ViewData["signin"])
+        <ul>
+            @foreach (var ip in Model)
+            {
+                <li>
+                    <button type="submit" name="idp" value="@ip.Name">@ip.DisplayName</button>
+                </li>
+            }
+        </ul>
+    }
+}
+else
+{
+    <p>No Identity Providers configured. Contact your administrator.</p>
+}

@@ -46,6 +46,12 @@ namespace Thinktecture.IdentityServer.Web
                     "issue/hrd",
                     new { controller = "Hrd", action = "issue" }
                 );
+                routes.MapRoute(
+                    "hrd-select",
+                    "issue/hrd/select",
+                    new { controller = "Hrd", action = "Select" },
+                    new { method = new HttpMethodConstraint("POST") }
+                );
             }
 
             // oauth2 endpoint

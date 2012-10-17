@@ -82,7 +82,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             }
             else
             {
-                return ShowHomeRealmSelection();
+                return ShowHomeRealmSelection(message);
             }
         }
 
@@ -129,9 +129,36 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         }
 
        
-        private ActionResult ShowHomeRealmSelection()
+        private ActionResult ShowHomeRealmSelection(SignInRequestMessage message)
         {
-            return View("HRD");
+            //Tracing.Verbose("HRD selection screen displayed.");
+            var idps = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection);
+            ViewData["signin"] = message.WriteQueryString();
+            return View("HRD", idps);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("Select")]
+        public ActionResult ProcessHRDSelection(string idp, string signin)
+        {
+            //Tracing.Verbose("HRD selected.");
+
+            var ip = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Name == idp).FirstOrDefault();
+            if (ip == null) return View("Error");
+
+            var uri = new Uri(signin);
+            var message = WSFederationMessage.CreateFromUri(uri);
+
+            // sign in 
+            var signinMessage = message as SignInRequestMessage;
+            if (signinMessage != null)
+            {
+                signinMessage.HomeRealm = idp;
+                return ProcessSignInRequest(signinMessage);
+            }
+
+            return View("Error");
         }
 
         private ActionResult RedirectToIdentityProvider(SignInRequestMessage request)
