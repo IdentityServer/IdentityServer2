@@ -77,7 +77,11 @@ namespace Thinktecture.IdentityServer.TokenService
                 principal.Identity.Name,
                 rst.AppliesTo.Uri.AbsoluteUri));
 
-            Tracing.Information("Authentication method: " + principal.Identities.First().FindFirst(ClaimTypes.AuthenticationMethod).Value);
+            var authenticationMethod = principal.Identities.First().FindFirst(ClaimTypes.AuthenticationMethod);
+            if (authenticationMethod != null)
+            {
+                Tracing.Information("Authentication method: " + authenticationMethod.Value);
+            }
 
             // analyze request
             var request = new Request(ConfigurationRepository);
