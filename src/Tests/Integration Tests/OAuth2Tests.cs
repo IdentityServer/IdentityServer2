@@ -13,6 +13,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Thinktecture.IdentityModel.Clients;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityModel.Tokens;
+using Thinktecture.IdentityModel.Tokens.Http;
 
 namespace Thinktecture.IdentityServer.Tests
 {
@@ -25,9 +26,12 @@ namespace Thinktecture.IdentityServer.Tests
         string scope = Constants.Realms.TestRP;
 
         [TestMethod]
-        public void ValidUserNameCredential()
+        public void ValidUserNameCredentialValidClientCredential()
         {
-            var client = new OAuth2Client(new Uri(baseAddress));
+            var client = new OAuth2Client(
+                new Uri(baseAddress),
+                Constants.Credentials.ValidClientId,
+                Constants.Credentials.ValidClientSecret);
 
             var response = client.RequestAccessTokenUserName(
                 Constants.Credentials.ValidUserName,
@@ -40,6 +44,18 @@ namespace Thinktecture.IdentityServer.Tests
             Assert.IsTrue(response.ExpiresIn > 0, "expiresIn is 0");
 
             Trace.WriteLine(response.AccessToken);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(HttpRequestException))]
+        public void ValidUserNameCredentialMissingClientCredential()
+        {
+            var client = new OAuth2Client(new Uri(baseAddress));
+
+            var response = client.RequestAccessTokenUserName(
+                Constants.Credentials.ValidUserName,
+                Constants.Credentials.ValidPassword,
+                scope);
         }
 
         [TestMethod]
@@ -64,7 +80,10 @@ namespace Thinktecture.IdentityServer.Tests
         [TestMethod]
         public void ValidUserNameCredentialWithTokenValidation()
         {
-            var client = new OAuth2Client(new Uri(baseAddress));
+            var client = new OAuth2Client(
+                new Uri(baseAddress),
+                Constants.Credentials.ValidClientId,
+                Constants.Credentials.ValidClientSecret);
 
             var response = client.RequestAccessTokenUserName(
                 Constants.Credentials.ValidUserName,
@@ -109,9 +128,11 @@ namespace Thinktecture.IdentityServer.Tests
                 });
 
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new BasicAuthenticationHeaderValue(Constants.Credentials.ValidClientId, Constants.Credentials.ValidClientSecret);
+
             var result = client.PostAsync(new Uri(baseAddress), form).Result;
 
-            Assert.AreEqual<HttpStatusCode>(HttpStatusCode.Unauthorized, result.StatusCode);            
+            Assert.AreEqual<HttpStatusCode>(HttpStatusCode.BadRequest, result.StatusCode);            
         }
 
         [TestMethod]
@@ -121,14 +142,15 @@ namespace Thinktecture.IdentityServer.Tests
                 {
                     { OAuth2Constants.GrantType, OAuth2Constants.Password },
                     { OAuth2Constants.UserName, Constants.Credentials.UnauthorizedUserName },
-                    { OAuth2Constants.Password, Constants.Credentials.ValidUserName },
+                    { OAuth2Constants.Password, Constants.Credentials.ValidPassword },
                     { OAuth2Constants.scope, scope }
                 });
 
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new BasicAuthenticationHeaderValue(Constants.Credentials.ValidClientId, Constants.Credentials.ValidClientSecret);
             var result = client.PostAsync(new Uri(baseAddress), form).Result;
 
-            Assert.AreEqual<HttpStatusCode>(HttpStatusCode.Unauthorized, result.StatusCode);
+            Assert.AreEqual<HttpStatusCode>(HttpStatusCode.BadRequest, result.StatusCode);
         }
 
         [TestMethod]
@@ -142,6 +164,7 @@ namespace Thinktecture.IdentityServer.Tests
                 });
 
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new BasicAuthenticationHeaderValue(Constants.Credentials.ValidClientId, Constants.Credentials.ValidClientSecret);
             var result = client.PostAsync(new Uri(baseAddress), form).Result;
 
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.BadRequest, result.StatusCode);
@@ -159,20 +182,42 @@ namespace Thinktecture.IdentityServer.Tests
                 });
 
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new BasicAuthenticationHeaderValue(Constants.Credentials.ValidClientId, Constants.Credentials.ValidClientSecret);
             var result = client.PostAsync(new Uri(baseAddress), form).Result;
 
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.BadRequest, result.StatusCode);
         }
 
         [TestMethod]
-        public void NoCredentials()
+        public void InvalidGrantType()
         {
             var form = new FormUrlEncodedContent(new Dictionary<string, string>
                 {
+                    { OAuth2Constants.GrantType, "invalid" },
+                    { OAuth2Constants.UserName, Constants.Credentials.ValidUserName },
+                    { OAuth2Constants.Password, Constants.Credentials.ValidUserName },
                     { OAuth2Constants.scope, scope }
                 });
 
             var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new BasicAuthenticationHeaderValue(Constants.Credentials.ValidClientId, Constants.Credentials.ValidClientSecret);
+            var result = client.PostAsync(new Uri(baseAddress), form).Result;
+
+            Assert.AreEqual<HttpStatusCode>(HttpStatusCode.BadRequest, result.StatusCode);
+        }
+
+        [TestMethod]
+        public void NoUserCredentials()
+        {
+            var form = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    { OAuth2Constants.GrantType, OAuth2Constants.Password },
+                    { OAuth2Constants.scope, scope }
+                });
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new BasicAuthenticationHeaderValue(Constants.Credentials.ValidClientId, Constants.Credentials.ValidClientSecret);
+
             var result = client.PostAsync(new Uri(baseAddress), form).Result;
 
             Assert.AreEqual<HttpStatusCode>(HttpStatusCode.BadRequest, result.StatusCode);
