@@ -2,10 +2,10 @@
 
 @{
     ViewBag.Title = "Username / Password Sign In";
-    ViewBag.Meta = "<meta name=\"viewport\" content=\"width=320\" />";
+    //ViewBag.Meta = "<meta name=\"viewport\" content=\"width=320\" />";
     if (Model.IsSigninRequest)
     {
-        Layout = "~/Views/Shared/_BrandingLayout.cshtml";
+        ViewBag.HideMenu = true;
     }
 }
 

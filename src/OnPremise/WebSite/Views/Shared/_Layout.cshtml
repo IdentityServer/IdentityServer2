@@ -1,42 +1,28 @@
-﻿@{
-    Layout = "_BrandingLayout.cshtml";
-    ViewBag.SetContainerID = false;
-}
-
-@section menu
-{
-<div class="menu">
-    @if (ViewBag.IsAdministrator)
-    {
-        @Html.ActionLink("[administration]", "index", "home", new{area="Admin"}, null)
-        @: &nbsp;
-    }
-        
-    @if (ViewBag.IsSignedIn)
-    { 
-        @Html.ActionLink("[home]", "index", "home", new{area=""}, null)
-        @: &nbsp;
-        @Html.ActionLink("[sign out]", "signout", "account", new{area=""}, null)
-        @: &nbsp;
-        @:(signed in as @Context.User.Identity.Name)
-    }
-    else
-    {
-        @Html.ActionLink("[home]", "index", "home", new{area=""}, null)
-        @: &nbsp;
-        @Html.ActionLink("[sign in]", "signin", "account", new{area=""}, null)
-    }
-</div>
-}
-
-@section styles
-{
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @Scripts.Render("~/bundles/js/modernizr")
+    @Styles.Render("~/bundles/css/site")
     @RenderSection("styles", false)
-}
+</head>
 
-@section scripts
-{
+<body>
+
+    @Html.Partial("_Banner")
+    @if (!(ViewBag.HideMenu == true))
+    {
+        @Html.Partial("_Menu")
+    }
+
+    <section id="main-section">
+        @RenderBody()
+    </section>
+
+    @Scripts.Render("~/bundles/js/jquery")
     @RenderSection("scripts", required: false)
-}
-
-@RenderBody()
+</body>
+</html>
