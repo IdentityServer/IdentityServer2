@@ -12,7 +12,7 @@
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(x=>x.OriginalSigninUrl)
-        <ul>
+        <ul class="hrd">
             @foreach (var provider in Model.Providers)
             {
                 <li>
