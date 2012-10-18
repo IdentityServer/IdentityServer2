@@ -13,7 +13,7 @@
         <h2>Identity Providers</h2>
         @if (Model.Providers.Any())
         {
-            using (Html.BeginForm("Select", "HRD"))
+            using (Html.BeginForm("Select", "HRD", FormMethod.Post, new { data_ajax="false" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(x => x.OriginalSigninUrl)
