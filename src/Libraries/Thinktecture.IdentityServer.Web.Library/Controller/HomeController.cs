@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Repositories;
+using System.Web.WebPages;
 
 namespace Thinktecture.IdentityServer.Web.Controllers
 {
@@ -27,6 +28,10 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
         public ActionResult Index()
         {
+            if (Request.Browser.IsMobileDevice)
+            {
+                HttpContext.SetOverriddenBrowser(BrowserOverride.Desktop);
+            }
             return View();
         }
 
