@@ -5,9 +5,9 @@
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
+    @Scripts.Render("~/bundles/js/modernizr")
+    @Styles.Render("~/bundles/css/site")
     @RenderSection("styles", false)
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 
 <body>
@@ -23,7 +23,7 @@
         @RenderBody()
     </section>
 
-    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/js/jquery")
     @RenderSection("scripts", required: false)
 </body>
 </html>
