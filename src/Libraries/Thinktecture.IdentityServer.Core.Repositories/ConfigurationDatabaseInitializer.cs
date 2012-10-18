@@ -297,14 +297,18 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 {
                     Name = "ADFS",
                     DisplayName = "LeastPrivilege ADFS Server",
+                    Enabled = true,
+                    ShowInHrdSelection = true,
                     Type = Models.IdentityProviderTypes.WS,
                     WSFederationEndpoint = "https://adfs.leastprivilege.vm/adfs/ls/",
-                    IssuerThumbprint = "DD4F4E11A52701FB98F4B55AAC406EB5D96C059B"
+                    IssuerThumbprint = "cad5731ae474b932631e57feb72d810aea6f0220"
                 },
                 new IdentityProvider
                 {
                     Name = "web",
-                    DisplayName = "ACS Namespace to integrate web identities",
+                    DisplayName = "Web Identities",
+                    Enabled = true,
+                    ShowInHrdSelection = true,
                     Type = Models.IdentityProviderTypes.WS,
                     WSFederationEndpoint = "https://idsrvwebids.accesscontrol.windows.net/v2/wsfederation",
                     IssuerThumbprint = "5AAD3C5CC1A5A715E791BEA85B4445D3CB29F33F"
