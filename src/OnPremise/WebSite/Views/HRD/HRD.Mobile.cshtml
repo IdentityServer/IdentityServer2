@@ -1,0 +1,39 @@
+﻿@model Thinktecture.IdentityServer.Protocols.WSFederation.HrdViewModel
+
+@{
+    ViewBag.Title = "HRD";
+    ViewBag.HideMenu = true;
+}
+
+<div data-role="page" id="signin">
+    <div data-role="header">
+        <h1>@ViewBag.SiteName</h1>
+    </div>
+    <div data-role="content">
+        <h2>Identity Providers</h2>
+        @if (Model.Providers.Any())
+        {
+            using (Html.BeginForm("Select", "HRD"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.OriginalSigninUrl)
+                <ul>
+                    @foreach (var provider in Model.Providers)
+                    {
+                        <li>
+                            <button type="submit" name="idp" value="@provider.ID">@provider.DisplayName</button>
+                        </li>
+                    }
+                </ul>
+            }
+        }
+        else
+        {
+            <p>No Identity Providers configured. Contact your administrator.</p>
+        }
+
+    </div>
+</div>
+
+
+

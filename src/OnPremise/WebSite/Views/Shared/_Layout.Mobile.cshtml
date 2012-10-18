@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @Styles.Render("~/bundles/css/mobile")
+    @Scripts.Render("~/bundles/js/mobile")
+    @RenderSection("styles", false)
+    @RenderSection("scripts", false)
+</head>
+
+<body>
+
+    @RenderBody()
+
+
+</body>
+</html>
+

@@ -1,0 +1,39 @@
+﻿@model Thinktecture.IdentityServer.Web.ViewModels.SignInModel
+
+@{
+    ViewBag.Title = ViewBag.SiteName + " : Sign In";
+    if (Model.IsSigninRequest)
+    {
+        ViewBag.HideMenu = true;
+    }
+}
+
+<div data-role="page" id="signin">
+    <div data-role="header">
+        <h1>@ViewBag.SiteName</h1>
+    </div>
+    <div data-role="content">
+        <h2>@ViewBag.Title</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
+            <fieldset>
+                <div data-role="fieldcontain">
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName)
+                </div>
+                <div data-role="fieldcontain">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password)
+                </div>
+                <div data-role="fieldcontain">
+                    @Html.CheckBoxFor(m => m.EnableSSO)
+                    @Html.LabelFor(m => m.EnableSSO)
+                </div>
+                <div>
+                    <button type="submit">Sign In</button>
+                </div>
+            </fieldset>
+        }
+    </div>
+</div>

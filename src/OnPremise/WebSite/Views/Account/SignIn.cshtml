@@ -19,7 +19,7 @@
 
 @using (Html.BeginForm())
 {
-@Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
+    @Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
     <fieldset>
         <legend>Login</legend>
         <div class="editor-label">
@@ -47,11 +47,11 @@
             <input type="submit" value="Sign In" />
         </p>
     </fieldset>
-        
-    if (Model.ShowClientCertificateLink)
-    { 
-        @Html.ActionLink("Use client certificate", "CertificateSignIn", new { returnUrl = Model.ReturnUrl }) 
-    }
+}
+
+@if (Model.ShowClientCertificateLink)
+{ 
+    @Html.ActionLink("Use client certificate", "CertificateSignIn", new { returnUrl = Model.ReturnUrl }) 
 }
 
 @section scripts

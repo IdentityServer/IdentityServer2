@@ -131,7 +131,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
        
         private ActionResult ShowHomeRealmSelection(SignInRequestMessage message)
         {
-            //Tracing.Verbose("HRD selection screen displayed.");
+            Tracing.Verbose("HRD selection screen displayed.");
             var idps = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Enabled);
             if (idps.Count() == 1)
             {
@@ -150,7 +150,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         [ActionName("Select")]
         public ActionResult ProcessHRDSelection(string idp, string originalSigninUrl)
         {
-            //Tracing.Verbose("HRD selected.");
+            Tracing.Verbose("HRD selected: " + idp);
 
             var ip = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Enabled && x.Name == idp).FirstOrDefault();
             if (ip == null) return View("Error");

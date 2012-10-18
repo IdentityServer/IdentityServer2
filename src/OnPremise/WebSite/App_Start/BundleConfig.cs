@@ -9,22 +9,16 @@ namespace Thinktecture.IdentityServer.Web
         {
             bundles.Add(new ScriptBundle("~/bundles/js/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/js/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/js/jquerymobile").Include(
-                        "~/Scripts/jquery.mobile-{version}.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/js/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
-
             bundles.Add(new ScriptBundle("~/bundles/js/modernizr").Include(
                         "~/Scripts/modernizr-{version}.js"));
 
-            bundles.Add(new StyleBundle("~/bundles/css/site").Include("~/Content/site.css"));
-
+            bundles.Add(new StyleBundle("~/bundles/css/site").Include(
+                        "~/Content/site.css"));
             bundles.Add(new StyleBundle("~/bundles/css/themes/base").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
                         "~/Content/themes/base/jquery.ui.resizable.css",
@@ -38,6 +32,13 @@ namespace Thinktecture.IdentityServer.Web
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/css/mobile").Include(
+                        "~/Content/jquery.mobile-{version}.css",
+                        "~/Content/mobile.css"));
+            bundles.Add(new ScriptBundle("~/bundles/js/mobile").Include(
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.mobile-{version}.js"));
         }
     }
 }

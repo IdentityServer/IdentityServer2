@@ -212,6 +212,9 @@
     <Content Include="Content\jquery.mobile.structure-1.2.0.min.css" />
     <Content Include="Content\jquery.mobile.theme-1.2.0.css" />
     <Content Include="Content\jquery.mobile.theme-1.2.0.min.css" />
+    <Content Include="Content\Mobile.css">
+      <DependentUpon>Mobile.less</DependentUpon>
+    </Content>
     <Content Include="Content\resources\jsnotify.htm" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
@@ -314,6 +317,7 @@
     <Content Include="Areas\Admin\Views\IP\Index.cshtml" />
     <Content Include="Areas\Admin\Views\IP\IP.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Thumbprint.cshtml" />
+    <Content Include="Content\Mobile.less" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -329,6 +333,9 @@
     <Content Include="Views\HRD\HRD.cshtml" />
     <Content Include="Views\Shared\_Banner.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
+    <Content Include="Views\Account\SignIn.Mobile.cshtml" />
+    <Content Include="Views\HRD\HRD.Mobile.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
