@@ -14,9 +14,10 @@
     </div>
     <div data-role="content">
         <h2>@ViewBag.Title</h2>
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Signin", "Account", FormMethod.Post, new { data_ajax="false" }))
         {
             @Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
+            @Html.HiddenFor(x=>x.ReturnUrl)
             <fieldset>
                 <div data-role="fieldcontain">
                     @Html.LabelFor(m => m.UserName)
