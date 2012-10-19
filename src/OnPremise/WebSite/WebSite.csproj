@@ -281,7 +281,9 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Configuration\connectionStrings.config" />
-    <Content Include="Configuration\identity.config" />
+    <Content Include="Configuration\identity.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Configuration\identityServices.config" />
     <Content Include="Configuration\profile.config" />
     <Content Include="Configuration\repositories.config" />

@@ -56,14 +56,22 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 
             if (!string.IsNullOrWhiteSpace(returnUrl))
             {
-                returnUrl = HttpUtility.UrlDecode(returnUrl);
-                if (Url.IsLocalUrl(returnUrl))
-                {
-                    return Redirect(returnUrl);
-                }
+                return RedirectToLocal(returnUrl);
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
         #endregion
     }

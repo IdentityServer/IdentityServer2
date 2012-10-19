@@ -48,29 +48,6 @@ namespace Thinktecture.IdentityServer.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        protected void Application_EndRequest(object sender, EventArgs e)
-        {
-            var context = (sender as HttpApplication).Context;
-
-            if (context.Response.StatusCode == 401)
-            {
-                var marker = NoRedirectMarker.Get();
-
-                if (!marker.HasValue || marker == false)
-                {
-                    var route = new RouteValueDictionary(new Dictionary<string, object>
-                        {
-                            { "Controller", "Account" },
-                            { "Action", "SignIn" },
-                            { "ReturnUrl", HttpUtility.UrlEncode(context.Request.RawUrl, context.Request.ContentEncoding) },
-                            { "Area", "" }
-                        });
-
-                    Response.RedirectToRoute(route);
-                }
-            }
-        }
-
         private void SetupCompositionContainer()
         {
             Container.Current = new CompositionContainer(new RepositoryExportProvider());
