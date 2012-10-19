@@ -104,7 +104,6 @@ namespace Thinktecture.IdentityServer.Web
             {
                 InheritHostClientIdentity = false,
                 DefaultAuthenticationScheme = "Basic",
-                SetNoRedirectMarker = true,
                 ClaimsAuthenticationManager = new ClaimsTransformer()
             };
 
@@ -118,7 +117,6 @@ namespace Thinktecture.IdentityServer.Web
             {
                 InheritHostClientIdentity = false,
                 DefaultAuthenticationScheme = "Basic",
-                SetNoRedirectMarker = true,
             };
 
             // accept arbitrary credentials on basic auth header,
