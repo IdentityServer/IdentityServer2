@@ -67,7 +67,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 {
                     ModelState.AddModelError("", ex.Message);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     ModelState.AddModelError("", "Error deleting delegation users.");
                 }

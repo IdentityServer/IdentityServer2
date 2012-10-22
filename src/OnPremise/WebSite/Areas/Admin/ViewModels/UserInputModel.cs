@@ -17,7 +17,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         
         public string Email { get; set; }
 
-        [Editable(false)]
+        [System.Web.Mvc.HiddenInput(DisplayValue = false)]
         public UserRoleAssignment[] Roles { get; set; }
     }
 }

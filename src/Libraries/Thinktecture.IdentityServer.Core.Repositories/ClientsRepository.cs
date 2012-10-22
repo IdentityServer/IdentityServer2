@@ -145,5 +145,66 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 return false;
             }
         }
+        
+        public IEnumerable<Models.Client> GetAll()
+        {
+            using (var entities = IdentityServerConfigurationContext.Get())
+            {
+                return entities.Clients.ToArray().Select(x => x.ToDomainModel()).ToArray();
+            }
+        }
+
+
+        public void Delete(int id)
+        {
+            using (var entities = IdentityServerConfigurationContext.Get())
+            {
+                var item = entities.Clients.Where(x => x.Id == id).SingleOrDefault();
+                if (item != null)
+                {
+                    entities.Clients.Remove(item);
+                    entities.SaveChanges();
+                }
+            }
+        }
+        public void Update(Models.Client model)
+        {
+            if (model == null) throw new ArgumentException("model");
+
+            using (var entities = IdentityServerConfigurationContext.Get())
+            {
+                var item = entities.Clients.Where(x => x.Id == model.ID).Single();
+                model.UpdateEntity(item);
+                entities.SaveChanges();
+            }
+        }
+
+        public void Create(Models.Client model)
+        {
+            if (model == null) throw new ArgumentException("model");
+
+            using (var entities = IdentityServerConfigurationContext.Get())
+            {
+                var item = new Client();
+                model.UpdateEntity(item);
+                entities.Clients.Add(item);
+                entities.SaveChanges();
+                model.ID = item.Id;
+            }
+        }
+
+
+        public Models.Client Get(int id)
+        {
+            using (var entities = IdentityServerConfigurationContext.Get())
+            {
+                var item = entities.Clients.Where(x => x.Id == id).SingleOrDefault();
+                if (item != null)
+                {
+                    return item.ToDomainModel();
+                }
+                return null;
+            }
+        }
     }
 }

@@ -35,7 +35,6 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
     public class DelegationUser
     {
         public string Username { get; set; }
-        [Editable(false)]
         public bool Delete { get; set; }
     }
 }

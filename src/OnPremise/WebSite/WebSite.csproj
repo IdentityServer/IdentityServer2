@@ -152,6 +152,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\ClientCertificateController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClientController.cs" />
     <Compile Include="Areas\Admin\Controllers\DelegationController.cs" />
     <Compile Include="Areas\Admin\Controllers\DiagnosticsController.cs" />
     <Compile Include="Areas\Admin\Controllers\GeneralController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Areas\Admin\ViewModels\ClientCertificatesForUserViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ClientCertificatesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\CertificateInputModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ClientViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DelegationSettingsForUserInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DelegationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\IdentityProvidersViewModel.cs" />
@@ -320,6 +322,8 @@
     <Content Include="Areas\Admin\Views\IP\IP.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Thumbprint.cshtml" />
     <Content Include="Content\Mobile.less" />
+    <Content Include="Areas\Admin\Views\Client\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Client\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />

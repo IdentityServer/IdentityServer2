@@ -1,24 +1,29 @@
 ﻿@using Thinktecture.IdentityServer.Web.Utility
 
 @{
-    var isTheFirst = true;
     foreach(var prop in this.ViewData.ModelMetadata.Properties)
     {
-        if (!prop.IsReadOnly)
+        if (prop.ShowForEdit)
         {
-            var id = ViewData.TemplateInfo.GetFullHtmlFieldId(prop.PropertyName);
-            var name = ViewData.TemplateInfo.GetFullHtmlFieldName(prop.PropertyName);
             <div>
-                @Html.Label(prop.PropertyName)
-                @*<label for="@id">@prop.GetDisplayName()</label>*@
-                @Html.Editor(prop.PropertyName)
-                @if(isTheFirst)
+                @if (prop.TemplateHint == "HiddenInput")
                 {
-                    <script>document.getElementById('@id').focus();</script>
+                    @Html.Hidden(prop.PropertyName)
                 }
-                @Html.Validator(prop)
+                else
+                {
+                    @Html.Label(prop.PropertyName)
+                    if(prop.IsReadOnly)
+                    {
+                        @Html.Display(prop.PropertyName)
+                    }
+                    else
+                    {
+                        @Html.Editor(prop.PropertyName)
+                        @Html.Validator(prop)
+                    }
+                }
             </div>
         }
-        isTheFirst = false;
     }
 }

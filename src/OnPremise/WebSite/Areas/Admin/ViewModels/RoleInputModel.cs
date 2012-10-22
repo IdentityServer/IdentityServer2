@@ -11,8 +11,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         [Required]
         public string Name { get; set; }
         
-        [System.ComponentModel.DataAnnotations.Editable(false)]
+        [System.Web.Mvc.HiddenInput(DisplayValue=false)]
         public bool Delete { get; set; }
+        [System.Web.Mvc.HiddenInput(DisplayValue = false)]
         public bool CanDelete
         {
             get

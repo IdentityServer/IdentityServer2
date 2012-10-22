@@ -1,0 +1,38 @@
+﻿@model Thinktecture.IdentityServer.Models.Client
+
+@{
+    if (Model.ID == 0)
+    {
+        ViewBag.Title = "New Client";
+    }
+    else
+    {
+        ViewBag.Title = "Client : " + Model.Name;
+    }
+}
+@{
+    var action = Model.Name == null ? "Create" : "Update";
+}
+@using (Html.BeginForm(action, "Client"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error updating client")
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        @Html.EditorForModel()
+
+        <div class="buttons">
+            @if (Model.ID != 0)
+            {
+                <button type="submit" name="action" value="save">Save Changes</button>
+                <button type="submit" name="action" value="delete">Delete</button>
+            }
+            else
+            {
+                <button type="submit" name="action" value="create">Create</button>
+            }
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

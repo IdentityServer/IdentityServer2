@@ -32,7 +32,6 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
     public class ClientCertificateUserInputModel
     {
         public string Username { get; set; }
-        [Editable(false)]
         public bool Delete { get; set; }
     }
 }

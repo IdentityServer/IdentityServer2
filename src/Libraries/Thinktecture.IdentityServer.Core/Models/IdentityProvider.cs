@@ -11,7 +11,7 @@ namespace Thinktecture.IdentityServer.Models
     {
         [Required]
         [Display(Order=1, Name = "Identifier", Description = "Unique identifier of the identity provider.")]
-        [Editable(false)]
+        [ScaffoldColumn(false)]
         public string Name { get; set; }
         
         [Required]

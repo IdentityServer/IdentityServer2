@@ -12,7 +12,7 @@ namespace Thinktecture.IdentityServer.Models
     public class RelyingParty
     {
         [Required]
-        [Editable(false)]
+        [UIHint("HiddenInput")]
         public string Id { get; set; }
         
         [Display(Name = "Enabled", Description = "Enabled or disable this RP.")]

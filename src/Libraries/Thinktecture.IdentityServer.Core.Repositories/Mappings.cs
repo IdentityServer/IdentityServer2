@@ -364,12 +364,22 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             return new Models.Client
             {
+                ID = client.Id,
                 ClientId = client.ClientId,
                 ClientSecret = client.ClientSecret,
                 Description = client.Description,
                 Name = client.Name,
                 RedirectUri = new Uri(client.RedirectUri)
             };
+        }
+        public static void UpdateEntity(this Models.Client client, Entities.Client target)
+        {
+            target.Id = client.ID;
+            target.ClientId = client.ClientId;
+            target.ClientSecret = client.ClientSecret;
+            target.Description = client.Description;
+            target.Name = client.Name;
+            target.RedirectUri = client.RedirectUri.AbsoluteUri;
         }
         #endregion
 
