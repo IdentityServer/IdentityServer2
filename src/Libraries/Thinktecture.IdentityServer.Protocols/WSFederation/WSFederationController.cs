@@ -18,6 +18,8 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
     [ClaimsAuthorize(Constants.Actions.Issue, Constants.Resources.WSFederation)]
     public class WSFederationController : Controller
     {
+        const string _cookieName = "wsfedsignout";
+
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
@@ -69,8 +71,8 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 TokenServiceConfiguration.Current.CreateSecurityTokenService());
 
             // set cookie for single-sign-out
-            new SignInSessionsManager(HttpContext, ConfigurationRepository.Global.MaximumTokenLifetime)
-                .AddRealm(response.BaseUri.AbsoluteUri);
+            new SignInSessionsManager(HttpContext, _cookieName, ConfigurationRepository.Global.MaximumTokenLifetime)
+                .AddEndpoint(response.BaseUri.AbsoluteUri);
 
             return new WSFederationResult(response, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
@@ -86,9 +88,9 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             }
 
             // check for existing sign in sessions
-            var mgr = new SignInSessionsManager(HttpContext);
-            var realms = mgr.GetRealms();
-            mgr.ClearRealms();
+            var mgr = new SignInSessionsManager(HttpContext, _cookieName);
+            var realms = mgr.GetEndpoints();
+            mgr.ClearEndpoints();
             
             return View("Signout", realms);
         }

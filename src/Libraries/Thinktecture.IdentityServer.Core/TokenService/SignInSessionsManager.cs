@@ -12,38 +12,44 @@ namespace Thinktecture.IdentityServer.TokenService
 {
     public class SignInSessionsManager
     {
-        private const string COOKIENAME = ".idsrvsso";
-        
+        string _cookieName;
         HttpContextBase _context;
         int _maximumCookieLifetime;
 
-        public SignInSessionsManager(HttpContextBase context) : this(context, 24)
+        public SignInSessionsManager(HttpContextBase context, string cookieName) : this(context, cookieName, 24)
         { }
 
-        public SignInSessionsManager(HttpContextBase context, int maximumCookieLifetime)
+        public SignInSessionsManager(HttpContextBase context, string cookieName, int maximumCookieLifetime)
         {
             _context = context;
+            _cookieName = cookieName;
             _maximumCookieLifetime = maximumCookieLifetime;
         }
 
-        public void AddRealm(string realm)
+        public void AddEndpoint(string address)
         {
-            var realms = ReadCookie();
-            if (!realms.Contains(realm.ToLowerInvariant()))
+            var endpoints = ReadCookie();
+            if (!endpoints.Contains(address.ToLowerInvariant()))
             {
-                realms.Add(realm.ToLowerInvariant());
-                WriteCookie(realms);
+                endpoints.Add(address.ToLowerInvariant());
+                WriteCookie(endpoints);
             }
         }
 
-        public List<string> GetRealms()
+        public void SetEndpoint(string address)
+        {
+            ClearEndpoints();
+            WriteCookie(new List<string> { address });
+        }
+
+        public List<string> GetEndpoints()
         {
             return ReadCookie();
         }
 
-        public void ClearRealms()
+        public void ClearEndpoints()
         {
-            var cookie = _context.Request.Cookies[COOKIENAME];
+            var cookie = _context.Request.Cookies[_cookieName];
             if (cookie != null)
             {
                 cookie.Value = "";
@@ -54,7 +60,7 @@ namespace Thinktecture.IdentityServer.TokenService
 
         private List<string> ReadCookie()
         {
-            var cookie = _context.Request.Cookies[COOKIENAME];
+            var cookie = _context.Request.Cookies[_cookieName];
             if (cookie == null)
             {
                 return new List<string>();
@@ -67,13 +73,13 @@ namespace Thinktecture.IdentityServer.TokenService
         {
             if (realms.Count == 0)
             {
-                ClearRealms();
+                ClearEndpoints();
                 return;
             }
 
             var realmString = string.Join("|", realms).ToLowerInvariant();
 
-            var cookie = new HttpCookie(COOKIENAME, realmString)
+            var cookie = new HttpCookie(_cookieName, realmString)
             {
                 Expires = DateTime.Now.AddHours(_maximumCookieLifetime),
                 HttpOnly = true,
