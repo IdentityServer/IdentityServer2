@@ -23,6 +23,8 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
 {
     public class HrdController : Controller
     {
+        const string _cookieName = "hrdsignout";
+
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
@@ -52,6 +54,13 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             if (signinMessage != null)
             {
                 return ProcessSignInRequest(signinMessage);
+            }
+
+            // sign out
+            var signoutMessage = message as SignOutRequestMessage;
+            if (signoutMessage != null)
+            {
+                return ProcessSignOut(signoutMessage);
             }
 
             return View("Error");
@@ -86,6 +95,22 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             }
         }
 
+        private ActionResult ProcessSignOut(SignOutRequestMessage message)
+        {
+            // check for return url
+            if (!string.IsNullOrWhiteSpace(message.Reply))
+            {
+                ViewBag.ReturnUrl = message.Reply;
+            }
+
+            // check for existing sign in sessions
+            var mgr = new SignInSessionsManager(HttpContext, _cookieName);
+            var realms = mgr.GetEndpoints();
+            mgr.ClearEndpoints();
+
+            return View("Signout", realms);
+        }
+
         private ActionResult ProcessSignInResponse(SignInResponseMessage responseMessage, SecurityToken token)
         {
             var principal = ValidateToken(token);
@@ -105,8 +130,8 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 TokenServiceConfiguration.Current.CreateSecurityTokenService());
 
             // set cookie for single-sign-out
-            new SignInSessionsManager(HttpContext, ConfigurationRepository.Global.MaximumTokenLifetime)
-                .AddRealm(context.WsFedEndpoint);
+            new SignInSessionsManager(HttpContext, _cookieName, ConfigurationRepository.Global.MaximumTokenLifetime)
+                .SetEndpoint(context.WsFedEndpoint);
 
             return new WSFederationResult(wsFedResponse, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
