@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IdentityModel.Services;
 using System.Security.Claims;
-using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Protocols;
 using Thinktecture.IdentityServer.Repositories;
@@ -51,8 +50,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 userName, 
                 authenticationMethod, 
                 isPersistent, 
-                ttl, 
-                HttpContext.Request.Url.AbsoluteUri);
+                ttl);
 
             if (!string.IsNullOrWhiteSpace(returnUrl))
             {

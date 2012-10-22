@@ -302,7 +302,7 @@ namespace Thinktecture.IdentityServer.Protocols
             return FederatedAuthentication.FederationConfiguration.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(string.Empty, principal);
         }
 
-        public void SetSessionToken(string userName, string authenticationMethod, bool isPersistent, int ttl, string resourceName, IEnumerable<Claim> additionalClaims = null)
+        public void SetSessionToken(string userName, string authenticationMethod, bool isPersistent, int ttl, IEnumerable<Claim> additionalClaims = null)
         {
             var principal = CreatePrincipal(userName, authenticationMethod);
 

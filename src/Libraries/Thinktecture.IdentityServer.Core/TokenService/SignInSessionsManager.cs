@@ -77,6 +77,7 @@ namespace Thinktecture.IdentityServer.TokenService
             {
                 Expires = DateTime.Now.AddHours(_maximumCookieLifetime),
                 HttpOnly = true,
+                Path = HttpRuntime.AppDomainAppVirtualPath
             };
 
             _context.Response.Cookies.Add(cookie);
