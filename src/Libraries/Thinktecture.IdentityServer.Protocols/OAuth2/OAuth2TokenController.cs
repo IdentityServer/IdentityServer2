@@ -42,14 +42,10 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         {
             Tracing.Information("OAuth2 endpoint called.");
 
-            // client authentication needed?
-            if (ConfigurationRepository.OAuth2.RequireClientAuthentication)
+            if (!ValidateClient())
             {
-                if (!ValidateClient())
-                {
-                    Tracing.Error("Invalid client credentials: " + ClaimsPrincipal.Current.Identity.Name);
-                    return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidClient);
-                }
+                Tracing.Error("Invalid client: " + ClaimsPrincipal.Current.Identity.Name);
+                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidClient);
             }
 
             var tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
