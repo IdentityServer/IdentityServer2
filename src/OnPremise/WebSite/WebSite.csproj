@@ -382,7 +382,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\SignedOut.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\WSFederation\SignOut.cshtml" />
+    <Content Include="Views\Shared\SignOut.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
     <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
@@ -407,6 +407,9 @@
       <Project>{fc2d7e2a-65a2-480f-aae8-855fd026af85}</Project>
       <Name>Thinktecture.IdentityServer.Web.Library</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\WSFederation\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
