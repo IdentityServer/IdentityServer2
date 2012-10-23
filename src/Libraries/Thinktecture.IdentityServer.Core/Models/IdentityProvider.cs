@@ -25,7 +25,7 @@ namespace Thinktecture.IdentityServer.Models
         public bool Enabled { get; set; }
 
         [Display(Name = "WS-Federation Endpoint", Description = "Specifies the endpoint of for the WS-Federation protocol.")]
-        [UrlValidator]
+        [AbsoluteUri]
         public string WSFederationEndpoint { get; set; }
 
         [Required]

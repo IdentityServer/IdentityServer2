@@ -14,6 +14,7 @@ namespace Thinktecture.IdentityServer.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        [AbsoluteUri]
         public Uri RedirectUri { get; set; }
 
         public string ClientId { get; set; }
