@@ -116,7 +116,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Enabled = false,
                 EnableImplicitFlow = false,
                 EnableResourceOwnerFlow = false,
-                RequireClientAuthentication = true
+                EnableConsent = true
             };
         }
 
@@ -202,7 +202,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Enabled = true,
                 EnableImplicitFlow = true,
                 EnableResourceOwnerFlow = true,
-                RequireClientAuthentication = true
+                EnableConsent = true
             };
         }
 

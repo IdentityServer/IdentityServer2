@@ -15,7 +15,7 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         [Display(Name = "Enable 'Implicit' Flow", Description = "This flow is for native apps and client web applications.")]
         public bool EnableImplicitFlow { get; set; }
 
-        [Display(Name = "Require Client Authentication", Description = "Specifies whether client have to authenticate to use the token endpoint.")]
-        public bool RequireClientAuthentication { get; set; }
+        [Display(Name = "Enable Consent Page", Description = "Specifies whether a consent page is shown before a token/code is returned.")]
+        public bool EnableConsent { get; set; }
     }
 }

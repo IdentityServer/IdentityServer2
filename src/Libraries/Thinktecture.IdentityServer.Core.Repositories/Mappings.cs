@@ -209,7 +209,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Enabled = entity.Enabled, 
                 EnableImplicitFlow = entity.EnableImplicitFlow,
                 EnableResourceOwnerFlow = entity.EnableResourceOwnerFlow,
-                RequireClientAuthentication = entity.RequireClientAuthentication
+                EnableConsent = entity.EnableConsent
             };
         }
         
@@ -220,7 +220,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Enabled = model.Enabled,
                 EnableImplicitFlow = model.EnableImplicitFlow,
                 EnableResourceOwnerFlow = model.EnableResourceOwnerFlow,
-                RequireClientAuthentication = model.RequireClientAuthentication
+                EnableConsent = model.EnableConsent
             };
         }
         #endregion
@@ -369,7 +369,11 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 ClientSecret = client.ClientSecret,
                 Description = client.Description,
                 Name = client.Name,
-                RedirectUri = new Uri(client.RedirectUri)
+                RedirectUri = new Uri(client.RedirectUri),
+                NativeClient = client.NativeClient,
+                AllowCodeFlow = client.AllowCodeFlow,
+                AllowImplicitFlow = client.AllowImplicitFlow,
+                AllowResourceOwnerFlow = client.AllowResourceOwnerFlow
             };
         }
         public static void UpdateEntity(this Models.Client client, Entities.Client target)
@@ -380,6 +384,10 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             target.Description = client.Description;
             target.Name = client.Name;
             target.RedirectUri = client.RedirectUri.AbsoluteUri;
+            target.NativeClient = client.NativeClient;
+            target.AllowResourceOwnerFlow = client.AllowResourceOwnerFlow;
+            target.AllowImplicitFlow = client.AllowImplicitFlow;
+            target.AllowCodeFlow = client.AllowCodeFlow;
         }
         #endregion
 

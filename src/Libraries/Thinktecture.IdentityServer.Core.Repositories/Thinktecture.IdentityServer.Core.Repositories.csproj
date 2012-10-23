@@ -93,6 +93,14 @@
     <Compile Include="Migrations\201210180632211_InitialCreate.Designer.cs">
       <DependentUpon>201210180632211_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201210231853270_UpdatedOAuth2Config.cs" />
+    <Compile Include="Migrations\201210231853270_UpdatedOAuth2Config.Designer.cs">
+      <DependentUpon>201210231853270_UpdatedOAuth2Config.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201210231857533_UpdatedClientConfig.cs" />
+    <Compile Include="Migrations\201210231857533_UpdatedClientConfig.Designer.cs">
+      <DependentUpon>201210231857533_UpdatedClientConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NullCacheRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +123,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201210180632211_InitialCreate.resx">
       <DependentUpon>201210180632211_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201210231853270_UpdatedOAuth2Config.resx">
+      <DependentUpon>201210231853270_UpdatedOAuth2Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201210231857533_UpdatedClientConfig.resx">
+      <DependentUpon>201210231857533_UpdatedClientConfig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

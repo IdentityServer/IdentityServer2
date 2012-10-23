@@ -15,7 +15,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql.Configuration
         [Required]
         public bool Enabled { get; set; }
 
-        public bool RequireClientAuthentication { get; set; }
+        public bool EnableConsent { get; set; }
         public bool EnableResourceOwnerFlow { get; set; }
         public bool EnableImplicitFlow { get; set; }        
     }
