@@ -10,10 +10,6 @@
         @Html.Action("ChildMenu", "Menu", new{controllerName="Protocol"})
     </li>
     <li>
-        @Html.ActionLink("Clients", "Index", "Client")
-        @Html.Action("ChildMenu", "Menu", new{controllerName="Client"})
-    </li>
-    <li>
         @Html.ActionLink("Relying Parties & Resources", "Index", "RP")
         @Html.Action("ChildMenu", "Menu", new{controllerName="RP"})
     </li>
@@ -21,8 +17,12 @@
         @Html.ActionLink("Identity Providers", "Index", "IP")
         @Html.Action("ChildMenu", "Menu", new{controllerName="IP"})
     </li>
+    <li>
+        @Html.ActionLink("Clients", "Index", "Client")
+        @Html.Action("ChildMenu", "Menu", new{controllerName="Client"})
+    </li>
+    <li>@Html.ActionLink("Identity Delegation", "Index", "Delegation")</li>
     <li>@Html.ActionLink("Roles", "Index", "Role")</li>
     <li>@Html.ActionLink("Users", "Index", "User")</li>
     <li>@Html.ActionLink("Client Certificates", "Index", "ClientCertificate")</li>
-    <li>@Html.ActionLink("Identity Delegation", "Index", "Delegation")</li>
 </ul>
