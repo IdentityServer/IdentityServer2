@@ -127,7 +127,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 {
                     this.identityProviderRepository.Add(model);
                     TempData["Message"] = "Identity Provider Created";
-                    return RedirectToAction("IP", new { id=model.Name });
+                    return RedirectToAction("IP", new { id=model.ID });
                 }
                 catch (ValidationException ex)
                 {
@@ -160,7 +160,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 {
                     this.identityProviderRepository.Update(model);
                     TempData["Message"] = "Identity Provider Updated"; ;
-                    return RedirectToAction("IP", new { id = model.Name });
+                    return RedirectToAction("IP", new { id = model.ID });
                 }
                 catch (ValidationException ex)
                 {
