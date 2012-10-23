@@ -101,6 +101,10 @@
     <Compile Include="Migrations\201210231857533_UpdatedClientConfig.Designer.cs">
       <DependentUpon>201210231857533_UpdatedClientConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201210232018407_AddIDKeyToIdentityProvider.cs" />
+    <Compile Include="Migrations\201210232018407_AddIDKeyToIdentityProvider.Designer.cs">
+      <DependentUpon>201210232018407_AddIDKeyToIdentityProvider.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NullCacheRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -129,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201210231857533_UpdatedClientConfig.resx">
       <DependentUpon>201210231857533_UpdatedClientConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201210232018407_AddIDKeyToIdentityProvider.resx">
+      <DependentUpon>201210232018407_AddIDKeyToIdentityProvider.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
