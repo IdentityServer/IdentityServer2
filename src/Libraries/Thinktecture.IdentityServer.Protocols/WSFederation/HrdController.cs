@@ -18,6 +18,7 @@ using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
 using Thinktecture.IdentityModel.Web;
+using System.Collections.Generic;
 
 namespace Thinktecture.IdentityServer.Protocols.WSFederation
 {
@@ -151,13 +152,18 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             return new WSFederationResult(wsFedResponse, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
 
+        IEnumerable<IdentityProvider> GetEnabledWSIdentityProviders()
+        {
+            return IdentityProviderRepository.GetAll().Where(x => x.Enabled && x.Type == IdentityProviderTypes.WSStar);
+        }
+
         private ClaimsPrincipal ValidateToken(SecurityToken token)
         {
             var config = new SecurityTokenHandlerConfiguration();
             config.AudienceRestriction.AudienceMode = AudienceUriMode.Always;
             config.AudienceRestriction.AllowedAudienceUris.Add(new Uri(ConfigurationRepository.Global.IssuerUri));
 
-            var registry = new IdentityProviderIssuerNameRegistry(IdentityProviderRepository.GetAll().Where(x=>x.Enabled));
+            var registry = new IdentityProviderIssuerNameRegistry(GetEnabledWSIdentityProviders());
             config.IssuerNameRegistry = registry;
             config.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
             config.CertificateValidator = X509CertificateValidator.None;
@@ -171,7 +177,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
        
         private ActionResult ShowHomeRealmSelection(SignInRequestMessage message)
         {
-            var idps = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Enabled);
+            var idps = GetEnabledWSIdentityProviders().Where(x => x.ShowInHrdSelection);
             if (idps.Count() == 1)
             {
                 message.HomeRealm = idps.First().Name;
@@ -192,8 +198,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             {
                 var cookie = Request.Cookies[_cookieNameRememberHrd];
                 var realm = cookie.Value;
-                var idps = 
-                    this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Enabled && x.Name == realm);
+                var idps = GetEnabledWSIdentityProviders().Where(x => x.ShowInHrdSelection && x.Name == realm);
                 var idp = idps.SingleOrDefault();
                 if (idp == null)
                 {
@@ -227,8 +232,8 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         public ActionResult ProcessHRDSelection(string idp, string originalSigninUrl, bool rememberHRDSelection = false)
         {
             Tracing.Verbose("HRD selected: " + idp);
-            
-            var ip = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Enabled && x.Name == idp).FirstOrDefault();
+
+            var ip = GetEnabledWSIdentityProviders().Where(x => x.ShowInHrdSelection && x.Name == idp).FirstOrDefault();
             if (ip == null) return View("Error");
 
             try
