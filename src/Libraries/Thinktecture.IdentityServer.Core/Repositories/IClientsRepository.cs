@@ -8,6 +8,7 @@ namespace Thinktecture.IdentityServer.Repositories
         // needed for core issuance logic
         bool ValidateClient(string clientId, string clientSecret);
         bool TryGetClient(string clientId, out Client client);
+        bool ValidateAndGetClient(string clientId, string clientSecret, out Client client);
 
         // management 
         IEnumerable<Client> GetAll();

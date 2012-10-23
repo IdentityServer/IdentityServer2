@@ -11,6 +11,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using Thinktecture.IdentityModel.Authorization;
+using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
@@ -42,11 +43,14 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         {
             Tracing.Information("OAuth2 endpoint called.");
 
-            if (!ValidateClient())
+            Client client = null;
+            if (!ValidateClient(out client))
             {
                 Tracing.Error("Invalid client: " + ClaimsPrincipal.Current.Identity.Name);
                 return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidClient);
             }
+
+            Tracing.Information("Client: " + client.Name);
 
             var tokenType = ConfigurationRepository.Global.DefaultHttpTokenType;
 
@@ -68,7 +72,14 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             {
                 if (ConfigurationRepository.OAuth2.EnableResourceOwnerFlow)
                 {
-                    return ProcessResourceOwnerCredentialRequest(tokenRequest.UserName, tokenRequest.Password, appliesTo, tokenType);
+                    if (client.AllowResourceOwnerFlow)
+                    {
+                        return ProcessResourceOwnerCredentialRequest(tokenRequest.UserName, tokenRequest.Password, appliesTo, tokenType, client);
+                    }
+                    else
+                    {
+                        Tracing.Error("Client is not allowed to use the resource owner password flow:" + client.Name);
+                    }
                 }
             }
 
@@ -76,11 +87,13 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             return OAuthErrorResponseMessage(OAuth2Constants.Errors.UnsupportedGrantType);
         }
 
-        private HttpResponseMessage ProcessResourceOwnerCredentialRequest(string userName, string password, EndpointReference appliesTo, string tokenType)
+        private HttpResponseMessage ProcessResourceOwnerCredentialRequest(string userName, string password, EndpointReference appliesTo, string tokenType, Client client)
         {
+            Tracing.Information("Starting resource owner password credential flow for client: " + client.Name);
+
             if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
             {
-                Tracing.Error("Invalid credentials for: " + appliesTo.Uri.AbsoluteUri);
+                Tracing.Error("Invalid resource owner credentials for: " + appliesTo.Uri.AbsoluteUri);
                 return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
             }
 
@@ -121,8 +134,10 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                 string.Format("{{ \"{0}\": \"{1}\" }}", OAuth2Constants.Errors.Error, error));
         }
 
-        private bool ValidateClient()
+        private bool ValidateClient(out Client client)
         {
+            client = null;
+
             if (!ClaimsPrincipal.Current.Identity.IsAuthenticated)
             {
                 Tracing.Error("Anonymous client.");
@@ -136,9 +151,10 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                 return false;
             }
 
-            return ClientsRepository.ValidateClient(
+            return ClientsRepository.ValidateAndGetClient(
                 ClaimsPrincipal.Current.Identity.Name,
-                passwordClaim.Value);
+                passwordClaim.Value, 
+                out client);
         }
     }
 }

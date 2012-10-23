@@ -16,103 +16,6 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
     /// </summary>
     public class ClientsRepository : IClientsRepository
     {
-        //#region Runtime
-        //public bool TryGetUserNameFromThumbprint(X509Certificate2 certificate, out string userName)
-        //{
-        //    userName = null;
-
-        //    using (var entities = IdentityServerConfigurationContext.Get())
-        //    {
-        //        userName = (from mapping in entities.ClientCertificates
-        //                    where mapping.Thumbprint.Equals(certificate.Thumbprint, StringComparison.OrdinalIgnoreCase)
-        //                    select mapping.UserName).FirstOrDefault();
-
-        //        return (userName != null);
-        //    }
-        //}
-        //#endregion
-
-        //#region Management
-        //public bool SupportsWriteAccess
-        //{
-        //    get { return true; }
-        //}
-
-        //public IEnumerable<string> List(int pageIndex, int pageSize)
-        //{
-        //    using (var entities = IdentityServerConfigurationContext.Get())
-        //    {
-        //        var users =
-        //            (from user in entities.ClientCertificates
-        //             orderby user.UserName
-        //             select user.UserName)
-        //            .Distinct();
-
-        //        if (pageIndex != -1 && pageSize != -1)
-        //        {
-        //            users = users.Skip(pageIndex * pageSize).Take(pageSize);
-        //        }
-
-        //        return users.ToList();
-        //    }
-        //}
-
-        //public IEnumerable<ClientCertificate> GetClientCertificatesForUser(string userName)
-        //{
-        //    using (var entities = IdentityServerConfigurationContext.Get())
-        //    {
-        //        var certs =
-        //             from record in entities.ClientCertificates
-        //             where record.UserName.Equals(userName, StringComparison.OrdinalIgnoreCase)
-        //             select record;
-
-        //        return certs.ToList().ToDomainModel();
-        //    }
-        //}
-
-        //public void Add(ClientCertificate certificate)
-        //{
-        //    using (var entities = IdentityServerConfigurationContext.Get())
-        //    {
-        //        var record =
-        //            (from entry in entities.ClientCertificates
-        //             where entry.UserName.Equals(certificate.UserName, StringComparison.OrdinalIgnoreCase) &&
-        //                   entry.Thumbprint.Equals(certificate.Thumbprint, StringComparison.OrdinalIgnoreCase)
-        //             select entry)
-        //            .SingleOrDefault();
-        //        if (record == null)
-        //        {
-        //            record = new ClientCertificates
-        //            {
-        //                UserName = certificate.UserName,
-        //                Thumbprint = certificate.Thumbprint,
-        //            };
-        //            entities.ClientCertificates.Add(record);
-        //        }
-        //        record.Description = certificate.Description;
-        //        entities.SaveChanges();
-        //    }
-        //}
-
-        //public void Delete(ClientCertificate certificate)
-        //{
-        //    using (var entities = IdentityServerConfigurationContext.Get())
-        //    {
-        //        var record =
-        //            (from entry in entities.ClientCertificates
-        //             where entry.UserName.Equals(certificate.UserName, StringComparison.OrdinalIgnoreCase) &&
-        //                   entry.Thumbprint.Equals(certificate.Thumbprint, StringComparison.OrdinalIgnoreCase)
-        //             select entry)
-        //            .SingleOrDefault();
-        //        if (record != null)
-        //        {
-        //            entities.ClientCertificates.Remove(record);
-        //            entities.SaveChanges();
-        //        }
-        //    }
-        //}
-        //#endregion
-
         public bool ValidateClient(string clientId, string clientSecret)
         {
             using (var entities = IdentityServerConfigurationContext.Get())
@@ -144,6 +47,20 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 client = null;
                 return false;
             }
+        }
+
+        public bool ValidateAndGetClient(string clientId, string clientSecret, out Models.Client client)
+        {
+            if (TryGetClient(clientId, out client))
+            {
+                if (client.ClientSecret.Equals(clientSecret, StringComparison.Ordinal))
+                {
+                    return true;
+                }
+            }
+
+            client = null;
+            return false;
         }
         
         public IEnumerable<Models.Client> GetAll()
