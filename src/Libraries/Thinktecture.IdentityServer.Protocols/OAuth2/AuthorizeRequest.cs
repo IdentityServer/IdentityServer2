@@ -10,6 +10,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         [Required]
         public string client_id { get; set; }
         
+        [Required]
         public string redirect_uri { get; set; }
         
         [Required]

@@ -33,6 +33,12 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         [HttpGet]
         public ActionResult HandleRequest(AuthorizeRequest request)
         {
+            // first round of validation:
+            // missing, invalid, or mismatching redirection URI or
+            // missing or invalid client id
+            // show error page to user
+
+
             // check required fields
             if (!ModelState.IsValid)
             {
