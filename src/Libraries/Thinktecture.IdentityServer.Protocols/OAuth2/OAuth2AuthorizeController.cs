@@ -33,24 +33,25 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         [HttpGet]
         public ActionResult HandleRequest(AuthorizeRequest request)
         {
+            //
             // first round of validation:
             // missing, invalid, or mismatching redirection URI or
             // missing or invalid client id
             // show error page to user
-
-
-            // check required fields
-            if (!ModelState.IsValid)
-            {
-                // return the right error
-                throw new Exception("Invalid model");
-            }
+            //
 
             // validate client
             Client client;
             if (!Clients.TryGetClient(request.client_id, out client))
             {
-                // return the right error
+                // todo: show error page to user
+                throw new Exception("invalid client.");
+            }
+
+            // validate redirect uri
+            if (string.IsNullOrEmpty(request.redirect_uri) || !string.Equals(request.redirect_uri, client.RedirectUri.AbsoluteUri, StringComparison.OrdinalIgnoreCase))
+            {
+                // todo: show error page to user
                 throw new Exception("invalid client.");
             }
 
@@ -58,8 +59,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             Uri uri;
             if (!Uri.TryCreate(request.scope, UriKind.Absolute, out uri))
             {
-                // return the right error
-                throw new Exception("invalid scope.");
+                return Error(client.RedirectUri, OAuth2Constants.Errors.InvalidScope, request.state);
             }
 
             // implicit grant
@@ -75,7 +75,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             }
 
             // todo: return appropiate error
-            throw new Exception("invalid response type.");
+            return Error(client.RedirectUri, OAuth2Constants.Errors.UnsupportedResponseType, request.state);
         }
 
         [ActionName("Index")]
@@ -117,8 +117,23 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             }
 
             // return right error code
-            throw new Exception("token issuance failed.");
+            return Error(client.RedirectUri, OAuth2Constants.Errors.InvalidRequest, request.state);
         }
 
+        private ActionResult Error(Uri redirectUri, string error, string state = null)
+        {
+            string url;
+
+            if (string.IsNullOrEmpty(state))
+            {
+                url = string.Format("{0}#error={1}", redirectUri.AbsoluteUri, error);
+            }
+            else
+            {
+                url = string.Format("{0}#error={1}&state={2}", redirectUri.AbsoluteUri, error, state);
+            }
+
+            return new RedirectResult(url);
+        }
     }
 }
