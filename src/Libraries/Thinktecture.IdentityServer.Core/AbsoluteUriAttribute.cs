@@ -16,6 +16,8 @@ namespace Thinktecture.IdentityServer
         
         public override bool IsValid(object value)
         {
+            if (value == null) return true;
+
             Uri uri = value as Uri;
             if (uri == null)
             {
