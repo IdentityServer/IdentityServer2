@@ -20,13 +20,13 @@
         @Html.Action("ChildMenu", "Menu", new{controllerName="IP"})
     </li>
     <li>
-        @Html.ActionLink("Clients", "Index", "Client")
+        @Html.ActionLink("OAuth Clients", "Index", "Client")
         @Html.Action("ChildMenu", "Menu", new{controllerName="Client"})
     </li>
-    <li>@Html.ActionLink("Identity Delegation", "Index", "Delegation")</li>
 </ul>
 <ul>
     <li>@Html.ActionLink("Roles", "Index", "Role")</li>
     <li>@Html.ActionLink("Users", "Index", "User")</li>
     <li>@Html.ActionLink("Client Certificates", "Index", "ClientCertificate")</li>
+    <li>@Html.ActionLink("Identity Delegation", "Index", "Delegation")</li>
 </ul>
