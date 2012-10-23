@@ -13,6 +13,7 @@
                 else
                 {
                     @Html.Label(prop.PropertyName)
+                    @:
                     if(prop.IsReadOnly)
                     {
                         @Html.Display(prop.PropertyName)
@@ -20,7 +21,9 @@
                     else
                     {
                         @Html.Editor(prop.PropertyName)
+                        @:
                         @Html.Validator(prop)
+                        @:
                     }
                 }
             </div>
