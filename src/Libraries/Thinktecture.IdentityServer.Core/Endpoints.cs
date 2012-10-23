@@ -25,7 +25,8 @@ namespace Thinktecture.IdentityServer
         
         public Uri SimpleHttp { get; set; }
         public Uri Wrap { get; set; }
-        public Uri OAuth2 { get; set; }
+        public Uri OAuth2Token { get; set; }
+        public Uri OAuth2Authorize { get; set; }
         public Uri JSNotify { get; set; }
 
         public static class Paths
@@ -102,11 +103,17 @@ namespace Thinktecture.IdentityServer
             builder.Port = httpsPort;
             ep.Wrap = builder.Uri;
 
-            var oauth2 = new Uri(baseUriString + Paths.OAuth2Token);
-            builder = new UriBuilder(oauth2);
+            var oauth2token = new Uri(baseUriString + Paths.OAuth2Token);
+            builder = new UriBuilder(oauth2token);
             builder.Scheme = Uri.UriSchemeHttps;
             builder.Port = httpsPort;
-            ep.OAuth2 = builder.Uri;
+            ep.OAuth2Token = builder.Uri;
+            
+            var oauth2auth = new Uri(baseUriString + Paths.OAuth2Authorize);
+            builder = new UriBuilder(oauth2auth);
+            builder.Scheme = Uri.UriSchemeHttps;
+            builder.Port = httpsPort;
+            ep.OAuth2Authorize = builder.Uri;
 
             var jsnotify = new Uri(baseUriString + Paths.JSNotify);
             builder = new UriBuilder(jsnotify);
