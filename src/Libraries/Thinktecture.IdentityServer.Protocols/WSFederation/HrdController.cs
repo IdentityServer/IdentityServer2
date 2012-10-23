@@ -91,8 +91,27 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             }
             else
             {
-                return ShowHomeRealmSelection(message);
+                var pastHRDSelection = GetRememberHRDCookieValue();
+                if (String.IsNullOrWhiteSpace(pastHRDSelection))
+                {
+                    message.HomeRealm = pastHRDSelection;
+                    Tracing.Verbose("Past HRD selection from cookie: " + message.HomeRealm);
+                    return ProcessSignInRequest(message);
+                }
+                else
+                {
+                    return ShowHomeRealmSelection(message);
+                }
             }
+        }
+
+        private string GetRememberHRDCookieValue()
+        {
+            return null;
+        }
+        private void SetRememberHRDCookieValue(string realm)
+        {
+            
         }
 
         private ActionResult ProcessSignOut(SignOutRequestMessage message)
@@ -156,15 +175,16 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
        
         private ActionResult ShowHomeRealmSelection(SignInRequestMessage message)
         {
-            Tracing.Verbose("HRD selection screen displayed.");
             var idps = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Enabled);
             if (idps.Count() == 1)
             {
                 message.HomeRealm = idps.First().Name;
+                Tracing.Verbose("Only one HRD option available: " + message.HomeRealm);
                 return ProcessSignInRequest(message);
             }
             else
             {
+                Tracing.Verbose("HRD selection screen displayed.");
                 var vm = new HrdViewModel(message, idps);
                 return View("HRD", vm);
             }
@@ -173,10 +193,10 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Select")]
-        public ActionResult ProcessHRDSelection(string idp, string originalSigninUrl)
+        public ActionResult ProcessHRDSelection(string idp, string originalSigninUrl, bool rememberHRDSelection = false)
         {
             Tracing.Verbose("HRD selected: " + idp);
-
+            
             var ip = this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Enabled && x.Name == idp).FirstOrDefault();
             if (ip == null) return View("Error");
 
@@ -189,6 +209,11 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 var signinMessage = message as SignInRequestMessage;
                 if (signinMessage != null)
                 {
+                    if (rememberHRDSelection)
+                    {
+                        SetRememberHRDCookieValue(idp);
+                    }
+
                     signinMessage.HomeRealm = idp;
                     return ProcessSignInRequest(signinMessage);
                 }
