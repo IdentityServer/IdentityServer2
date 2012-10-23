@@ -3,12 +3,13 @@
  * see license.txt
  */
 
+using System.ComponentModel.DataAnnotations;
 namespace Thinktecture.IdentityServer.Models
 {
-    public static class IdentityProviderTypes
+    public enum IdentityProviderTypes
     {
-        public const string WS = "WS*";
+        WSStar = 1,
         //public const string OpenId = "OpenId";
-        //public const string OAuth2 = "OAuth2";
+        OAuth2 = 2
     }
 }

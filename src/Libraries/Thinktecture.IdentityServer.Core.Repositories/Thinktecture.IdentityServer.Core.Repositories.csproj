@@ -105,6 +105,10 @@
     <Compile Include="Migrations\201210232018407_AddIDKeyToIdentityProvider.Designer.cs">
       <DependentUpon>201210232018407_AddIDKeyToIdentityProvider.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201210232130242_OAuthSupportForIdentityProvider.cs" />
+    <Compile Include="Migrations\201210232130242_OAuthSupportForIdentityProvider.Designer.cs">
+      <DependentUpon>201210232130242_OAuthSupportForIdentityProvider.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NullCacheRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201210232018407_AddIDKeyToIdentityProvider.resx">
       <DependentUpon>201210232018407_AddIDKeyToIdentityProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201210232130242_OAuthSupportForIdentityProvider.resx">
+      <DependentUpon>201210232130242_OAuthSupportForIdentityProvider.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

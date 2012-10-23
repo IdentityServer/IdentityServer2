@@ -417,7 +417,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Name = idp.Name,
                     Enabled = idp.Enabled,
                     DisplayName = idp.DisplayName,
-                    //Type = idp.Type,
+                    Type = (IdentityProviderTypes)idp.Type,
                     ShowInHrdSelection = idp.ShowInHrdSelection,
                     WSFederationEndpoint = idp.WSFederationEndpoint,
                     IssuerThumbprint = idp.IssuerThumbprint
@@ -438,7 +438,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Enabled = idp.Enabled,
                 DisplayName = idp.DisplayName,
                 ShowInHrdSelection = idp.ShowInHrdSelection,
-                //Type = idp.Type,
+                Type = (IdentityProviderTypes)idp.Type,
                 WSFederationEndpoint = idp.WSFederationEndpoint,
                 IssuerThumbprint = idp.IssuerThumbprint
             };
@@ -468,7 +468,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             entity.Enabled = idp.Enabled;
             entity.ShowInHrdSelection = idp.ShowInHrdSelection;
             entity.DisplayName = idp.DisplayName;
-            entity.Type = IdentityProviderTypes.WS;
+            entity.Type = (int)idp.Type;
             entity.WSFederationEndpoint = idp.WSFederationEndpoint;
             entity.IssuerThumbprint = idp.IssuerThumbprint;
         }
