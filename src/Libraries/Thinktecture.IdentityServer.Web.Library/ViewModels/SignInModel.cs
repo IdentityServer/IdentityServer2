@@ -30,8 +30,15 @@ namespace Thinktecture.IdentityServer.Web.ViewModels
             {
                 if (isSigninRequest == null)
                 {
-                    var rp = new AuthenticationHelper().GetRelyingPartyDetailsFromReturnUrl(this.ReturnUrl);
-                    isSigninRequest = rp != null;
+                    try
+                    {
+                        var rp = new AuthenticationHelper().GetRelyingPartyDetailsFromReturnUrl(this.ReturnUrl);
+                        isSigninRequest = rp != null;
+                    }
+                    catch
+                    {
+                        isSigninRequest = false;
+                    }
                 }
                 return isSigninRequest.Value;
             }
