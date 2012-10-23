@@ -17,8 +17,8 @@
         @for (int i = 0; i < list.Length; i++)
         {
             <div>
-                @Html.HiddenFor(x=>list[i].Name)
-                @Html.LabelFor(x => list[i].Delete, list[i].DisplayName)
+                @Html.HiddenFor(x=>list[i].ID)
+                @Html.LabelFor(x => list[i].Delete, list[i].Name)
                 @Html.CheckBoxFor(x => list[i].Delete)
             </div>
         }

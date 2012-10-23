@@ -2,7 +2,7 @@
 @using Thinktecture.IdentityServer.Web.Utility
 
 @{
-    if (Model.Name == null)
+    if (Model.ID == 0)
     {
         ViewBag.Title = "New Identity Provider";
     }
@@ -12,7 +12,7 @@
     }
 }
 @{
-    var action = Model.Name == null ? "Create" : "Update";
+    var action = Model.ID == 0 ? "Create" : "Update";
 }
 @using (Html.BeginForm(action, "IP", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -21,24 +21,10 @@
     <fieldset class="editor">
         <legend>@ViewBag.Title</legend>
 
-        <div>
-            @Html.LabelFor(x => x.Name)
-            @if (Model.Name == null)
-            {
-                @Html.EditorFor(x => x.Name)
-            }
-            else
-            {
-                @Html.HiddenFor(x => x.Name)
-                @Html.DisplayFor(x => x.Name)
-            }
-            @Html.ValidatorFor(x => x.Name)
-        </div>
-
         @Html.EditorForModel()
 
         <div class="buttons">
-            @if (Model.Name != null)
+            @if (Model.ID > 0)
             {
                 <button type="submit" name="action" value="save">Save Changes</button>
                 <button type="submit" name="action" value="delete">Delete</button>

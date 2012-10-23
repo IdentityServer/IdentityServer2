@@ -413,6 +413,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 from idp in idps
                 select new Models.IdentityProvider
                 {
+                    ID = idp.ID,
                     Name = idp.Name,
                     Enabled = idp.Enabled,
                     DisplayName = idp.DisplayName,
@@ -432,6 +433,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 
             return new Models.IdentityProvider
             {
+                ID = idp.ID,
                 Name = idp.Name,
                 Enabled = idp.Enabled,
                 DisplayName = idp.DisplayName,
@@ -461,6 +463,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 return;
             }
 
+            entity.ID = idp.ID;
             entity.Name = idp.Name;
             entity.Enabled = idp.Enabled;
             entity.ShowInHrdSelection = idp.ShowInHrdSelection;

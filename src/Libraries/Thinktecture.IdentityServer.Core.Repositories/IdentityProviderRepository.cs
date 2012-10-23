@@ -4,6 +4,7 @@
  */
 
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
@@ -31,17 +32,28 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             using (var entities = IdentityServerConfigurationContext.Get())
             {
+                ValidateUniqueName(item, entities);
+                
                 item.IssuerThumbprint = item.IssuerThumbprint.Replace(" ", "");
                 entities.IdentityProviders.Add(item.ToEntity());
                 entities.SaveChanges();
             }
         }
 
-        public void Delete(string name)
+        private static void ValidateUniqueName(Models.IdentityProvider item, IdentityServerConfigurationContext entities)
+        {
+            var othersWithSameName =
+                from e in entities.IdentityProviders
+                where e.Name == item.Name
+                select e;
+            if (othersWithSameName.Any()) throw new ValidationException(string.Format("The Name/Identifier '{0}' is already in use.", item.Name));
+        }
+
+        public void Delete(int id)
         {
             using (var entities = IdentityServerConfigurationContext.Get())
             {
-                var item = entities.IdentityProviders.Where(idp => idp.Name == name).FirstOrDefault();
+                var item = entities.IdentityProviders.Where(idp => idp.ID == id).FirstOrDefault();
                 if (item != null)
                 {
                     entities.IdentityProviders.Remove(item);
@@ -54,12 +66,28 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             using (var entities = IdentityServerConfigurationContext.Get())
             {
-                var dbitem = entities.IdentityProviders.Where(idp => idp.Name == item.Name).FirstOrDefault();
+                ValidateUniqueName(item, entities);
+
+                var dbitem = entities.IdentityProviders.Where(idp => idp.ID == item.ID).FirstOrDefault();
                 if (dbitem != null)
                 {
                     item.UpdateEntity(dbitem);
                     entities.SaveChanges();
                 }
+            }
+        }
+
+
+        public Models.IdentityProvider Get(int id)
+        {
+            using (var entities = IdentityServerConfigurationContext.Get())
+            {
+                var item = entities.IdentityProviders.SingleOrDefault(x=>x.ID == id);
+                if (item != null)
+                {
+                    return item.ToDomainModel();
+                }
+                return null;
             }
         }
     }

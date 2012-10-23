@@ -9,9 +9,11 @@ namespace Thinktecture.IdentityServer.Models
 {
     public class IdentityProvider
     {
+        [UIHint("HiddenInput")]
+        public int ID { get; set; }
+
         [Required]
         [Display(Order=1, Name = "Identifier", Description = "Unique identifier of the identity provider.")]
-        [ScaffoldColumn(false)]
         public string Name { get; set; }
         
         [Required]

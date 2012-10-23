@@ -17,7 +17,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
             this.identityProviderRepository = identityProviderRepository;
             this.IdentityProviders =
                 identityProviderRepository.GetAll()
-                .Select(x => new IPModel { DisplayName = x.DisplayName, Name = x.Name })
+                .Select(x => new IPModel { ID = x.ID, Name = x.DisplayName })
                 .ToArray();
         }
 
@@ -26,9 +26,8 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 
     public class IPModel 
     {
-        public string DisplayName { get; set; }
-        [Required]
         public string Name { get; set; }
+        public int ID { get; set; }
         public bool Delete { get; set; }
     }
 }

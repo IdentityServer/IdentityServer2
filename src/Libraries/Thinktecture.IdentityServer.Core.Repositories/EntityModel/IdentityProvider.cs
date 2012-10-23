@@ -5,6 +5,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
     public class IdentityProvider
     {
         [Key]
+        public int ID { get; set; }
+
+        [Required]
         public string Name { get; set; }
 
         [Required]

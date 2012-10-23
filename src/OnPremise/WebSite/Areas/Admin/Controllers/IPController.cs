@@ -57,8 +57,8 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                         {
                             Controller = "IP",
                             Action = "IP",
-                            Title = x.DisplayName,
-                            RouteValues = new { id = x.Name }
+                            Title = x.Name,
+                            RouteValues = new { id = x.ID }
                         }).ToArray()
                 };
                 return PartialView("ChildMenu", vm);
@@ -76,7 +76,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                     {
                         foreach (var item in list.Where(x => x.Delete))
                         {
-                            this.identityProviderRepository.Delete(item.Name);
+                            this.identityProviderRepository.Delete(item.ID);
                         }
                         TempData["Message"] = "Identity Providers Deleted.";
                     }
@@ -100,11 +100,10 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             return View("IP", new IdentityProvider());
         }
 
-        public ActionResult IP(string id)
+        public ActionResult IP(int id)
         {
-            IdentityProvider ip;
-            if (!this.identityProviderRepository.TryGet(id, out ip)) return HttpNotFound();
-
+            var ip = this.identityProviderRepository.Get(id);
+            if (ip == null) return HttpNotFound();
             return View("IP", ip);
         }
 
@@ -141,7 +140,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             }
             
             // if we're here, then we should clear name so the view thinks it's new
-            model.Name = null;
+            model.ID = 0;
             return View("IP", model);
         }
         
