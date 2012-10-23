@@ -24,6 +24,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
     public class HrdController : Controller
     {
         const string _cookieName = "hrdsignout";
+        const string _cookieNameRememberHrd = "hrdSelection";
 
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
@@ -94,24 +95,19 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 var pastHRDSelection = GetRememberHRDCookieValue();
                 if (String.IsNullOrWhiteSpace(pastHRDSelection))
                 {
-                    message.HomeRealm = pastHRDSelection;
-                    Tracing.Verbose("Past HRD selection from cookie: " + message.HomeRealm);
-                    return ProcessSignInRequest(message);
+                    return ShowHomeRealmSelection(message);
                 }
                 else
                 {
-                    return ShowHomeRealmSelection(message);
+                    return ProcessHomeRealmFromCookieValue(message, pastHRDSelection);
                 }
             }
         }
 
-        private string GetRememberHRDCookieValue()
+        private ActionResult ProcessHomeRealmFromCookieValue(SignInRequestMessage message, string pastHRDSelection)
         {
-            return null;
-        }
-        private void SetRememberHRDCookieValue(string realm)
-        {
-            
+            message.HomeRealm = pastHRDSelection;
+            return ProcessSignInRequest(message);
         }
 
         private ActionResult ProcessSignOut(SignOutRequestMessage message)
@@ -188,6 +184,41 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 var vm = new HrdViewModel(message, idps);
                 return View("HRD", vm);
             }
+        }
+
+        private string GetRememberHRDCookieValue()
+        {
+            if (Request.Cookies.AllKeys.Contains(_cookieNameRememberHrd))
+            {
+                var cookie = Request.Cookies[_cookieNameRememberHrd];
+                var realm = cookie.Value;
+                var idps = 
+                    this.IdentityProviderRepository.GetAll().Where(x => x.ShowInHrdSelection && x.Enabled && x.Name == realm);
+                var idp = idps.SingleOrDefault();
+                if (idp == null)
+                {
+                    Tracing.Verbose("Past HRD selection from cookie not found in current HRD list. Past value was: " + realm);
+                    SetRememberHRDCookieValue(null);
+                }
+                return realm;
+            }
+            return null;
+        }
+
+        private void SetRememberHRDCookieValue(string realm)
+        {
+            if (String.IsNullOrWhiteSpace(realm))
+            {
+                Response.Cookies.Remove(_cookieNameRememberHrd);
+                return;
+            }
+
+            var cookie = new HttpCookie(_cookieNameRememberHrd, realm);
+            cookie.Expires = DateTime.Now.AddMonths(1);
+            cookie.HttpOnly = true;
+            cookie.Secure = true;
+            cookie.Path = Request.ApplicationPath;
+            Response.Cookies.Add(cookie);
         }
 
         [HttpPost]

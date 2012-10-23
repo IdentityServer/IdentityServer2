@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
 
         public IEnumerable<HRDIdentityProvider> Providers { get; set; }
         public string OriginalSigninUrl { get; set; }
+        [Display(Name="Remember Selection")]
+        public bool RememberHRDSelection { get; set; }
     }
 
     public class HRDIdentityProvider

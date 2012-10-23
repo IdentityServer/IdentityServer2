@@ -12,6 +12,12 @@
     {
         @Html.AntiForgeryToken()
         @Html.HiddenFor(x=>x.OriginalSigninUrl)
+    
+        <div>
+            @Html.LabelFor(x=>x.RememberHRDSelection)
+            @Html.CheckBoxFor(x=>x.RememberHRDSelection)    
+        </div>
+    
         <ul class="hrd">
             @foreach (var provider in Model.Providers)
             {
