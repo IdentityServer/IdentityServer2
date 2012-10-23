@@ -13,7 +13,7 @@
 @{
     var action = Model.Name == null ? "Create" : "Update";
 }
-@using (Html.BeginForm(action, "Client"))
+@using (Html.BeginForm(action, "OAuthClient"))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("Error updating client")

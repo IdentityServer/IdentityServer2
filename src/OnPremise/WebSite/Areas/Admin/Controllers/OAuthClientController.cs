@@ -11,29 +11,29 @@ using Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 {
-    public class ClientController : Controller
+    public class OAuthClientController : Controller
     {
         [Import]
         public IClientsRepository clientRepository { get; set; }
 
-        public ClientController()
+        public OAuthClientController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
-        public ClientController(IClientsRepository clientRepository)
+        public OAuthClientController(IClientsRepository clientRepository)
         {
             this.clientRepository = clientRepository;
         }
 
         public ActionResult Index()
         {
-            var vm = new ClientViewModel(this.clientRepository);
+            var vm = new OAuthClientViewModel(this.clientRepository);
             return View("Index", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string action, ClientInputModel[] list)
+        public ActionResult Index(string action, OAuthClientInputModel[] list)
         {
             if (action == "new") return RedirectToAction("Edit");
             if (action == "delete") return Delete(list);
@@ -42,7 +42,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             return Index();
         }
 
-        private ActionResult Delete(ClientInputModel[] list)
+        private ActionResult Delete(OAuthClientInputModel[] list)
         {
             if (ModelState.IsValid)
             {
@@ -162,7 +162,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
         [ChildActionOnly]
         public ActionResult Menu()
         {
-            var list = new ClientViewModel(this.clientRepository);
+            var list = new OAuthClientViewModel(this.clientRepository);
             if (list.Clients.Any())
             {
                 var vm = new ChildMenuViewModel
@@ -170,7 +170,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                     Items = list.Clients.Select(x =>
                         new ChildMenuItem
                         {
-                            Controller = "Client",
+                            Controller = "OAuthClient",
                             Action = "Edit",
                             Title = x.Name,
                             RouteValues = new { id = x.ID }

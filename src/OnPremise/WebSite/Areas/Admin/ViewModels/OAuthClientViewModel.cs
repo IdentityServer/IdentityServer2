@@ -6,24 +6,24 @@ using Thinktecture.IdentityServer.Models;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
-    public class ClientViewModel
+    public class OAuthClientViewModel
     {
         private Repositories.IClientsRepository clientsRepository;
-        public ClientInputModel[] Clients
+        public OAuthClientInputModel[] Clients
         {
             get;
             private set;
         }
 
-        public ClientViewModel(Repositories.IClientsRepository clientsRepository)
+        public OAuthClientViewModel(Repositories.IClientsRepository clientsRepository)
         {
             // TODO: Complete member initialization
             this.clientsRepository = clientsRepository;
-            this.Clients = this.clientsRepository.GetAll().Select(x=>new ClientInputModel{Name=x.Name, ID=x.ID}).ToArray();
+            this.Clients = this.clientsRepository.GetAll().Select(x=>new OAuthClientInputModel{Name=x.Name, ID=x.ID}).ToArray();
         }
     }
 
-    public class ClientInputModel
+    public class OAuthClientInputModel
     {
         public string Name { get; set; }
         public int ID { get; set; }
