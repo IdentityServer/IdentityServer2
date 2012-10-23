@@ -30,20 +30,22 @@ namespace Thinktecture.IdentityServer
 
         public static class Paths
         {
-            public const string WSFedIssuePage = "/issue/wsfed";
-            public const string WSFedHRD = "/issue/hrd";
-            public const string WSFedMetadata = "/FederationMetadata/2007-06/FederationMetadata.xml";
-            public const string PrivacyNotice = "/privacyNotice.txt";
-            public const string WSTrustBase = "/issue/wstrust";
-            public const string SimpleHttp = "/issue/simple";
-            public const string Wrap = "/issue/wrap";
-            public const string OAuth2 = "/issue/oauth2";
-            public const string JSNotify = "/issue/jsnotify";
-            public const string Mex = "/mex";
-            public const string WSTrustMessageUserName = "/message/username";
-            public const string WSTrustMixedUserName = "/mixed/username";
-            public const string WSTrustMessageCertificate = "/message/certificate";
-            public const string WSTrustMixedCertificate = "/mixed/certificate";
+            public const string WSFedIssuePage = "issue/wsfed";
+            public const string WSFedHRD = "issue/hrd";
+            public const string WSFedHRDSelect = "issue/hrd/select";
+            public const string WSFedMetadata = "FederationMetadata/2007-06/FederationMetadata.xml";
+            public const string PrivacyNotice = "privacyNotice.txt";
+            public const string WSTrustBase = "issue/wstrust";
+            public const string SimpleHttp = "issue/simple";
+            public const string Wrap = "issue/wrap";
+            public const string OAuth2Token = "issue/oauth2/token";
+            public const string OAuth2Authorize = "issue/oauth2/authorize";
+            public const string JSNotify = "issue/jsnotify";
+            public const string Mex = "mex";
+            public const string WSTrustMessageUserName = "message/username";
+            public const string WSTrustMixedUserName = "mixed/username";
+            public const string WSTrustMessageCertificate = "message/certificate";
+            public const string WSTrustMixedCertificate = "mixed/certificate";
         }
 
         /// <summary>
@@ -63,9 +65,9 @@ namespace Thinktecture.IdentityServer
         public static Endpoints Create(string baseUriString, int httpPort, int httpsPort)
         {
             var ep = new Endpoints();
-            if (baseUriString.EndsWith("/"))
+            if (!baseUriString.EndsWith("/"))
             {
-                baseUriString = baseUriString.Substring(0, baseUriString.Length - 1);
+                baseUriString += "/";
             }
             
             // construct various http and https URIs
@@ -100,7 +102,7 @@ namespace Thinktecture.IdentityServer
             builder.Port = httpsPort;
             ep.Wrap = builder.Uri;
 
-            var oauth2 = new Uri(baseUriString + Paths.OAuth2);
+            var oauth2 = new Uri(baseUriString + Paths.OAuth2Token);
             builder = new UriBuilder(oauth2);
             builder.Scheme = Uri.UriSchemeHttps;
             builder.Port = httpsPort;
@@ -129,13 +131,13 @@ namespace Thinktecture.IdentityServer
             builder.Port = httpsPort;
             var activeSsl = builder.Uri;
 
-            ep.WSTrustMessageUserName = new Uri(activeClear + Paths.WSTrustMessageUserName);
-            ep.WSTrustMixedUserName = new Uri(activeSsl + Paths.WSTrustMixedUserName);
+            ep.WSTrustMessageUserName = new Uri(activeClear, Paths.WSTrustMessageUserName);
+            ep.WSTrustMixedUserName = new Uri(activeSsl, Paths.WSTrustMixedUserName);
 
-            ep.WSTrustMessageCertificate = new Uri(activeClear + Paths.WSTrustMessageCertificate);
-            ep.WSTrustMixedCertificate = new Uri(activeSsl + Paths.WSTrustMixedCertificate);
+            ep.WSTrustMessageCertificate = new Uri(activeClear, Paths.WSTrustMessageCertificate);
+            ep.WSTrustMixedCertificate = new Uri(activeSsl, Paths.WSTrustMixedCertificate);
 
-            ep.WSTrustMex = new Uri(activeSsl + Paths.Mex);
+            ep.WSTrustMex = new Uri(activeSsl, Paths.Mex);
 
             return ep;
         }

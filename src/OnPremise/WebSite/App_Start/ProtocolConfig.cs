@@ -23,7 +23,7 @@ namespace Thinktecture.IdentityServer.Web
             {
                 routes.MapRoute(
                     "FederationMetadata",
-                    "FederationMetadata/2007-06/FederationMetadata.xml",
+                    Thinktecture.IdentityServer.Endpoints.Paths.WSFedMetadata,
                     new { controller = "FederationMetadata", action = "Generate" }
                 );
             }
@@ -33,7 +33,7 @@ namespace Thinktecture.IdentityServer.Web
             {
                 routes.MapRoute(
                     "wsfederation",
-                    "issue/wsfed",
+                    Thinktecture.IdentityServer.Endpoints.Paths.WSFedIssuePage,
                     new { controller = "WSFederation", action = "issue" }
                 );
             }
@@ -43,12 +43,12 @@ namespace Thinktecture.IdentityServer.Web
             {
                 routes.MapRoute(
                     "hrd",
-                    "issue/hrd",
+                    Thinktecture.IdentityServer.Endpoints.Paths.WSFedHRD,
                     new { controller = "Hrd", action = "issue" }
                 );
                 routes.MapRoute(
                     "hrd-select",
-                    "issue/hrd/select",
+                    Thinktecture.IdentityServer.Endpoints.Paths.WSFedHRDSelect,
                     new { controller = "Hrd", action = "Select" },
                     new { method = new HttpMethodConstraint("POST") }
                 );
@@ -60,7 +60,7 @@ namespace Thinktecture.IdentityServer.Web
                 // token endpoint
                 routes.MapHttpRoute(
                     name: "oauth2token",
-                    routeTemplate: "issue/oauth2/token",
+                    routeTemplate: Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Token,
                     defaults: new { controller = "OAuth2Token" },
                     constraints: null,
                     handler: new AuthenticationHandler(clientAuthConfig, httpConfiguration)
@@ -69,7 +69,7 @@ namespace Thinktecture.IdentityServer.Web
                 // authorize endpoint
                 routes.MapRoute(
                     "oauth2authorize",
-                    "issue/oauth2/authorize",
+                    Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Authorize,
                     new { controller = "OAuth2Authorize", action = "index" }
                 );
             }
@@ -79,7 +79,7 @@ namespace Thinktecture.IdentityServer.Web
             {
                 routes.MapHttpRoute(
                     name: "simplehttp",
-                    routeTemplate: "issue/simple",
+                    routeTemplate: Thinktecture.IdentityServer.Endpoints.Paths.SimpleHttp,
                     defaults: new { controller = "SimpleHttp" },
                     constraints: null,
                     handler: new AuthenticationHandler(basicAuthConfig, httpConfiguration)
@@ -90,7 +90,7 @@ namespace Thinktecture.IdentityServer.Web
             if (configuration.WSTrust.Enabled)
             {
                 routes.Add(new ServiceRoute(
-                    "issue/wstrust",
+                    Thinktecture.IdentityServer.Endpoints.Paths.WSTrustBase,
                     new TokenServiceHostFactory(),
                     typeof(TokenServiceConfiguration))
                 );
