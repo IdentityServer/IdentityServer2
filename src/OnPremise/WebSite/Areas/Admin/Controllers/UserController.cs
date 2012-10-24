@@ -63,10 +63,13 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 try
                 {
                     this.UserManagementRepository.CreateUser(model.Username, model.Password, model.Email);
-                    var roles = model.Roles.Where(x => x.InRole).Select(x => x.Role);
-                    if (roles.Any())
+                    if (model.Roles != null)
                     {
-                        this.UserManagementRepository.SetRolesForUser(model.Username, roles);
+                        var roles = model.Roles.Where(x => x.InRole).Select(x => x.Role);
+                        if (roles.Any())
+                        {
+                            this.UserManagementRepository.SetRolesForUser(model.Username, roles);
+                        }
                     }
                     TempData["Message"] = "User Created";
                     return RedirectToAction("Index");
@@ -80,6 +83,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Error creating user.");
                 }
             }
+
             return View("Create", model);
         }
 

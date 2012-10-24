@@ -8,6 +8,8 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
     public class UserInputModel
     {
+
+
         [Required]
         public string Username { get; set; }
         
@@ -17,7 +19,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         
         public string Email { get; set; }
 
-        [System.Web.Mvc.HiddenInput(DisplayValue = false)]
+        [ScaffoldColumn(false)]
         public UserRoleAssignment[] Roles { get; set; }
     }
 }
