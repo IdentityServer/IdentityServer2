@@ -199,6 +199,9 @@
     <Content Include="Areas\Admin\Content\Admin.css">
       <DependentUpon>Admin.less</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\Admin.min.css">
+      <DependentUpon>Admin.less</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Scripts\Admin.js" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\error.png" />
@@ -324,7 +327,7 @@
     <Content Include="Content\Mobile.less" />
     <Content Include="Areas\Admin\Views\OAuthClient\Index.cshtml" />
     <Content Include="Areas\Admin\Views\OAuthClient\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\IdentityProviderTypes.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Enum.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />

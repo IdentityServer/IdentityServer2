@@ -33,10 +33,10 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             using (var entities = IdentityServerConfigurationContext.Get())
             {
                 ValidateUniqueName(item, entities);
-                
-                item.IssuerThumbprint = item.IssuerThumbprint.Replace(" ", "");
-                entities.IdentityProviders.Add(item.ToEntity());
+                var entity = item.ToEntity();
+                entities.IdentityProviders.Add(entity);
                 entities.SaveChanges();
+                item.ID = entity.ID;
             }
         }
 

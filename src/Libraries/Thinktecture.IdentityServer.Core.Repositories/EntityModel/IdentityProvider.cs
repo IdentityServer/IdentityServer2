@@ -24,7 +24,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public string ClientID { get; set; }
         public string ClientSecret { get; set; }
         public string AuthorizationUrl { get; set; }
-        public string TokenUrl { get; set; }
+        public int? ProfileType { get; set; }
+        public string CustomProfileType { get; set; }
 
         public bool Enabled { get; set; }
     }

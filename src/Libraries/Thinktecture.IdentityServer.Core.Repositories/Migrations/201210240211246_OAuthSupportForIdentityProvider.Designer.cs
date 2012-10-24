@@ -11,7 +11,7 @@ namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201210232130242_OAuthSupportForIdentityProvider"; }
+            get { return "201210240211246_OAuthSupportForIdentityProvider"; }
         }
         
         string IMigrationMetadata.Source

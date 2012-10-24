@@ -93,13 +93,14 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             // oauth2
             if (Configuration.OAuth2.Enabled)
             {
-                if (Configuration.OAuth2.EnableResourceOwnerFlow)
-                {
-                    list.Add("OAuth2 Token", endpoints.OAuth2Token.AbsoluteUri);
-                }
                 if (Configuration.OAuth2.EnableImplicitFlow)
                 {
                     list.Add("OAuth2 Authorize", endpoints.OAuth2Authorize.AbsoluteUri);
+                }
+                list.Add("OAuth2 Callback", endpoints.OAuth2Callback.AbsoluteUri);
+                if (Configuration.OAuth2.EnableResourceOwnerFlow)
+                {
+                    list.Add("OAuth2 Token", endpoints.OAuth2Token.AbsoluteUri);
                 }
             }
 

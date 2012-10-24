@@ -206,13 +206,13 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             return new Models.Configuration.OAuth2Configuration
             {
-                Enabled = entity.Enabled, 
+                Enabled = entity.Enabled,
                 EnableImplicitFlow = entity.EnableImplicitFlow,
                 EnableResourceOwnerFlow = entity.EnableResourceOwnerFlow,
                 EnableConsent = entity.EnableConsent
             };
         }
-        
+
         public static Entities.Configuration.OAuth2Configuration ToEntity(this Models.Configuration.OAuth2Configuration model)
         {
             return new Entities.Configuration.OAuth2Configuration
@@ -264,7 +264,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         #region Relying Party
         public static RelyingParty ToDomainModel(this RelyingParties rpEntity)
         {
-            var rp = new RelyingParty 
+            var rp = new RelyingParty
             {
                 Id = rpEntity.Id.ToString(),
                 Name = rpEntity.Name,
@@ -420,7 +420,12 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Type = (IdentityProviderTypes)idp.Type,
                     ShowInHrdSelection = idp.ShowInHrdSelection,
                     WSFederationEndpoint = idp.WSFederationEndpoint,
-                    IssuerThumbprint = idp.IssuerThumbprint
+                    IssuerThumbprint = idp.IssuerThumbprint,
+                    ClientID = idp.ClientID,
+                    ClientSecret = idp.ClientSecret,
+                    AuthorizationUrl = idp.AuthorizationUrl,
+                    ProfileType = (OAuthProfileTypes?)idp.ProfileType,
+                    CustomProfileType = idp.CustomProfileType
                 });
         }
 
@@ -440,7 +445,12 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 ShowInHrdSelection = idp.ShowInHrdSelection,
                 Type = (IdentityProviderTypes)idp.Type,
                 WSFederationEndpoint = idp.WSFederationEndpoint,
-                IssuerThumbprint = idp.IssuerThumbprint
+                IssuerThumbprint = idp.IssuerThumbprint,
+                ClientID = idp.ClientID,
+                ClientSecret = idp.ClientSecret,
+                AuthorizationUrl = idp.AuthorizationUrl,
+                ProfileType = (OAuthProfileTypes?)idp.ProfileType,
+                CustomProfileType = idp.CustomProfileType
             };
         }
 
@@ -471,6 +481,11 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             entity.Type = (int)idp.Type;
             entity.WSFederationEndpoint = idp.WSFederationEndpoint;
             entity.IssuerThumbprint = idp.IssuerThumbprint;
+            entity.ClientID = idp.ClientID;
+            entity.ClientSecret = idp.ClientSecret;
+            entity.AuthorizationUrl = idp.AuthorizationUrl;
+            entity.ProfileType = (int?)idp.ProfileType;
+            entity.CustomProfileType = idp.CustomProfileType;
         }
 
         #endregion

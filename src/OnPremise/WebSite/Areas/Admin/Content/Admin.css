@@ -42,6 +42,9 @@
   padding: 1px;
   margin-right: 1px;
 }
+.editor select .input-validation-error {
+  width: 352px;
+}
 .editor input.base64 {
   width: 275px;
 }

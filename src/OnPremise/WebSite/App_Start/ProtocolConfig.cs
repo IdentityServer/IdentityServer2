@@ -57,6 +57,20 @@ namespace Thinktecture.IdentityServer.Web
             // oauth2 endpoint
             if (configuration.OAuth2.Enabled)
             {
+                // authorize endpoint
+                routes.MapRoute(
+                    "oauth2authorize",
+                    Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Authorize,
+                    new { controller = "OAuth2Authorize", action = "index" }
+                );
+
+                // callback endpoint
+                routes.MapRoute(
+                    "oauth2callback",
+                    Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Callback,
+                    new { controller = "Hrd", action = "OAuthTokenCallback" }
+                );
+
                 // token endpoint
                 routes.MapHttpRoute(
                     name: "oauth2token",
@@ -64,13 +78,6 @@ namespace Thinktecture.IdentityServer.Web
                     defaults: new { controller = "OAuth2Token" },
                     constraints: null,
                     handler: new AuthenticationHandler(clientAuthConfig, httpConfiguration)
-                );
-
-                // authorize endpoint
-                routes.MapRoute(
-                    "oauth2authorize",
-                    Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Authorize,
-                    new { controller = "OAuth2Authorize", action = "index" }
                 );
             }
 

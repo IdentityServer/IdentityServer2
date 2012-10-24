@@ -19,6 +19,8 @@ using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
 using Thinktecture.IdentityModel.Web;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Thinktecture.IdentityServer.Protocols.WSFederation
 {
@@ -154,7 +156,13 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
 
         IEnumerable<IdentityProvider> GetEnabledWSIdentityProviders()
         {
-            return IdentityProviderRepository.GetAll().Where(x => x.Enabled && x.Type == IdentityProviderTypes.WSStar);
+            return IdentityProviderRepository.GetAll().Where(
+                x => x.Enabled && x.Type == IdentityProviderTypes.WSStar);
+        }
+        IEnumerable<IdentityProvider> GetVisibleIdentityProviders()
+        {
+            return IdentityProviderRepository.GetAll().Where(
+                x => x.Enabled && x.ShowInHrdSelection);
         }
 
         private ClaimsPrincipal ValidateToken(SecurityToken token)
@@ -174,15 +182,16 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             return new ClaimsPrincipal(identity);
         }
 
-       
+
         private ActionResult ShowHomeRealmSelection(SignInRequestMessage message)
         {
-            var idps = GetEnabledWSIdentityProviders().Where(x => x.ShowInHrdSelection);
+            var idps = GetVisibleIdentityProviders();
             if (idps.Count() == 1)
             {
-                message.HomeRealm = idps.First().Name;
+                var ip = idps.First();
+                message.HomeRealm = ip.Name;
                 Tracing.Verbose("Only one HRD option available: " + message.HomeRealm);
-                return ProcessSignInRequest(message);
+                return RedirectToIdentityProvider(ip, message);
             }
             else
             {
@@ -198,7 +207,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             {
                 var cookie = Request.Cookies[_cookieNameRememberHrd];
                 var realm = cookie.Value;
-                var idps = GetEnabledWSIdentityProviders().Where(x => x.ShowInHrdSelection && x.Name == realm);
+                var idps = GetVisibleIdentityProviders().Where(x => x.Name == realm);
                 var idp = idps.SingleOrDefault();
                 if (idp == null)
                 {
@@ -233,28 +242,32 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             Tracing.Verbose("HRD selected: " + idp);
 
-            var ip = GetEnabledWSIdentityProviders().Where(x => x.ShowInHrdSelection && x.Name == idp).FirstOrDefault();
-            if (ip == null) return View("Error");
+            var uri = new Uri(originalSigninUrl);
+            var message = WSFederationMessage.CreateFromUri(uri);
+            var signinMessage = message as SignInRequestMessage;
+
+            var ip = GetVisibleIdentityProviders().Where(x => x.Name == idp).FirstOrDefault();
+            if (ip == null || signinMessage == null) return View("Error");
 
             try
             {
-                var uri = new Uri(originalSigninUrl);
-                var message = WSFederationMessage.CreateFromUri(uri);
-
-                // sign in 
-                var signinMessage = message as SignInRequestMessage;
-                if (signinMessage != null)
+                if (rememberHRDSelection)
                 {
-                    if (rememberHRDSelection)
-                    {
-                        SetRememberHRDCookieValue(idp);
-                    }
+                    SetRememberHRDCookieValue(idp);
+                }
 
-                    signinMessage.HomeRealm = idp;
-                    return ProcessSignInRequest(signinMessage);
+                if (ip.Type == IdentityProviderTypes.WSStar)
+                {
+                    signinMessage.HomeRealm = ip.Name;
+                    return RedirectToIdentityProvider(ip, signinMessage);
+                }
+
+                if (ip.Type == IdentityProviderTypes.OAuth2)
+                {
+                    return ProcessOAuthSignIn(ip, signinMessage);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Tracing.Error(ex.ToString());
             }
@@ -309,6 +322,170 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             public string Wctx { get; set; }
             public string Realm { get; set; }
             public string WsFedEndpoint { get; set; }
+        }
+
+        internal class OAuthContext : Context
+        {
+            public int IdP { get; set; }
+        }
+
+        private void SetOAuthContextCookie(OAuthContext ctx)
+        {
+            var j = JObject.FromObject(ctx);
+
+            var cookie = new HttpCookie("idsrvoauthcontext", j.ToString());
+            cookie.Secure = true;
+            cookie.HttpOnly = true;
+            cookie.Path = Request.ApplicationPath;
+
+            Response.Cookies.Add(cookie);
+        }
+
+        private OAuthContext GetOAuthContextCookie()
+        {
+            var cookie = Request.Cookies["idsrvoauthcontext"];
+            if (cookie == null)
+            {
+                throw new InvalidOperationException("cookie");
+            }
+
+            var json = JObject.Parse(HttpUtility.UrlDecode(cookie.Value));
+            return json.ToObject<OAuthContext>();
+        }
+
+
+        private ActionResult ProcessOAuthSignIn(IdentityProvider ip, SignInRequestMessage request)
+        {
+            switch (ip.ProfileType)
+            {
+                case OAuthProfileTypes.Google:
+                    return ProcessOAuthSignInGoogle(ip, request);
+            }
+
+            return View("Error");
+        }
+
+        private ActionResult ProcessOAuthSignInGoogle(IdentityProvider ip, SignInRequestMessage request)
+        {
+            var scope = "https://www.googleapis.com/auth/userinfo.profile";
+            var state = Thinktecture.IdentityModel.CryptoRandom.CreateRandomKeyString(10);
+            var redirectUri = String.Format("https://{0}{1}",
+                Request.Url.Host,
+                Url.Action("OAuthTokenCallback"));
+            var url = String.Format("{0}?scope={1}&state={2}&redirect_uri={3}&response_type=code&client_id={4}",
+                ip.AuthorizationUrl,
+                scope,
+                state,
+                redirectUri,
+                ip.ClientID);
+            var ctx = new OAuthContext
+            {
+                Wctx = request.Context,
+                Realm = request.Realm,
+                IdP = ip.ID
+            };
+            SetOAuthContextCookie(ctx);
+            return Redirect(url);
+        }
+
+        [HttpGet]
+        public ActionResult OAuthTokenCallback(string code, string state, string error)
+        {
+            if (!String.IsNullOrWhiteSpace(code))
+            {
+                var ctx = GetOAuthContextCookie();
+                if (ctx != null)
+                {
+                    var ip = GetVisibleIdentityProviders().Where(x => x.ID == ctx.IdP).FirstOrDefault();
+                    if (ip != null && ip.Type == IdentityProviderTypes.OAuth2)
+                    {
+                        var p = GetOAuthClaimsGoogle(code, ip);
+                        return ProcessOAuthResponse(p, ctx);
+                    }
+                }
+            }
+            return View("Error");
+        }
+
+        string GetOAuthTokenGoogle(string code, IdentityProvider ip)
+        {
+            HttpClient client = new HttpClient();
+            var redirectUri = String.Format("https://{0}{1}",
+                Request.Url.Host,
+                Url.Action("OAuthTokenCallback"));
+            List<KeyValuePair<string, string>> postValues =
+                new List<KeyValuePair<string, string>>();
+            postValues.Add(new KeyValuePair<string, string>("code", code));
+            postValues.Add(new KeyValuePair<string, string>("client_id", ip.ClientID));
+            postValues.Add(new KeyValuePair<string, string>("client_secret", ip.ClientSecret));
+            postValues.Add(new KeyValuePair<string, string>("redirect_uri", redirectUri));
+            postValues.Add(new KeyValuePair<string, string>("grant_type", "authorization_code"));
+            var content = new FormUrlEncodedContent(postValues);
+            var result = client.PostAsync("https://accounts.google.com/o/oauth2/token", content).Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var response = result.Content.ReadAsAsync<TokenResponse>().Result;
+                return response.AccessToken;
+            }
+
+            return null;
+        }
+        
+        IEnumerable<Claim> GetOAuthProfileGoogle(string accessKey, IdentityProvider ip)
+        {
+            HttpClient client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", accessKey);
+            var result = client.GetAsync("https://www.googleapis.com/oauth2/v1/userinfo").Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var response = result.Content.ReadAsStringAsync().Result;
+                var profile = JObject.Parse(response);
+                
+                var issuer = ip.Name;
+                var claims = new List<Claim>();
+                claims.Add(new Claim(Constants.Claims.IdentityProvider, issuer, ClaimValueTypes.String, Constants.InternalIssuer));
+                
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, profile.Value<string>("id")));
+                claims.Add(new Claim(ClaimTypes.Email, profile.Value<string>("email")));
+                claims.Add(new Claim(ClaimTypes.Name, profile.Value<string>("name")));
+                claims.Add(new Claim(ClaimTypes.GivenName, profile.Value<string>("given_name")));
+                claims.Add(new Claim(ClaimTypes.Surname, profile.Value<string>("family_name")));
+                claims.Add(new Claim(ClaimTypes.Gender, profile.Value<string>("gender")));
+                return claims;
+            }
+
+            return null;
+        }
+
+        private ClaimsPrincipal GetOAuthClaimsGoogle(string code, IdentityProvider ip)
+        {
+            var token = GetOAuthTokenGoogle(code, ip);
+            if (token != null)
+            {
+                var claims = GetOAuthProfileGoogle(token, ip);
+                var id = new ClaimsIdentity(claims, "OAuth");
+                return new ClaimsPrincipal(id);
+            }
+            return null;
+        }
+
+        private ActionResult ProcessOAuthResponse(ClaimsPrincipal principal, Context context)
+        {
+            var message = new SignInRequestMessage(new Uri("http://foo"), context.Realm);
+            message.Context = context.Wctx;
+
+            // issue token and create ws-fed response
+            var wsFedResponse = FederatedPassiveSecurityTokenServiceOperations.ProcessSignInRequest(
+                message,
+                principal,
+                TokenServiceConfiguration.Current.CreateSecurityTokenService());
+
+            // set cookie for single-sign-out
+            new SignInSessionsManager(HttpContext, _cookieName, ConfigurationRepository.Global.MaximumTokenLifetime)
+                .SetEndpoint(context.WsFedEndpoint);
+
+            return new WSFederationResult(wsFedResponse, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
 
         #endregion
