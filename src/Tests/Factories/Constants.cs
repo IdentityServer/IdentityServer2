@@ -18,7 +18,7 @@ namespace Thinktecture.IdentityServer.Tests
 
         static Constants()
         {
-            HostName = "idsrv";
+            HostName = "idsrv.local";
         }
 
         public static class Http
