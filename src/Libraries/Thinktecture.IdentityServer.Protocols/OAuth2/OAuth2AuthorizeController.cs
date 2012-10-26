@@ -44,14 +44,14 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             Client client;
             if (!Clients.TryGetClient(request.client_id, out client))
             {
-                // todo: show error page to user
+                // brock todo: show error page to user
                 throw new Exception("invalid client.");
             }
 
             // validate redirect uri
             if (string.IsNullOrEmpty(request.redirect_uri) || !string.Equals(request.redirect_uri, client.RedirectUri.AbsoluteUri, StringComparison.OrdinalIgnoreCase))
             {
-                // todo: show error page to user
+                // brock todo: show error page to user
                 throw new Exception("invalid client.");
             }
 
@@ -65,12 +65,16 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             // implicit grant
             if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Token, StringComparison.Ordinal))
             {
+                // brock todo: show consent then on postback do this next line of code (repeating all the prior stuff up to here)
+                // show resource name, uri and client name
+                // client is trying to access resource on your behalf
                 return HandleImplicitGrant(request, client);
             }
 
             // authorization code grant
             if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Code, StringComparison.Ordinal))
             {
+                // brock todo: show consent then on postback do this next line of code (repeating all the prior stuff up to here)
                 return HandleAuthorizationCodeGrant(request, client);
             }
 
