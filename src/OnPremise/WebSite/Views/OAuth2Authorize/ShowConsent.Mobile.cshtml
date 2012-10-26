@@ -23,8 +23,11 @@
             {
                 qsParams.Add(key, Request.QueryString[key]);
             }
+            var url = Url.Action("Index", "OAuth2Authorize", qsParams);
+            var attrs = new RouteValueDictionary();
+            attrs.Add("data-ajax", "false");
         }
-        @using (Html.BeginForm("Index", "OAuth2Authorize", qsParams, FormMethod.Post, new { data_ajax = "false" }))
+        @using (Html.BeginForm("Index", "OAuth2Authorize", qsParams, FormMethod.Post, attrs))
         {
             @Html.AntiForgeryToken()
             <button name="button" value="yes">Allow Access</button>
