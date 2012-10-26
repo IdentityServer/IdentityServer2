@@ -3,6 +3,7 @@ using System.ServiceModel.Activation;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Thinktecture.IdentityModel.Http;
 using Thinktecture.IdentityModel.Tokens.Http;
 using Thinktecture.IdentityServer.Protocols.OAuth2;
 using Thinktecture.IdentityServer.Protocols.WSTrust;
@@ -17,6 +18,9 @@ namespace Thinktecture.IdentityServer.Web
         {
             var basicAuthConfig = CreateBasicAuthConfig(users);
             var clientAuthConfig = CreateClientAuthConfig();
+
+            // require SSL for all web api endpoints
+            httpConfiguration.MessageHandlers.Add(new RequireHttpsHandler());
 
             #region Protocols
             // federation metadata
