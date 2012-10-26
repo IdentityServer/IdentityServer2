@@ -1,9 +1,12 @@
 ﻿/*
- * Copyright (c) Dominick Baier.  All rights reserved.
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
  * see license.txt
  */
 
+using BrockAllen.OAuth2;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Services;
@@ -11,18 +14,12 @@ using System.IdentityModel.Services.Configuration;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Newtonsoft.Json.Linq;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
-using Thinktecture.IdentityModel.Web;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using BrockAllen.OAuth2;
-using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityServer.Protocols.WSFederation
 {

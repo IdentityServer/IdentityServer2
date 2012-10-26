@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.Composition;
+﻿/*
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
+ * see license.txt
+ */
+
+using System.ComponentModel.Composition;
 using System.IdentityModel.Protocols.WSTrust;
 using System.Linq;
 using System.Net;

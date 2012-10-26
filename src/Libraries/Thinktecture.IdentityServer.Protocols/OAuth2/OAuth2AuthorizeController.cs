@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
+ * see license.txt
+ */
+
+using System;
 using System.ComponentModel.Composition;
 using System.IdentityModel.Protocols.WSTrust;
 using System.Security.Claims;
@@ -14,8 +19,10 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
     {
         [Import]
         public IClientsRepository Clients { get; set; }
+        
         [Import]
         public IConfigurationRepository Configuration { get; set; }
+        
         [Import]
         public IRelyingPartyRepository RPRepository { get; set; }
 

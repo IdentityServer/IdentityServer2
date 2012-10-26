@@ -1,12 +1,11 @@
 ﻿/*
- * Copyright (c) Dominick Baier.  All rights reserved.
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
  * see license.txt
  */
 
 using System.ComponentModel.Composition;
 using System.IdentityModel.Services;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Authorization.Mvc;

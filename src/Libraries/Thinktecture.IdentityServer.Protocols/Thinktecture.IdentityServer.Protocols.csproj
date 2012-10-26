@@ -70,10 +70,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JSNotify\JSNotifyController.cs" />
-    <Compile Include="JSNotify\JSNotifyResult.cs" />
     <Compile Include="OAuth2\AuthorizeRequest.cs" />
-    <Compile Include="OAuth2\ClientValidator.cs" />
     <Compile Include="OAuth2\OAuth2AuthorizeController.cs" />
     <Compile Include="OAuth2\OAuth2ConsentViewModel.cs" />
     <Compile Include="Shared\AuthenticationHelper.cs" />
@@ -85,10 +82,7 @@
     <Compile Include="Shared\OAuth2Constants.cs" />
     <Compile Include="Shared\TokenResponse.cs" />
     <Compile Include="Shared\STS.cs" />
-    <Compile Include="Shared\UnauthorizedResult.cs" />
     <Compile Include="SimpleHTTP\SimpleHttpController.cs" />
-    <Compile Include="WRAP\WrapController.cs" />
-    <Compile Include="WRAP\WrapResult.cs" />
     <Compile Include="WSFederation\HrdController.cs" />
     <Compile Include="WSFederation\HrdViewModel.cs" />
     <Compile Include="WSFederation\WSFederationController.cs" />
@@ -103,9 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="JSNotify\jsnotify.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

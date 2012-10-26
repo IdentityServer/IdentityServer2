@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/*
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
+ * see license.txt
+ */
+
+using System.ComponentModel.DataAnnotations;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {

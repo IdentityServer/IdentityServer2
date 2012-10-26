@@ -1,9 +1,10 @@
 ﻿/*
- * Copyright (c) Dominick Baier.  All rights reserved.
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
  * see license.txt
  */
 
 using System;
+using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Services;
 using System.Web.Mvc;
 
@@ -17,7 +18,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             {
                 if (message.BaseUri.Scheme != Uri.UriSchemeHttps)
                 {
-                    throw new InvalidOperationException("Return URL must be SSL.");
+                    throw new InvalidRequestException("Return URL must be SSL.");
                 }
             }
 
