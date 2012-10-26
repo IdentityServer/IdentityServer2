@@ -353,7 +353,6 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             return json.ToObject<OAuthContext>();
         }
 
-
         private ActionResult ProcessOAuthSignIn(IdentityProvider ip, SignInRequestMessage request)
         {
             switch (ip.ProfileType)
@@ -446,12 +445,12 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 var claims = new List<Claim>();
                 claims.Add(new Claim(Constants.Claims.IdentityProvider, issuer, ClaimValueTypes.String, Constants.InternalIssuer));
                 
-                claims.Add(new Claim(ClaimTypes.NameIdentifier, profile.Value<string>("id")));
-                claims.Add(new Claim(ClaimTypes.Email, profile.Value<string>("email")));
-                claims.Add(new Claim(ClaimTypes.Name, profile.Value<string>("name")));
-                claims.Add(new Claim(ClaimTypes.GivenName, profile.Value<string>("given_name")));
-                claims.Add(new Claim(ClaimTypes.Surname, profile.Value<string>("family_name")));
-                claims.Add(new Claim(ClaimTypes.Gender, profile.Value<string>("gender")));
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, profile.Value<string>("id"), ClaimValueTypes.String, issuer));
+                claims.Add(new Claim(ClaimTypes.Email, profile.Value<string>("email"), ClaimValueTypes.String, issuer));
+                claims.Add(new Claim(ClaimTypes.Name, profile.Value<string>("name"), ClaimValueTypes.String, issuer));
+                claims.Add(new Claim(ClaimTypes.GivenName, profile.Value<string>("given_name"), ClaimValueTypes.String, issuer));
+                claims.Add(new Claim(ClaimTypes.Surname, profile.Value<string>("family_name"), ClaimValueTypes.String, issuer));
+                claims.Add(new Claim(ClaimTypes.Gender, profile.Value<string>("gender"), ClaimValueTypes.String, issuer));
                 return claims;
             }
 
