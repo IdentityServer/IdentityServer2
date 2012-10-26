@@ -109,6 +109,10 @@
     <Compile Include="Migrations\201210240211246_OAuthSupportForIdentityProvider.Designer.cs">
       <DependentUpon>201210240211246_OAuthSupportForIdentityProvider.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201210260320349_CleanupIdentityProviderOAuthInfo.cs" />
+    <Compile Include="Migrations\201210260320349_CleanupIdentityProviderOAuthInfo.Designer.cs">
+      <DependentUpon>201210260320349_CleanupIdentityProviderOAuthInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NullCacheRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201210240211246_OAuthSupportForIdentityProvider.resx">
       <DependentUpon>201210240211246_OAuthSupportForIdentityProvider.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201210260320349_CleanupIdentityProviderOAuthInfo.resx">
+      <DependentUpon>201210260320349_CleanupIdentityProviderOAuthInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

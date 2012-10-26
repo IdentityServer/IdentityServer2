@@ -423,9 +423,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     IssuerThumbprint = idp.IssuerThumbprint,
                     ClientID = idp.ClientID,
                     ClientSecret = idp.ClientSecret,
-                    AuthorizationUrl = idp.AuthorizationUrl,
-                    ProfileType = (OAuthProfileTypes?)idp.ProfileType,
-                    CustomProfileType = idp.CustomProfileType
+                    ProviderType = (OAuth2ProviderTypes?)idp.OAuth2ProviderType,
                 });
         }
 
@@ -448,9 +446,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 IssuerThumbprint = idp.IssuerThumbprint,
                 ClientID = idp.ClientID,
                 ClientSecret = idp.ClientSecret,
-                AuthorizationUrl = idp.AuthorizationUrl,
-                ProfileType = (OAuthProfileTypes?)idp.ProfileType,
-                CustomProfileType = idp.CustomProfileType
+                ProviderType = (OAuth2ProviderTypes?)idp.OAuth2ProviderType,
             };
         }
 
@@ -483,9 +479,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             entity.IssuerThumbprint = idp.IssuerThumbprint;
             entity.ClientID = idp.ClientID;
             entity.ClientSecret = idp.ClientSecret;
-            entity.AuthorizationUrl = idp.AuthorizationUrl;
-            entity.ProfileType = (int?)idp.ProfileType;
-            entity.CustomProfileType = idp.CustomProfileType;
+            entity.OAuth2ProviderType = (int?)idp.ProviderType;
         }
 
         #endregion

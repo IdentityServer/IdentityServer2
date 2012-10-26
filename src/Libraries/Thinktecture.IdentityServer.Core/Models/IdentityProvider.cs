@@ -53,18 +53,13 @@ namespace Thinktecture.IdentityServer.Models
             }
         }
 
-        [Display(Order = 8, Name = "Client ID", Description = "")]
-        public string ClientID { get; set; }
-        [Display(Order = 9, Name = "Client Secret", Description = "")]
-        public string ClientSecret { get; set; }
-        [AbsoluteUri]
-        [Display(Order = 10, Name = "Authorization Url", Description = "")]
-        public string AuthorizationUrl { get; set; }
-        [Display(Order = 11, Name = "Profile Type", Description = "")]
+        [Display(Order = 8, Name = "OAuth2 Provider", Description = "")]
         [UIHint("Enum")]
-        public OAuthProfileTypes? ProfileType { get; set; }
-        [Display(Order = 12, Name = "Custom Profile Type", Description = "")]
-        public string CustomProfileType { get; set; }
+        public OAuth2ProviderTypes? ProviderType { get; set; }
+        [Display(Order = 9, Name = "Client ID", Description = "")]
+        public string ClientID { get; set; }
+        [Display(Order = 10, Name = "Client Secret", Description = "")]
+        public string ClientSecret { get; set; }
 
         public System.Collections.Generic.IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -91,7 +86,7 @@ namespace Thinktecture.IdentityServer.Models
                 {
                     errors.Add(new ValidationResult("Client Secret is required.", new string[] { "ClientSecret" }));
                 }
-                if (this.ProfileType == null)
+                if (this.ProviderType == null)
                 {
                     errors.Add(new ValidationResult("Profile Type is required.", new string[] { "ProfileType" }));
                 }

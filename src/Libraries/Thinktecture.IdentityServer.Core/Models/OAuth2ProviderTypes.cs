@@ -5,7 +5,7 @@
 
 namespace Thinktecture.IdentityServer.Models
 {
-    public enum OAuthProfileTypes
+    public enum OAuth2ProviderTypes
     {
         Google = 1,
         Facebook = 2,

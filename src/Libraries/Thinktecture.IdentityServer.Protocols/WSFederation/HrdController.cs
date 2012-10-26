@@ -329,12 +329,12 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             public string WsFedEndpoint { get; set; }
         }
 
-        internal class OAuthContext : Context
+        internal class OAuth2Context : Context
         {
             public int IdP { get; set; }
         }
 
-        private void SetOAuthContextCookie(OAuthContext ctx)
+        private void SetOAuthContextCookie(OAuth2Context ctx)
         {
             var j = JObject.FromObject(ctx);
 
@@ -346,7 +346,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             Response.Cookies.Add(cookie);
         }
 
-        private OAuthContext GetOAuthContextCookie()
+        private OAuth2Context GetOAuthContextCookie()
         {
             var cookie = Request.Cookies["idsrvoauthcontext"];
             if (cookie == null)
@@ -355,22 +355,42 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             }
 
             var json = JObject.Parse(HttpUtility.UrlDecode(cookie.Value));
-            return json.ToObject<OAuthContext>();
+            return json.ToObject<OAuth2Context>();
         }
 
         private ActionResult ProcessOAuth2SignIn(IdentityProvider ip, SignInRequestMessage request)
         {
-            switch (ip.ProfileType)
+            var ctx = new OAuth2Context
             {
-                case OAuthProfileTypes.Google:
-                    return new OAuth2ActionResult(ProviderType.Google, null);
-                case OAuthProfileTypes.Facebook:
-                    return new OAuth2ActionResult(ProviderType.Facebook, null);
-                case OAuthProfileTypes.Live:
-                    return new OAuth2ActionResult(ProviderType.Live, null);
+                Wctx = request.Context,
+                Realm = request.Realm,
+                IdP = ip.ID
+            };
+            SetOAuthContextCookie(ctx);
+
+            var oauth2 = new OAuth2Client(GetProviderTypeFromOAuthProfileTypes(ip.ProviderType.Value), ip.ClientID, ip.ClientSecret);
+            switch (ip.ProviderType)
+            {
+                case OAuth2ProviderTypes.Google:
+                    return new OAuth2ActionResult(oauth2, ProviderType.Google, null);
+                case OAuth2ProviderTypes.Facebook:
+                    return new OAuth2ActionResult(oauth2, ProviderType.Facebook, null);
+                case OAuth2ProviderTypes.Live:
+                    return new OAuth2ActionResult(oauth2, ProviderType.Live, null);
             }
 
             return View("Error");
+        }
+
+        ProviderType GetProviderTypeFromOAuthProfileTypes(OAuth2ProviderTypes type)
+        {
+            switch (type)
+            {
+                case OAuth2ProviderTypes.Facebook: return ProviderType.Facebook;
+                case OAuth2ProviderTypes.Live: return ProviderType.Live;
+                case OAuth2ProviderTypes.Google: return ProviderType.Google;
+                default: throw new Exception("Invalid OAuthProfileTypes");
+            }
         }
 
         [HttpGet]
@@ -379,10 +399,13 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             var ctx = GetOAuthContextCookie();
             var ip = GetVisibleIdentityProviders().Single(x => x.ID == ctx.IdP);
 
-            var result = await OAuth2Client.ProcessCallbackAsync(this.HttpContext);
+            var oauth2 = new OAuth2Client(GetProviderTypeFromOAuthProfileTypes(ip.ProviderType.Value), ip.ClientID, ip.ClientSecret);
+            var result = await oauth2.ProcessCallbackAsync();
             if (result.Error != null) return View("Error");
             
             var claims = result.Claims.ToList();
+            var authInstant = claims.Find(x=>x.Type == ClaimTypes.AuthenticationInstant);
+            if (authInstant != null) claims.Remove(authInstant);
             claims.Add(new Claim(Constants.Claims.IdentityProvider, ip.Name, ClaimValueTypes.String, Constants.InternalIssuer));
             var id = new ClaimsIdentity(claims, "OAuth");
             var cp = new ClaimsPrincipal(id);
