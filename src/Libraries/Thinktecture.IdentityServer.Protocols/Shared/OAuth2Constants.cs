@@ -32,6 +32,7 @@ namespace Thinktecture.IdentityServer.Protocols
             public const string UnsupportedGrantType = "unsupported_grant_type";
             public const string UnsupportedResponseType = "unsupported_response_type";
             public const string InvalidScope = "invalid_scope";
+            public const string AccessDenied = "access_denied";
         }
     }
 }

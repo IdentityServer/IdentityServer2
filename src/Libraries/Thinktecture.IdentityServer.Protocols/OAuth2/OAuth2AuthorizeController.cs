@@ -14,34 +14,26 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
     {
         [Import]
         public IClientsRepository Clients { get; set; }
-
         [Import]
         public IConfigurationRepository Configuration { get; set; }
+        [Import]
+        public IRelyingPartyRepository RPRepository { get; set; }
 
         public OAuth2AuthorizeController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public OAuth2AuthorizeController(IConfigurationRepository configuration, IClientsRepository client)
+        public OAuth2AuthorizeController(IConfigurationRepository configuration, IClientsRepository client, IRelyingPartyRepository rpRepository)
         {
             Configuration = configuration;
             Clients = client;
+            RPRepository = rpRepository;
         }
 
-        [ActionName("Index")]
-        [HttpGet]
-        public ActionResult HandleRequest(AuthorizeRequest request)
+        private ActionResult CheckRequest(AuthorizeRequest request, out Client client)
         {
-            //
-            // first round of validation:
-            // missing, invalid, or mismatching redirection URI or
-            // missing or invalid client id
-            // show error page to user
-            //
-
             // validate client
-            Client client;
             if (!Clients.TryGetClient(request.client_id, out client))
             {
                 ViewBag.Message = "Invalid client_id : " + request.client_id;
@@ -62,20 +54,44 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                 return Error(client.RedirectUri, OAuth2Constants.Errors.InvalidScope, request.state);
             }
 
-            // implicit grant
-            if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Token, StringComparison.Ordinal))
-            {
-                // brock todo: show consent then on postback do this next line of code (repeating all the prior stuff up to here)
-                // show resource name, uri and client name
-                // client is trying to access resource on your behalf
-                return HandleImplicitGrant(request, client);
-            }
+            return null;
+        }
 
-            // authorization code grant
-            if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Code, StringComparison.Ordinal))
+        [ActionName("Index")]
+        [HttpGet]
+        public ActionResult HandleRequest(AuthorizeRequest request)
+        {
+            //
+            // first round of validation:
+            // missing, invalid, or mismatching redirection URI or
+            // missing or invalid client id
+            // show error page to user
+            //
+
+            Client client;
+            var error = CheckRequest(request, out client);
+            if (error != null) return error;
+
+            // implicit grant
+            if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Token, StringComparison.Ordinal) ||
+                request.response_type.Equals(OAuth2Constants.ResponseTypes.Code, StringComparison.Ordinal))
             {
-                // brock todo: show consent then on postback do this next line of code (repeating all the prior stuff up to here)
-                return HandleAuthorizationCodeGrant(request, client);
+                // brock todo: show consent then on postback do this next line of code 
+                // (repeating all the prior stuff up to here)
+                RelyingParty rp;
+                if (RPRepository.TryGet(request.scope, out rp))
+                {
+                    // show resource name, uri and client name
+                    // client is trying to access resource on your behalf
+                    var vm = new OAuth2ConsentViewModel
+                    {
+                        ResourceUri = rp.Realm.AbsoluteUri,
+                        ResourceName = rp.Name,
+                        ClientName = client.ClientId
+                    };
+
+                    return View("ShowConsent", vm);
+                }
             }
 
             // todo: return appropiate error
@@ -84,9 +100,35 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
         [ActionName("Index")]
         [HttpPost]
-        public ActionResult HandleResponse()
+        [ValidateAntiForgeryToken]
+        public ActionResult HandleResponse(string button, AuthorizeRequest request)
         {
-            return null;
+            Client client;
+            var error = CheckRequest(request, out client);
+            if (error != null) return error;
+
+            if (button == "no")
+            {
+                return Error(client.RedirectUri, OAuth2Constants.Errors.AccessDenied, request.state);
+            }
+
+            if (button == "yes")
+            {
+                // implicit grant
+                if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Token, StringComparison.Ordinal))
+                {
+                    return HandleImplicitGrant(request, client);
+                }
+
+                // authorization code grant
+                if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Code, StringComparison.Ordinal))
+                {
+                    return HandleAuthorizationCodeGrant(request, client);
+                }
+            }
+
+            // todo: return appropiate error
+            return Error(client.RedirectUri, OAuth2Constants.Errors.UnsupportedResponseType, request.state);
         }
 
 

@@ -1,0 +1,20 @@
+﻿@model Thinktecture.IdentityServer.Protocols.OAuth2.OAuth2ConsentViewModel
+
+@{
+    ViewBag.Title = "ShowConsent";
+}
+
+<h2>Resource Consent</h2>
+<dl>
+    <dt><b>@Model.ClientName</b>
+    is requesting permission to access a resource on your behalf:</dt>
+    <dd><b>Resource Name:</b> @Model.ResourceName</dd>
+    <dd><b>Resource ID:</b> @Model.ResourceUri</dd>
+</dl>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button name="button" value="yes">Allow Access</button>
+    <button name="button" value="no">No Thanks</button>
+}
