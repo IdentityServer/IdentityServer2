@@ -132,7 +132,7 @@ namespace Thinktecture.IdentityServer.TokenService
             }
 
             var userClaims = GetOutputClaims(principal, requestDetails, ClaimsRepository);
-            var outputIdentity = new ClaimsIdentity(userClaims);
+            var outputIdentity = new ClaimsIdentity(userClaims, "IdSrv");
 
             if (requestDetails.IsActAsRequest)
             {
@@ -164,10 +164,13 @@ namespace Thinktecture.IdentityServer.TokenService
             if (IdentityProviderRepository.TryGet(idpClaim.Value, out idp))
             {
                 var transformedClaims = ClaimsTransformationRulesRepository.ProcessClaims(SanitizeInternalClaims(principal), idp, requestDetails);
-                return new ClaimsIdentity(transformedClaims, "External");
+                var id = new ClaimsIdentity(transformedClaims, "External");
+
+                id.AddClaim(new Claim(Constants.Claims.IdentityProvider, idp.Name));
+                return id;
             }
 
-            throw new InvalidOperationException("Invalid identity provider.");
+            throw new InvalidRequestException("Invalid identity provider.");
         }
 
         protected virtual ClaimsIdentity GetActAsClaimsIdentity(ClaimsIdentity clientIdentity, RequestDetails requestDetails)
