@@ -45,14 +45,16 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             if (!Clients.TryGetClient(request.client_id, out client))
             {
                 // brock todo: show error page to user
-                throw new Exception("invalid client.");
+                ViewBag.Message = "Invalid client_id : " + request.client_id;
+                return View("Error");
             }
 
             // validate redirect uri
             if (string.IsNullOrEmpty(request.redirect_uri) || !string.Equals(request.redirect_uri, client.RedirectUri.AbsoluteUri, StringComparison.OrdinalIgnoreCase))
             {
                 // brock todo: show error page to user
-                throw new Exception("invalid client.");
+                ViewBag.Message = "The redirect_uri in the request: " + request.redirect_uri + " did not match a registered redirect URI.";
+                return View("Error");
             }
 
             // validate scope (must be a valid URI)

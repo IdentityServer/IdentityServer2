@@ -350,6 +350,7 @@
     <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
     <Content Include="Views\Account\SignIn.Mobile.cshtml" />
     <Content Include="Views\HRD\HRD.Mobile.cshtml" />
+    <Content Include="Views\OAuth2Authorize\Error.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
