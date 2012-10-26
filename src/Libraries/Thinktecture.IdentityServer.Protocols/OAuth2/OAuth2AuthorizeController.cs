@@ -44,7 +44,6 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             Client client;
             if (!Clients.TryGetClient(request.client_id, out client))
             {
-                // brock todo: show error page to user
                 ViewBag.Message = "Invalid client_id : " + request.client_id;
                 return View("Error");
             }
@@ -52,7 +51,6 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             // validate redirect uri
             if (string.IsNullOrEmpty(request.redirect_uri) || !string.Equals(request.redirect_uri, client.RedirectUri.AbsoluteUri, StringComparison.OrdinalIgnoreCase))
             {
-                // brock todo: show error page to user
                 ViewBag.Message = "The redirect_uri in the request: " + request.redirect_uri + " did not match a registered redirect URI.";
                 return View("Error");
             }
