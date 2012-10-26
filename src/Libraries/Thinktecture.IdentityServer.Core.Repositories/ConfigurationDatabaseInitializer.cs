@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using Thinktecture.IdentityModel.Constants;
+using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories.Sql.Configuration;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
@@ -299,7 +300,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     DisplayName = "LeastPrivilege ADFS Server",
                     Enabled = true,
                     ShowInHrdSelection = true,
-                    //Type = Models.IdentityProviderTypes.WS,
+                    Type = 1,
                     WSFederationEndpoint = "https://adfs.leastprivilege.vm/adfs/ls/",
                     IssuerThumbprint = "cad5731ae474b932631e57feb72d810aea6f0220"
                 },
@@ -309,7 +310,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     DisplayName = "Web Identities",
                     Enabled = true,
                     ShowInHrdSelection = true,
-                    //Type = Models.IdentityProviderTypes.WS,
+                    Type = 1,
                     WSFederationEndpoint = "https://idsrvwebids.accesscontrol.windows.net/v2/wsfederation",
                     IssuerThumbprint = "5AAD3C5CC1A5A715E791BEA85B4445D3CB29F33F"
                 }
