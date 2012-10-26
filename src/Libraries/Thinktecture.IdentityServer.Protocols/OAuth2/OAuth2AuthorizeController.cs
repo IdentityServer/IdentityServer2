@@ -83,21 +83,27 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Token, StringComparison.Ordinal) ||
                 request.response_type.Equals(OAuth2Constants.ResponseTypes.Code, StringComparison.Ordinal))
             {
-                // brock todo: show consent then on postback do this next line of code 
-                // (repeating all the prior stuff up to here)
-                RelyingParty rp;
-                if (RPRepository.TryGet(request.scope, out rp))
+                if (Configuration.OAuth2.EnableConsent)
                 {
-                    // show resource name, uri and client name
-                    // client is trying to access resource on your behalf
-                    var vm = new OAuth2ConsentViewModel
+                    RelyingParty rp;
+                    if (RPRepository.TryGet(request.scope, out rp))
                     {
-                        ResourceUri = rp.Realm.AbsoluteUri,
-                        ResourceName = rp.Name,
-                        ClientName = client.ClientId
-                    };
+                        // show resource name, uri and client name
+                        // client is trying to access resource on your behalf
+                        var vm = new OAuth2ConsentViewModel
+                        {
+                            ResourceUri = rp.Realm.AbsoluteUri,
+                            ResourceName = rp.Name,
+                            ClientName = client.ClientId
+                        };
 
-                    return View("ShowConsent", vm);
+                        return View("ShowConsent", vm);
+                    }
+                }
+                else
+                {
+                    var grantResult = PerformGrant(request, client);
+                    if (grantResult != null) return grantResult;
                 }
             }
 
@@ -121,23 +127,30 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
             if (button == "yes")
             {
-                // implicit grant
-                if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Token, StringComparison.Ordinal))
-                {
-                    return HandleImplicitGrant(request, client);
-                }
-
-                // authorization code grant
-                if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Code, StringComparison.Ordinal))
-                {
-                    return HandleAuthorizationCodeGrant(request, client);
-                }
+                var grantResult = PerformGrant(request, client);
+                if (grantResult != null) return grantResult;
             }
 
             // todo: return appropiate error
             return Error(client.RedirectUri, OAuth2Constants.Errors.UnsupportedResponseType, request.state);
         }
 
+        private ActionResult PerformGrant(AuthorizeRequest request, Client client)
+        {
+            // implicit grant
+            if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Token, StringComparison.Ordinal))
+            {
+                return HandleImplicitGrant(request, client);
+            }
+
+            // authorization code grant
+            if (request.response_type.Equals(OAuth2Constants.ResponseTypes.Code, StringComparison.Ordinal))
+            {
+                return HandleAuthorizationCodeGrant(request, client);
+            }
+
+            return null;
+        }
 
         private ActionResult HandleAuthorizationCodeGrant(AuthorizeRequest request, Client client)
         {
