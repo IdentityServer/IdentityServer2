@@ -101,7 +101,12 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             ClaimsPrincipal principal;
             if (UserRepository.ValidateUser(userName, password))
             {
-                principal = auth.CreatePrincipal(userName, "OAuth2");
+                principal = auth.CreatePrincipal(userName, "OAuth2",
+                    new Claim[]
+                        {
+                            new Claim(Constants.Claims.Client, client.Name),
+                            new Claim(Constants.Claims.Scope, appliesTo.Uri.AbsoluteUri)
+                        });
 
                 if (!ClaimsAuthorization.CheckAccess(principal, Constants.Actions.Issue, Constants.Resources.OAuth2))
                 {

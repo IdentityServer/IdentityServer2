@@ -15,6 +15,8 @@ namespace Thinktecture.IdentityServer
             public const string Base = "http://identityserver.thinktecture.com/claims/";
 
             public const string IdentityProvider = Base + "identityprovider";
+            public const string Client = Base + "client";
+            public const string Scope = Base + "scope";
         }
 
         public static class Actions
