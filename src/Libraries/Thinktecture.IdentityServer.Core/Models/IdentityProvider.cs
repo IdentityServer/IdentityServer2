@@ -91,20 +91,9 @@ namespace Thinktecture.IdentityServer.Models
                 {
                     errors.Add(new ValidationResult("Client Secret is required.", new string[] { "ClientSecret" }));
                 }
-                if (String.IsNullOrEmpty(this.AuthorizationUrl))
-                {
-                    errors.Add(new ValidationResult("Authorization Url is required.", new string[] { "AuthorizationUrl" }));
-                }
-
                 if (this.ProfileType == null)
                 {
                     errors.Add(new ValidationResult("Profile Type is required.", new string[] { "ProfileType" }));
-                }
-
-                if (this.ProfileType == OAuthProfileTypes.Custom &&
-                    String.IsNullOrWhiteSpace(this.CustomProfileType))
-                {
-                    errors.Add(new ValidationResult("Custom Profile Type is required.", new string[] { "CustomProfileType" }));
                 }
             }
 

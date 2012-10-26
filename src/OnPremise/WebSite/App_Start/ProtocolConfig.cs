@@ -1,4 +1,5 @@
-﻿using System.ServiceModel.Activation;
+﻿using BrockAllen.OAuth2;
+using System.ServiceModel.Activation;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -65,6 +66,7 @@ namespace Thinktecture.IdentityServer.Web
                 );
 
                 // callback endpoint
+                OAuth2Client.OAuthCallbackUrl = Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Callback;
                 routes.MapRoute(
                     "oauth2callback",
                     Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Callback,
