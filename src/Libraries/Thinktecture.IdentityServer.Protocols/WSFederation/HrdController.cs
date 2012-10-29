@@ -27,6 +27,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
     {
         const string _cookieName = "hrdsignout";
         const string _cookieNameRememberHrd = "hrdSelection";
+        const string _cookieContext = "idsrvcontext";
 
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
@@ -300,22 +301,31 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             var j = JObject.FromObject(new Context { Wctx = wctx, Realm = realm, WsFedEndpoint = wsfedEndpoint });
 
-            var cookie = new HttpCookie("idsrvcontext", j.ToString());
-            cookie.Secure = true;
-            cookie.HttpOnly = true;
-
+            var cookie = new HttpCookie(_cookieContext, j.ToString())
+            {
+                Secure = true,
+                HttpOnly = true,
+                Path = HttpRuntime.AppDomainAppVirtualPath
+            };
+            
             Response.Cookies.Add(cookie);
         }
 
         private Context GetContextCookie()
         {
-            var cookie = Request.Cookies["idsrvcontext"];
+            var cookie = Request.Cookies[_cookieContext];
             if (cookie == null)
             {
                 throw new InvalidOperationException("cookie");
             }
 
             var json = JObject.Parse(HttpUtility.UrlDecode(cookie.Value));
+
+            cookie.Value = "";
+            cookie.Expires = new DateTime(2000, 1, 1);
+            cookie.Path = HttpRuntime.AppDomainAppVirtualPath;
+            Response.SetCookie(cookie);
+
             return json.ToObject<Context>();
         }
 
