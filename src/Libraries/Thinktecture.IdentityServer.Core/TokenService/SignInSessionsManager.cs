@@ -54,6 +54,8 @@ namespace Thinktecture.IdentityServer.TokenService
             {
                 cookie.Value = "";
                 cookie.Expires = new DateTime(2000, 1, 1);
+                cookie.Path = HttpRuntime.AppDomainAppVirtualPath;
+
                 _context.Response.SetCookie(cookie);
             }
         }
