@@ -46,7 +46,7 @@ namespace Thinktecture.IdentityServer.Protocols
             principal = null;
 
             // first check for client certificate
-            if (TryGetClientCertificatePrinciaplFromRequest(request, out principal))
+            if (TryGetClientCertificatePrincipalFromRequest(request, out principal))
             {
                 return true;
             }
@@ -65,7 +65,7 @@ namespace Thinktecture.IdentityServer.Protocols
             principal = null;
 
             // first check for client certificate
-            if (TryGetClientCertificatePrinciaplFromRequest(request, out principal))
+            if (TryGetClientCertificatePrincipalFromRequest(request, out principal))
             {
                 return true;
             }
@@ -79,51 +79,8 @@ namespace Thinktecture.IdentityServer.Protocols
             return false;
         }
 
-        public bool TryGetPrincipalFromOAuth2Request(HttpRequestBase request, TokenRequest tokenRequest, out ClaimsPrincipal principal)
-        {
-            principal = null;
-
-            // first check for client certificate
-            if (TryGetClientCertificatePrinciaplFromRequest(request, out principal))
-            {
-                return true;
-            }
-
-            // then OAuth2 userName credential
-            if (UserRepository.ValidateUser(tokenRequest.UserName ?? "", tokenRequest.Password ?? ""))
-            {
-                principal = CreatePrincipal(tokenRequest.UserName, AuthenticationMethods.Password);
-                return true;
-            }
-
-            return false;
-        }
-
-        public bool TryGetPrincipalFromWrapRequest(HttpRequestBase request, out ClaimsPrincipal principal)
-        {
-            HttpListenerBasicIdentity userNameId;
-            principal = null;
-
-            // first check for client certificate
-            if (TryGetClientCertificatePrinciaplFromRequest(request, out principal))
-            {
-                return true;
-            }
-
-            // then WRAP userName credential
-            if (TryGetUserNameCredentialsFromWrapRequest(request, out userNameId))
-            {
-                if (UserRepository.ValidateUser(userNameId.Name, userNameId.Password))
-                {
-                    principal = CreatePrincipal(userNameId.Name, AuthenticationMethods.Password);
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public bool TryGetClientCertificatePrinciaplFromRequest(HttpRequestBase request, out ClaimsPrincipal principal)
+        #region Client Certificates
+        public bool TryGetClientCertificatePrincipalFromRequest(HttpRequestBase request, out ClaimsPrincipal principal)
         {
             X509Certificate2 clientCertificate = null;
             principal = null;
@@ -141,7 +98,7 @@ namespace Thinktecture.IdentityServer.Protocols
             return false;
         }
 
-        public bool TryGetClientCertificatePrinciaplFromRequest(HttpRequestMessage request, out ClaimsPrincipal principal)
+        public bool TryGetClientCertificatePrincipalFromRequest(HttpRequestMessage request, out ClaimsPrincipal principal)
         {
             X509Certificate2 clientCertificate = null;
             principal = null;
@@ -183,7 +140,9 @@ namespace Thinktecture.IdentityServer.Protocols
 
             return false;
         }
+        #endregion
 
+        #region Basic Authentication
         public bool TryGetBasicAuthenticationPrincipalFromRequest(HttpRequestBase request, out ClaimsPrincipal principal)
         {
             principal = null;
@@ -265,22 +224,7 @@ namespace Thinktecture.IdentityServer.Protocols
 
             return false;
         }
-        
-        public bool TryGetUserNameCredentialsFromWrapRequest(HttpRequestBase request, out HttpListenerBasicIdentity identity)
-        {
-            identity = null;
-            var userName = request.Form["wrap_name"];
-            var password = request.Form["wrap_password"];
-
-            if (string.IsNullOrWhiteSpace(userName) ||
-               string.IsNullOrWhiteSpace(password))
-            {
-                return false;
-            }
-
-            identity = new HttpListenerBasicIdentity(userName, password);
-            return true;
-        }
+        #endregion
 
         public ClaimsPrincipal CreatePrincipal(string username, string authenticationMethod, IEnumerable<Claim> additionalClaims = null)
         {
@@ -304,7 +248,7 @@ namespace Thinktecture.IdentityServer.Protocols
 
         public void SetSessionToken(string userName, string authenticationMethod, bool isPersistent, int ttl, IEnumerable<Claim> additionalClaims = null)
         {
-            var principal = CreatePrincipal(userName, authenticationMethod);
+            var principal = CreatePrincipal(userName, authenticationMethod, additionalClaims);
 
             var sessionToken = new SessionSecurityToken(principal, TimeSpan.FromHours(ttl))
             {
