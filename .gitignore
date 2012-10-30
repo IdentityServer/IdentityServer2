@@ -9,3 +9,6 @@ build/
 *.sdf
 *.mdf
 *.ldf
+_ReSharper.*
+*.resharper
+PublishProfiles
