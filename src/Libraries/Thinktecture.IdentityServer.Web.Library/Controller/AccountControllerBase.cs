@@ -50,7 +50,8 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 userName, 
                 authenticationMethod, 
                 isPersistent, 
-                ttl);
+                ttl,
+                additionalClaims);
 
             if (!string.IsNullOrWhiteSpace(returnUrl))
             {
