@@ -362,7 +362,15 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             }
 
             var json = JObject.Parse(HttpUtility.UrlDecode(cookie.Value));
-            return json.ToObject<OAuth2Context>();
+            var data = json.ToObject<OAuth2Context>();
+
+            var deletecookie = new HttpCookie("idsrvoauthcontext", ".");
+            deletecookie.Secure = true;
+            deletecookie.HttpOnly = true;
+            deletecookie.Path = Request.ApplicationPath;
+            Response.Cookies.Add(deletecookie); 
+            
+            return data;
         }
 
         private ActionResult ProcessOAuth2SignIn(IdentityProvider ip, SignInRequestMessage request)
