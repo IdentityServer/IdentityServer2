@@ -20,32 +20,28 @@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
-    <fieldset>
+    <fieldset class="editor small">
         <legend>Login</legend>
-        <div class="editor-label">
+        <div>
             @Html.LabelFor(m => m.UserName)
-        </div>
-        <div class="editor-field-slim">
             @Html.TextBoxFor(m => m.UserName)
             @Html.ValidationMessageFor(m => m.UserName)
         </div>
                 
-        <div class="editor-label">
+        <div>
             @Html.LabelFor(m => m.Password)
-        </div>
-        <div class="editor-field-slim">
             @Html.PasswordFor(m => m.Password)
             @Html.ValidationMessageFor(m => m.Password)
         </div>
                 
-        <div class="editor-label">
-            @Html.CheckBoxFor(m => m.EnableSSO)
+        <div>
             @Html.LabelFor(m => m.EnableSSO)
+            @Html.CheckBoxFor(m => m.EnableSSO)
         </div>
                 
-        <p>
+        <div class="buttons">
             <input type="submit" value="Sign In" />
-        </p>
+        </div>
     </fieldset>
 }
 
@@ -56,11 +52,6 @@
 
 @section scripts
 {
-@if (false)
-{
-    <script src="../../Scripts/jquery-1.6.4.js" type="text/javascript" />
-} 
-
 <script type="text/javascript">
     $(function () {
         $("#UserName").focus();

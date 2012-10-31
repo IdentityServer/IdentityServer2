@@ -32,6 +32,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             {
                 HttpContext.SetOverriddenBrowser(BrowserOverride.Desktop);
             }
+
             return View();
         }
 

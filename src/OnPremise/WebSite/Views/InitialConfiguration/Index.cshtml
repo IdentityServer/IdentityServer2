@@ -4,8 +4,7 @@
     ViewBag.Title = "Initial Configuration";
 }
 
-<h2>
-    Initial Configuration
+<h2>Initial Configuration
     <a href="@Url.Content("~/docs/initialConfiguration.html")" target="_blank">(help)</a>
 </h2>
 
@@ -14,61 +13,46 @@
 {
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    <fieldset class="editor">
         <legend>Settings</legend>
 
-        <div class="editor-label">
-            <b>@Html.LabelFor(model => model.SiteName)</b>
-        </div>
-        <div class="editor-field">
+        <div>
+            @Html.LabelFor(model => model.SiteName)
             @Html.EditorFor(model => model.SiteName)
             @Html.ValidationMessageFor(model => model.SiteName)
         </div>
 
-        <div class="editor-label">
-            <b>@Html.LabelFor(model => model.IssuerUri)</b>
-        </div>
-        <div class="editor-field">
+        <div>
+            @Html.LabelFor(model => model.IssuerUri)
             @Html.EditorFor(model => model.IssuerUri)
             @Html.ValidationMessageFor(model => model.IssuerUri)
         </div>
 
-        <div class="editor-label">
-            <b>@Html.LabelFor(model => model.SigningCertificate)</b>
-        </div>
-
-        <div class="editor-field">
+        <div>
+            @Html.LabelFor(model => model.SigningCertificate)
             @Html.DropDownList("SigningCertificate", Model.AvailableCertificatesList)
         </div>
     </fieldset>
     
-     <fieldset>
+    <fieldset class="editor">
         <legend>Default accounts</legend>
-        <div class="editor-label">
-            <b>@Html.LabelFor(model => model.CreateDefaultAccounts)</b>
-        </div>
-        <div class="editor-field">
+        <div>
+            @Html.LabelFor(model => model.CreateDefaultAccounts)
             @Html.EditorFor(model => model.CreateDefaultAccounts)
         </div>
 
-        <div class="editor-label">
-            <b>@Html.LabelFor(model => model.UserName)</b>
-        </div>
-        <div class="editor-field">
+        <div>
+            @Html.LabelFor(model => model.UserName)
             @Html.EditorFor(model => model.UserName)
         </div>
 
-        <div class="editor-label">
-            <b>@Html.LabelFor(model => model.Password)</b>
-        </div>
-        <div class="editor-field">
+        <div>
+            @Html.LabelFor(model => model.Password)
             @Html.EditorFor(model => model.Password)
         </div>
     </fieldset>
     
-         <p>
-            <input type="submit" value="Save" />
-        </p>
-    
-
+    <div class="buttons"> 
+        <input type="submit" value="Save" />
+    </div>
 }

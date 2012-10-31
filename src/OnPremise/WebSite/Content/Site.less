@@ -72,16 +72,17 @@ fieldset {
 /* Styles for the web frontent
 -----------------------------------------------------------*/
 
-a{
-	color: black;
-	text-decoration: none;
+a {
+    color: black;
+    text-decoration: none;
 
-	&:hover{
-		text-decoration:underline;
-	}
-	&.bodyLink {
-		color: #7285a3;
-	}
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &.bodyLink {
+        color: #7285a3;
+    }
 }
 
 .masterHeader {
@@ -103,25 +104,121 @@ a{
     color: #000000;
     padding-left: 15px;
 
-	a {
+    a {
         color: #FFFFFF;
         text-decoration: none;
 
-		&:hover{
-			text-decoration:underline;
-		}
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 
 
-ul.hrd{
-	li{
-		list-style:none;
+ul.hrd {
+    li {
+        list-style: none;
 
-		button{
-			width:300px;
-			height:30px;
-			margin:3px;
-		}
-	}
+        button {
+            width: 300px;
+            height: 30px;
+            margin: 3px;
+        }
+    }
+}
+
+
+.editor {
+
+    > div, > form > div {
+        margin: 5px;
+    }
+
+
+    label {
+        display: inline-block;
+        width: 230px;
+        font-weight: bold;
+        text-align: right;
+        margin-right: 10px;
+
+        &:after {
+            content: ':';
+        }
+    }
+
+    &.small {
+        label {
+            width: 130px;
+        }
+
+        div.buttons {
+            max-width: 500px;
+        }
+    }
+
+    input[type=text],
+    input[type=password],
+    input[type=file],
+    input[type=url],
+    input[type=email] {
+        width: 350px;
+    }
+
+    select {
+        width: 352px;
+        padding: 1px;
+        margin-right: 1px;
+
+        .input-validation-error {
+            width: 352px;
+        }
+    }
+
+    input.base64 {
+        width: 275px;
+    }
+
+    button.base64 {
+        width: 70px;
+    }
+
+    img {
+        vertical-align: middle;
+        position: relative;
+        top: -2px;
+
+        &.error {
+            margin-left: 5px;
+        }
+    }
+
+    .inline-editor {
+        vertical-align: top;
+        text-align: left;
+        display: inline-block;
+        width: 353px;
+        margin-left: 0;
+        margin-right: 2px;
+
+        * {
+            label, input {
+                width: auto;
+            }
+        }
+
+        &.create-user-roles {
+            * {
+                label {
+                    width: 230px;
+                }
+            }
+        }
+    }
+
+    div.buttons {
+        padding-top: 10px;
+        text-align: right;
+        max-width: 600px;
+    }
 }
