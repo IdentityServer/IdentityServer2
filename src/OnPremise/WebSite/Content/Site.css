@@ -58,7 +58,7 @@ fieldset .editor-field input[type=url] {
 -----------------------------------------------------------*/
 a {
   color: black;
-  text-decoration: none;
+  text-decoration: underline;
 }
 a:hover {
   text-decoration: underline;
