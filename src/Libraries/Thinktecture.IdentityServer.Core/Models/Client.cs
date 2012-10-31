@@ -27,6 +27,7 @@ namespace Thinktecture.IdentityServer.Models
         public string ClientId { get; set; }
 
         [Display(Name = "Client Secret", Description = "Client secret.")]
+        [UIHint("SymmetricKey")]
         public string ClientSecret { get; set; }
 
         [Display(Name = "Native Client", Description = "Native Client.")]
