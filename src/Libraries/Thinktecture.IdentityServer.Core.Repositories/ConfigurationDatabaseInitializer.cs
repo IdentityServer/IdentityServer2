@@ -55,7 +55,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             context.OAuth2.Add(CreateDefaultOAuth2Configuration());
             context.SimpleHttp.Add(CreateDefaultSimpleHttpConfiguration());
             context.Diagnostics.Add(CreateDefaultDiagnosticsConfiguration());
-            
+
 
             base.Seed(context);
         }
@@ -101,7 +101,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new WSTrustConfiguration
             {
                 Enabled = true,
-                
+
                 EnableClientCertificateAuthentication = false,
                 EnableDelegation = true,
                 EnableFederatedAuthentication = false,
@@ -313,7 +313,29 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Type = 1,
                     WSFederationEndpoint = "https://idsrvwebids.accesscontrol.windows.net/v2/wsfederation",
                     IssuerThumbprint = "5AAD3C5CC1A5A715E791BEA85B4445D3CB29F33F"
-                }
+                },
+                new IdentityProvider
+                {
+                    Name = "Facebook",
+                    DisplayName = "Facebook",
+                    Enabled = true,
+                    ShowInHrdSelection = true,
+                    Type = 2,
+                    ClientID = "239987582797347",
+                    ClientSecret = "c29a33352a739c2263c8f32c699077d6",
+                    OAuth2ProviderType = 2
+                },
+                new IdentityProvider
+                {
+                    Name = "Live",
+                    DisplayName = "Live",
+                    Enabled = true,
+                    ShowInHrdSelection = true,
+                    Type = 2,
+                    ClientID = "00000000480DD362",
+                    ClientSecret = "gH9ngNoSaxRrupt3UcynwI2aK8qODZvf",
+                    OAuth2ProviderType = 3
+                },                
             };
         }
 
