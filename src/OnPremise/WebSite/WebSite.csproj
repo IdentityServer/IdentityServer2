@@ -185,9 +185,16 @@
     <Compile Include="Areas\Admin\ViewModels\UserInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserRolesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UsersViewModel.cs" />
+    <Compile Include="Controller\AccountController.cs" />
+    <Compile Include="Controller\AccountControllerBase.cs" />
+    <Compile Include="Controller\HomeController.cs" />
+    <Compile Include="Controller\InitialConfigurationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="GlobalFilter\GlobalViewModelFilter.cs" />
+    <Compile Include="GlobalFilter\InitialConfigurationFilter.cs" />
+    <Compile Include="GlobalFilter\SslRedirectFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Areas\Admin\ViewModels\RelyingPartyViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ProtocolsInputModel.cs" />
@@ -196,6 +203,8 @@
     <Compile Include="Areas\Admin\ViewModels\RelyingPartiesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RPCertInputModel.cs" />
     <Compile Include="Utility\HtmlHelpers.cs" />
+    <Compile Include="ViewModels\InitialConfigurationModel.cs" />
+    <Compile Include="ViewModels\SignInModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\dummy.txt" />
@@ -421,10 +430,6 @@
     <ProjectReference Include="..\..\Libraries\Thinktecture.IdentityServer.Protocols\Thinktecture.IdentityServer.Protocols.csproj">
       <Project>{c129c90c-774c-47d7-a19e-57b31c87ae18}</Project>
       <Name>Thinktecture.IdentityServer.Protocols</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\Thinktecture.IdentityServer.Web.Library\Thinktecture.IdentityServer.Web.Library.csproj">
-      <Project>{fc2d7e2a-65a2-480f-aae8-855fd026af85}</Project>
-      <Name>Thinktecture.IdentityServer.Web.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
