@@ -168,18 +168,32 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                     Configuration.Global.DefaultHttpTokenType,
                     out tokenResponse))
             {
-                var redirectString = string.Format("{0}#access_token={1}&token_type={2}&expires_in={3}",
-                        client.RedirectUri.AbsoluteUri,
+                var tokenString = string.Format("access_token={0}&token_type={1}&expires_in={2}",
                         tokenResponse.AccessToken,
                         tokenResponse.TokenType,
                         tokenResponse.ExpiresIn);
 
                 if (!string.IsNullOrEmpty(request.state))
                 {
-                    redirectString = string.Format("{0}&state={1}", redirectString, request.state);
+                    tokenString = string.Format("{0}&state={1}", tokenString, request.state);
                 }
 
-                return Redirect(redirectString);
+                if (client.NativeClient)
+                {
+                    var html = String.Format(
+                        "<html><head><title>{0}</title></head><body>Authorized</body></html>",
+                        tokenString);
+                    return Content(html, "text/html");
+                }
+                else
+                {
+                    var redirectString = string.Format("{0}#{1}",
+                            client.RedirectUri.AbsoluteUri,
+                            tokenString);
+
+
+                    return Redirect(redirectString);
+                }
             }
 
             // return right error code
