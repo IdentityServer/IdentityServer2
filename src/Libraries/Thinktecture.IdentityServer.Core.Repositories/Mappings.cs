@@ -369,7 +369,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 ClientSecret = client.ClientSecret,
                 Description = client.Description,
                 Name = client.Name,
-                RedirectUri = new Uri(client.RedirectUri),
+                RedirectUri = client.RedirectUri != null ? new Uri(client.RedirectUri) : null,
                 NativeClient = client.NativeClient,
                 AllowCodeFlow = client.AllowCodeFlow,
                 AllowImplicitFlow = client.AllowImplicitFlow,
@@ -383,7 +383,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             target.ClientSecret = client.ClientSecret;
             target.Description = client.Description;
             target.Name = client.Name;
-            target.RedirectUri = client.RedirectUri.AbsoluteUri;
+            target.RedirectUri = client.RedirectUri != null ? client.RedirectUri.AbsoluteUri : null;
             target.NativeClient = client.NativeClient;
             target.AllowResourceOwnerFlow = client.AllowResourceOwnerFlow;
             target.AllowImplicitFlow = client.AllowImplicitFlow;
