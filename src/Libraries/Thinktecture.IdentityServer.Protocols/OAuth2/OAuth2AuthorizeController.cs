@@ -180,17 +180,13 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
                 if (client.NativeClient)
                 {
-                    var html = String.Format(
-                        "<html><head><title>{0}</title></head><body>Authorized</body></html>",
-                        tokenString);
-                    return Content(html, "text/html");
+                    return new OAuthTitleGrantResult(tokenString, client.RedirectUri.AbsoluteUri);
                 }
                 else
                 {
                     var redirectString = string.Format("{0}#{1}",
                             client.RedirectUri.AbsoluteUri,
                             tokenString);
-
 
                     return Redirect(redirectString);
                 }
