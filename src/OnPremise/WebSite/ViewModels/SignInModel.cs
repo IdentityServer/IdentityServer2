@@ -3,6 +3,7 @@
  * see license.txt
  */
 
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Thinktecture.IdentityServer.Protocols;
@@ -30,15 +31,7 @@ namespace Thinktecture.IdentityServer.Web.ViewModels
             {
                 if (isSigninRequest == null)
                 {
-                    try
-                    {
-                        var rp = new AuthenticationHelper().GetRelyingPartyDetailsFromReturnUrl(this.ReturnUrl);
-                        isSigninRequest = rp != null;
-                    }
-                    catch
-                    {
-                        isSigninRequest = false;
-                    }
+                    isSigninRequest = !String.IsNullOrWhiteSpace(ReturnUrl);
                 }
                 return isSigninRequest.Value;
             }
