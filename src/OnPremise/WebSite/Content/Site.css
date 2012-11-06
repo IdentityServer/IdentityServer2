@@ -115,6 +115,13 @@ ul.hrd li button {
 .editor.small label {
   width: 130px;
 }
+.editor.small.signin input[type=text],
+.editor.small.signin input[type=password] {
+  width: 230px;
+}
+.editor.small.signin div.buttons {
+  max-width: 380px;
+}
 .editor.small div.buttons {
   max-width: 500px;
 }

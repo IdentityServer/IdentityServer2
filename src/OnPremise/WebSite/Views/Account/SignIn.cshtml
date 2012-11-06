@@ -20,7 +20,7 @@
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true, "Sign In was unsuccessful. Please correct the errors and try again.")
-    <fieldset class="editor small">
+    <fieldset class="editor small signin">
         <legend>Login</legend>
         <div>
             @Html.LabelFor(m => m.UserName)
