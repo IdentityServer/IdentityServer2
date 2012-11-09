@@ -233,7 +233,6 @@
     <Content Include="Content\Mobile.css">
       <DependentUpon>Mobile.less</DependentUpon>
     </Content>
-    <Content Include="Content\resources\jsnotify.htm" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
