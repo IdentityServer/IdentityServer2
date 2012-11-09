@@ -3,6 +3,7 @@
  * see license.txt
  */
 
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             using (var entities = IdentityServerConfigurationContext.Get())
             {
                 var match = (from rp in entities.RelyingParties
-                             where rp.Realm.StartsWith(realm) &&
+                             where rp.Realm.Equals(realm, StringComparison.OrdinalIgnoreCase) &&
                                    rp.Enabled == true
                              orderby rp.Realm descending
                              select rp)
