@@ -13,10 +13,24 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
     [ClaimsAuthorize(Constants.Actions.Administration, Constants.Resources.Configuration)]
     public class MenuController : Controller
     {
+        [Import]
+        public IConfigurationRepository ConfigurationRepository { get; set; }
+
+        public MenuController()
+        {
+            Container.Current.SatisfyImportsOnce(this);
+        }
+
+        public MenuController(IConfigurationRepository configuration)
+        {
+            ConfigurationRepository = configuration;
+        }
+
         [ChildActionOnly]
         public ActionResult Index()
         {
-            return PartialView();
+            var vm = new MenuViewModel(this.ConfigurationRepository);
+            return PartialView("Index", vm);
         }
 
         bool IsController(string controller)

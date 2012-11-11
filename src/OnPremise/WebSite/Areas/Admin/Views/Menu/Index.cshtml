@@ -1,4 +1,4 @@
-﻿
+﻿@model MenuViewModel
 
 <h1>Configuration</h1>
 <ul>
@@ -19,10 +19,13 @@
         @Html.ActionLink("Identity Providers", "Index", "IP")
         @Html.Action("ChildMenu", "Menu", new{controllerName="IP"})
     </li>
-    <li>
-        @Html.ActionLink("OAuth Clients", "Index", "OAuthClient")
-        @Html.Action("ChildMenu", "Menu", new{controllerName="OAuthClient"})
-    </li>
+    @if(Model.ShowOAuthClients)
+    {
+        <li>
+            @Html.ActionLink("OAuth Clients", "Index", "OAuthClient")
+            @Html.Action("ChildMenu", "Menu", new{controllerName="OAuthClient"})
+        </li>
+    }
 </ul>
 <ul>
     <li>@Html.ActionLink("Roles", "Index", "Role")</li>
