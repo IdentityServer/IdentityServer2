@@ -17,33 +17,23 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
             if (String.IsNullOrEmpty(filter))
             {
                 Users = UserManagementRepository.GetUsers();
-                Total = Showing;
+                Total = Showing = Users.Count();
             }
             else
             {
                 Users = UserManagementRepository.GetUsers(filter);
                 Total = UserManagementRepository.GetUsers().Count();
+                Showing = Users.Count();
             }
+
+            UsersDeleteList = Users.Select(x => new UserDeleteModel { Username = x }).ToArray();
         }
 
         public IEnumerable<string> Users { get; set; }
-        public UserDeleteModel[] UsersDeleteList
-        {
-            get
-            {
-                return Users.Select(x => new UserDeleteModel { Username = x }).ToArray();
-            }
-        }
-
+        public UserDeleteModel[] UsersDeleteList {get;set;}
         public string Filter { get; set; }
         public int Total { get; set; }
-        public int Showing
-        {
-            get
-            {
-                return Users.Count();
-            }
-        }
+        public int Showing { get; set; }
     }
 
     public class UserDeleteModel
