@@ -11,7 +11,6 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 
         public UsersViewModel(Repositories.IUserManagementRepository UserManagementRepository, string filter)
         {
-            // TODO: Complete member initialization
             this.UserManagementRepository = UserManagementRepository;
             this.Filter = filter;
 
