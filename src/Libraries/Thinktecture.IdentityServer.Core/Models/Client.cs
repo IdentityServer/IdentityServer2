@@ -44,6 +44,7 @@ namespace Thinktecture.IdentityServer.Models
         public bool AllowResourceOwnerFlow { get; set; }
 
         [Display(Name = "Allow Code Flow", Description = "Allow code flow.")]
+        [UIHint("HiddenInput")]
         public bool AllowCodeFlow { get; set; }
 
         public System.Collections.Generic.IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
