@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NullCacheRepository.cs" />
+    <Compile Include="PassThruTransformationRuleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderClaimsRepository.cs" />
     <Compile Include="ProviderUserManagementRepository.cs" />

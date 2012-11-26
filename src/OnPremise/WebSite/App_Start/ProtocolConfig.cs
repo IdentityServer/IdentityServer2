@@ -5,7 +5,6 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Thinktecture.IdentityModel.Http;
 using Thinktecture.IdentityModel.Tokens.Http;
-using Thinktecture.IdentityServer.Protocols.OAuth2;
 using Thinktecture.IdentityServer.Protocols.WSTrust;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
