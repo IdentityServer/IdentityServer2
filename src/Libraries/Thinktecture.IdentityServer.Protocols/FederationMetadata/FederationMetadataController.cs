@@ -8,7 +8,6 @@ using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Helper;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.TokenService;
 
 namespace Thinktecture.IdentityServer.Protocols.FederationMetadata
 {
