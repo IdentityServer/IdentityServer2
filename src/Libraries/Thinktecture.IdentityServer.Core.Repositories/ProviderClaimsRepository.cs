@@ -5,13 +5,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Thinktecture.IdentityServer.TokenService;
-using System.Web.Profile;
 using System.Configuration;
-using System.Web.Security;
+using System.Linq;
 using System.Security.Claims;
+using System.Web.Profile;
+using System.Web.Security;
+using Thinktecture.IdentityServer.TokenService;
 
 namespace Thinktecture.IdentityServer.Repositories
 {

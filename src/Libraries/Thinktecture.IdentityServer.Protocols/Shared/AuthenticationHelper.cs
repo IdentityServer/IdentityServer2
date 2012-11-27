@@ -17,7 +17,6 @@ using System.Text;
 using System.Web;
 using Thinktecture.IdentityModel;
 using Thinktecture.IdentityServer.Models;
-using Thinktecture.IdentityServer.Protocols.OAuth2;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols

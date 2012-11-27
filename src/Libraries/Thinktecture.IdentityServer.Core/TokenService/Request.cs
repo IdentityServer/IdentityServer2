@@ -11,11 +11,10 @@ using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
 using System.Text;
-using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityModel.Constants;
+using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Models.Configuration;
 
 namespace Thinktecture.IdentityServer.TokenService
 {

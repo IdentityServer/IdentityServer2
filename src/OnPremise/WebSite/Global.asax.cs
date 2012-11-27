@@ -1,17 +1,12 @@
-﻿using BrockAllen.OAuth2;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Data.Entity;
 using System.Security.Claims;
-using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Thinktecture.IdentityModel.Web;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Repositories.Sql;
 

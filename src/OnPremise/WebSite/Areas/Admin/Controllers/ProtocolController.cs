@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Authorization.Mvc;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.Repositories.Sql;
 using Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers

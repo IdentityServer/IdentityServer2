@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Web;
 using System.Web.Mvc;
-using Thinktecture.IdentityModel;
 using Thinktecture.IdentityModel.Authorization.Mvc;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;

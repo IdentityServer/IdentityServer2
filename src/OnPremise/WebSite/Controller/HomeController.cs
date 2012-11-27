@@ -6,8 +6,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
-using Thinktecture.IdentityServer.Repositories;
 using System.Web.WebPages;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Web.Controllers
 {

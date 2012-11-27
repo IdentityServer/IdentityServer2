@@ -3,15 +3,11 @@
  * see license.txt
  */
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Configuration;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using System.Web.Profile;
 using System.Web.Security;
-using Thinktecture.IdentityServer.TokenService;
 
 namespace Thinktecture.IdentityServer.Repositories
 {

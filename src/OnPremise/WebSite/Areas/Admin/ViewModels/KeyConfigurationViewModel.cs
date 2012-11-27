@@ -5,7 +5,6 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
-using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel;
 using Thinktecture.IdentityServer.Models.Configuration;

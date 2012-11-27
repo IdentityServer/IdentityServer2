@@ -1,9 +1,6 @@
-﻿using System.ServiceModel.Activation;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
-using Thinktecture.IdentityServer.Protocols.WSTrust;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityServer.TokenService;
 
 namespace Thinktecture.IdentityServer.Web
 {

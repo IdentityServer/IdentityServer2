@@ -7,10 +7,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Security.Claims;
-using Thinktecture.IdentityModel;
 using Thinktecture.IdentityModel.Authorization;
 using Thinktecture.IdentityModel.Constants;
-using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer

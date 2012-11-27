@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Thinktecture.IdentityServer.Models.Configuration;
+﻿using Thinktecture.IdentityServer.Models.Configuration;
 
 namespace Thinktecture.IdentityServer.Repositories
 {

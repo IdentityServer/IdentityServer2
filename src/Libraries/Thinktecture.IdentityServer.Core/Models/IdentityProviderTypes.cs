@@ -3,7 +3,6 @@
  * see license.txt
  */
 
-using System.ComponentModel.DataAnnotations;
 namespace Thinktecture.IdentityServer.Models
 {
     public enum IdentityProviderTypes

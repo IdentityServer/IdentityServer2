@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel;
 using Thinktecture.IdentityModel.Authorization.Mvc;

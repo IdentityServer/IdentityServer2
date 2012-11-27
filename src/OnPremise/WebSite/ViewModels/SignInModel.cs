@@ -6,7 +6,6 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Thinktecture.IdentityServer.Protocols;
 
 namespace Thinktecture.IdentityServer.Web.ViewModels
 {

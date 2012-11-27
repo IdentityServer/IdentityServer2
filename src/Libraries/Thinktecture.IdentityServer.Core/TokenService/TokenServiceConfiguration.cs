@@ -8,8 +8,6 @@ using System.ComponentModel.Composition;
 using System.IdentityModel.Configuration;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
-using Thinktecture.IdentityServer.Models;
-using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.TokenService

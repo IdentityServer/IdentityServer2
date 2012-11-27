@@ -4,7 +4,6 @@
  */
 
 using Newtonsoft.Json;
-using System.Runtime.Serialization;
 
 namespace Thinktecture.IdentityServer.Protocols
 {

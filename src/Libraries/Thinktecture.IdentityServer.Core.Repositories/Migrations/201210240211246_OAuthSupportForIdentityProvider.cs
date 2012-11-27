@@ -1,6 +1,5 @@
 namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
     
     public partial class OAuthSupportForIdentityProvider : DbMigration

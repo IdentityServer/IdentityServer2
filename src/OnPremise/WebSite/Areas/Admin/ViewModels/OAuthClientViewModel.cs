@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Thinktecture.IdentityServer.Models;
+﻿using System.Linq;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {

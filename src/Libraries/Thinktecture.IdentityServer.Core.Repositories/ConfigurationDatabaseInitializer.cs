@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using Thinktecture.IdentityModel.Constants;
-using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories.Sql.Configuration;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
