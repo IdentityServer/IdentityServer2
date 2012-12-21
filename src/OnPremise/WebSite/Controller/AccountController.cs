@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) Dominick Baier.  All rights reserved.
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
  * see license.txt
  */
 
@@ -15,12 +15,6 @@ namespace Thinktecture.IdentityServer.Web.Controllers
 {
     public class AccountController : AccountControllerBase
     {
-        [Import]
-        public IUserRepository UserRepository { get; set; }
-
-        [Import]
-        public IConfigurationRepository ConfigurationRepository { get; set; }
-
         public AccountController() : base()
         { }
 
@@ -37,6 +31,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 ReturnUrl = returnUrl,
                 ShowClientCertificateLink = ConfigurationRepository.Global.EnableClientCertificateAuthentication
             };
+
             if (mobile) vm.IsSigninRequest = true;
             return View(vm);
         }
