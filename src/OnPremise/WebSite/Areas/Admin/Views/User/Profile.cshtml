@@ -1,0 +1,45 @@
+﻿@model UserProfileViewModel
+@using Thinktecture.IdentityServer.Web.Utility
+
+@{
+    ViewBag.Title = "Profile : " + Model.Username;
+}
+
+<h1>@ViewBag.Title</h1>
+@if (Model.ProfileValues == null || Model.ProfileValues.Length == 0)
+{
+    <p>No Profile Properties Available</p>
+}
+else
+{
+    using(Html.BeginForm())
+    {
+        @Html.ValidationSummary("Errors updating profile:")
+        @Html.AntiForgeryToken()
+
+        <fieldset class="editor small">
+            @for (int i = 0; i < Model.ProfileValues.Length; i++)
+            {
+                var prop = Model.ProfileValues[i].Data;
+                <div>
+                    <label for="@prop.Name">@prop.Name</label>
+                    <input type="hidden" name="profileValues[@i].name" value="@prop.Name" />
+                    @if (Model.ProfileValues[i].Type == ProfilePropertyViewModel.ProfilePropertyType.Boolean)
+                    {
+                        var isChecked = Convert.ToBoolean(prop.Value);
+                        <input type="checkbox" id="@prop.Name" checked="@isChecked" name="profileValues[@i].value" value="true" />
+                        <input hidden type="checkbox" id="@prop.Name" checked name="profileValues[@i].value" value="false" />
+                    }
+                    else
+                    {
+                        <input id="@prop.Name" name="profileValues[@i].value" value="@prop.Value" />
+                    }
+                    @Html.Validator("profileValues["+i+"].value", Model.ProfileValues[i].Description)
+                </div>
+            }
+            <div class="buttons">
+                <button>Save</button>
+            </div>
+        </fieldset>
+    }
+}

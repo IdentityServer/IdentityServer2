@@ -3,6 +3,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Profile;
 using Thinktecture.IdentityModel.Authorization.Mvc;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels;
@@ -142,6 +143,27 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             }
 
             return View("Roles", vm);
+        }
+
+        public ActionResult Profile(string id)
+        {
+            var vm = new UserProfileViewModel(id);
+            return View(vm);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Profile(string id, ProfilePropertyInputModel[] profileValues)
+        {
+            var vm = new UserProfileViewModel(id, profileValues);
+
+            if (vm.UpdateProfileFromValues(ModelState))
+            {
+                TempData["Message"] = "Profile Updated";
+                return RedirectToAction("Profile", new { id });
+            }
+
+            return View(vm);
         }
     }
 }
