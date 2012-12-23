@@ -8,11 +8,10 @@ using System.ComponentModel.Composition;
 using System.IdentityModel.Services;
 using System.Security.Claims;
 using System.Web.Mvc;
-using Thinktecture.IdentityServer.Protocols;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
 
-namespace Thinktecture.IdentityServer.Web.Controllers
+namespace Thinktecture.IdentityServer.Protocols
 {
     public class AccountControllerBase : Controller
     {

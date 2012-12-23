@@ -188,7 +188,6 @@
     <Compile Include="Areas\Admin\ViewModels\UserRolesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UsersViewModel.cs" />
     <Compile Include="Controller\AccountController.cs" />
-    <Compile Include="Controller\AccountControllerBase.cs" />
     <Compile Include="Controller\HomeController.cs" />
     <Compile Include="Controller\InitialConfigurationController.cs" />
     <Compile Include="Global.asax.cs">

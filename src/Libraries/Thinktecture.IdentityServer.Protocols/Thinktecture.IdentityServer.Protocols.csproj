@@ -74,6 +74,7 @@
     <Compile Include="OAuth2\OAuth2AuthorizeController.cs" />
     <Compile Include="OAuth2\OAuth2ConsentViewModel.cs" />
     <Compile Include="OAuth2\OAuthTitleGrantResult.cs" />
+    <Compile Include="Shared\AccountControllerBase.cs" />
     <Compile Include="Shared\AuthenticationHelper.cs" />
     <Compile Include="FederationMetadata\FederationMetadataController.cs" />
     <Compile Include="FederationMetadata\WSFederationMetadataGenerator.cs" />

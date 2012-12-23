@@ -3,11 +3,11 @@
  * see license.txt
  */
 
-using System.ComponentModel.Composition;
 using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
+using Thinktecture.IdentityServer.Protocols;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.ViewModels;
 
