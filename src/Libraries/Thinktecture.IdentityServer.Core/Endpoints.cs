@@ -146,11 +146,11 @@ namespace Thinktecture.IdentityServer
             builder.Port = httpsPort;
             var activeSsl = builder.Uri;
 
-            ep.WSTrustMessageUserName = new Uri(activeClear, Paths.WSTrustMessageUserName);
-            ep.WSTrustMixedUserName = new Uri(activeSsl, Paths.WSTrustMixedUserName);
+            ep.WSTrustMessageUserName = new Uri(activeClear + "/" + Paths.WSTrustMessageUserName);
+            ep.WSTrustMixedUserName = new Uri(activeSsl + "/" + Paths.WSTrustMixedUserName);
 
-            ep.WSTrustMessageCertificate = new Uri(activeClear, Paths.WSTrustMessageCertificate);
-            ep.WSTrustMixedCertificate = new Uri(activeSsl, Paths.WSTrustMixedCertificate);
+            ep.WSTrustMessageCertificate = new Uri(activeClear + "/" + Paths.WSTrustMessageCertificate);
+            ep.WSTrustMixedCertificate = new Uri(activeSsl + "/" + Paths.WSTrustMixedCertificate);
 
             ep.WSTrustMex = new Uri(activeSsl, Paths.Mex);
 
