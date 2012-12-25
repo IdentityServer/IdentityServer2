@@ -41,10 +41,10 @@ namespace Thinktecture.IdentityServer.Repositories
                 {
                     foreach (SettingsProperty prop in ProfileBase.Properties)
                     {
-                        string value = profile.GetPropertyValue(prop.Name).ToString();
-                        if (!String.IsNullOrWhiteSpace(value))
+                        object value = profile.GetPropertyValue(prop.Name);
+                        if (value != null)
                         {
-                            claims.Add(new Claim(ProfileClaimPrefix + prop.Name.ToLowerInvariant(), value));
+                            claims.Add(new Claim(ProfileClaimPrefix + prop.Name.ToLowerInvariant(), value.ToString()));
                         }
                     }
                 }
