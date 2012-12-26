@@ -19,6 +19,10 @@
             @Html.ValidatorFor(x=>x.Keys.SigningCertificate)
         </div>
         <div>
+            @Html.LabelFor(x=>x.SigningCertificateThumbprint)
+            @Model.SigningCertificateThumbprint
+        </div>
+        <div>
             @Html.LabelFor(x=>x.Keys.DecryptionCertificate)
             @Html.DropDownListFor(x=>x.Keys.DecryptionCertificate, Model.AvailableDecryptionCerts)
             @Html.ValidatorFor(x=>x.Keys.DecryptionCertificate)
