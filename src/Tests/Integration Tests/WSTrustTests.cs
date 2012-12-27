@@ -7,11 +7,11 @@
  * 
  */
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Tokens;
 using System.ServiceModel;
 using System.ServiceModel.Security;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Thinktecture.IdentityModel.Constants;
 
 namespace Thinktecture.IdentityServer.Tests

@@ -8,7 +8,6 @@
  */
 
 using System.IdentityModel.Protocols.WSTrust;
-using System.ServiceModel;
 
 namespace Thinktecture.IdentityServer.Tests
 {

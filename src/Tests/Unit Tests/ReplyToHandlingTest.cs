@@ -7,12 +7,10 @@
  * 
  */
 
-using System.Security.Claims;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Thinktecture.IdentityServer.Models;
-using Thinktecture.IdentityServer.Models.Configuration;
-using Thinktecture.IdentityServer.TokenService;
+using System.Security.Claims;
 using Thinktecture.IdentityServer.Repositories;
+using Thinktecture.IdentityServer.TokenService;
 
 namespace Thinktecture.IdentityServer.Tests
 {

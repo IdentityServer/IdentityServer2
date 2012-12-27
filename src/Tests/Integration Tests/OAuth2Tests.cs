@@ -3,13 +3,13 @@
  * see license.txt
  */
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Tokens;
 using System.Net;
 using System.Net.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Thinktecture.IdentityModel.Clients;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityModel.Tokens;

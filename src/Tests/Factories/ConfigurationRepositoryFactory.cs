@@ -8,7 +8,6 @@
  */
 
 using System;
-using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Tests.Repositories;

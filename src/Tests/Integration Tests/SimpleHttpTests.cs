@@ -3,15 +3,13 @@
  * see license.txt
  */
 
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
-using System.Net.Mime;
 using System.Web;
-using System.Xml.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Thinktecture.IdentityModel.Constants;
 
 namespace Thinktecture.IdentityServer.Tests
