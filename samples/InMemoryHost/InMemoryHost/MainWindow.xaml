@@ -1,0 +1,14 @@
+﻿<Window x:Class="InMemoryHost.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="552" Width="814">
+    <Grid>
+        <Button x:Name="CreateTokenButton" Content="Create Token" HorizontalAlignment="Left" Margin="27,82,0,0" VerticalAlignment="Top" Width="118" Height="37" Click="CreateTokenButton_Click"/>
+        <TextBox x:Name ="Output" HorizontalAlignment="Left" Height="363" Margin="27,148,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="769"/>
+        <TextBlock HorizontalAlignment="Left" Margin="27,10,0,0" TextWrapping="Wrap" Text="User:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="213,10,0,0" TextWrapping="Wrap" Text="Realm:" VerticalAlignment="Top"/>
+        <TextBox x:Name="UserName" HorizontalAlignment="Left" Height="23" Margin="27,31,0,0" TextWrapping="Wrap" Text="bob" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Realm" HorizontalAlignment="Left" Height="23" Margin="213,31,0,0" TextWrapping="Wrap" Text="urn:realm1" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>
