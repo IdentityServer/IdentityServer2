@@ -138,7 +138,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
                 catch
                 {
-                    ModelState.AddModelError("", "Error deleting user.");
+                    ModelState.AddModelError("", "Error deleting roles.");
                 }
             }
 
