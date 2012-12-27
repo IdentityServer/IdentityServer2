@@ -26,8 +26,10 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
     public class HrdController : Controller
     {
         const string _cookieName = "hrdsignout";
+        const string _cookieNameIdp = "hrdidp";
         const string _cookieNameRememberHrd = "hrdSelection";
         const string _cookieContext = "idsrvcontext";
+        const string _cookieOAuthContext = "idsrvoauthcontext";
 
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
@@ -67,14 +69,14 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             var signoutMessage = message as SignOutRequestMessage;
             if (signoutMessage != null)
             {
-                return ProcessSignOutRequest(signoutMessage);
+                return ProcessWSFedSignOutRequest(signoutMessage);
             }
 
             // sign out cleanup
             var cleanupMessage = message as SignOutCleanupRequestMessage;
             if (cleanupMessage != null)
             {
-                return ProcessSignOutCleanupRequest(cleanupMessage);
+                return ProcessWSFedSignOutCleanupRequest(cleanupMessage);
             }
 
             return View("Error");
@@ -189,20 +191,34 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             }
         }
 
-        private ActionResult ProcessSignOutRequest(SignOutRequestMessage message)
+        private ActionResult ProcessWSFedSignOutRequest(SignOutRequestMessage message)
         {
-            // tell upstream idp to cleanup
-            // send reply if present
+            var idp = GetIdpCookie();
+            if (string.IsNullOrWhiteSpace(idp))
+            {
+                return ShowSignOutPage(message.Reply);
+            }
 
-            throw new NotImplementedException();
-        }
-
-        private ActionResult ProcessSignOutCleanupRequest(SignOutCleanupRequestMessage message)
-        {
-            // check for return url
+            var signOutMessage = new SignOutRequestMessage(new Uri(idp));
             if (!string.IsNullOrWhiteSpace(message.Reply))
             {
-                ViewBag.ReturnUrl = message.Reply;
+                signOutMessage.Reply = message.Reply;
+            }
+
+            return Redirect(signOutMessage.WriteQueryString());
+        }
+
+        private ActionResult ProcessWSFedSignOutCleanupRequest(SignOutCleanupRequestMessage message)
+        {
+            return ShowSignOutPage(message.Reply);
+        }
+
+        private ActionResult ShowSignOutPage(string returnUrl)
+        {
+            // check for return url
+            if (!string.IsNullOrWhiteSpace(returnUrl))
+            {
+                ViewBag.ReturnUrl = returnUrl;
             }
 
             // check for existing sign in sessions
@@ -275,9 +291,12 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 principal,
                 TokenServiceConfiguration.Current.CreateSecurityTokenService());
 
-            // set realm cookie for single-sign-out
+            // set cookie for single-sign-out
             new SignInSessionsManager(HttpContext, _cookieName, ConfigurationRepository.Global.MaximumTokenLifetime)
-                .AddEndpoint(context.Realm);
+                .AddEndpoint(wsFedResponse.BaseUri.AbsoluteUri);
+
+            // set cookie for idp signout
+            SetIdPCookie(context.WsFedEndpoint);
 
             return new WSFederationResult(wsFedResponse, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
@@ -295,7 +314,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
 
             // set cookie for single-sign-out
             new SignInSessionsManager(HttpContext, _cookieName, ConfigurationRepository.Global.MaximumTokenLifetime)
-                .AddEndpoint(context.Realm);
+                .AddEndpoint(wsFedResponse.BaseUri.AbsoluteUri);
 
             return new WSFederationResult(wsFedResponse, requireSsl: ConfigurationRepository.WSFederation.RequireSslForReplyTo);
         }
@@ -360,7 +379,41 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         }
         #endregion
 
+       
+
+        #endregion
+
         #region Cookies
+        private void SetIdPCookie(string url)
+        {
+            var cookie = new HttpCookie(_cookieNameIdp, url)
+            {
+                Secure = true,
+                HttpOnly = true,
+                Path = HttpRuntime.AppDomainAppVirtualPath
+            };
+
+            Response.Cookies.Add(cookie);
+        }
+
+        private string GetIdpCookie()
+        {
+            var cookie = Request.Cookies[_cookieNameIdp];
+            if (cookie == null)
+            {
+                return null;
+            }
+
+            var idp = cookie.Value;
+
+            cookie.Value = "";
+            cookie.Expires = new DateTime(2000, 1, 1);
+            cookie.Path = HttpRuntime.AppDomainAppVirtualPath;
+            Response.SetCookie(cookie);
+
+            return idp;
+        }
+
         private void SetContextCookie(string wctx, string realm, string wsfedEndpoint)
         {
             var j = JObject.FromObject(new Context { Wctx = wctx, Realm = realm, WsFedEndpoint = wsfedEndpoint });
@@ -397,7 +450,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             var j = JObject.FromObject(ctx);
 
-            var cookie = new HttpCookie("idsrvoauthcontext", j.ToString());
+            var cookie = new HttpCookie(_cookieOAuthContext, j.ToString());
             cookie.Secure = true;
             cookie.HttpOnly = true;
             cookie.Path = Request.ApplicationPath;
@@ -407,7 +460,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
 
         private OAuth2Context GetOAuthContextCookie()
         {
-            var cookie = Request.Cookies["idsrvoauthcontext"];
+            var cookie = Request.Cookies[_cookieOAuthContext];
             if (cookie == null)
             {
                 throw new InvalidOperationException("cookie");
@@ -416,7 +469,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             var json = JObject.Parse(HttpUtility.UrlDecode(cookie.Value));
             var data = json.ToObject<OAuth2Context>();
 
-            var deletecookie = new HttpCookie("idsrvoauthcontext", ".");
+            var deletecookie = new HttpCookie(_cookieOAuthContext, ".");
             deletecookie.Secure = true;
             deletecookie.HttpOnly = true;
             deletecookie.Path = Request.ApplicationPath;
@@ -481,8 +534,6 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             public int IdP { get; set; }
         }
-
-        #endregion
 
         #endregion
     }
