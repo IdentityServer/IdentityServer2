@@ -37,7 +37,8 @@ namespace Thinktecture.Samples
             {
                 Enabled = true,
                 Realm = new Uri(realm),
-                Name = "InMemory realm."
+                Name = "InMemory realm.",
+                SymmetricSigningKey = Convert.FromBase64String("L6aMge6UHG5IJ+Ah10Nhw9wsmkWC9ZBUEHT2lciAwSw=")
             };
 
             return true;
