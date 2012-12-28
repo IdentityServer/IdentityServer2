@@ -57,6 +57,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Thinktecture.IdentityModel.2.2.1\lib\net45\Thinktecture.IdentityModel.dll</HintPath>
     </Reference>
+    <Reference Include="Thinktecture.IdentityServer.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Thinktecture.IdentityServer.Core.2.0.0\lib\net45\Thinktecture.IdentityServer.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Thinktecture.IdentityServer.Core.Repositories, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Thinktecture.IdentityServer.Core.2.0.0\lib\net45\Thinktecture.IdentityServer.Core.Repositories.dll</HintPath>
+    </Reference>
+    <Reference Include="Thinktecture.IdentityServer.Protocols, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Thinktecture.IdentityServer.Core.2.0.0\lib\net45\Thinktecture.IdentityServer.Protocols.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
