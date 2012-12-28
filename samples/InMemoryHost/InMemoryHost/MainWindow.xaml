@@ -1,7 +1,7 @@
 ﻿<Window x:Class="InMemoryHost.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="567.203" Width="838.559" ResizeMode="NoResize">
+        Title="Embedded IdentityServer" Height="567.203" Width="838.559" ResizeMode="NoResize">
     <Grid Margin="0,0,-6,-9">
         <Button x:Name="CreateTokenButton" Content="Create Token" HorizontalAlignment="Left" Margin="474,31,0,0" VerticalAlignment="Top" Width="188" Height="82" Click="CreateTokenButton_Click" FontWeight="Bold" FontSize="14"/>
         <TextBox x:Name ="Output" HorizontalAlignment="Left" Height="368" Margin="27,143,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="769"/>
