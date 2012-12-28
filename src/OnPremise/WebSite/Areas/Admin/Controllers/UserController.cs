@@ -144,7 +144,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             return View("Roles", vm);
         }
 
-        public ActionResult Profile(string id)
+        public new ActionResult Profile(string id)
         {
             var vm = new UserProfileViewModel(id);
             return View(vm);
@@ -152,7 +152,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Profile(string id, ProfilePropertyInputModel[] profileValues)
+        public new ActionResult Profile(string id, ProfilePropertyInputModel[] profileValues)
         {
             var vm = new UserProfileViewModel(id, profileValues);
 
