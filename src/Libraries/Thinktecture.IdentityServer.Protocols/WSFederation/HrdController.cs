@@ -368,7 +368,18 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 var ip = idps.First();
                 message.HomeRealm = ip.Name;
                 Tracing.Verbose("Only one HRD option available: " + message.HomeRealm);
-                return RedirectToWSFedIdentityProvider(ip, message);
+                if (ip.Type == IdentityProviderTypes.WSStar)
+                {
+                    return RedirectToWSFedIdentityProvider(ip, message);
+                }
+                else if (ip.Type == IdentityProviderTypes.OAuth2)
+                {
+                    return RedirectToOAuth2IdentityProvider(ip, message);
+                }
+                else
+                {
+                    throw new Exception("Invalid IdentityProviderType");
+                }
             }
             else
             {
