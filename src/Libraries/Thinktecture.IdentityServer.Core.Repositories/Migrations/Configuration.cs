@@ -1,6 +1,7 @@
 namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
 {
     using System.Data.Entity.Migrations;
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Thinktecture.IdentityServer.Repositories.Sql.IdentityServerConfigurationContext>
     {
@@ -12,6 +13,10 @@ namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
         protected override void Seed(Thinktecture.IdentityServer.Repositories.Sql.IdentityServerConfigurationContext context)
         {
             //  This method will be called after migrating to the latest version.
+            if (!context.GlobalConfiguration.Any())
+            {
+                Thinktecture.IdentityServer.Repositories.Sql.ConfigurationDatabaseInitializer.SeedContext(context);
+            }
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.

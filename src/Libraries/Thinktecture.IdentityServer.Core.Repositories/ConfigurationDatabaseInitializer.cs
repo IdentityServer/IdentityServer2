@@ -13,7 +13,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 {
     public class ConfigurationDatabaseInitializer : CreateDatabaseIfNotExists<IdentityServerConfigurationContext>
     {
-        protected override void Seed(IdentityServerConfigurationContext context)
+        public static void SeedContext(IdentityServerConfigurationContext context)
         {
             // test data
             var entry = ConfigurationManager.AppSettings["idsrv:CreateTestDataOnInitialization"];
@@ -54,8 +54,11 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             context.OAuth2.Add(CreateDefaultOAuth2Configuration());
             context.SimpleHttp.Add(CreateDefaultSimpleHttpConfiguration());
             context.Diagnostics.Add(CreateDefaultDiagnosticsConfiguration());
+        }
 
-
+        protected override void Seed(IdentityServerConfigurationContext context)
+        {
+            SeedContext(context);
             base.Seed(context);
         }
 
@@ -95,7 +98,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private WSTrustConfiguration CreateDefaultWSTrustConfiguration()
+        private static WSTrustConfiguration CreateDefaultWSTrustConfiguration()
         {
             return new WSTrustConfiguration
             {
@@ -109,7 +112,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private OAuth2Configuration CreateDefaultOAuth2Configuration()
+        private static OAuth2Configuration CreateDefaultOAuth2Configuration()
         {
             return new OAuth2Configuration
             {
@@ -120,7 +123,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private SimpleHttpConfiguration CreateDefaultSimpleHttpConfiguration()
+        private static SimpleHttpConfiguration CreateDefaultSimpleHttpConfiguration()
         {
             return new SimpleHttpConfiguration
             {
@@ -128,7 +131,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private FederationMetadataConfiguration CreateDefaultFederationMetadataConfiguration()
+        private static FederationMetadataConfiguration CreateDefaultFederationMetadataConfiguration()
         {
             return new FederationMetadataConfiguration
             {
@@ -136,7 +139,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private DiagnosticsConfiguration CreateDefaultDiagnosticsConfiguration()
+        private static DiagnosticsConfiguration CreateDefaultDiagnosticsConfiguration()
         {
             return new DiagnosticsConfiguration
             {
@@ -181,7 +184,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private WSTrustConfiguration CreateTestWSTrustConfiguration()
+        private static WSTrustConfiguration CreateTestWSTrustConfiguration()
         {
             return new WSTrustConfiguration
             {
@@ -195,7 +198,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private OAuth2Configuration CreateTestOAuth2Configuration()
+        private static OAuth2Configuration CreateTestOAuth2Configuration()
         {
             return new OAuth2Configuration
             {
@@ -206,7 +209,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private SimpleHttpConfiguration CreateTestSimpleHttpConfiguration()
+        private static SimpleHttpConfiguration CreateTestSimpleHttpConfiguration()
         {
             return new SimpleHttpConfiguration
             {
@@ -214,7 +217,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private FederationMetadataConfiguration CreateTestFederationMetadataConfiguration()
+        private static FederationMetadataConfiguration CreateTestFederationMetadataConfiguration()
         {
             return new FederationMetadataConfiguration
             {
@@ -222,7 +225,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private DiagnosticsConfiguration CreateTestDiagnosticsConfiguration()
+        private static DiagnosticsConfiguration CreateTestDiagnosticsConfiguration()
         {
             return new DiagnosticsConfiguration
             {
@@ -232,7 +235,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         #endregion
 
         #region Test Data
-        private List<RelyingParties> CreateTestRelyingParties()
+        private static List<RelyingParties> CreateTestRelyingParties()
         {
             return new List<RelyingParties>
             {
@@ -263,7 +266,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private List<Delegation> CreateTestDelegationSettings()
+        private static List<Delegation> CreateTestDelegationSettings()
         {
             return new List<Delegation>
             {
@@ -276,7 +279,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private List<ClientCertificates> CreateTestClientCertificateSettings()
+        private static List<ClientCertificates> CreateTestClientCertificateSettings()
         {
             return new List<ClientCertificates>
             {
@@ -289,7 +292,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private List<IdentityProvider> CreateTestIdentityProviders()
+        private static List<IdentityProvider> CreateTestIdentityProviders()
         {
             return new List<IdentityProvider>
             {
@@ -338,7 +341,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
 
-        private List<Client> CreateTestClients()
+        private static List<Client> CreateTestClients()
         {
             return new List<Client>
             {
