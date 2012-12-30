@@ -307,7 +307,9 @@
     </Content>
     <Content Include="Configuration\identityServices.config" />
     <Content Include="Configuration\profile.config" />
-    <Content Include="Configuration\repositories.config" />
+    <Content Include="Configuration\repositories.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Configuration\tracing.config">
       <SubType>Designer</SubType>
     </Content>

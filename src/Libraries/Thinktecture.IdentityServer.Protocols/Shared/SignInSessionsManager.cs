@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Thinktecture.IdentityServer.TokenService
+namespace Thinktecture.IdentityServer.Protocols
 {
     public class SignInSessionsManager
     {
@@ -83,7 +83,7 @@ namespace Thinktecture.IdentityServer.TokenService
 
             var cookie = new HttpCookie(_cookieName, realmString)
             {
-                Expires = DateTime.Now.AddHours(_maximumCookieLifetime),
+                Secure = true,
                 HttpOnly = true,
                 Path = HttpRuntime.AppDomainAppVirtualPath
             };

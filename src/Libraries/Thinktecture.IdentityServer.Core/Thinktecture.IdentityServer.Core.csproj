@@ -142,7 +142,6 @@
     <Compile Include="Models\Configuration\WSFederationConfiguration.cs" />
     <Compile Include="Repositories\IUserManagementRepository.cs" />
     <Compile Include="TokenService\IdentityProviderIssuerNameRegistry.cs" />
-    <Compile Include="TokenService\SignInSessionsManager.cs" />
     <Compile Include="TokenService\ClientCertificateIssuerNameRegistry.cs" />
     <Compile Include="TokenService\RepositoryX509SecurityTokenHandler.cs" />
     <Compile Include="TokenService\RepositoryUserNameSecurityTokenHandler.cs" />
