@@ -1,8 +1,9 @@
-namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
+namespace Thinktecture.IdentityServer.Core.Repositories.Migrations.SqlServer
 {
+    using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -11,11 +12,11 @@ namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        SiteName = c.String(nullable: false, maxLength: 4000),
-                        IssuerUri = c.String(nullable: false, maxLength: 4000),
-                        IssuerContactEmail = c.String(nullable: false, maxLength: 4000),
-                        DefaultWSTokenType = c.String(nullable: false, maxLength: 4000),
-                        DefaultHttpTokenType = c.String(nullable: false, maxLength: 4000),
+                        SiteName = c.String(nullable: false),
+                        IssuerUri = c.String(nullable: false),
+                        IssuerContactEmail = c.String(nullable: false),
+                        DefaultWSTokenType = c.String(nullable: false),
+                        DefaultHttpTokenType = c.String(nullable: false),
                         DefaultTokenLifetime = c.Int(nullable: false),
                         MaximumTokenLifetime = c.Int(nullable: false),
                         SsoCookieLifetime = c.Int(nullable: false),
@@ -48,10 +49,10 @@ namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        SigningCertificateName = c.String(maxLength: 4000),
-                        DecryptionCertificateName = c.String(maxLength: 4000),
-                        RSASigningKey = c.String(maxLength: 4000),
-                        SymmetricSigningKey = c.String(maxLength: 4000),
+                        SigningCertificateName = c.String(),
+                        DecryptionCertificateName = c.String(),
+                        RSASigningKey = c.String(),
+                        SymmetricSigningKey = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -84,7 +85,7 @@ namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Enabled = c.Boolean(nullable: false),
-                        RequireClientAuthentication = c.Boolean(nullable: false),
+                        EnableConsent = c.Boolean(nullable: false),
                         EnableResourceOwnerFlow = c.Boolean(nullable: false),
                         EnableImplicitFlow = c.Boolean(nullable: false),
                     })
@@ -113,9 +114,9 @@ namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserName = c.String(nullable: false, maxLength: 4000),
-                        Thumbprint = c.String(nullable: false, maxLength: 4000),
-                        Description = c.String(nullable: false, maxLength: 4000),
+                        UserName = c.String(nullable: false),
+                        Thumbprint = c.String(nullable: false),
+                        Description = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -124,9 +125,9 @@ namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        UserName = c.String(nullable: false, maxLength: 4000),
-                        Realm = c.String(nullable: false, maxLength: 4000),
-                        Description = c.String(maxLength: 4000),
+                        UserName = c.String(nullable: false),
+                        Realm = c.String(nullable: false),
+                        Description = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -135,16 +136,16 @@ namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 4000),
+                        Name = c.String(nullable: false),
                         Enabled = c.Boolean(nullable: false),
-                        Realm = c.String(nullable: false, maxLength: 4000),
+                        Realm = c.String(nullable: false),
                         TokenLifeTime = c.Int(nullable: false),
-                        ReplyTo = c.String(maxLength: 4000),
+                        ReplyTo = c.String(),
                         EncryptingCertificate = c.String(),
-                        SymmetricSigningKey = c.String(maxLength: 4000),
-                        ExtraData1 = c.String(maxLength: 4000),
-                        ExtraData2 = c.String(maxLength: 4000),
-                        ExtraData3 = c.String(maxLength: 4000),
+                        SymmetricSigningKey = c.String(),
+                        ExtraData1 = c.String(),
+                        ExtraData2 = c.String(),
+                        ExtraData3 = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -152,26 +153,34 @@ namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
                 "dbo.IdentityProvider",
                 c => new
                     {
-                        Name = c.String(nullable: false, maxLength: 4000),
-                        DisplayName = c.String(nullable: false, maxLength: 4000),
-                        Type = c.String(nullable: false, maxLength: 4000),
+                        ID = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        DisplayName = c.String(nullable: false),
+                        Type = c.Int(nullable: false),
                         ShowInHrdSelection = c.Boolean(nullable: false),
-                        WSFederationEndpoint = c.String(maxLength: 4000),
-                        IssuerThumbprint = c.String(maxLength: 4000),
+                        WSFederationEndpoint = c.String(),
+                        IssuerThumbprint = c.String(),
+                        ClientID = c.String(),
+                        ClientSecret = c.String(),
+                        OAuth2ProviderType = c.Int(),
                         Enabled = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.Name);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.Client",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 4000),
-                        Description = c.String(nullable: false, maxLength: 4000),
-                        ClientId = c.String(nullable: false, maxLength: 4000),
-                        ClientSecret = c.String(nullable: false, maxLength: 4000),
-                        RedirectUri = c.String(maxLength: 4000),
+                        Name = c.String(nullable: false),
+                        Description = c.String(nullable: false),
+                        ClientId = c.String(nullable: false),
+                        ClientSecret = c.String(nullable: false),
+                        RedirectUri = c.String(),
+                        NativeClient = c.Boolean(nullable: false),
+                        AllowImplicitFlow = c.Boolean(nullable: false),
+                        AllowResourceOwnerFlow = c.Boolean(nullable: false),
+                        AllowCodeFlow = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             

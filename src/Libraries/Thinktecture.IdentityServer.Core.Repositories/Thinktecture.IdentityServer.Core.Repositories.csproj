@@ -89,31 +89,16 @@
     <Compile Include="Mappings.cs" />
     <Compile Include="MemoryCacheRepository.cs" />
     <Compile Include="ConfigurationRepository.cs" />
-    <Compile Include="Migrations\201210180632211_InitialCreate.cs" />
-    <Compile Include="Migrations\201210180632211_InitialCreate.Designer.cs">
-      <DependentUpon>201210180632211_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations.SqlServer\SqlServerConfiguration.cs" />
+    <Compile Include="Migrations.SqlServer\201301011810411_InitialMigration.cs" />
+    <Compile Include="Migrations.SqlServer\201301011810411_InitialMigration.Designer.cs">
+      <DependentUpon>201301011810411_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201210231853270_UpdatedOAuth2Config.cs" />
-    <Compile Include="Migrations\201210231853270_UpdatedOAuth2Config.Designer.cs">
-      <DependentUpon>201210231853270_UpdatedOAuth2Config.cs</DependentUpon>
+    <Compile Include="Migrations.SqlCe\SqlCeConfiguration.cs" />
+    <Compile Include="Migrations.SqlCe\201301011818314_InitialMigration.cs" />
+    <Compile Include="Migrations.SqlCe\201301011818314_InitialMigration.Designer.cs">
+      <DependentUpon>201301011818314_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201210231857533_UpdatedClientConfig.cs" />
-    <Compile Include="Migrations\201210231857533_UpdatedClientConfig.Designer.cs">
-      <DependentUpon>201210231857533_UpdatedClientConfig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201210232018407_AddIDKeyToIdentityProvider.cs" />
-    <Compile Include="Migrations\201210232018407_AddIDKeyToIdentityProvider.Designer.cs">
-      <DependentUpon>201210232018407_AddIDKeyToIdentityProvider.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201210240211246_OAuthSupportForIdentityProvider.cs" />
-    <Compile Include="Migrations\201210240211246_OAuthSupportForIdentityProvider.Designer.cs">
-      <DependentUpon>201210240211246_OAuthSupportForIdentityProvider.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201210260320349_CleanupIdentityProviderOAuthInfo.cs" />
-    <Compile Include="Migrations\201210260320349_CleanupIdentityProviderOAuthInfo.Designer.cs">
-      <DependentUpon>201210260320349_CleanupIdentityProviderOAuthInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NullCacheRepository.cs" />
     <Compile Include="PassThruTransformationRuleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,24 +119,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201210180632211_InitialCreate.resx">
-      <DependentUpon>201210180632211_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations.SqlServer\201301011810411_InitialMigration.resx">
+      <DependentUpon>201301011810411_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201210231853270_UpdatedOAuth2Config.resx">
-      <DependentUpon>201210231853270_UpdatedOAuth2Config.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations.SqlCe\201301011818314_InitialMigration.resx">
+      <DependentUpon>201301011818314_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201210231857533_UpdatedClientConfig.resx">
-      <DependentUpon>201210231857533_UpdatedClientConfig.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201210232018407_AddIDKeyToIdentityProvider.resx">
-      <DependentUpon>201210232018407_AddIDKeyToIdentityProvider.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201210240211246_OAuthSupportForIdentityProvider.resx">
-      <DependentUpon>201210240211246_OAuthSupportForIdentityProvider.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201210260320349_CleanupIdentityProviderOAuthInfo.resx">
-      <DependentUpon>201210260320349_CleanupIdentityProviderOAuthInfo.cs</DependentUpon>
-    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Migrations.SqlCe\Sql\201301011818314_InitialMigration.sql" />
+    <Content Include="Migrations.SqlServer\Sql\201301011810411_InitialMigration.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

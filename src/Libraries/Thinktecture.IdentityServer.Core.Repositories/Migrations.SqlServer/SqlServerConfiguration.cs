@@ -1,11 +1,11 @@
-namespace Thinktecture.IdentityServer.Core.Repositories.Migrations
+namespace Thinktecture.IdentityServer.Core.Repositories.Migrations.SqlServer
 {
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Thinktecture.IdentityServer.Repositories.Sql.IdentityServerConfigurationContext>
+    internal sealed class SqlServerConfiguration : DbMigrationsConfiguration<Thinktecture.IdentityServer.Repositories.Sql.IdentityServerConfigurationContext>
     {
-        public Configuration()
+        public SqlServerConfiguration()
         {
             AutomaticMigrationsEnabled = false;
         }
