@@ -35,7 +35,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             : base("name=IdentityServerConfiguration")
         { }
 
-        public IdentityServerConfigurationContext(DbConnection conn) : base(conn, true)
+        public IdentityServerConfigurationContext(DbConnection conn)
+            : base(conn, true)
         {
         }
 
@@ -48,9 +49,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             if (FactoryMethod != null) return FactoryMethod();
 
-            var cs = ConfigurationManager.ConnectionStrings["IdentityServerConfiguration"].ConnectionString;
-            var conn = Database.DefaultConnectionFactory.CreateConnection(cs);
-            return new IdentityServerConfigurationContext(conn);
+            return new IdentityServerConfigurationContext();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
