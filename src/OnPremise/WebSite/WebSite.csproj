@@ -347,6 +347,7 @@
     <Content Include="Areas\Admin\Views\OAuthClient\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Enum.cshtml" />
     <Content Include="Areas\Admin\Views\User\Profile.cshtml" />
+    <Content Include="Areas\Admin\Views\General\Recycle.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />

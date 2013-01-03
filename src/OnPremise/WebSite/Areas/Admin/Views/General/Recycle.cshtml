@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Application Recycle";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        <div>
+            <label>Current AppDomain ID</label>
+            @AppDomain.CurrentDomain.FriendlyName
+        </div>
+
+        <div class="buttons">
+            <p>
+                This will recycle the Application's AppDomain. 
+            </p>
+            <button type="submit">Recycle Application</button>
+        </div>
+    </fieldset>
+}
