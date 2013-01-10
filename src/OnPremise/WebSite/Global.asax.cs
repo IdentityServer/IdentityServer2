@@ -38,7 +38,7 @@ namespace Thinktecture.IdentityServer.Web
 
             AreaRegistration.RegisterAllAreas();
 
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, ConfigurationRepository);
             RouteConfig.RegisterRoutes(RouteTable.Routes, ConfigurationRepository, UserRepository);
             ProtocolConfig.RegisterProtocols(GlobalConfiguration.Configuration, RouteTable.Routes, ConfigurationRepository, UserRepository, RelyingPartyRepository);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

@@ -10,6 +10,13 @@ namespace Thinktecture.IdentityServer.Web.GlobalFilter
 {
     public class SslRedirectFilter : ActionFilterAttribute
     {
+        int _port = 443;
+
+        public SslRedirectFilter(int sslPort)
+        {
+            _port = sslPort;
+        }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (!filterContext.HttpContext.Request.IsSecureConnection)
@@ -24,6 +31,7 @@ namespace Thinktecture.IdentityServer.Web.GlobalFilter
         {
             UriBuilder builder = new UriBuilder(Uri.UriSchemeHttps, uriFromCaller.Host);
             builder.Path = uriFromCaller.GetComponents(UriComponents.Path, UriFormat.Unescaped);
+            builder.Port = _port;
 
             string query = uriFromCaller.GetComponents(UriComponents.Query, UriFormat.UriEscaped);
             if (query.Length > 0)
