@@ -175,7 +175,18 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             if (!string.IsNullOrWhiteSpace(message.HomeRealm))
             {
-                return RedirectToWSFedIdentityProvider(message);
+                var idp = GetEnabledIdentityProvider(message.HomeRealm);
+                if (idp != null)
+                {
+                    if (idp.Type == IdentityProviderTypes.WSStar)
+                    {
+                        return RedirectToWSFedIdentityProvider(message);
+                    }
+                    else if (idp.Type == IdentityProviderTypes.OAuth2)
+                    {
+                        return RedirectToOAuth2IdentityProvider(idp, message);
+                    }
+                }
             }
             else
             {
@@ -189,6 +200,8 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                     return ProcessHomeRealmFromCookieValue(message, pastHRDSelection);
                 }
             }
+
+            return View("Error");
         }
 
         private ActionResult ProcessWSFedSignOutRequest(SignOutRequestMessage message)
@@ -331,6 +344,17 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             }
         }
 
+        IdentityProvider GetEnabledIdentityProvider(string homeRealm)
+        {
+            IdentityProvider idp;
+            if (IdentityProviderRepository.TryGet(homeRealm, out idp))
+            {
+                if (idp.Enabled) return idp;
+            }
+
+            return null;
+        }
+        
         IEnumerable<IdentityProvider> GetEnabledWSIdentityProviders()
         {
             return IdentityProviderRepository.GetAll().Where(
