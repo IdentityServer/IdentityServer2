@@ -9,3 +9,5 @@ build/
 *.sdf
 *.mdf
 *.ldf
+
+*.DS_Store
