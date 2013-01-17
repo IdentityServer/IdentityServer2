@@ -44,7 +44,10 @@ namespace Thinktecture.IdentityServer.Repositories
                         object value = profile.GetPropertyValue(prop.Name);
                         if (value != null)
                         {
-                            claims.Add(new Claim(ProfileClaimPrefix + prop.Name.ToLowerInvariant(), value.ToString()));
+                            if (!string.IsNullOrWhiteSpace(value.ToString()))
+                            {
+                                claims.Add(new Claim(ProfileClaimPrefix + prop.Name.ToLowerInvariant(), value.ToString()));
+                            }
                         }
                     }
                 }
