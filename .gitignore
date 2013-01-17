@@ -12,3 +12,4 @@ build/
 _ReSharper.*
 *.resharper
 PublishProfiles
+*.DS_Store
