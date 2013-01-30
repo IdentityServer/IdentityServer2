@@ -152,7 +152,7 @@ namespace Thinktecture.IdentityServer
             ep.WSTrustMessageCertificate = new Uri(activeClear + "/" + Paths.WSTrustMessageCertificate);
             ep.WSTrustMixedCertificate = new Uri(activeSsl + "/" + Paths.WSTrustMixedCertificate);
 
-            ep.WSTrustMex = new Uri(activeSsl, Paths.Mex);
+            ep.WSTrustMex = new Uri(activeSsl + "/" + Paths.Mex);
 
             return ep;
         }
