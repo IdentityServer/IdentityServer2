@@ -47,6 +47,40 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        public void ValidUserNameCredentialValidClientCredentialUseRefreshToken()
+        {
+            var client = new OAuth2Client(
+                new Uri(baseAddress),
+                Constants.Credentials.ValidClientId,
+                Constants.Credentials.ValidClientSecret);
+
+            var response = client.RequestAccessTokenUserName(
+                Constants.Credentials.ValidUserName,
+                Constants.Credentials.ValidPassword,
+                scope);
+
+            Assert.IsTrue(response != null, "response is null");
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(response.AccessToken), "access token is null");
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(response.TokenType), "token type is null");
+            Assert.IsTrue(response.ExpiresIn > 0, "expiresIn is 0");
+
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(response.RefreshToken));
+
+            var form = new FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    { OAuth2Constants.GrantType, "refresh_token" },
+                    { "refresh_token", response.RefreshToken },
+                    { OAuth2Constants.Scope, scope }
+                });
+
+            var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Authorization = new BasicAuthenticationHeaderValue(Constants.Credentials.ValidClientId, Constants.Credentials.ValidClientSecret);
+
+            var result = httpClient.PostAsync(new Uri(baseAddress), form).Result;
+            Assert.AreEqual<HttpStatusCode>(HttpStatusCode.OK, result.StatusCode);          
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(HttpRequestException))]
         public void ValidUserNameCredentialMissingClientCredential()
         {
