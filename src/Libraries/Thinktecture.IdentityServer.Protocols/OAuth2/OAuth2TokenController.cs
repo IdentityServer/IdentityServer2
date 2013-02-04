@@ -3,7 +3,6 @@
  * see license.txt
  */
 
-using System;
 using System.ComponentModel.Composition;
 using System.IdentityModel.Protocols.WSTrust;
 using System.Net;

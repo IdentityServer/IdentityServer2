@@ -3,10 +3,7 @@
  * see license.txt
  */
 
-using System.Collections.Generic;
-using System.Security.Claims;
 using Thinktecture.IdentityServer.Models;
-using Thinktecture.IdentityServer.TokenService;
 
 namespace Thinktecture.IdentityServer.Repositories
 {

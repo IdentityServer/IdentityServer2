@@ -4,7 +4,6 @@
  */
 
 using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {
