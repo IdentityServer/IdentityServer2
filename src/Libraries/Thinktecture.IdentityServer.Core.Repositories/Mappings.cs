@@ -209,7 +209,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Enabled = entity.Enabled,
                 EnableImplicitFlow = entity.EnableImplicitFlow,
                 EnableResourceOwnerFlow = entity.EnableResourceOwnerFlow,
-                EnableConsent = entity.EnableConsent
+                EnableConsent = entity.EnableConsent,
+                EnableCodeFlow = entity.EnableCodeFlow
             };
         }
 
@@ -220,7 +221,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Enabled = model.Enabled,
                 EnableImplicitFlow = model.EnableImplicitFlow,
                 EnableResourceOwnerFlow = model.EnableResourceOwnerFlow,
-                EnableConsent = model.EnableConsent
+                EnableConsent = model.EnableConsent,
+                EnableCodeFlow = model.EnableCodeFlow
             };
         }
         #endregion
@@ -370,7 +372,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 Description = client.Description,
                 Name = client.Name,
                 RedirectUri = client.RedirectUri != null ? new Uri(client.RedirectUri) : null,
-                NativeClient = client.NativeClient,
+                AllowRefreshToken = client.AllowRefreshToken,
                 AllowCodeFlow = client.AllowCodeFlow,
                 AllowImplicitFlow = client.AllowImplicitFlow,
                 AllowResourceOwnerFlow = client.AllowResourceOwnerFlow
@@ -384,7 +386,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             target.Description = client.Description;
             target.Name = client.Name;
             target.RedirectUri = client.RedirectUri != null ? client.RedirectUri.AbsoluteUri : null;
-            target.NativeClient = client.NativeClient;
+            target.AllowRefreshToken = client.AllowRefreshToken;
             target.AllowResourceOwnerFlow = client.AllowResourceOwnerFlow;
             target.AllowImplicitFlow = client.AllowImplicitFlow;
             target.AllowCodeFlow = client.AllowCodeFlow;
@@ -482,6 +484,21 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             entity.OAuth2ProviderType = (int?)idp.ProviderType;
         }
 
+        #endregion
+
+        #region CodeToken
+        public static Models.CodeToken ToDomainModel(this Entities.CodeToken token)
+        {
+            return new Models.CodeToken
+            {
+                ClientId = token.ClientId,
+                Scope = token.Scope,
+                UserName = token.UserName,
+                Code = token.Code,
+                Type = (CodeTokenType)token.Type,
+                TimeStamp = token.TimeStamp
+            };
+        }
         #endregion
     }
 }

@@ -117,6 +117,8 @@
     <Compile Include="Helper\X509Certificates.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ClientCertificate.cs" />
+    <Compile Include="Models\CodeToken.cs" />
+    <Compile Include="Models\CodeTokenType.cs" />
     <Compile Include="Models\Configuration\SimpleHttpConfiguration.cs" />
     <Compile Include="Models\Configuration\KeyMaterialConfiguration.cs" />
     <Compile Include="Models\Configuration\OAuth2Configuration.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Models\IdentityProviderTypes.cs" />
     <Compile Include="Models\Configuration\DiagnosticsConfiguration.cs" />
     <Compile Include="Repositories\IClientsRepository.cs" />
+    <Compile Include="Repositories\ICodeTokenRepository.cs" />
     <Compile Include="Repositories\IConfigurationRepository.cs" />
     <Compile Include="Repositories\IClaimsRepository.cs" />
     <Compile Include="Repositories\IClaimsTransformationRulesRepository.cs" />

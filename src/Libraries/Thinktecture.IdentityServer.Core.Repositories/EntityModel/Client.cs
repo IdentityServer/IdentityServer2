@@ -22,7 +22,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public string RedirectUri { get; set; }
 
         [Required]
-        public bool NativeClient { get; set; }
+        public bool AllowRefreshToken { get; set; }
 
         [Required]
         public bool AllowImplicitFlow { get; set; }

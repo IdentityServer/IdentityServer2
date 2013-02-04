@@ -28,6 +28,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public DbSet<RelyingParties> RelyingParties { get; set; }
         public DbSet<IdentityProvider> IdentityProviders { get; set; }
         public DbSet<Client> Clients { get; set; }
+        public DbSet<CodeToken> CodeTokens { get; set; }
 
         public static Func<IdentityServerConfigurationContext> FactoryMethod { get; set; }
 
@@ -35,8 +36,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             : base("name=IdentityServerConfiguration")
         { }
 
-        public IdentityServerConfigurationContext(DbConnection conn)
-            : base(conn, true)
+        public IdentityServerConfigurationContext(DbConnection conn) : base(conn, true)
         {
         }
 
@@ -49,7 +49,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             if (FactoryMethod != null) return FactoryMethod();
 
-            return new IdentityServerConfigurationContext();
+            var cs = ConfigurationManager.ConnectionStrings["IdentityServerConfiguration"].ConnectionString;
+            var conn = Database.DefaultConnectionFactory.CreateConnection(cs);
+            return new IdentityServerConfigurationContext(conn);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

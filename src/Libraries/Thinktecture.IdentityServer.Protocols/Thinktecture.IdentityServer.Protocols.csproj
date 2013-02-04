@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OAuth2\AuthorizeRequest.cs" />
+    <Compile Include="OAuth2\ClientValidator.cs" />
     <Compile Include="OAuth2\OAuth2AuthorizeController.cs" />
     <Compile Include="OAuth2\OAuth2ConsentViewModel.cs" />
     <Compile Include="OAuth2\OAuthTitleGrantResult.cs" />
