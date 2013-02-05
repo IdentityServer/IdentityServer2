@@ -70,7 +70,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdfsIntegration\Adfs.cs" />
+    <Compile Include="AdfsIntegration\AdfsController.cs" />
+    <Compile Include="AdfsIntegration\AdfsBridge.cs" />
     <Compile Include="OAuth2\AuthorizeRequest.cs" />
     <Compile Include="OAuth2\ClientValidator.cs" />
     <Compile Include="OAuth2\OAuth2AuthorizeController.cs" />
