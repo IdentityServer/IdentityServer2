@@ -72,6 +72,7 @@
     <Compile Include="ConfigurationDatabaseInitializer.cs" />
     <Compile Include="ClientsRepository.cs" />
     <Compile Include="EntityModel\CodeToken.cs" />
+    <Compile Include="EntityModel\Configuration\AdfsIntegrationConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\SimpleHttpConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\DiagnosticsConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\FederationMetadataConfiguration.cs" />

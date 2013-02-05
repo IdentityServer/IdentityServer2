@@ -3,19 +3,10 @@ using System.ComponentModel.Composition;
 using System.IdentityModel.Tokens;
 using System.Net;
 using System.Net.Http;
-using System.ServiceModel;
-using System.ServiceModel.Description;
 using System.Web.Http;
-using Thinktecture.IdentityModel.WSTrust;
+using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityServer.Protocols.OAuth2;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityModel.Extensions;
-using Thinktecture.IdentityModel.Tokens;
-using System.Linq;
-using System.IdentityModel.Selectors;
-using System.ServiceModel.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Claims;
 
 namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 {
@@ -62,7 +53,11 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             GenericXmlSecurityToken token;
             try
             {
-                token = AdfsBridge.Authenticate(request.UserName, request.Password, request.Scope, ConfigurationRepository.AdfsIntegration.UserNameEndpoint);
+                token = AdfsBridge.Authenticate(
+                    request.UserName, 
+                    request.Password, 
+                    request.Scope, 
+                    new Uri(ConfigurationRepository.AdfsIntegration.UserNameEndpoint));
             }
             catch (Exception ex)
             {

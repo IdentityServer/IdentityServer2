@@ -14,6 +14,19 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 {
     internal static class AdfsBridge
     {
+        public static GenericXmlSecurityToken Authenticate(string userName, string password, string appliesTo, Uri adfsEndpoint)
+        {
+            var credentials = new ClientCredentials();
+            credentials.UserName.UserName = userName;
+            credentials.UserName.Password = password;
+
+            return WSTrustClient.Issue(
+                new EndpointAddress(adfsEndpoint),
+                new EndpointAddress(appliesTo),
+                new UserNameWSTrustBinding(SecurityMode.TransportWithMessageCredential),
+                credentials) as GenericXmlSecurityToken;
+        }
+
         public static TokenResponse ConvertSamlToJwt(SecurityToken securityToken, string issuerThumbprint, string signingKey, string issuerUri)
         {
             var identity = AdfsBridge.ValidateSamlToken(
@@ -51,19 +64,6 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             var handler = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(configuration);
             var identity = handler.ValidateToken(securityToken).First();
             return identity;
-        }
-
-        public static GenericXmlSecurityToken Authenticate(string userName, string password, string appliesTo, Uri adfsEndpoint)
-        {
-            var credentials = new ClientCredentials();
-            credentials.UserName.UserName = userName;
-            credentials.UserName.Password = password;
-
-            return WSTrustClient.Issue(
-                new EndpointAddress(adfsEndpoint),
-                new EndpointAddress(appliesTo),
-                new UserNameWSTrustBinding(SecurityMode.TransportWithMessageCredential),
-                credentials) as GenericXmlSecurityToken;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         public bool UserNameEnabled { get; set; }
 
         [Display(Name = "ADFS UserName Endpoint", Description = "Address of the UserNameMixed WS-Trust endpoint on ADFS for user authentication")]
-        public Uri UserNameEndpoint { get; set; }
+        public string UserNameEndpoint { get; set; }
 
         [Display(Name = "Create new token", Description = "If enabled, a new JWT token will be created, if not the original ADFS SAML token will be passed through")]
         public bool CreateNewToken { get; set; }
@@ -28,7 +28,7 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         public bool DelegationEnabled { get; set; }
 
         [Display(Name = "ADFS Delegation Endpoint", Description = "Address of the WindowsMixed WS-Trust endpoint on ADFS for delegation")]
-        public Uri DelegationEndpoint { get; set; }
+        public string DelegationEndpoint { get; set; }
 
 
         // Shared config options

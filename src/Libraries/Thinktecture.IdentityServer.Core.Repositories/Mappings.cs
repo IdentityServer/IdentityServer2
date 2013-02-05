@@ -227,6 +227,38 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         }
         #endregion
 
+        #region AdfsIntegrationConfiguration
+        public static Models.Configuration.AdfsIntegrationConfiguration ToDomainModel(this Entities.Configuration.AdfsIntegrationConfiguration entity)
+        {
+            return new Models.Configuration.AdfsIntegrationConfiguration
+            {
+                Enabled = entity.Enabled,
+                CreateNewToken = entity.CreateNewToken,
+                DelegationEnabled = entity.DelegationEnabled,
+                DelegationEndpoint = entity.DelegationEndpoint,
+                IssuerSigningThumbprint = entity.IssuerSigningThumbprint,
+                SymmetricSigningKey = entity.SymmetricSigningKey,
+                UserNameEnabled = entity.UserNameEnabled,
+                UserNameEndpoint = entity.UserNameEndpoint
+            };
+        }
+
+        public static Entities.Configuration.AdfsIntegrationConfiguration ToEntity(this Models.Configuration.AdfsIntegrationConfiguration model)
+        {
+            return new Entities.Configuration.AdfsIntegrationConfiguration
+            {
+                Enabled = model.Enabled,
+                CreateNewToken = model.CreateNewToken,
+                DelegationEnabled = model.DelegationEnabled,
+                DelegationEndpoint = model.DelegationEndpoint,
+                IssuerSigningThumbprint = model.IssuerSigningThumbprint,
+                SymmetricSigningKey = model.SymmetricSigningKey,
+                UserNameEnabled = model.UserNameEnabled,
+                UserNameEndpoint = model.UserNameEndpoint
+            };
+        }
+        #endregion
+
         #region SimpleHttpConfiguration
         public static Models.Configuration.SimpleHttpConfiguration ToDomainModel(this Entities.Configuration.SimpleHttpConfiguration entity)
         {
