@@ -197,5 +197,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 }
             }
         }
+
+        // todo: wire up with DB
+        public Models.Configuration.AdfsIntegrationConfiguration AdfsIntegration { get; set; }
     }
 }
