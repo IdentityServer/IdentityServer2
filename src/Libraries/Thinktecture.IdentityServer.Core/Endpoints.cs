@@ -43,6 +43,7 @@ namespace Thinktecture.IdentityServer
             public const string OAuth2Token = "issue/oauth2/token";
             public const string OAuth2Callback = "issue/oauth2/callback";
             public const string OAuth2Authorize = "issue/oauth2/authorize";
+            public const string AdfsIntegration = "issue/adfs";
             public const string JSNotify = "issue/jsnotify";
             public const string Mex = "mex";
             public const string WSTrustMessageUserName = "message/username";
