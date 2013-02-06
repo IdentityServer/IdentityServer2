@@ -27,5 +27,8 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
         [JsonProperty(PropertyName = "refresh_token")]
         public string Refresh_Token { get; set; }
+
+        [JsonProperty(PropertyName = "assertion")]
+        public string Assertion { get; set; }
     }
 }
