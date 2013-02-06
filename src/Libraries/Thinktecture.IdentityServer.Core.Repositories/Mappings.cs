@@ -233,13 +233,17 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new Models.Configuration.AdfsIntegrationConfiguration
             {
                 Enabled = entity.Enabled,
-                CreateNewToken = entity.CreateNewToken,
+                PassThruAuthenticationToken = entity.PassThruAuthenticationToken,
+                IssuerThumbprint = entity.IssuerThumbprint,
+                SymmetricSigningKey = entity.SymmetricSigningKey,
+                AuthenticationEnabled = entity.AuthenticationEnabled,
+                AuthenticationEndpoint = entity.AuthenticationEndpoint,
+                AuthenticationTokenLifetime = entity.AuthenticationTokenLifetime,
+                
                 DelegationEnabled = entity.DelegationEnabled,
                 DelegationEndpoint = entity.DelegationEndpoint,
-                IssuerSigningThumbprint = entity.IssuerSigningThumbprint,
-                SymmetricSigningKey = entity.SymmetricSigningKey,
-                UserNameEnabled = entity.UserNameEnabled,
-                UserNameEndpoint = entity.UserNameEndpoint
+                DelegationTokenLifetime = entity.DelegationTokenLifetime,
+                PassThruDelegationToken = entity.PassThruDelegationToken
             };
         }
 
@@ -248,13 +252,17 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new Entities.Configuration.AdfsIntegrationConfiguration
             {
                 Enabled = model.Enabled,
-                CreateNewToken = model.CreateNewToken,
+                PassThruAuthenticationToken = model.PassThruAuthenticationToken,
+                IssuerThumbprint = model.IssuerThumbprint,
+                SymmetricSigningKey = model.SymmetricSigningKey,
+                AuthenticationEnabled = model.AuthenticationEnabled,
+                AuthenticationEndpoint = model.AuthenticationEndpoint,
+                AuthenticationTokenLifetime = model.AuthenticationTokenLifetime,
+
                 DelegationEnabled = model.DelegationEnabled,
                 DelegationEndpoint = model.DelegationEndpoint,
-                IssuerSigningThumbprint = model.IssuerSigningThumbprint,
-                SymmetricSigningKey = model.SymmetricSigningKey,
-                UserNameEnabled = model.UserNameEnabled,
-                UserNameEndpoint = model.UserNameEndpoint
+                DelegationTokenLifetime = model.DelegationTokenLifetime,
+                PassThruDelegationToken = model.PassThruDelegationToken
             };
         }
         #endregion

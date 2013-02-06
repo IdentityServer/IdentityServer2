@@ -49,6 +49,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             {
                 AppliesTo = new EndpointReference(appliesTo),
                 RequestType = RequestTypes.Issue,
+                KeyType = KeyTypes.Bearer,
 
                 ActAs = new SecurityTokenElement(token)
             };
@@ -62,7 +63,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
                 out rstr) as GenericXmlSecurityToken;
         }
 
-        public static TokenResponse ConvertAuthenticationSamlToJwt(SecurityToken securityToken, string issuerThumbprint, string signingKey, string issuerUri)
+        public static TokenResponse ConvertAuthenticationSamlToJwt(SecurityToken securityToken, string issuerThumbprint, string signingKey, string issuerUri, int ttl)
         {
             var identity = AdfsBridge.ValidateSamlToken(
                 securityToken,
@@ -72,7 +73,8 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             {
                 Subject = identity,
                 SigningCredentials = new HmacSigningCredentials(signingKey),
-                TokenIssuerName = issuerUri
+                TokenIssuerName = issuerUri,
+                Lifetime = new Lifetime(DateTime.UtcNow, DateTime.UtcNow.AddMinutes(ttl))
             };
 
             var jwtHandler = new JsonWebTokenHandler();
@@ -80,7 +82,8 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 
             return new TokenResponse
             {
-                AccessToken = jwtHandler.WriteToken(jwt)
+                AccessToken = jwtHandler.WriteToken(jwt),
+                ExpiresIn = ttl
             };
         }
 
@@ -108,17 +111,24 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 
         public static ClaimsIdentity ValidateSamlToken(SecurityToken securityToken, string issuerThumbprint)
         {
-            var registry = new ConfigurationBasedIssuerNameRegistry();
-            registry.AddTrustedIssuer(issuerThumbprint, "ADFS");
-
             var configuration = new SecurityTokenHandlerConfiguration();
             configuration.AudienceRestriction.AudienceMode = AudienceUriMode.Never;
             configuration.CertificateValidationMode = X509CertificateValidationMode.None;
             configuration.RevocationMode = X509RevocationMode.NoCheck;
             configuration.CertificateValidator = X509CertificateValidator.None;
-            configuration.IssuerNameRegistry = registry;
-            //configuration.IssuerNameRegistry = new TestIssuerNameRegistry();
 
+            if (string.IsNullOrEmpty(issuerThumbprint))
+            {
+                configuration.IssuerNameRegistry = new TestIssuerNameRegistry();
+                Tracing.Information("Signature validation on return SAML token skipped. No issuer thumbprint set.");
+            }
+            else
+            {
+                var registry = new ConfigurationBasedIssuerNameRegistry();
+                registry.AddTrustedIssuer(issuerThumbprint, "ADFS");
+                configuration.IssuerNameRegistry = registry;
+            }
+            
             var handler = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(configuration);
             var identity = handler.ValidateToken(securityToken).First();
             return identity;

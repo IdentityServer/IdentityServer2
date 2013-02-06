@@ -46,9 +46,69 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
                 return ProcessDelegationRequest(request);
             }
 
+            Tracing.Error("Unsupported grant type: " + request.Grant_Type);
             return OAuthErrorResponseMessage(OAuth2Constants.Errors.UnsupportedGrantType);
         }
 
+        #region Authentication
+        private HttpResponseMessage ProcessAuthenticationRequest(TokenRequest request)
+        {
+            if (string.IsNullOrEmpty(request.UserName) ||
+                string.IsNullOrEmpty(request.Password))
+            {
+                Tracing.Error("ADFS integration authentication request with empty username or password");
+                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
+            }
+
+            Tracing.Information("Starting ADFS integration authentication request for scope: " + request.Scope);
+
+            GenericXmlSecurityToken token;
+            try
+            {
+                Tracing.Information("Starting WS-Trust authentication request for user: " + request.UserName);
+
+                token = AdfsBridge.Authenticate(
+                    request.UserName, 
+                    request.Password, 
+                    request.Scope, 
+                    new Uri(ConfigurationRepository.AdfsIntegration.AuthenticationEndpoint));
+            }
+            catch (Exception ex)
+            {
+                Tracing.Error("Error while communicating with ADFS: " + ex.ToString());
+                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
+            }
+
+            var response = CreateAuthenticationTokenResponse(token);
+            Tracing.Information("ADFS integration authentication request successful");
+
+            return response;
+        }
+
+        private HttpResponseMessage CreateAuthenticationTokenResponse(GenericXmlSecurityToken token)
+        {
+            var response = new TokenResponse();
+
+            if (ConfigurationRepository.AdfsIntegration.PassThruAuthenticationToken)
+            {
+                response.AccessToken = token.TokenXml.OuterXml;
+                response.ExpiresIn = (int)(token.ValidTo.Subtract(DateTime.UtcNow).TotalSeconds);
+            }
+            else
+            {
+                response = AdfsBridge.ConvertAuthenticationSamlToJwt(
+                    token.ToSecurityToken(),
+                    ConfigurationRepository.AdfsIntegration.IssuerThumbprint,
+                    ConfigurationRepository.AdfsIntegration.SymmetricSigningKey,
+                    ConfigurationRepository.Global.IssuerUri,
+                    ConfigurationRepository.AdfsIntegration.AuthenticationTokenLifetime);
+            }
+
+            return Request.CreateResponse<TokenResponse>(HttpStatusCode.OK, response);
+        }
+        #endregion
+
+        #region Delegation
         private HttpResponseMessage ProcessDelegationRequest(TokenRequest request)
         {
             if (string.IsNullOrEmpty(request.Assertion))
@@ -79,7 +139,9 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
                 delegationToken = AdfsBridge.Delegate(
                     ConfigurationRepository.AdfsIntegration.DelegationEndpoint,
                     token,
-                    request.Scope);
+                    request.Scope,
+                    "bob",
+                    "abc!123");
             }
             catch (Exception ex)
             {
@@ -90,79 +152,26 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             return CreateDelegationTokenResponse(delegationToken);
         }
 
-        private HttpResponseMessage ProcessAuthenticationRequest(TokenRequest request)
-        {
-            if (string.IsNullOrEmpty(request.UserName) ||
-                string.IsNullOrEmpty(request.Password))
-            {
-                Tracing.Error("ADFS integration authentication request with empty username or password");
-                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
-            }
-
-            Tracing.Information("Starting ADFS integration authentication request for scope: " + request.Scope);
-
-            GenericXmlSecurityToken token;
-            try
-            {
-                Tracing.Information("Starting WS-Trust authentication request for user: " + request.UserName);
-
-                token = AdfsBridge.Authenticate(
-                    request.UserName, 
-                    request.Password, 
-                    request.Scope, 
-                    new Uri(ConfigurationRepository.AdfsIntegration.UserNameEndpoint));
-            }
-            catch (Exception ex)
-            {
-                Tracing.Error("Error while communicating with ADFS: " + ex.ToString());
-                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
-            }
-
-            var response = CreateAuthenticationTokenResponse(token);
-            Tracing.Information("ADFS integration authentication request successful");
-
-            return response;
-        }
-
-        private HttpResponseMessage CreateAuthenticationTokenResponse(GenericXmlSecurityToken token)
-        {
-            var response = new TokenResponse();
-
-            if (ConfigurationRepository.AdfsIntegration.CreateNewToken)
-            {
-                response = AdfsBridge.ConvertAuthenticationSamlToJwt(
-                    token.ToSecurityToken(),
-                    ConfigurationRepository.AdfsIntegration.IssuerSigningThumbprint,
-                    ConfigurationRepository.AdfsIntegration.SymmetricSigningKey,
-                    ConfigurationRepository.Global.IssuerUri);
-            }
-            else
-            {
-                response.AccessToken = token.TokenXml.OuterXml;
-            }
-
-            return Request.CreateResponse<TokenResponse>(HttpStatusCode.OK, response);
-        }
-
         private HttpResponseMessage CreateDelegationTokenResponse(GenericXmlSecurityToken token)
         {
             var response = new TokenResponse();
 
-            if (ConfigurationRepository.AdfsIntegration.CreateNewToken)
+            if (ConfigurationRepository.AdfsIntegration.PassThruDelegationToken)
             {
-                response = AdfsBridge.ConvertAuthenticationSamlToJwt(
-                    token.ToSecurityToken(),
-                    ConfigurationRepository.AdfsIntegration.IssuerSigningThumbprint,
-                    ConfigurationRepository.AdfsIntegration.SymmetricSigningKey,
-                    ConfigurationRepository.Global.IssuerUri);
+                response.AccessToken = token.TokenXml.OuterXml;
             }
             else
             {
-                response.AccessToken = token.TokenXml.OuterXml;
+                response = AdfsBridge.ConvertDelegationSamlToJwt(
+                    token.ToSecurityToken(),
+                    ConfigurationRepository.AdfsIntegration.IssuerThumbprint,
+                    ConfigurationRepository.AdfsIntegration.SymmetricSigningKey,
+                    ConfigurationRepository.Global.IssuerUri);
             }
 
             return Request.CreateResponse<TokenResponse>(HttpStatusCode.OK, response);
         }
+        #endregion
 
         private HttpResponseMessage OAuthErrorResponseMessage(string error)
         {

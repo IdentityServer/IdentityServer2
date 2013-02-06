@@ -10,12 +10,17 @@ namespace Thinktecture.IdentityServer.Repositories.Sql.Configuration
         [Required]
         public bool Enabled { get; set; }
 
-        public bool UserNameEnabled { get; set; }
-        public string UserNameEndpoint { get; set; }
-        public bool CreateNewToken { get; set; }
+        public bool AuthenticationEnabled { get; set; }
+        public string AuthenticationEndpoint { get; set; }
+        public bool PassThruAuthenticationToken { get; set; }
+        public int AuthenticationTokenLifetime { get; set; }
+
         public bool DelegationEnabled { get; set; }
         public string DelegationEndpoint { get; set; }
-        public string IssuerSigningThumbprint { get; set; }
+        public bool PassThruDelegationToken { get; set; }
+        public int DelegationTokenLifetime { get; set; }
+
+        public string IssuerThumbprint { get; set; }
         public string SymmetricSigningKey { get; set; }
     }
 }
