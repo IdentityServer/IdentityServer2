@@ -37,14 +37,16 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
                 return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidScope);
             }
 
-            if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.Password))
+            if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.Password) &&
+                ConfigurationRepository.AdfsIntegration.AuthenticationEnabled)
             {
                 return ProcessAuthenticationRequest(request);
             }
-            else if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.Saml2))
-            {
-                return ProcessDelegationRequest(request);
-            }
+
+            //else if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.Saml2))
+            //{
+            //    return ProcessDelegationRequest(request);
+            //}
 
             Tracing.Error("Unsupported grant type: " + request.Grant_Type);
             return OAuthErrorResponseMessage(OAuth2Constants.Errors.UnsupportedGrantType);
@@ -71,7 +73,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
                     request.UserName, 
                     request.Password, 
                     request.Scope, 
-                    new Uri(ConfigurationRepository.AdfsIntegration.AuthenticationEndpoint));
+                    new Uri(ConfigurationRepository.AdfsIntegration.UserNameAuthenticationEndpoint));
             }
             catch (Exception ex)
             {
@@ -96,7 +98,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             }
             else
             {
-                response = AdfsBridge.ConvertAuthenticationSamlToJwt(
+                response = AdfsBridge.ConvertSamlToJwt(
                     token.ToSecurityToken(),
                     ConfigurationRepository.AdfsIntegration.IssuerThumbprint,
                     ConfigurationRepository.AdfsIntegration.SymmetricSigningKey,
@@ -108,70 +110,72 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
         }
         #endregion
 
-        #region Delegation
-        private HttpResponseMessage ProcessDelegationRequest(TokenRequest request)
-        {
-            if (string.IsNullOrEmpty(request.Assertion))
-            {
-                Tracing.Error("ADFS integration delegation request with empty assertion");
-                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
-            }
+        //#region Delegation
+        //private HttpResponseMessage ProcessDelegationRequest(TokenRequest request)
+        //{
+        //    if (string.IsNullOrEmpty(request.Assertion))
+        //    {
+        //        Tracing.Error("ADFS integration delegation request with empty assertion");
+        //        return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
+        //    }
 
-            Tracing.Information("Starting ADFS integration delegation request for scope: " + request.Scope);
+        //    Tracing.Information("Starting ADFS integration delegation request for scope: " + request.Scope);
 
-            var handlers = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
-            var reader = new XmlTextReader(new StringReader(request.Assertion));
+        //    var handlers = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+        //    var reader = new XmlTextReader(new StringReader(request.Assertion));
 
-            SecurityToken token;
-            if (handlers.CanReadToken(reader))
-            {
-                token = handlers.ReadToken(reader);
-            }
-            else
-            {
-                Tracing.Error("Invalid SAML assertion: " + request.Assertion);
-                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
-            }
+        //    SecurityToken token;
+        //    if (handlers.CanReadToken(reader))
+        //    {
+        //        token = handlers.ReadToken(reader);
+        //    }
+        //    else
+        //    {
+        //        Tracing.Error("Invalid SAML assertion: " + request.Assertion);
+        //        return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
+        //    }
 
-            GenericXmlSecurityToken delegationToken;
-            try
-            {
-                delegationToken = AdfsBridge.Delegate(
-                    ConfigurationRepository.AdfsIntegration.DelegationEndpoint,
-                    token,
-                    request.Scope,
-                    "bob",
-                    "abc!123");
-            }
-            catch (Exception ex)
-            {
-                Tracing.Error("Error while communicating with ADFS: " + ex.ToString());
-                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
-            }
+        //    GenericXmlSecurityToken delegationToken;
+        //    try
+        //    {
+        //        delegationToken = AdfsBridge.Delegate(
+        //            ConfigurationRepository.AdfsIntegration.FederationEndpoint,
+        //            token,
+        //            request.Scope,
+        //            "bob",
+        //            "abc!123");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Tracing.Error("Error while communicating with ADFS: " + ex.ToString());
+        //        return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
+        //    }
 
-            return CreateDelegationTokenResponse(delegationToken);
-        }
+        //    return CreateDelegationTokenResponse(delegationToken);
+        //}
 
-        private HttpResponseMessage CreateDelegationTokenResponse(GenericXmlSecurityToken token)
-        {
-            var response = new TokenResponse();
+        //private HttpResponseMessage CreateDelegationTokenResponse(GenericXmlSecurityToken token)
+        //{
+        //    var response = new TokenResponse();
 
-            if (ConfigurationRepository.AdfsIntegration.PassThruDelegationToken)
-            {
-                response.AccessToken = token.TokenXml.OuterXml;
-            }
-            else
-            {
-                response = AdfsBridge.ConvertDelegationSamlToJwt(
-                    token.ToSecurityToken(),
-                    ConfigurationRepository.AdfsIntegration.IssuerThumbprint,
-                    ConfigurationRepository.AdfsIntegration.SymmetricSigningKey,
-                    ConfigurationRepository.Global.IssuerUri);
-            }
+        //    if (ConfigurationRepository.AdfsIntegration.PassThruFederationToken)
+        //    {
+        //        response.AccessToken = token.TokenXml.OuterXml;
+        //        response.ExpiresIn = (int)(token.ValidTo.Subtract(DateTime.UtcNow).TotalSeconds);
+        //    }
+        //    else
+        //    {
+        //        response = AdfsBridge.ConvertSamlToJwt(
+        //            token.ToSecurityToken(),
+        //            ConfigurationRepository.AdfsIntegration.IssuerThumbprint,
+        //            ConfigurationRepository.AdfsIntegration.SymmetricSigningKey,
+        //            ConfigurationRepository.Global.IssuerUri,
+        //            ConfigurationRepository.AdfsIntegration.FederationTokenLifetime);
+        //    }
 
-            return Request.CreateResponse<TokenResponse>(HttpStatusCode.OK, response);
-        }
-        #endregion
+        //    return Request.CreateResponse<TokenResponse>(HttpStatusCode.OK, response);
+        //}
+        //#endregion
 
         private HttpResponseMessage OAuthErrorResponseMessage(string error)
         {

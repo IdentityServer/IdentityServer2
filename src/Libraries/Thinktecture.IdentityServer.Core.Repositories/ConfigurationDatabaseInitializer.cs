@@ -31,6 +31,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                         context.WSTrust.Add(CreateTestWSTrustConfiguration());
                         context.FederationMetadata.Add(CreateTestFederationMetadataConfiguration());
                         context.OAuth2.Add(CreateTestOAuth2Configuration());
+                        context.AdfsIntegration.Add(CreateTestAdfsIntegrationConfiguration());
                         context.SimpleHttp.Add(CreateTestSimpleHttpConfiguration());
                         context.Diagnostics.Add(CreateTestDiagnosticsConfiguration());
 
@@ -52,6 +53,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             context.WSTrust.Add(CreateDefaultWSTrustConfiguration());
             context.FederationMetadata.Add(CreateDefaultFederationMetadataConfiguration());
             context.OAuth2.Add(CreateDefaultOAuth2Configuration());
+            context.AdfsIntegration.Add(CreateDefaultAdfsIntegrationConfiguration());
             context.SimpleHttp.Add(CreateDefaultSimpleHttpConfiguration());
             context.Diagnostics.Add(CreateDefaultDiagnosticsConfiguration());
         }
@@ -120,6 +122,18 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 EnableImplicitFlow = false,
                 EnableResourceOwnerFlow = false,
                 EnableConsent = true
+            };
+        }
+
+        private static AdfsIntegrationConfiguration CreateDefaultAdfsIntegrationConfiguration()
+        {
+            return new AdfsIntegrationConfiguration
+            {
+                Enabled = false,
+                AuthenticationEnabled = true,
+                AuthenticationTokenLifetime = 60,
+                PassThruAuthenticationToken = true,
+                UserNameAuthenticationEndpoint = "https://server/adfs/services/trust/13/usernamemixed"
             };
         }
 
@@ -207,6 +221,20 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 EnableResourceOwnerFlow = true,
                 EnableCodeFlow = true,
                 EnableConsent = true
+            };
+        }
+
+        private static AdfsIntegrationConfiguration CreateTestAdfsIntegrationConfiguration()
+        {
+            return new AdfsIntegrationConfiguration
+            {
+                Enabled = true,
+                AuthenticationEnabled = true,
+                AuthenticationTokenLifetime = 60,
+                PassThruAuthenticationToken = false,
+                UserNameAuthenticationEndpoint = "https://adfs.leastprivilege.vm/adfs/services/trust/13/usernamemixed",
+                SymmetricSigningKey = "",
+                IssuerThumbprint = ""
             };
         }
 

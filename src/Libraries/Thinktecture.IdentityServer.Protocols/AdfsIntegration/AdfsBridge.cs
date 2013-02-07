@@ -63,7 +63,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
                 out rstr) as GenericXmlSecurityToken;
         }
 
-        public static TokenResponse ConvertAuthenticationSamlToJwt(SecurityToken securityToken, string issuerThumbprint, string signingKey, string issuerUri, int ttl)
+        public static TokenResponse ConvertSamlToJwt(SecurityToken securityToken, string issuerThumbprint, string signingKey, string issuerUri, int ttl)
         {
             var identity = AdfsBridge.ValidateSamlToken(
                 securityToken,
@@ -84,28 +84,6 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             {
                 AccessToken = jwtHandler.WriteToken(jwt),
                 ExpiresIn = ttl
-            };
-        }
-
-        public static TokenResponse ConvertDelegationSamlToJwt(SecurityToken securityToken, string issuerThumbprint, string signingKey, string issuerUri)
-        {
-            var identity = AdfsBridge.ValidateSamlToken(
-                securityToken,
-                issuerThumbprint);
-
-            var descriptor = new SecurityTokenDescriptor
-            {
-                Subject = identity,
-                SigningCredentials = new HmacSigningCredentials(signingKey),
-                TokenIssuerName = issuerUri
-            };
-
-            var jwtHandler = new JsonWebTokenHandler();
-            var jwt = jwtHandler.CreateToken(descriptor);
-
-            return new TokenResponse
-            {
-                AccessToken = jwtHandler.WriteToken(jwt)
             };
         }
 

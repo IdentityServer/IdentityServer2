@@ -5,18 +5,16 @@
 
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Thinktecture.IdentityServer.Models.Configuration
 {
     public class AdfsIntegrationConfiguration : ProtocolConfiguration
     {
-        // OAuth2 to ADFS bridge - authentication
+        // general settings - authentication
 
         [Display(Name = "Enable username/password authentication", Description = "Enables the OAuth2 to ADFS authentication bridge")]      
         public bool AuthenticationEnabled { get; set; }
-
-        [Display(Name = "ADFS UserName Endpoint", Description = "Address of the UserNameMixed WS-Trust endpoint on ADFS for user authentication")]
-        public string AuthenticationEndpoint { get; set; }
 
         [Display(Name = "Pass-through authentication token", Description = "If enabled, the original token from ADFS will be passed back")]
         public bool PassThruAuthenticationToken { get; set; }
@@ -25,27 +23,39 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         public int AuthenticationTokenLifetime { get; set; }
 
         
-        // OAuth2 to ADFS bridge - delegation
+        // general settings - federation
 
         [Display(Name = "Enable delegation", Description = "Enables the OAuth2 to ADFS delegation bridge")]
-        public bool DelegationEnabled { get; set; }
-
-        [Display(Name = "ADFS Delegation Endpoint", Description = "Address of the WindowsMixed WS-Trust endpoint on ADFS for delegation")]
-        public string DelegationEndpoint { get; set; }
+        public bool FederationEnabled { get; set; }
 
         [Display(Name = "Pass-through delegation token", Description = "If enabled, the original token from ADFS will be passed back")]
-        public bool PassThruDelegationToken { get; set; }
+        public bool PassThruFederationToken { get; set; }
 
         [Display(Name = "Lifetime of the delegation token", Description = "Specifies the lifetime of the delegation token (in minutes)")]
-        public int DelegationTokenLifetime { get; set; }
+        public int FederationTokenLifetime { get; set; }
 
 
-        // Shared config options
-
-        [Display(Name = "ADFS Signing Certificate Thumbprint", Description = "Thumbprint of the ADFS signing certificate. Only needed when creating new tokens")]
-        public string IssuerThumbprint { get; set; }
+        // general settings
 
         [Display(Name = "Symmetric signing key", Description = "The symmetric singing key for the newly created token, empty if you want to use the default signing key")]
-        public string SymmetricSigningKey { get; set; }
+        public string SymmetricSigningKey { get; set; }        
+
+
+        // adfs settings
+
+        [Display(Name = "ADFS UserName Endpoint", Description = "Address of the ADFS UserNameMixed endoint.")]
+        public string UserNameAuthenticationEndpoint { get; set; }
+
+        [Display(Name = "ADFS Delegation Endpoint", Description = "Address of the ADFS federation endpoint (mixed/symmetric/basic256).")]
+        public string FederationEndpoint { get; set; }
+
+        [Display(Name = "ADFS Signing Certificate Thumbprint", Description = "Thumbprint of the ADFS signing certificate.")]
+        public string IssuerThumbprint { get; set; }
+
+        [Display(Name = "ADFS Issuer URI", Description = "ADFS Issuer URI")]
+        public string IssuerUri { get; set; }
+
+        [Display(Name = "ADFS Encryption certificate", Description = "ADFS Issuer URI")]
+        public X509Certificate2 EncryptionCertificate { get; set; }
     }
 }

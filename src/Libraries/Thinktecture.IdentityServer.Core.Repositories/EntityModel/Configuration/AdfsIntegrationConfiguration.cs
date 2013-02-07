@@ -10,17 +10,31 @@ namespace Thinktecture.IdentityServer.Repositories.Sql.Configuration
         [Required]
         public bool Enabled { get; set; }
 
+
+        // general settings - authentication
+
         public bool AuthenticationEnabled { get; set; }
-        public string AuthenticationEndpoint { get; set; }
         public bool PassThruAuthenticationToken { get; set; }
         public int AuthenticationTokenLifetime { get; set; }
 
-        public bool DelegationEnabled { get; set; }
-        public string DelegationEndpoint { get; set; }
-        public bool PassThruDelegationToken { get; set; }
-        public int DelegationTokenLifetime { get; set; }
+        // general settings - federation
 
+        //public bool FederationEnabled { get; set; }
+        //public bool PassThruFederationToken { get; set; }
+        //public int FederationTokenLifetime { get; set; }
+
+
+        // general settings
+
+        public string SymmetricSigningKey { get; set; }        
+
+
+        // adfs settings
+
+        public string UserNameAuthenticationEndpoint { get; set; }
+        //public string FederationEndpoint { get; set; }
         public string IssuerThumbprint { get; set; }
-        public string SymmetricSigningKey { get; set; }
+        //public string IssuerUri { get; set; }
+        //public X509Certificate2 EncryptionCertificate { get; set; }
     }
 }

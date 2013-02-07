@@ -237,13 +237,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 IssuerThumbprint = entity.IssuerThumbprint,
                 SymmetricSigningKey = entity.SymmetricSigningKey,
                 AuthenticationEnabled = entity.AuthenticationEnabled,
-                AuthenticationEndpoint = entity.AuthenticationEndpoint,
-                AuthenticationTokenLifetime = entity.AuthenticationTokenLifetime,
-                
-                DelegationEnabled = entity.DelegationEnabled,
-                DelegationEndpoint = entity.DelegationEndpoint,
-                DelegationTokenLifetime = entity.DelegationTokenLifetime,
-                PassThruDelegationToken = entity.PassThruDelegationToken
+                UserNameAuthenticationEndpoint = entity.UserNameAuthenticationEndpoint,
+                AuthenticationTokenLifetime = entity.AuthenticationTokenLifetime,    
             };
         }
 
@@ -256,13 +251,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 IssuerThumbprint = model.IssuerThumbprint,
                 SymmetricSigningKey = model.SymmetricSigningKey,
                 AuthenticationEnabled = model.AuthenticationEnabled,
-                AuthenticationEndpoint = model.AuthenticationEndpoint,
+                UserNameAuthenticationEndpoint = model.UserNameAuthenticationEndpoint,
                 AuthenticationTokenLifetime = model.AuthenticationTokenLifetime,
-
-                DelegationEnabled = model.DelegationEnabled,
-                DelegationEndpoint = model.DelegationEndpoint,
-                DelegationTokenLifetime = model.DelegationTokenLifetime,
-                PassThruDelegationToken = model.PassThruDelegationToken
             };
         }
         #endregion
