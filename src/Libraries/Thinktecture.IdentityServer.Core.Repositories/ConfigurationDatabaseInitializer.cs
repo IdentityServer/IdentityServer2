@@ -233,8 +233,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 AuthenticationTokenLifetime = 60,
                 PassThruAuthenticationToken = false,
                 UserNameAuthenticationEndpoint = "https://adfs.leastprivilege.vm/adfs/services/trust/13/usernamemixed",
-                SymmetricSigningKey = "",
-                IssuerThumbprint = ""
+                SymmetricSigningKey = "YLjuDzcQZGnAMrnUlyxaSLTW9VX3mNvCa2cw6esDqII=",
+                IssuerThumbprint = "cad5731ae474b932631e57feb72d810aea6f0220"
             };
         }
 

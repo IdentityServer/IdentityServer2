@@ -31,7 +31,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 
         public static GenericXmlSecurityToken Delegate(string adfsEndpoint, SecurityToken token, string appliesTo)
         {
-            return Delegate(adfsEndpoint, appliesTo, token, new ClientCredentials(), new WindowsWSTrustBinding(SecurityMode.TransportWithMessageCredential));    
+            return Delegate(adfsEndpoint, appliesTo, token, new ClientCredentials(), new WindowsWSTrustBinding(SecurityMode.TransportWithMessageCredential));
         }
 
         public static GenericXmlSecurityToken Delegate(string adfsEndpoint, SecurityToken token, string appliesTo, string serviceAccountName, string serviceAccountPassword)
@@ -40,7 +40,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             credentials.UserName.UserName = serviceAccountName;
             credentials.UserName.Password = serviceAccountPassword;
 
-            return Delegate(adfsEndpoint, appliesTo, token, credentials, new UserNameWSTrustBinding(SecurityMode.TransportWithMessageCredential));   
+            return Delegate(adfsEndpoint, appliesTo, token, credentials, new UserNameWSTrustBinding(SecurityMode.TransportWithMessageCredential));
         }
 
         public static GenericXmlSecurityToken Delegate(string adfsEndpoint, string appliesTo, SecurityToken token, ClientCredentials credentials, Binding binding)
@@ -95,18 +95,10 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             configuration.RevocationMode = X509RevocationMode.NoCheck;
             configuration.CertificateValidator = X509CertificateValidator.None;
 
-            if (string.IsNullOrEmpty(issuerThumbprint))
-            {
-                configuration.IssuerNameRegistry = new TestIssuerNameRegistry();
-                Tracing.Information("Signature validation on return SAML token skipped. No issuer thumbprint set.");
-            }
-            else
-            {
-                var registry = new ConfigurationBasedIssuerNameRegistry();
-                registry.AddTrustedIssuer(issuerThumbprint, "ADFS");
-                configuration.IssuerNameRegistry = registry;
-            }
-            
+            var registry = new ConfigurationBasedIssuerNameRegistry();
+            registry.AddTrustedIssuer(issuerThumbprint, "ADFS");
+            configuration.IssuerNameRegistry = registry;
+
             var handler = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(configuration);
             var identity = handler.ValidateToken(securityToken).First();
             return identity;
