@@ -1,0 +1,705 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project>
+  <configuration createBackupFiles="False" hideEmptyRows="False" hideTranslatedRows="False" useSpellChecker="True" neutralLanguageCode="en-us" languagesToDisplay="">
+    <globalSetting name="ReadOnlyFileOverwriteBehaviour">0</globalSetting>
+    <globalSetting name="OmitEmptyItems">True</globalSetting>
+    <globalSetting name="ShowCommentsColumnInGrid">False</globalSetting>
+    <globalSetting name="IgnoreWindowsFormsResourcesWithDesignerFiles">False</globalSetting>
+    <globalSetting name="HideInternalDesignerRows">True</globalSetting>
+    <globalSetting name="UseShallowGridDataCumulation">True</globalSetting>
+    <globalSetting name="HideFileGroupFilesInTree">True</globalSetting>
+    <globalSetting name="NeutralLanguageFileNamePattern">[basename].[extension]</globalSetting>
+    <globalSetting name="NonNeutralLanguageFileNamePattern">[basename].[languagecode].[extension]</globalSetting>
+    <globalSetting name="BaseNameDotCount">0</globalSetting>
+    <globalSetting name="DefaultFileTypesToIgnore">.aspx;.ascx;.asmx;.master;.sitemap;.cshtml</globalSetting>
+    <globalSetting name="Project-PersistGridSettings">True</globalSetting>
+    <globalSetting name="ColorifyNullCells">True</globalSetting>
+    <globalSetting name="EnableExcelExportSnapshots">True</globalSetting>
+    <globalSetting name="Filter-ResourceEditorGrid">&lt;XtraSerializer version="1.0" application="View"&gt;
+  &lt;property name="#LayoutVersion" /&gt;
+  &lt;property name="ActiveFilterString" /&gt;
+&lt;/XtraSerializer&gt;</globalSetting>
+    <globalSetting name="Sort-ResourceEditorGrid">&lt;XtraSerializer version="1.0" application="View"&gt;
+  &lt;property name="#LayoutVersion" /&gt;
+&lt;/XtraSerializer&gt;</globalSetting>
+    <globalSetting name="projectMruItems">&lt;?xml version='1.0' encoding='utf-8'?&gt;&lt;items&gt;&lt;item type="2" checksum="2514029161" /&gt;&lt;/items&gt;</globalSetting>
+    <userSetting name="allards@MEDIAINCBCSRCCA.filesInitialDir">C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources</userSetting>
+    <userSetting name="allards@MEDIAINCBCSRCCA.FindText">
+    </userSetting>
+    <userSetting name="allards@MEDIAINCBCSRCCA.RecentFiles">C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Account\SignIn.Mobile.cshtml.resx;C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Account\SignIn.Mobile.cshtml.fr.resx</userSetting>
+    <description>
+    </description>
+  </configuration>
+  <fileGroups>
+    <fileGroup name="" projectFolderUniqueID="09759e19-e667-49a8-8977-9e6d2b2b6d89" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="0af26a34-31bc-45ad-9dc4-d8be309877f5">
+      <file filePath="src\Libraries\Thinktecture.IdentityServer.Core.Repositories\Migrations.SqlServer\201301011810411_InitialMigration.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\Libraries\Thinktecture.IdentityServer.Core.Repositories\Migrations.SqlServer\201301011810411_InitialMigration.resx" uniqueID="2d2d0809-7113-430f-b651-e1e40e336cbe" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="09759e19-e667-49a8-8977-9e6d2b2b6d89" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="89f9cc24-faa1-465f-bd1e-e8c874aaff02">
+      <file filePath="src\Libraries\Thinktecture.IdentityServer.Core.Repositories\Migrations.SqlCe\201301011818314_InitialMigration.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\Libraries\Thinktecture.IdentityServer.Core.Repositories\Migrations.SqlCe\201301011818314_InitialMigration.resx" uniqueID="7fd62dc3-4e93-48d6-9900-ecfeb5e1ea89" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="09759e19-e667-49a8-8977-9e6d2b2b6d89" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="987adcdc-8fd8-46d9-8db5-24dc1545db17">
+      <file filePath="src\Libraries\Thinktecture.IdentityServer.Core.Repositories\Migrations.SqlServer\201302041414549_RefreshToken.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\Libraries\Thinktecture.IdentityServer.Core.Repositories\Migrations.SqlServer\201302041414549_RefreshToken.resx" uniqueID="75efc755-ed96-471d-a78c-4cca5b25e311" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="09759e19-e667-49a8-8977-9e6d2b2b6d89" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="7598408e-935e-4bb5-856d-03c3be74a799">
+      <file filePath="src\Libraries\Thinktecture.IdentityServer.Core.Repositories\Migrations.SqlCe\201302041416106_RefreshToken.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\Libraries\Thinktecture.IdentityServer.Core.Repositories\Migrations.SqlCe\201302041416106_RefreshToken.resx" uniqueID="fb7730ee-debe-41cf-a6f9-d415d7c47a02" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="e1ad3ad4-b586-407e-8f56-50ca227c7891">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Home\AppIntegration.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Home\AppIntegration.cshtml.resx" uniqueID="40ea8ea5-958a-456e-a3c0-ef22506000d0" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Home\AppIntegration.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Home\AppIntegration.cshtml.fr.resx" uniqueID="d3e776e3-6d5b-48fa-b9bf-24a669a0a2d9" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="412210d9-0c6a-4575-a561-fb09532684fa">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\_ViewStart.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\_ViewStart.cshtml.resx" uniqueID="e09023a4-f583-43f9-b60d-e859fac32701" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\_ViewStart.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\_ViewStart.cshtml.fr.resx" uniqueID="94702144-e12e-42fc-8554-c3925815ebf7" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="30aa93bc-f175-46f7-acfc-c48441f1d6ef">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\_ViewStart.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\_ViewStart.cshtml.resx" uniqueID="feb9d1ea-2acf-40bf-ad68-d31652b20f91" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\_ViewStart.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\_ViewStart.cshtml.fr.resx" uniqueID="dd1dd79f-c1f5-4163-8497-586af5a75a35" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="9dcc9a4d-bbda-4a6b-8260-4d891e0139b9">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Byte[].cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Byte[].cshtml.resx" uniqueID="10319886-4d25-4dbe-bc30-ee7be4a8bcc6" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Byte[].cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Byte[].cshtml.fr.resx" uniqueID="bf5d341d-72e2-4f5e-aea5-0f73404b3927" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="bf1b2582-f7da-48a8-9f10-a4e9a5b9a14a">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\ChildMenu.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\ChildMenu.cshtml.resx" uniqueID="d053e186-eb14-4193-b005-ebc7fdf28c1d" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\ChildMenu.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\ChildMenu.cshtml.fr.resx" uniqueID="b7485388-f58f-4cfa-877f-17270fa5c7c1" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="cf05b1e7-27e6-43ef-b68f-7df0c147e38f">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\ClientCertificate\Configure.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\ClientCertificate\Configure.cshtml.resx" uniqueID="4b139590-fc4b-4450-b80f-21a435b2d19a" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\ClientCertificate\Configure.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\ClientCertificate\Configure.cshtml.fr.resx" uniqueID="f47653ba-2368-4813-8e84-6b7949cd1f10" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="9354b934-6f95-4d36-8640-839e3d615b7d">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Delegation\Configure.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Delegation\Configure.cshtml.resx" uniqueID="699e8b0c-e044-47ab-a18c-c606f1380801" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Delegation\Configure.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Delegation\Configure.cshtml.fr.resx" uniqueID="52c78ad9-412f-4ac3-9f59-838bf25577f4" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="f467d717-79ee-44a7-9789-09a4a78da612">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\Confirm.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\Confirm.cshtml.resx" uniqueID="f0a6d2c9-1a90-4c0d-80c5-1c1f2061ef4c" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\Confirm.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\Confirm.cshtml.fr.resx" uniqueID="aea64228-cc09-4625-92d3-354a50464e77" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="80e4c05f-c14a-4e10-93fe-8457237f641d">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Role\Create.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Role\Create.cshtml.resx" uniqueID="cc7d63a2-2728-44c8-b5b9-9441cf9dbce9" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Role\Create.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Role\Create.cshtml.fr.resx" uniqueID="4c7530a2-db8a-448f-8e9f-c5727c86979a" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="bd8fbf53-bdfe-4783-9807-d799600f14f1">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Create.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Create.cshtml.resx" uniqueID="72f5f2e6-a3f9-4cb5-83e2-2aaf3074fa24" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Create.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Create.cshtml.fr.resx" uniqueID="5db91117-d81c-4bf3-bd35-a4f39eb5224d" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="20e6c804-ec60-4e43-8068-302a393414f4">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\OAuthClient\Edit.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\OAuthClient\Edit.cshtml.resx" uniqueID="73d94a9b-8f3d-4b7e-8b08-fe77859f3ea0" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\OAuthClient\Edit.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\OAuthClient\Edit.cshtml.fr.resx" uniqueID="6dd7e86c-e93a-490b-90e3-37eb972e1343" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="989a65cc-e2f7-4cc7-a241-855bc5512089">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Enum.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Enum.cshtml.resx" uniqueID="c3a5118c-5cac-47cd-baae-1a434082f1b9" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Enum.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Enum.cshtml.fr.resx" uniqueID="bc712708-8dbf-40bf-8469-8e87ea9a542c" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="7f8c187e-244f-46ce-8185-2f0ba0cfd23b">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\Error.Mobile.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\Error.Mobile.cshtml.resx" uniqueID="d6f168fd-4127-4eff-a0e6-63d34d39421f" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\Error.Mobile.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\Error.Mobile.cshtml.fr.resx" uniqueID="c2166476-8069-4651-8ce0-516c5878fcc6" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="af76a1f0-8ac0-4a63-ac9a-9e2c4d60f144">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\Error.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\Error.cshtml.resx" uniqueID="23b79458-b76a-4bee-a8c0-7a73edfe0c46" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\Error.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\Error.cshtml.fr.resx" uniqueID="1c915201-2e92-4504-b170-a4c49eebbe75" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="61a6d085-d922-48e4-a70f-ec1f218058c3">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\Error.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\Error.cshtml.resx" uniqueID="6cd4566b-6b2c-45b5-ace1-c854533d1ab3" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\Error.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\Error.cshtml.fr.resx" uniqueID="ff26278b-1cf7-4fe3-a3c7-a3bcab4fee5a" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="2b5e3082-4d05-4cee-99aa-7a2d07def7f4">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\HRD\HRD.Mobile.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\HRD\HRD.Mobile.cshtml.resx" uniqueID="f2d220ef-6ecd-4309-bb3c-9188d6799569" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\HRD\HRD.Mobile.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\HRD\HRD.Mobile.cshtml.fr.resx" uniqueID="66cf0e1d-cb6b-43bf-82be-3ba7605cb105" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="db0e726a-9f30-4516-ad53-a7079fc55403">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\HRD\HRD.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\HRD\HRD.cshtml.resx" uniqueID="66a775ca-a3bd-4485-b0d2-87f442d75dfd" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\HRD\HRD.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\HRD\HRD.cshtml.fr.resx" uniqueID="bd5e9c59-d9a2-4aa6-9819-c1a7b97dd2f8" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="b72fed0b-6d87-4734-92ca-51fa7a7fe95d">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\IP\IP.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\IP\IP.cshtml.resx" uniqueID="5781dcf8-b431-4af9-b532-e335ae8b46fb" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\IP\IP.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\IP\IP.cshtml.fr.resx" uniqueID="3a6f8237-3580-4c24-87c8-9fe333d400ef" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="88e5149f-f31a-4fa9-b9e3-35379e55a965">
+      <file filePath="samples\InMemoryHost\InMemoryHost\Properties\Resources.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\samples\InMemoryHost\InMemoryHost\Properties\Resources.resx" uniqueID="5f6adf05-9b5d-462f-9deb-f34953522c24" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="b6c97fc8-137a-498b-a6dc-785a36eb8b1e">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\IP\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\IP\Index.cshtml.resx" uniqueID="ad116a5a-9473-4a1b-835a-826e0ed7a95c" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\IP\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\IP\Index.cshtml.fr.resx" uniqueID="25c13088-990c-45fc-94f6-ea8ade4e758d" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="f42764cc-3f45-4d9e-aa54-842e2a2af4e9">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\InitialConfiguration\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\InitialConfiguration\Index.cshtml.resx" uniqueID="944a72e1-2e55-4807-a870-0fed64ef635a" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\InitialConfiguration\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\InitialConfiguration\Index.cshtml.fr.resx" uniqueID="a9f17cd0-3264-4f1f-83a0-7fd0dcb189e7" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="8702a40a-d882-4ee0-a339-ad6665a11f49">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\General\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\General\Index.cshtml.resx" uniqueID="58fd2a66-512d-46db-92af-cdbeacd88a05" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\General\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\General\Index.cshtml.fr.resx" uniqueID="44c39d8c-044e-4983-814b-0ea0d249f33c" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="210909b8-f030-4784-bdc1-a41bfc12dbbc">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Role\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Role\Index.cshtml.resx" uniqueID="07f9843c-3cbd-4c3d-ae3f-07da5e55f1b3" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Role\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Role\Index.cshtml.fr.resx" uniqueID="704166cb-57d4-40d8-8fc7-b3ddf2015143" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="d002c28f-c7cb-4820-ad0e-5c2317a58782">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\OAuthClient\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\OAuthClient\Index.cshtml.resx" uniqueID="781dabc2-900c-4216-9e56-5dc9fd8285d6" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\OAuthClient\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\OAuthClient\Index.cshtml.fr.resx" uniqueID="e66ed636-1ebc-4c6a-99e5-cf446a8d9923" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="13c7260a-d47d-4b1b-876f-6b165cb75e04">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\RP\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\RP\Index.cshtml.resx" uniqueID="e602d41a-4cdc-42fd-b55e-f6012574afe0" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\RP\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\RP\Index.cshtml.fr.resx" uniqueID="1b5cfc3e-fe29-4cac-90ec-0cbcc42b5a7c" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="24d3d39a-9af9-4773-9752-d49eada0b1a6">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\KeyConfiguration\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\KeyConfiguration\Index.cshtml.resx" uniqueID="3385b53d-f64c-4308-a97c-50e288c85152" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\KeyConfiguration\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\KeyConfiguration\Index.cshtml.fr.resx" uniqueID="70d8d1b1-ac4e-4810-877c-a43288d7f8d8" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="5386268e-e596-4a67-8418-5103ad8f442e">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Menu\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Menu\Index.cshtml.resx" uniqueID="cd197698-8c83-48e8-8f8d-97dc87197535" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Menu\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Menu\Index.cshtml.fr.resx" uniqueID="d2a5574a-f3fb-4639-89ea-ebe192b50f75" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="c621d737-bf7a-42c4-9cef-45667710a59f">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\ClientCertificate\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\ClientCertificate\Index.cshtml.resx" uniqueID="28dbc8cc-774a-435c-894c-f451757d1802" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\ClientCertificate\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\ClientCertificate\Index.cshtml.fr.resx" uniqueID="5145cd5d-f8f9-416f-8cbe-b09773c26a16" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="cc9bcb98-4396-471b-82d5-03e029606299">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Index.cshtml.resx" uniqueID="bd9eeb8c-f51a-47e5-9279-2c5d067bdda6" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Index.cshtml.fr.resx" uniqueID="440e86fa-1300-43ab-8601-9435619b52fb" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="4d3aff42-2662-43ea-97a3-c591f6ef85f3">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Protocol\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Protocol\Index.cshtml.resx" uniqueID="ac974bdd-716c-4799-b18b-d9a4ab440f89" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Protocol\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Protocol\Index.cshtml.fr.resx" uniqueID="64cdaa95-c0f7-44f4-a0bf-60c323086a06" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="85cd9d16-658e-4344-932f-b54c7846a4a8">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Delegation\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Delegation\Index.cshtml.resx" uniqueID="8bab35ee-34ee-406d-8141-018033c4400d" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Delegation\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Delegation\Index.cshtml.fr.resx" uniqueID="8a7a5a2e-3fc4-4895-8e04-17a8208a248b" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="fc3ce5f3-641a-49be-8083-92459c45e5f9">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Diagnostics\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Diagnostics\Index.cshtml.resx" uniqueID="0e585f11-029a-4263-9a2b-46a510e76aff" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Diagnostics\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Diagnostics\Index.cshtml.fr.resx" uniqueID="df76d863-163c-4a5e-8da9-9de987a9c26c" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="f75570fb-094e-4b96-9802-82d8de3e80f4">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Home\Index.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Home\Index.cshtml.resx" uniqueID="d621a149-e273-4a7e-ab47-2a10e786812d" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Home\Index.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Home\Index.cshtml.fr.resx" uniqueID="f0b3d17f-bccc-434c-b62e-f23f07580da7" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="0d9eecc7-371c-44cf-abb4-481b4b6be0bb">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Menu\LoadChildMenu.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Menu\LoadChildMenu.cshtml.resx" uniqueID="acafa249-ac8d-45b7-b012-74655b8d8e83" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Menu\LoadChildMenu.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Menu\LoadChildMenu.cshtml.fr.resx" uniqueID="8840468b-74c2-465e-b940-45fe4ba67cf9" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="435d9cec-e19d-4d9b-96a0-bc66556169d6">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Object.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Object.cshtml.resx" uniqueID="684ec0f7-af2f-4360-a394-86437f8a42b2" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Object.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Object.cshtml.fr.resx" uniqueID="0284c913-eb9e-4336-9654-2ccf0d1854ce" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="ead92c55-0abb-4334-adcb-c34698e1c335">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Profile.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Profile.cshtml.resx" uniqueID="7a9aa019-65f1-4f26-94eb-3ecc71b03159" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Profile.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Profile.cshtml.fr.resx" uniqueID="944c2b3c-df2f-4746-98a2-46f4e4969525" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="98d26add-39a0-41e2-9aca-826c2e7c5420">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Protocol\Protocol.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Protocol\Protocol.cshtml.resx" uniqueID="b597451d-b594-4270-bc5b-3cffe78782a9" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Protocol\Protocol.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Protocol\Protocol.cshtml.fr.resx" uniqueID="7047d518-2016-4e77-9370-8631577670df" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="4ce2bd74-039e-4f6b-81eb-2bde3f875fb2">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\RP\RP.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\RP\RP.cshtml.resx" uniqueID="846d9396-7096-4c50-95d0-1f471e81f6b7" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\RP\RP.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\RP\RP.cshtml.fr.resx" uniqueID="cd984761-cc3d-4050-87cd-5be20f869a8d" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="82902575-e21d-42d5-99d5-fbf604b7f4ae">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\General\Recycle.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\General\Recycle.cshtml.resx" uniqueID="f5aae420-fdcb-4df8-a58f-e0dad68ce06f" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\General\Recycle.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\General\Recycle.cshtml.fr.resx" uniqueID="e88f3e32-d8c3-4b24-9af4-3d4407b77519" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="adb8fc5d-a64f-44e4-96dc-3dad3d59d2cb">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Roles.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Roles.cshtml.resx" uniqueID="5b2f6fa6-b720-4870-9f3a-4d5c1c7645cf" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Roles.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\User\Roles.cshtml.fr.resx" uniqueID="ef4ddbe2-6c77-4ec4-8030-678f48bb50cc" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="3b43f91e-870f-4354-ac3a-37035b2cdb0b">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\ShowConsent.Mobile.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\ShowConsent.Mobile.cshtml.resx" uniqueID="22c92aeb-c8fa-4825-ae7c-910e1df7a789" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\ShowConsent.Mobile.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\ShowConsent.Mobile.cshtml.fr.resx" uniqueID="7c3a077e-8a99-4caf-ab42-df01ba83febc" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="b35bdea7-0d02-4715-a1c6-76b121af642e">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\ShowConsent.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\ShowConsent.cshtml.resx" uniqueID="17b6c3de-7770-448e-9a00-7d9c236d3668" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\ShowConsent.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\OAuth2Authorize\ShowConsent.cshtml.fr.resx" uniqueID="2df0e168-7171-4348-8d19-a1190224ff50" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="96317ffd-0559-445a-93e9-b2b2f48e59fe">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Account\SignIn.Mobile.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Account\SignIn.Mobile.cshtml.resx" uniqueID="c5e44ab5-cb30-4a82-8198-944c6cfc9cc0" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Account\SignIn.Mobile.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Account\SignIn.Mobile.cshtml.fr.resx" uniqueID="1ace5f8b-5fc5-4d12-987a-1658a0cd6e60" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="d57699f1-462d-4c47-af4f-caf35ad1e1eb">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Account\SignIn.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Account\SignIn.cshtml.resx" uniqueID="11fd9d23-3361-4050-8546-12ecb1bbf1c7" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Account\SignIn.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Account\SignIn.cshtml.fr.resx" uniqueID="25a966dc-0dfc-450d-a637-46aad219e7e0" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="72b4188c-df82-41e0-b278-106b006ea921">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\SignOut.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\SignOut.cshtml.resx" uniqueID="5faab443-3df9-475f-a58d-f4658a2ede7e" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\SignOut.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\SignOut.cshtml.fr.resx" uniqueID="eac1f5a0-eccc-413d-be41-30f4752d82f5" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="cf86d7f8-88b3-42d8-a816-1eed2c4f01cf">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\SignedOut.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\SignedOut.cshtml.resx" uniqueID="ff36350f-3efa-4554-893f-7a8446ceb87f" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\SignedOut.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\SignedOut.cshtml.fr.resx" uniqueID="e5e3f3ce-68d9-41d3-8125-dc8a5c463151" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="3c19c471-4fa0-484a-941e-5e885eb6151c">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\SymmetricKey.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\SymmetricKey.cshtml.resx" uniqueID="1062b97f-4b1e-47e1-9342-58276b44b2ef" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\SymmetricKey.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\SymmetricKey.cshtml.fr.resx" uniqueID="9c663ec0-abac-4f2e-8030-22e731a89658" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="b7bbcab5-3b9f-4f54-8650-51265c437f7b">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Thumbprint.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Thumbprint.cshtml.resx" uniqueID="2fd8c4ee-e0d8-43bd-bf79-c2a18632a8e1" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Thumbprint.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\Thumbprint.cshtml.fr.resx" uniqueID="3eb5ff38-0817-4b6e-b25b-0263685b7559" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="5c398f40-b5a6-4ed2-806d-7b79a80f64a4">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\X509Certificate2.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\X509Certificate2.cshtml.resx" uniqueID="25ea1fe4-46f5-4971-894a-92e442c45bde" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\X509Certificate2.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\EditorTemplates\X509Certificate2.cshtml.fr.resx" uniqueID="db059251-0046-4ffd-83cb-38b954ce99bf" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="fb977f87-20e6-4e4c-b560-0826168f9e97">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\_Banner.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\_Banner.cshtml.resx" uniqueID="93c5787b-8ea6-4982-8209-4ba039ec4569" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\_Banner.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\_Banner.cshtml.fr.resx" uniqueID="aaed42b4-db45-475e-b7a7-8d5a4cdd1f43" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="7521bc2e-ec4b-431b-b0ee-02ae327a2c73">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\_Layout.Mobile.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\_Layout.Mobile.cshtml.resx" uniqueID="8a7bd072-f9a9-4c31-b7ac-21182d7ee280" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\_Layout.Mobile.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\_Layout.Mobile.cshtml.fr.resx" uniqueID="7aa37b13-ddcf-4418-b7e9-9b527faaa053" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="695b7a08-cbc0-43f1-97a0-898a6426cbd8">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\_Layout.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\_Layout.cshtml.resx" uniqueID="8aaf03e2-54b9-46ef-b7ef-84670418f64a" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\_Layout.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\_Layout.cshtml.fr.resx" uniqueID="254f3ca4-d51b-439a-8968-209edb68f683" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="18938c09-7b16-4ec1-a9a3-3713496a059b">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\_Layout.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\_Layout.cshtml.resx" uniqueID="ba0925dd-e778-4e2b-a8c6-abfee0fb9947" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\_Layout.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\App_LocalResources\Shared\_Layout.cshtml.fr.resx" uniqueID="297a11a1-4dea-46b9-a518-86d8e6a89ec5" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="e3c7e624-44f3-4ca1-8d9e-fa9363ef19f0">
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\_Menu.cshtml.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\_Menu.cshtml.resx" uniqueID="0dad645b-6ea6-4ddd-9792-ed516f18ea22" />
+      <file filePath="src\OnPremise\WebSite\App_LocalResources\Shared\_Menu.cshtml.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\App_LocalResources\Shared\_Menu.cshtml.fr.resx" uniqueID="9392f1bb-298c-4369-98f2-bede2ce3c7dd" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Resources\InitialConfigurationModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\InitialConfigurationModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Resources\InitialConfigurationModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\InitialConfigurationModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Resources\InitialConfigurationController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\InitialConfigurationController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Resources\InitialConfigurationController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\InitialConfigurationController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Resources\HomeController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\HomeController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Resources\HomeController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\HomeController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Resources\AccountController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\AccountController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Resources\AccountController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\AccountController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Resources\SignInModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\SignInModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Resources\SignInModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Resources\SignInModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\CertificateInputModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\CertificateInputModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\CertificateInputModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\CertificateInputModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ChildMenuViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ChildMenuViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ChildMenuViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ChildMenuViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificateController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificateController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificateController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificateController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificateInputModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificateInputModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificateInputModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificateInputModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificatesForUserViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificatesForUserViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificatesForUserViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificatesForUserViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificatesViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificatesViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificatesViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ClientCertificatesViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\DelegationController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\DelegationController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\DelegationController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\DelegationController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\DelegationSettingsForUserInputModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\DelegationSettingsForUserInputModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\DelegationSettingsForUserInputModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\DelegationSettingsForUserInputModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\DelegationViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\DelegationViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\DelegationViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\DelegationViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\DiagnosticsController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\DiagnosticsController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\DiagnosticsController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\DiagnosticsController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\GeneralController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\GeneralController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\GeneralController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\GeneralController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\HomeController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\HomeController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\HomeController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\HomeController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\IdentityProvidersViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\IdentityProvidersViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\IdentityProvidersViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\IdentityProvidersViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\IPCertInputModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\IPCertInputModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\IPCertInputModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\IPCertInputModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\IPController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\IPController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\IPController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\IPController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\KeyConfigurationController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\KeyConfigurationController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\KeyConfigurationController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\KeyConfigurationController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\KeyConfigurationViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\KeyConfigurationViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\KeyConfigurationViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\KeyConfigurationViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\MenuController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\MenuController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\MenuController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\MenuController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\MenuViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\MenuViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\MenuViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\MenuViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\OAuthClientController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\OAuthClientController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\OAuthClientController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\OAuthClientController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\OAuthClientViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\OAuthClientViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\OAuthClientViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\OAuthClientViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolsInputModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolsInputModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolsInputModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolsInputModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolsViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolsViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolsViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolsViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\ProtocolViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RelyingPartiesViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RelyingPartiesViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RelyingPartiesViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RelyingPartiesViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RelyingPartyViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RelyingPartyViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RelyingPartyViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RelyingPartyViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RoleController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RoleController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RoleController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RoleController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RoleInputModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RoleInputModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RoleInputModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RoleInputModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RolesViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RolesViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RolesViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RolesViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RPCertInputModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RPCertInputModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RPCertInputModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RPCertInputModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RPController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RPController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\RPController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\RPController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UserController.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UserController.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UserController.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UserController.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UserInputModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UserInputModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UserInputModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UserInputModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UserProfileViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UserProfileViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UserProfileViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UserProfileViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UserRolesViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UserRolesViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UserRolesViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UserRolesViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UsersViewModel.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UsersViewModel.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="src\OnPremise\WebSite\Areas\Admin\Resources\UsersViewModel.fr.resx" absoluteFilePath="C:\dev\github\sebastien-allard\thinktecture\Thinktecture.IdentityServer.v2\src\OnPremise\WebSite\Areas\Admin\Resources\UsersViewModel.fr.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+  </fileGroups>
+  <projectFolders>
+    <projectFolder uniqueID="8632ee1c-6d49-4574-9b74-af57889f9e4b" parentUniqueID="c3670c55-687f-455c-bddf-fe2fa67d5888" name="Admin" orderPosition="0">
+      <remarks>
+      </remarks>
+      <dynSettings>
+        <setting name="UseParentFilePatternSettings">
+          <value>True</value>
+        </setting>
+        <setting name="NeutralLanguageFileNamePattern">
+          <value>[basename][optionaldefaulttypes].[extension]</value>
+        </setting>
+        <setting name="NonNeutralLanguageFileNamePattern">
+          <value>[basename][optionaldefaulttypes].[languagecode].[extension]</value>
+        </setting>
+        <setting name="BaseNameDotCount">
+          <value>0</value>
+        </setting>
+        <setting name="DefaultFileTypesToIgnore">
+          <value>.aspx;.ascx;.asmx;.master;.sitemap;.cshtml</value>
+        </setting>
+        <setting name="IgnoreDuringExportAndImport">
+          <value>False</value>
+        </setting>
+      </dynSettings>
+    </projectFolder>
+    <projectFolder uniqueID="c3670c55-687f-455c-bddf-fe2fa67d5888" parentUniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" name="Areas" orderPosition="0">
+      <remarks>
+      </remarks>
+      <dynSettings>
+        <setting name="UseParentFilePatternSettings">
+          <value>True</value>
+        </setting>
+        <setting name="NeutralLanguageFileNamePattern">
+          <value>[basename][optionaldefaulttypes].[extension]</value>
+        </setting>
+        <setting name="NonNeutralLanguageFileNamePattern">
+          <value>[basename][optionaldefaulttypes].[languagecode].[extension]</value>
+        </setting>
+        <setting name="BaseNameDotCount">
+          <value>0</value>
+        </setting>
+        <setting name="DefaultFileTypesToIgnore">
+          <value>.aspx;.ascx;.asmx;.master;.sitemap;.cshtml</value>
+        </setting>
+        <setting name="IgnoreDuringExportAndImport">
+          <value>False</value>
+        </setting>
+      </dynSettings>
+    </projectFolder>
+    <projectFolder uniqueID="202f3310-76f4-439b-a4c5-b362755b0617" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Tests" orderPosition="0">
+      <remarks>
+      </remarks>
+      <dynSettings />
+    </projectFolder>
+    <projectFolder uniqueID="a43a8acc-f38a-4f1a-95ee-759fc3e28fea" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Thinktecture.IdentityServer.Core" orderPosition="0">
+      <remarks>
+      </remarks>
+      <dynSettings />
+    </projectFolder>
+    <projectFolder uniqueID="09759e19-e667-49a8-8977-9e6d2b2b6d89" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Thinktecture.IdentityServer.Core.Repositories" orderPosition="0">
+      <remarks>
+      </remarks>
+      <dynSettings />
+    </projectFolder>
+    <projectFolder uniqueID="192a21ff-32fb-42b8-be86-d86ffc66da5c" parentUniqueID="00000000-0000-0000-0000-000000000000" name="Thinktecture.IdentityServer.Protocols" orderPosition="0">
+      <remarks>
+      </remarks>
+      <dynSettings />
+    </projectFolder>
+    <projectFolder uniqueID="84da737b-aa50-4019-9236-1aaaf2ad542e" parentUniqueID="00000000-0000-0000-0000-000000000000" name="WebSite" orderPosition="0">
+      <remarks>
+      </remarks>
+      <dynSettings />
+    </projectFolder>
+  </projectFolders>
+</project>
