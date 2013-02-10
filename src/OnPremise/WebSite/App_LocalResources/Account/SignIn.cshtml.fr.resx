@@ -127,7 +127,7 @@
 		<value>Utiliser un certificat client</value>
 	</data>
 	<data name="UsernamePasswordSignIn" xml:space="preserve">
-		<value>Overture de session avec nom d’utilisateur / mot de passe</value>
+		<value>Ouverture de session avec nom d’utilisateur / mot de passe</value>
 	</data>
 	<data name="SignInWasUnsuccessful" xml:space="preserve">
 		<value>L’ouverture de session a échoué. Corrigez les erreurs et réessayez.</value>
