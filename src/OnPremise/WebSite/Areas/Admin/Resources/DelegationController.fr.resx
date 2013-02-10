@@ -104,7 +104,7 @@
 		<value>Erreur de suppression des utilisateurs de délégation.</value>
 	</data>
 	<data name="ErrorAddingDelegationSetting" xml:space="preserve">
-		<value>Erreur d'ajout des réglages de délégation.</value>
+		<value>Erreur d’ajout des réglages de délégation.</value>
 	</data>
 	<data name="ErrorDeletingDelegationSetting" xml:space="preserve">
 		<value>Erreur de suppression des réglages de la délégation.</value>

@@ -98,6 +98,6 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="ReturnUrlMustBeSslException" xml:space="preserve">
-		<value>L'adresse de retour doit être SSL.</value>
+		<value>L’adresse de retour doit utiliser le protocole SSL.</value>
 	</data>
 </root>

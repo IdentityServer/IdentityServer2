@@ -107,12 +107,12 @@
 		<value>Nom de l'utilisateur</value>
 	</data>
 	<data name="UserNameDescription" xml:space="preserve">
-		<value>Nom de l'utilisateur où l'association s'applique.</value>
+		<value>Nom de l’utilisateur où l’association s’applique.</value>
 	</data>
 	<data name="Realm" xml:space="preserve">
 		<value>Domaine</value>
 	</data>
 	<data name="RealmDescription" xml:space="preserve">
-		<value>Identifiant du domaine où que l'identité peut être déléguée.</value>
+		<value>Identifiant du domaine où que l’identité peut être déléguée.</value>
 	</data>
 </root>

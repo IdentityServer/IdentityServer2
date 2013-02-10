@@ -101,6 +101,6 @@
 		<value>Erreur</value>
 	</data>
 	<data name="SignedOutMessage" xml:space="preserve">
-		<value>Vous avez été déconnecté du serveur d'identité. Il est possible que vous ayez encore des sessions actives avec d'autres applications.</value>
+		<value>Vous avez fermé votre session au serveur d’identité. Il est possible que vous ayez encore des sessions actives avec d’autres applications.</value>
 	</data>
 </root>

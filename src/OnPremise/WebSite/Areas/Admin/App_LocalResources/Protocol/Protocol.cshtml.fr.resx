@@ -104,7 +104,7 @@
 		<value>Configuration de protocole : {0}</value>
 	</data>
 	<data name="ErrorUpdatingProtocol" xml:space="preserve">
-		<value>Erreur de mise à jour du protocole</value>
+		<value>Erreur de mise à jour du protocole.</value>
 	</data>
 	<data name="SaveChanges" xml:space="preserve">
 		<value>Sauvegarder</value>

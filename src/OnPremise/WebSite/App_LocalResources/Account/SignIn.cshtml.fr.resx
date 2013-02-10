@@ -127,12 +127,12 @@
 		<value>Utiliser un certificat client</value>
 	</data>
 	<data name="UsernamePasswordSignIn" xml:space="preserve">
-		<value>Connexion avec nom d'utilisateur / mot de passe</value>
+		<value>Overture de session avec nom d’utilisateur / mot de passe</value>
 	</data>
 	<data name="SignInWasUnsuccessful" xml:space="preserve">
-		<value>L'ouverture de session a échoué. Corrigez les erreurs et réessayez.</value>
+		<value>L’ouverture de session a échoué. Corrigez les erreurs et réessayez.</value>
 	</data>
 	<data name="UnauthorizedAuthenticatedUser" xml:space="preserve">
-		<value>Vous êtes présentement connecté en tant que {0}, cependant vous demandez accès à une ressource pour laquelle vous n'êtes pas autorisé. Fournissez les informations de connexion autorisées pour l'accès ou contactez votre administrateur pour demander l'accès.</value>
+		<value>Vous êtes présentement connecté en tant que {0}, cependant vous demandez accès à une ressource pour laquelle vous n’êtes pas autorisé. Fournissez les informations de connexion autorisées pour l’accès ou contactez votre administrateur pour demander l’accès.</value>
 	</data>
 </root>

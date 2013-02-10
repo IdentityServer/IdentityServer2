@@ -121,7 +121,7 @@
     <value>Annuler</value>
   </data>
 	<data name="ErrorUpdatingConfiguration" xml:space="preserve">
-    <value>Erreur de mise à jour de la confguration</value>
+    <value>Erreur de mise à jour de la configuration</value>
   </data>
 	<data name="GeneralConfiguration" xml:space="preserve">
     <value>Configuration générale</value>

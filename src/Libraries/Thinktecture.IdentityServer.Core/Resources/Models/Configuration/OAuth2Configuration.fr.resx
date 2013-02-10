@@ -101,7 +101,7 @@
 		<value>Activer le flux implicite</value>
 	</data>
 	<data name="EnableCodeFlow" xml:space="preserve">
-		<value>Permettre le flux de code</value>
+		<value>Activer le flux de code</value>
 	</data>
 	<data name="EnableCodeFlowDescription" xml:space="preserve">
 		<value>Ce flux est pour les applications web.</value>
@@ -110,7 +110,7 @@
 		<value>Activer la page de consentement</value>
 	</data>
 	<data name="EnableConsentDescription" xml:space="preserve">
-		<value>Spécifie si la page de consentement doit être affichée avant qu'un jeton/code soit retourné.</value>
+		<value>Spécifie si la page de consentement doit être affichée avant qu’un jeton/code soit retourné.</value>
 	</data>
 	<data name="EnableImplicitFlowDescription" xml:space="preserve">
 		<value>Ce flux est pour les applications natives et les applications web clients.</value>
@@ -119,6 +119,6 @@
 		<value>Activer le flux de ressource propriétaire</value>
 	</data>
 	<data name="EnableResourceOwnerFlowDescription" xml:space="preserve">
-		<value>Active le flux pour les applications de confiance uniquement. Les utilisateurs entrent leur informations de connexion directement dans le client.</value>
+		<value>Active le flux pour les applications de confiance uniquement. Les utilisateurs entrent leurs informations de connexion directement dans le client.</value>
 	</data>
 </root>

@@ -98,39 +98,39 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="AllowReplyTo" xml:space="preserve">
-		<value>Permettre le paramètre "replyto"</value>
+		<value>Permettre le paramètre « replyto »</value>
 	</data>
 	<data name="AllowReplyToDescription" xml:space="preserve">
-		<value>Permettre la spécification du paramètre fédéré WS "replyto". Autrement ce paramètre sera toujours ignoré.</value>
+		<value>Permet la spécification du paramètre fédéré WS « replyto », autrement ce paramètre sera toujours ignoré.</value>
 	</data>
 	<data name="EnableAuthentication" xml:space="preserve">
-		<value>Permettre la connexion</value>
+		<value>Activer l’ouverture de session</value>
 	</data>
 	<data name="EnableAuthenticationDescription" xml:space="preserve">
-		<value>Permettre la connexion fédérée WS.</value>
+		<value>Active l’ouverture de session fédérée WS.</value>
 	</data>
 	<data name="EnableFederation" xml:space="preserve">
 		<value>Activer la fédération</value>
 	</data>
 	<data name="EnableFederationDescription" xml:space="preserve">
-		<value>Active la connexion fédérée WS (voir fournisseur d'identité.)</value>
+		<value>Active l’ouverture de session fédérée WS (voir fournisseur d’identité.)</value>
 	</data>
 	<data name="EnableHrd" xml:space="preserve">
-		<value>Activer la découverte de domaine d'origine</value>
+		<value>Activer la découverte de domaine d’origine</value>
 	</data>
 	<data name="EnableHrdDescription" xml:space="preserve">
-		<value>Active la page de sélection du fournisseur d'identité pour la connexion fédérée.</value>
+		<value>Active la page de sélection du fournisseur d’identité pour l’ouverture de session fédérée.</value>
 	</data>
 	<data name="RequireReplyToWithinRealm" xml:space="preserve">
-		<value>Url de redirection doit être à l'intérieur du domaine</value>
+		<value>URL de redirection doit être à l’intérieur du domaine</value>
 	</data>
 	<data name="RequireReplyToWithinRealmDescription" xml:space="preserve">
-		<value>S'assure que le Url de redirection (paramètre replyto) soit un sous Url du domaine.</value>
+		<value>S’assure que le URL de redirection (paramètre « replyto ») soit un sous URL du domaine.</value>
 	</data>
 	<data name="RequireSslForReplyTo" xml:space="preserve">
-		<value>SSL requis</value>
+		<value>Requiert le protocole SSL</value>
 	</data>
 	<data name="RequireSslForReplyToDescription" xml:space="preserve">
-		<value>S'assure que SSL soit utilisé pour l'adresse de redirection. Cette option devrait toujours être activée.</value>
+		<value>S’assure que le protocole SSL soit utilisé pour l’adresse de redirection. Cette option devrait toujours être activée.</value>
 	</data>
 </root>

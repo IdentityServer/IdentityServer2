@@ -101,25 +101,25 @@
 		<value>Permettre le flux implicite</value>
 	</data>
 	<data name="AllowImplicitFlowDescription" xml:space="preserve">
-		<value>Permettre le flux implicite.</value>
+		<value>Permet le flux implicite.</value>
 	</data>
 	<data name="AllowResourceOwnerFlow" xml:space="preserve">
 		<value>Permettre le flux de ressource propriétaire</value>
 	</data>
 	<data name="AllowResourceOwnerFlowDescription" xml:space="preserve">
-		<value>Permettre le flux de ressource propriétaire.</value>
+		<value>Permet le flux de ressource propriétaire.</value>
 	</data>
 	<data name="AllowCodeFlow" xml:space="preserve">
 		<value>Permettre le flux de code</value>
 	</data>
 	<data name="AllowCodeFlowDescription" xml:space="preserve">
-		<value>Permettre le flux de code.</value>
+		<value>Permet le flux de code.</value>
 	</data>
 	<data name="AllowRefreshToken" xml:space="preserve">
-		<value>Permettre des jetons de rafraîchissement</value>
+		<value>Permettre les jetons de rafraîchissement</value>
 	</data>
 	<data name="AllowRefreshTokenDescription" xml:space="preserve">
-		<value>Permettre des jetons de rafraîchissement. Ceci permettrera l'accès hors ligne au client pour les ressources.</value>
+		<value>Permet les jetons de rafraîchissement. Ceci permettra l’accès hors ligne au client pour les ressources.</value>
 	</data>
 	<data name="Description" xml:space="preserve">
 		<value>Description</value>
@@ -143,16 +143,16 @@
 		<value>Le secret client est requis pour le flux de code et de ressource propriétaire.</value>
 	</data>
 	<data name="NameDescription" xml:space="preserve">
-		<value>Nom d'affichage.</value>
+		<value>Nom d’affichage.</value>
 	</data>
 	<data name="RedirectUri" xml:space="preserve">
-		<value>Uri de redirection</value>
+		<value>URI de redirection</value>
 	</data>
 	<data name="RedirectUriDescription" xml:space="preserve">
-		<value>Uri de redirection.</value>
+		<value>URI de redirection.</value>
 	</data>
 	<data name="RedirectUriRequiredError" xml:space="preserve">
-		<value>Uri de redirection est requis pour le flux de code et implicite.</value>
+		<value>URI de redirection est requis pour le flux de code et implicite.</value>
 	</data>
 	<data name="Name" xml:space="preserve">
 		<value>Nom</value>

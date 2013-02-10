@@ -107,7 +107,7 @@
 		<value>Parties utilisatrices activées</value>
 	</data>
 	<data name="ErrorUpdatingRelyingParties" xml:space="preserve">
-		<value>Erreur de mise à jour des parties utilisatrices</value>
+		<value>Erreur de mise à jour des parties utilisatrices.</value>
 	</data>
 	<data name="New" xml:space="preserve">
 		<value>Nouveau</value>

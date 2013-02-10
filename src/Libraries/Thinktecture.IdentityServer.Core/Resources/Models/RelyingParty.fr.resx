@@ -104,13 +104,13 @@
 		<value>Activé</value>
 	</data>
 	<data name="EnabledDescription" xml:space="preserve">
-		<value>Activer ou désactiver cette partie de confiance.</value>
+		<value>Activer ou désactiver cette partie utilisatrice.</value>
 	</data>
 	<data name="Name" xml:space="preserve">
 		<value>Nom d'affichage</value>
 	</data>
 	<data name="ReplyTo" xml:space="preserve">
-		<value>Url de redirection</value>
+		<value>URL de redirection</value>
 	</data>
 	<data name="SymmetricSigningKey" xml:space="preserve">
 		<value>Clef de signature symétrique</value>
@@ -128,33 +128,33 @@
 		<value>Nom du domaine/portée</value>
 	</data>
 	<data name="RealmDescription" xml:space="preserve">
-		<value>Uri de l'identifiant de domaine/portée.</value>
+		<value>URI de l’identifiant de domaine/portée.</value>
 	</data>
 	<data name="ReplyToDescription" xml:space="preserve">
-		<value>Url de réacheminement (paramètre ReplyTo) après qu'un jeton soit émis.</value>
+		<value>URL de réacheminement (paramètre « replyto ») après qu’un jeton soit émis.</value>
 	</data>
 	<data name="ExtraData1" xml:space="preserve">
-		<value>Donnée supplémentaire 1</value>
+		<value>Donnée supplémentaire #1</value>
 	</data>
 	<data name="ExtraData1Description" xml:space="preserve">
-		<value>Donnée supplémentaire que vous pouvez associer avec cette partie de confiance. (1)</value>
+		<value>Donnée supplémentaire que vous pouvez associer avec cette partie utilisatrice. (1)</value>
 	</data>
 	<data name="ExtraData2" xml:space="preserve">
-		<value>Donnée supplémentaire 2</value>
+		<value>Donnée supplémentaire #2</value>
 	</data>
 	<data name="ExtraData2Description" xml:space="preserve">
-		<value>Donnée supplémentaire que vous pouvez associer avec cette partie de confiance. (2)</value>
+		<value>Donnée supplémentaire que vous pouvez associer avec cette partie utilisatrice. (2)</value>
 	</data>
 	<data name="ExtraData3" xml:space="preserve">
-		<value>Donnée supplémentaire 3</value>
+		<value>Donnée supplémentaire #3</value>
 	</data>
 	<data name="ExtraData3Description" xml:space="preserve">
-		<value>Donnée supplémentaire que vous pouvez associer avec cette partie de confiance. (3)</value>
+		<value>Donnée supplémentaire que vous pouvez associer avec cette partie utilisatrice. (3)</value>
 	</data>
 	<data name="TokenLifeTime" xml:space="preserve">
-		<value>Durée de vie d'un jeton (en minutes)</value>
+		<value>Durée de vie d’un jeton (en minutes)</value>
 	</data>
 	<data name="TokenLifeTimeDescription" xml:space="preserve">
-		<value>Peut être utilisé pour surpasser la durée de vie par défaut des jetons. La valeur globale par défaut sera utilisée lorsque cette valeur est '0'.</value>
+		<value>Peut être utilisé pour surpasser la durée de vie par défaut des jetons. La valeur globale par défaut sera utilisée lorsque cette valeur est ‘0’.</value>
 	</data>
 </root>

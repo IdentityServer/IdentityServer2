@@ -101,18 +101,18 @@
     <value>Signing Certificate</value>
   </data>
 	<data name="SigningCertificateDescription" xml:space="preserve">
-    <value>The X.509 certificate to sign outgoing SAML tokens</value>
+    <value>The X.509 certificate to sign outgoing SAML tokens.</value>
   </data>
 	<data name="DecryptionCertificate" xml:space="preserve">
     <value>Decryption Certificate</value>
   </data>
 	<data name="DecryptionCertificateDescription" xml:space="preserve">
-    <value>The X.509 certificate to decrypt incoming SAML tokens</value>
+    <value>The X.509 certificate to decrypt incoming SAML tokens.</value>
   </data>
 	<data name="SymmetricSigningKey" xml:space="preserve">
     <value>Symmetric Signing Key</value>
   </data>
 	<data name="SymmetricSigningKeyDescription" xml:space="preserve">
-    <value>Default symmetric signing key</value>
+    <value>Default symmetric signing key.</value>
   </data>
 </root>

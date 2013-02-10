@@ -101,13 +101,13 @@
 		<value>Certificat de déchiffrement</value>
 	</data>
 	<data name="SymmetricSigningKeyDescription" xml:space="preserve">
-		<value>Clef symétrique de signature par défaut</value>
+		<value>Clef symétrique de signature par défaut.</value>
 	</data>
 	<data name="SymmetricSigningKey" xml:space="preserve">
 		<value>Clef de signature symétrique</value>
 	</data>
 	<data name="DecryptionCertificateDescription" xml:space="preserve">
-		<value>Le certificat X.509 pour déchiffrer les jetons SAML entrants</value>
+		<value>Le certificat X.509 pour déchiffrer les jetons SAML entrants.</value>
 	</data>
 	<data name="SigningCertificate" xml:space="preserve">
 		<value>Certificat de chiffrement</value>

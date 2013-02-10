@@ -121,13 +121,13 @@
     <value>Mot de passe</value>
   </data>
 	<data name="UserName" xml:space="preserve">
-    <value>Nom d'utilisateur</value>
+    <value>Nom d’utilisateur</value>
   </data>
 	<data name="CreateDefaultAccounts" xml:space="preserve">
 		<value>Créer les rôles par défaut et le compte administrateur ?</value>
 	</data>
 	<data name="IssuerUri" xml:space="preserve">
-		<value>URI de l'émetteur</value>
+		<value>URI de l’émetteur</value>
 	</data>
 	<data name="SigningCertificate" xml:space="preserve">
 		<value>Certificat de signature</value>

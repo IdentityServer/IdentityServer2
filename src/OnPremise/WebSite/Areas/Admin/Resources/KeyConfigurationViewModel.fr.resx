@@ -98,13 +98,13 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="NoReadAccessToPrivateKey" xml:space="preserve">
-		<value>{0} n'a pas les droits de lecture sur la clé privée du certificat sélectionné (voir see http://technet.microsoft.com/fr-ca/library/ee662329.aspx).</value>
+		<value>{0} n’a pas les droits de lecture sur la clef privée du certificat sélectionné (voir HTTP://technet.microsoft.com/fr-ca/library/ee662329.aspx).</value>
 	</data>
 	<data name="InvalidSymmetricKeyLength" xml:space="preserve">
-		<value>Longeur invalide (32 octets dépassés.)</value>
+		<value>Longueur invalide (32 octets dépassés.)</value>
 	</data>
 	<data name="NoItemSelected" xml:space="preserve">
-		<value>-aucune séléction-</value>
+		<value>-aucune sélection-</value>
 	</data>
 	<data name="SigningThumbprint" xml:space="preserve">
 		<value>Empreinte de signature</value>

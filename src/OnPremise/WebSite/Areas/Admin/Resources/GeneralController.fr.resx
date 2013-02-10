@@ -98,7 +98,7 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="ErrorUpdatingConfiguration" xml:space="preserve">
-		<value>Erreur de mise à jour de la confguration.</value>
+		<value>Erreur de mise à jour de la configuration.</value>
 	</data>
 	<data name="UpdateSuccessful" xml:space="preserve">
 		<value>Mise à jour réussie</value>

@@ -121,22 +121,22 @@
     <value>Jeton HTTP par défaut</value>
   </data>
 	<data name="DefaultTokenLifetime" xml:space="preserve">
-    <value>Durée de vie par défaut d'un jeton</value>
+    <value>Durée de vie par défaut d’un jeton</value>
   </data>
 	<data name="DefaultWSTokenType" xml:space="preserve">
     <value>Jeton WS* par défaut</value>
   </data>
 	<data name="EnableClientCertificateAuthentication" xml:space="preserve">
-    <value>Permettre les certificats client</value>
+    <value>Activer les certificats client</value>
   </data>
 	<data name="EnableClientCertificateAuthenticationDescription" xml:space="preserve">
-    <value>Permettre aux utilisateurs de s'authentifier dans le portail avec un certificat client.</value>
+    <value>Permet aux utilisateurs de s'authentifier dans le portail avec un certificat client.</value>
   </data>
 	<data name="EnforceUsersGroupMembership" xml:space="preserve">
-    <value>Rôle 'IdentityServerUsers' requis pour l'obtention de jetons</value>
+    <value>Requiert le rôle ‘IdentityServerUsers’ pour l’obtention de jetons</value>
   </data>
 	<data name="EnforceUsersGroupMembershipDescription" xml:space="preserve">
-    <value>Lorsque cette option est activé, le SJS émettra des jetons seulement aux utilisateurs qui sont dans le rôle 'IdentityServerUsers'.</value>
+    <value>Lorsque cette option est activée, le SJS émettra des jetons seulement aux utilisateurs qui sont dans le rôle ‘IdentityServerUsers’.</value>
   </data>
 	<data name="HttpPort" xml:space="preserve">
     <value>Port HTTP</value>
@@ -151,43 +151,43 @@
     <value>Identifiant du site</value>
   </data>
 	<data name="IssuerUriDescription" xml:space="preserve">
-    <value>Identifiant unique pour votre SJS. Doit être un URI et sera l'identifiant publié dans les jetons. Les parties de confiance l'utiliseront pour identifier votre fournisseur d'identité (ce SJS.)</value>
+    <value>Identifiant unique pour votre SJS. Doit être un URI et sera l’identifiant émis dans les jetons. Les parties utilisatrices l’utiliseront pour identifier votre fournisseur d’identité (ce SJS.)</value>
   </data>
 	<data name="MaximumTokenLifetime" xml:space="preserve">
-    <value>Durée de vie maximale d'un jeton</value>
+    <value>Durée de vie maximale d’un jeton</value>
   </data>
 	<data name="SiteName" xml:space="preserve">
     <value>Identifiant du site</value>
   </data>
 	<data name="SiteNameDescription" xml:space="preserve">
-    <value>Nom descriptif de votre STS.</value>
+    <value>Nom descriptif de votre SJS.</value>
   </data>
 	<data name="DefaultWSTokenTypeDescription" xml:space="preserve">
-		<value>Type de jeton par défaut publié pour les requêtes de jeton fédéré et confiance WS.</value>
+		<value>Type de jeton par défaut émis pour les requêtes de jeton fédéré et confiance WS.</value>
 	</data>
 	<data name="DefaultHttpTokenTypeDescription" xml:space="preserve">
-		<value>Type de jeton par défaut publié pour les requêtes de jeton HTTP (non WS-*.) </value>
+		<value>Type de jeton par défaut émis pour les requêtes de jeton HTTP (non WS-*.) </value>
 	</data>
 	<data name="DefaultTokenLifetimeDescription" xml:space="preserve">
-		<value>Durée de vie par défaut d'un jeton (en heure) publié par ce SJS.</value>
+		<value>Durée de vie par défaut d’un jeton (en heures) émis par ce SJS.</value>
 	</data>
 	<data name="IssuerContactEmailDescription" xml:space="preserve">
 		<value>Courriel de la personne contact qui administre ce SJS.</value>
 	</data>
 	<data name="MaximumTokenLifetimeDescription" xml:space="preserve">
-		<value>La durée de vie maximale (en heure) des jetons émis par ce SJS lorsqu'une partie de confiance demande un jeton ayant une durée de vie plus longue que le défaut.</value>
+		<value>La durée de vie maximale (en heures) des jetons émis par ce SJS lorsqu’une partie utilisatrice demande un jeton ayant une durée de vie plus longue que le défaut.</value>
 	</data>
 	<data name="RequireEncryption" xml:space="preserve">
-		<value>Chiffrement de jeton requis</value>
+		<value>Requiert le chiffrement des jetons</value>
 	</data>
 	<data name="RequireEncryptionDescription" xml:space="preserve">
 		<value>Lorsque cette option est activée, tous les jetons sortant doivent être chiffrés.</value>
 	</data>
 	<data name="RequireRelyingPartyRegistration" xml:space="preserve">
-		<value>Enregistrement de partie utilisatrice requis</value>
+		<value>Requiert l'enregistrement de parties utilisatrices</value>
 	</data>
 	<data name="RequireRelyingPartyRegistrationDescription" xml:space="preserve">
-		<value>Lorsque cette option est activée, le SJS émettera des jetons seulement aux parties utilisatrices qui sont enregistrées.</value>
+		<value>Lorsque cette option est activée, le SJS émettra des jetons seulement aux parties utilisatrices qui sont enregistrées.</value>
 	</data>
 	<data name="HttpPortDescription" xml:space="preserve">
 		<value>Numéro de port HTTP utilisé par le SJS.</value>
@@ -196,7 +196,7 @@
 		<value>Numéro de port HTTPS utilisé par le SJS.</value>
 	</data>
 	<data name="SsoCookieLifetime" xml:space="preserve">
-		<value>Durée de signature unique</value>
+		<value>Durée de vie des signatures uniques</value>
 	</data>
 	<data name="SsoCookieLifetimeDescription" xml:space="preserve">
 		<value>La durée (en heures) des fichiers témoins utilisés par ce site pour la signature unique.</value>

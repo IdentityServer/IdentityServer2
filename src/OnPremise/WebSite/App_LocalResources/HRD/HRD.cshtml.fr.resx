@@ -98,12 +98,12 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="ChooseIdentityProvider" xml:space="preserve">
-		<value>Sélectionnez votre fournisseur d'identité pour la connexion</value>
+		<value>Sélectionnez votre fournisseur d’identité pour la connexion</value>
 	</data>
 	<data name="HRD" xml:space="preserve">
-		<value>Découverte de domaine d'origine (HRD)</value>
+		<value>Découverte de domaine d’origine (HRD)</value>
 	</data>
 	<data name="NoIdentityProviders" xml:space="preserve">
-		<value>Aucun fournisseur d'identité n'est configuré. Contactez votre administrateur.</value>
+		<value>Aucun fournisseur d’identité n’est configuré. Contactez votre administrateur.</value>
 	</data>
 </root>

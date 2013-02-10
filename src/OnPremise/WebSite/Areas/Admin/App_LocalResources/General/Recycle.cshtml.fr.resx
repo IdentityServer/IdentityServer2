@@ -98,15 +98,15 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="ApplicationRecycle" xml:space="preserve">
-		<value>Recycler l'application</value>
+		<value>Recycler l’application</value>
 	</data>
 	<data name="CurrentAppDomainId" xml:space="preserve">
 		<value>Identifiant actuel du domaine applicatif</value>
 	</data>
 	<data name="RecycleButton" xml:space="preserve">
-		<value>Recycler l'application</value>
+		<value>Recycler l’application</value>
 	</data>
 	<data name="RecycleMessage" xml:space="preserve">
-		<value>Ceci recyclera le domaine applicatif de l'application.</value>
+		<value>Ceci recyclera le domaine applicatif de l’application.</value>
 	</data>
 </root>

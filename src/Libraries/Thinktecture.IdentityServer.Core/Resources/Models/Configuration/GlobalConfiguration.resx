@@ -139,7 +139,7 @@
     <value>Default WS* Token</value>
   </data>
 	<data name="DefaultWSTokenTypeDescription" xml:space="preserve">
-    <value>Default token type to be issues for WS-Federation and WS-Trust token requests.</value>
+    <value>Default token type to be issued for WS-Federation and WS-Trust token requests.</value>
   </data>
 	<data name="DefaultHttpTokenTypeDescription" xml:space="preserve">
     <value>Default token type to be issued for HTTP (non WS-*) token requests.</value>

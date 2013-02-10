@@ -101,9 +101,9 @@
 		<value>Intégration applicative</value>
 	</data>
 	<data name="ViewWsFederationMetadata" xml:space="preserve">
-		<value>Voir les métadonnées fédérés WS*</value>
+		<value>Voir les métadonnées de fédération WS*</value>
 	</data>
 	<data name="WelcomeToSite" xml:space="preserve">
-		<value>Bienvenue sur le {0}</value>
+		<value>Bienvenue au {0}</value>
 	</data>
 </root>

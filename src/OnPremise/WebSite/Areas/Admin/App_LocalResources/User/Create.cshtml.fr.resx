@@ -107,7 +107,7 @@
 		<value>Créer un utilisateur</value>
 	</data>
 	<data name="ErrorCreatingUser" xml:space="preserve">
-		<value>Erreur de création de l'utilisateur.</value>
+		<value>Erreur de création de l’utilisateur.</value>
 	</data>
 	<data name="Roles" xml:space="preserve">
 		<value>Rôles</value>

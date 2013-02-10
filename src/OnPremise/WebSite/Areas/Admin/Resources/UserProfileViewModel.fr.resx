@@ -104,6 +104,6 @@
 		<value>Erreur de conversion de la valeur {0}. {1}</value>
 	</data>
 	<data name="ErrorConvertingPropertyValueType" xml:space="preserve">
-		<value>Erreur de conversion de la valeur {0}. Elle doit être d'un type {1}.</value>
+		<value>Erreur de conversion de la valeur {0}. Elle doit être de type {1}.</value>
 	</data>
 </root>

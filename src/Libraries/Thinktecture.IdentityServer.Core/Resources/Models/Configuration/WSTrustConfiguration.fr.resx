@@ -98,22 +98,22 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="EnableClientCertificateAuthentication" xml:space="preserve">
-		<value>Permettre les certificatis clients pour l'authentification.</value>
+		<value>Activer les certificats clients pour l’authentification</value>
 	</data>
 	<data name="EnableClientCertificateAuthenticationDescription" xml:space="preserve">
-		<value>Permettre l'authentification des clients basée sur un certificat.</value>
+		<value>Permet l’authentification des clients basée sur un certificat.</value>
 	</data>
 	<data name="EnableDelegation" xml:space="preserve">
-		<value>Activer la délégation d'identité</value>
+		<value>Activer la délégation d’identité</value>
 	</data>
 	<data name="EnableDelegationDescription" xml:space="preserve">
-		<value>Active la délégation d'identité.</value>
+		<value>Active la délégation d’identité.</value>
 	</data>
 	<data name="EnableFederatedAuthentication" xml:space="preserve">
-		<value>Activer l'authentification fédérée.</value>
+		<value>Activer l’authentification fédérée.</value>
 	</data>
 	<data name="EnableFederatedAuthenticationDescription" xml:space="preserve">
-		<value>Active l'authentification fédérée en utilisant un jeton d'un fournisseur d'identité de confiance.</value>
+		<value>Active l’authentification fédérée en utilisant un jeton d’un fournisseur d’identité de confiance.</value>
 	</data>
 	<data name="EnableMessageSecurity" xml:space="preserve">
 		<value>Activer la sécurité de messages aux terminaisons</value>

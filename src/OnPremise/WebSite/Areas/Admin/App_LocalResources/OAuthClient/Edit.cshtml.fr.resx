@@ -107,7 +107,7 @@
 		<value>Supprimer</value>
 	</data>
 	<data name="ErrorUpdatingClient" xml:space="preserve">
-		<value>Erreur de mise à jour du client</value>
+		<value>Erreur de mise à jour du client.</value>
 	</data>
 	<data name="NewOAuthClient" xml:space="preserve">
 		<value>Nouveau client OAuth</value>

@@ -104,19 +104,19 @@
 		<value>Secret client</value>
 	</data>
 	<data name="ClientIDRequiredError" xml:space="preserve">
-		<value>Identifiant client requis.</value>
+		<value>Identifiant client est requis.</value>
 	</data>
 	<data name="ClientSecretRequiredError" xml:space="preserve">
-		<value>Secret client requis.</value>
+		<value>Secret client est requis.</value>
 	</data>
 	<data name="DisplayName" xml:space="preserve">
-		<value>Nom d'affichage</value>
+		<value>Nom d’affichage</value>
 	</data>
 	<data name="Enabled" xml:space="preserve">
 		<value>Activé</value>
 	</data>
 	<data name="DisplayNameDescription" xml:space="preserve">
-		<value>Nom descriptif du fournisseur d'identité (pour la journalisation.)</value>
+		<value>Nom descriptif du fournisseur d’identité (pour la journalisation.)</value>
 	</data>
 	<data name="EnabledDescription" xml:space="preserve">
 		<value>Spécifie si ce fournisseur sera utilisé.</value>
@@ -125,34 +125,34 @@
 		<value>Identifiant</value>
 	</data>
 	<data name="NameDescription" xml:space="preserve">
-		<value>Identifiant unique du fournisseur d'identité.</value>
+		<value>Identifiant unique du fournisseur d’identité.</value>
 	</data>
 	<data name="IssuerThumbprint" xml:space="preserve">
-		<value>Empreinte de l'émetteur</value>
+		<value>Empreinte de l’émetteur</value>
 	</data>
 	<data name="IssuerThumbprintDescription" xml:space="preserve">
-		<value>Spécifie l'empreinte de l'émetteur pour la validation basée sur un certificat X.509.</value>
+		<value>Spécifie l’empreinte de l’émetteur pour la validation basée sur un certificat X.509.</value>
 	</data>
 	<data name="ProviderType" xml:space="preserve">
 		<value>Fournisseur OAuth2</value>
 	</data>
 	<data name="IssuerThumbprintRequiredError" xml:space="preserve">
-		<value>Empreinte de l'émetteur est requise.</value>
+		<value>Empreinte de l’émetteur est requise.</value>
 	</data>
 	<data name="ProviderTypeRequiredError" xml:space="preserve">
-		<value>Type de profil requis.</value>
+		<value>Type de profil est requis.</value>
 	</data>
 	<data name="ShowInHrdSelection" xml:space="preserve">
-		<value>Inclure dans la découverte du domaine d'origine</value>
+		<value>Inclure dans la découverte du domaine d’origine</value>
 	</data>
 	<data name="ShowInHrdSelectionDescription" xml:space="preserve">
-		<value>Spécifie si ce fournisseur sera affiché sur la page de sélection de découverte de domaine d'origine.</value>
+		<value>Spécifie si ce fournisseur sera affiché sur la page de sélection de découverte de domaine d’origine.</value>
 	</data>
 	<data name="Type" xml:space="preserve">
 		<value>Type</value>
 	</data>
 	<data name="TypeDescription" xml:space="preserve">
-		<value>Spécifie le type du fournisseur d'identité.</value>
+		<value>Spécifie le type du fournisseur d’identité.</value>
 	</data>
 	<data name="WSFederationEndpointRequiredError" xml:space="preserve">
 		<value>Terminaison fédérée WS est requis.</value>

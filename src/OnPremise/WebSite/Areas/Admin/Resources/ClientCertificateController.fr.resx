@@ -107,7 +107,7 @@
 		<value>Certificat ajouté</value>
 	</data>
 	<data name="ErrorAddingClientCertificate" xml:space="preserve">
-		<value>Erreur d'ajout du certificat client.</value>
+		<value>Erreur d’ajout du certificat client.</value>
 	</data>
 	<data name="CertificateRemoved" xml:space="preserve">
 		<value>Certificat retiré</value>

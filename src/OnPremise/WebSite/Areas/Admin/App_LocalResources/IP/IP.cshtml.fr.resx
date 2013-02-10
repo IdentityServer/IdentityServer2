@@ -98,7 +98,7 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="ErrorUpdatingIdentityProvider" xml:space="preserve">
-		<value>Erreur de mise à jour du fournisseur d'identité</value>
+		<value>Erreur de mise à jour du fournisseur d’identité</value>
 	</data>
 	<data name="Cancel" xml:space="preserve">
 		<value>Annuler</value>
@@ -110,10 +110,10 @@
 		<value>Supprimer</value>
 	</data>
 	<data name="NewIdentityProvider" xml:space="preserve">
-		<value>Nouveau fournisseur d'identité</value>
+		<value>Nouveau fournisseur d’identité</value>
 	</data>
 	<data name="IdentityProvider" xml:space="preserve">
-		<value>Fournisseur d'identité : {0}</value>
+		<value>Fournisseur d’identité : {0}</value>
 	</data>
 	<data name="SaveChanges" xml:space="preserve">
 		<value>Sauvegarder</value>
