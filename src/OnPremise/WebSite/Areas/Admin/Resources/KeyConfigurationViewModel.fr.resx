@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,4 +97,16 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="NoReadAccessToPrivateKey" xml:space="preserve">
+		<value>{0} n'a pas les droits de lecture sur la clé privée du certificat sélectionné (voir see http://technet.microsoft.com/fr-ca/library/ee662329.aspx).</value>
+	</data>
+	<data name="InvalidSymmetricKeyLength" xml:space="preserve">
+		<value>Longeur invalide (32 octets dépassés.)</value>
+	</data>
+	<data name="NoItemSelected" xml:space="preserve">
+		<value>-aucune séléction-</value>
+	</data>
+	<data name="SigningThumbprint" xml:space="preserve">
+		<value>Empreinte de signature</value>
+	</data>
 </root>

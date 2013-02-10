@@ -107,6 +107,18 @@
 		<value>Erreur de création de l'utilisateur.</value>
 	</data>
 	<data name="UsersDeleted" xml:space="preserve">
-		<value>Utilisateurs effacés.</value>
+		<value>Utilisateurs supprimés</value>
+	</data>
+	<data name="ErrorDeletingUser" xml:space="preserve">
+		<value>Erreur de suppression de l'utilisateur.</value>
+	</data>
+	<data name="ErrorAssigningRoles" xml:space="preserve">
+		<value>Erreur d'assignation des rôles.</value>
+	</data>
+	<data name="RolesAssignedSuccessfully" xml:space="preserve">
+		<value>Assignation de rôles réussie</value>
+	</data>
+	<data name="ProfileUpdated" xml:space="preserve">
+		<value>Profil mis à jour</value>
 	</data>
 </root>

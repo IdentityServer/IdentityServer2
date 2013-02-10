@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,4 +97,25 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="ErrorCreatingRole" xml:space="preserve">
+		<value>Erreur de création du rôle.</value>
+	</data>
+	<data name="CannotDeleteRole" xml:space="preserve">
+		<value>Impossible de supprimer le rôle {0}.</value>
+	</data>
+	<data name="ErrorDeletingRole" xml:space="preserve">
+		<value>Erreur de suppression du rôle.</value>
+	</data>
+	<data name="InvalidAction" xml:space="preserve">
+		<value>Action invalide.</value>
+	</data>
+	<data name="RoleCreated" xml:space="preserve">
+		<value>Rôle créé</value>
+	</data>
+	<data name="RolesDeleted" xml:space="preserve">
+		<value>Rôles supprimés</value>
+	</data>
+	<data name="UpdateSuccessful" xml:space="preserve">
+		<value>Mise à jour réussie</value>
+	</data>
 </root>

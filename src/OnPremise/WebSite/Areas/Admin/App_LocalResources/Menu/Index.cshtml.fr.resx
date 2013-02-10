@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,4 +97,43 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="Configuration" xml:space="preserve">
+		<value>Configuration</value>
+	</data>
+	<data name="Diagnostics" xml:space="preserve">
+		<value>Diagnostiques</value>
+	</data>
+	<data name="ApplicationRecycle" xml:space="preserve">
+		<value>Recycler l'application</value>
+	</data>
+	<data name="ClientCertificates" xml:space="preserve">
+		<value>Certificats client</value>
+	</data>
+	<data name="GeneralConfiguration" xml:space="preserve">
+		<value>Configuration générale</value>
+	</data>
+	<data name="KeyConfiguration" xml:space="preserve">
+		<value>Configuration des clefs</value>
+	</data>
+	<data name="Protocols" xml:space="preserve">
+		<value>Protocoles</value>
+	</data>
+	<data name="RelyingPartiesResources" xml:space="preserve">
+		<value>Parties utilisatrices &amp; ressources</value>
+	</data>
+	<data name="IdentityProviders" xml:space="preserve">
+		<value>Fournisseurs d'identié</value>
+	</data>
+	<data name="OAuthClients" xml:space="preserve">
+		<value>Clients OAuth</value>
+	</data>
+	<data name="Roles" xml:space="preserve">
+		<value>Rôles</value>
+	</data>
+	<data name="IdentityDelegation" xml:space="preserve">
+		<value>Délégation d'identité</value>
+	</data>
+	<data name="Users" xml:space="preserve">
+		<value>Utilisateurs</value>
+	</data>
 </root>

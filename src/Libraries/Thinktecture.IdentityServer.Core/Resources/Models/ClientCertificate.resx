@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,22 +97,22 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-  <data name="Description" xml:space="preserve">
+	<data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="DescriptionDescription" xml:space="preserve">
+	<data name="DescriptionDescription" xml:space="preserve">
     <value>Name of the user to map the certificate to.</value>
   </data>
-  <data name="UserName" xml:space="preserve">
+	<data name="UserName" xml:space="preserve">
     <value>User Name</value>
   </data>
-  <data name="UserNameDescription" xml:space="preserve">
+	<data name="UserNameDescription" xml:space="preserve">
     <value>Name of the user to map the certificate to.</value>
   </data>
-  <data name="Thumbprint" xml:space="preserve">
+	<data name="Thumbprint" xml:space="preserve">
     <value>Client Certificate Thumbprint</value>
   </data>
-  <data name="ThumbprintDescription" xml:space="preserve">
+	<data name="ThumbprintDescription" xml:space="preserve">
     <value>Thumbprint of the client certificate.</value>
   </data>
 </root>

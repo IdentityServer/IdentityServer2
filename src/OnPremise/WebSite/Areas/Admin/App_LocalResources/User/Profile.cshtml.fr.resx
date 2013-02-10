@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,4 +97,16 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="Profile" xml:space="preserve">
+		<value>Profil : {0}</value>
+	</data>
+	<data name="ErrorsUpdatingProfile" xml:space="preserve">
+		<value>Erreurs de mise à jour du profil</value>
+	</data>
+	<data name="NoProfilePropertiesAvailable" xml:space="preserve">
+		<value>Aucune propriété de profil disponible</value>
+	</data>
+	<data name="Save" xml:space="preserve">
+		<value>Sauvegarder</value>
+	</data>
 </root>

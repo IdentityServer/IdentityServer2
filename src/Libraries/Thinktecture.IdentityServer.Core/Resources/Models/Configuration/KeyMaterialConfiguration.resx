@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,22 +97,22 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-  <data name="SigningCertificate" xml:space="preserve">
+	<data name="SigningCertificate" xml:space="preserve">
     <value>Signing Certificate</value>
   </data>
-  <data name="SigningCertificateDescription" xml:space="preserve">
+	<data name="SigningCertificateDescription" xml:space="preserve">
     <value>The X.509 certificate to sign outgoing SAML tokens</value>
   </data>
-  <data name="DecryptionCertificate" xml:space="preserve">
+	<data name="DecryptionCertificate" xml:space="preserve">
     <value>Decryption Certificate</value>
   </data>
-  <data name="DecryptionCertificateDescription" xml:space="preserve">
+	<data name="DecryptionCertificateDescription" xml:space="preserve">
     <value>The X.509 certificate to decrypt incoming SAML tokens</value>
   </data>
-  <data name="SymmetricSigningKey" xml:space="preserve">
+	<data name="SymmetricSigningKey" xml:space="preserve">
     <value>Symmetric Signing Key</value>
   </data>
-  <data name="SymmetricSigningKeyDescription" xml:space="preserve">
+	<data name="SymmetricSigningKeyDescription" xml:space="preserve">
     <value>Default symmetric signing key</value>
   </data>
 </root>

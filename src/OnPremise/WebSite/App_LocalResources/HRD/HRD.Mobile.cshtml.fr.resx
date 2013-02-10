@@ -101,9 +101,9 @@
 		<value>Fournisseurs d'identié</value>
 	</data>
 	<data name="HRD" xml:space="preserve">
-		<value>HRD</value>
+		<value>Découverte de domaine d'origine (HRD)</value>
 	</data>
 	<data name="NoIdentityProviders" xml:space="preserve">
-		<value>Aucun fournisseur d'identité est configuré. Contactez votre administrateur.</value>
+		<value>Aucun fournisseur d'identité n'est configuré. Contactez votre administrateur.</value>
 	</data>
 </root>

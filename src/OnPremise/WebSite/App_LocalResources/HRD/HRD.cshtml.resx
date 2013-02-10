@@ -121,7 +121,7 @@
     <value>Choose an Identity Provider to Login</value>
   </data>
 	<data name="HRD" xml:space="preserve">
-    <value>HRD</value>
+    <value>Home Realm Discovery (HRD)</value>
   </data>
 	<data name="NoIdentityProviders" xml:space="preserve">
     <value>No Identity Providers configured. Contact your administrator.</value>

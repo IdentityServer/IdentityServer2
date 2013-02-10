@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,4 +97,25 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="DelegationUsersDeleted" xml:space="preserve">
+		<value>Utilisateurs de délégation supprimés</value>
+	</data>
+	<data name="ErrorDeletingDelegationUsers" xml:space="preserve">
+		<value>Erreur de suppression des utilisateurs de délégation.</value>
+	</data>
+	<data name="ErrorAddingDelegationSetting" xml:space="preserve">
+		<value>Erreur d'ajout des réglages de délégation.</value>
+	</data>
+	<data name="ErrorDeletingDelegationSetting" xml:space="preserve">
+		<value>Erreur de suppression des réglages de la délégation.</value>
+	</data>
+	<data name="RealmAdded" xml:space="preserve">
+		<value>Domaine ajouté</value>
+	</data>
+	<data name="RealmDeleted" xml:space="preserve">
+		<value>Domaine supprimé</value>
+	</data>
+	<data name="UpdateSuccessful" xml:space="preserve">
+		<value>Mise à jour réussie</value>
+	</data>
 </root>

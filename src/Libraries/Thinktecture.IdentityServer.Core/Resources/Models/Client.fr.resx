@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,4 +97,64 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="AllowImplicitFlow" xml:space="preserve">
+		<value>Permettre le flux implicite</value>
+	</data>
+	<data name="AllowImplicitFlowDescription" xml:space="preserve">
+		<value>Permettre le flux implicite.</value>
+	</data>
+	<data name="AllowResourceOwnerFlow" xml:space="preserve">
+		<value>Permettre le flux de ressource propriétaire</value>
+	</data>
+	<data name="AllowResourceOwnerFlowDescription" xml:space="preserve">
+		<value>Permettre le flux de ressource propriétaire.</value>
+	</data>
+	<data name="AllowCodeFlow" xml:space="preserve">
+		<value>Permettre le flux de code</value>
+	</data>
+	<data name="AllowCodeFlowDescription" xml:space="preserve">
+		<value>Permettre le flux de code.</value>
+	</data>
+	<data name="AllowRefreshToken" xml:space="preserve">
+		<value>Permettre des jetons de rafraîchissement</value>
+	</data>
+	<data name="AllowRefreshTokenDescription" xml:space="preserve">
+		<value>Permettre des jetons de rafraîchissement. Ceci permettrera l'accès hors ligne au client pour les ressources.</value>
+	</data>
+	<data name="Description" xml:space="preserve">
+		<value>Description</value>
+	</data>
+	<data name="DescriptionDescription" xml:space="preserve">
+		<value>Description.</value>
+	</data>
+	<data name="ClientId" xml:space="preserve">
+		<value>Identifiant client</value>
+	</data>
+	<data name="ClientIdDescription" xml:space="preserve">
+		<value>Identifiant client.</value>
+	</data>
+	<data name="ClientSecret" xml:space="preserve">
+		<value>Secret client</value>
+	</data>
+	<data name="ClientSecretDescription" xml:space="preserve">
+		<value>Secret client.</value>
+	</data>
+	<data name="ClientSecretRequiredError" xml:space="preserve">
+		<value>Le secret client est requis pour le flux de code et de ressource propriétaire.</value>
+	</data>
+	<data name="NameDescription" xml:space="preserve">
+		<value>Nom d'affichage.</value>
+	</data>
+	<data name="RedirectUri" xml:space="preserve">
+		<value>Uri de redirection</value>
+	</data>
+	<data name="RedirectUriDescription" xml:space="preserve">
+		<value>Uri de redirection.</value>
+	</data>
+	<data name="RedirectUriRequiredError" xml:space="preserve">
+		<value>Uri de redirection est requis pour le flux de code et implicite.</value>
+	</data>
+	<data name="Name" xml:space="preserve">
+		<value>Nom</value>
+	</data>
 </root>

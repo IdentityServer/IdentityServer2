@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,22 +97,22 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-  <data name="UserCertificatesDeleted" xml:space="preserve">
+	<data name="UserCertificatesDeleted" xml:space="preserve">
     <value>User Certificates Deleted</value>
   </data>
-  <data name="ErrorDeletingClientCertificates" xml:space="preserve">
+	<data name="ErrorDeletingClientCertificates" xml:space="preserve">
     <value>Error deleting client certificates.</value>
   </data>
-  <data name="CertificateAdded" xml:space="preserve">
+	<data name="CertificateAdded" xml:space="preserve">
     <value>Certificate Added</value>
   </data>
-  <data name="ErrorAddingClientCertificate" xml:space="preserve">
+	<data name="ErrorAddingClientCertificate" xml:space="preserve">
     <value>Error adding client certificate.</value>
   </data>
-  <data name="CertificateRemoved" xml:space="preserve">
+	<data name="CertificateRemoved" xml:space="preserve">
     <value>Certificate Removed</value>
   </data>
-  <data name="ErrorRemovingClientCertificate" xml:space="preserve">
+	<data name="ErrorRemovingClientCertificate" xml:space="preserve">
     <value>Error removing client certificate.</value>
   </data>
 </root>

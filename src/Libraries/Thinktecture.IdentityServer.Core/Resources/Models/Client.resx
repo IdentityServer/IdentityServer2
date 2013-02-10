@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,64 +97,64 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
-  <data name="Name" xml:space="preserve">
+	<data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="NameDescription" xml:space="preserve">
+	<data name="NameDescription" xml:space="preserve">
     <value>Display name.</value>
   </data>
-  <data name="Description" xml:space="preserve">
+	<data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="DescriptionDescription" xml:space="preserve">
+	<data name="DescriptionDescription" xml:space="preserve">
     <value>Description.</value>
   </data>
-  <data name="ClientId" xml:space="preserve">
+	<data name="ClientId" xml:space="preserve">
     <value>Client ID</value>
   </data>
-  <data name="ClientIdDescription" xml:space="preserve">
+	<data name="ClientIdDescription" xml:space="preserve">
     <value>Client ID.</value>
   </data>
-  <data name="ClientSecret" xml:space="preserve">
+	<data name="ClientSecret" xml:space="preserve">
     <value>Client Secret</value>
   </data>
-  <data name="ClientSecretDescription" xml:space="preserve">
+	<data name="ClientSecretDescription" xml:space="preserve">
     <value>Client secret.</value>
   </data>
-  <data name="RedirectUri" xml:space="preserve">
+	<data name="RedirectUri" xml:space="preserve">
     <value>Redirect URI</value>
   </data>
-  <data name="RedirectUriDescription" xml:space="preserve">
+	<data name="RedirectUriDescription" xml:space="preserve">
     <value>Redirect URI.</value>
   </data>
-  <data name="AllowImplicitFlow" xml:space="preserve">
+	<data name="AllowImplicitFlow" xml:space="preserve">
     <value>Allow Implicit Flow</value>
   </data>
-  <data name="AllowImplicitFlowDescription" xml:space="preserve">
+	<data name="AllowImplicitFlowDescription" xml:space="preserve">
     <value>Allow implicit flow.</value>
   </data>
-  <data name="AllowResourceOwnerFlow" xml:space="preserve">
+	<data name="AllowResourceOwnerFlow" xml:space="preserve">
     <value>Allow Resource Owner Flow</value>
   </data>
-  <data name="AllowResourceOwnerFlowDescription" xml:space="preserve">
+	<data name="AllowResourceOwnerFlowDescription" xml:space="preserve">
     <value>Allow Resource Owner Flow.</value>
   </data>
-  <data name="AllowCodeFlow" xml:space="preserve">
+	<data name="AllowCodeFlow" xml:space="preserve">
     <value>Allow Code Flow</value>
   </data>
-  <data name="AllowCodeFlowDescription" xml:space="preserve">
+	<data name="AllowCodeFlowDescription" xml:space="preserve">
     <value>Allow code flow.</value>
   </data>
-  <data name="AllowRefreshToken" xml:space="preserve">
+	<data name="AllowRefreshToken" xml:space="preserve">
     <value>Allow Refresh Tokens</value>
   </data>
-  <data name="AllowRefreshTokenDescription" xml:space="preserve">
+	<data name="AllowRefreshTokenDescription" xml:space="preserve">
     <value>Allow Refresh Tokens. This enabled offline access for the client to the resource.</value>
   </data>
-  <data name="ClientSecretRequiredError" xml:space="preserve">
+	<data name="ClientSecretRequiredError" xml:space="preserve">
     <value>Client Secret is required for Code and Resource Owner Flows.</value>
   </data>
-  <data name="RedirectUriRequiredError" xml:space="preserve">
+	<data name="RedirectUriRequiredError" xml:space="preserve">
     <value>Redirect URI is required for Code and Implicit Flows.</value>
   </data>
 </root>

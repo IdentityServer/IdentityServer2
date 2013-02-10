@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,4 +97,40 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="AllowReplyTo" xml:space="preserve">
+		<value>Permettre le paramètre "replyto"</value>
+	</data>
+	<data name="AllowReplyToDescription" xml:space="preserve">
+		<value>Permettre la spécification du paramètre fédéré WS "replyto". Autrement ce paramètre sera toujours ignoré.</value>
+	</data>
+	<data name="EnableAuthentication" xml:space="preserve">
+		<value>Permettre la connexion</value>
+	</data>
+	<data name="EnableAuthenticationDescription" xml:space="preserve">
+		<value>Permettre la connexion fédérée WS.</value>
+	</data>
+	<data name="EnableFederation" xml:space="preserve">
+		<value>Activer la fédération</value>
+	</data>
+	<data name="EnableFederationDescription" xml:space="preserve">
+		<value>Active la connexion fédérée WS (voir fournisseur d'identité.)</value>
+	</data>
+	<data name="EnableHrd" xml:space="preserve">
+		<value>Activer la découverte de domaine d'origine</value>
+	</data>
+	<data name="EnableHrdDescription" xml:space="preserve">
+		<value>Active la page de sélection du fournisseur d'identité pour la connexion fédérée.</value>
+	</data>
+	<data name="RequireReplyToWithinRealm" xml:space="preserve">
+		<value>Url de redirection doit être à l'intérieur du domaine</value>
+	</data>
+	<data name="RequireReplyToWithinRealmDescription" xml:space="preserve">
+		<value>S'assure que le Url de redirection (paramètre replyto) soit un sous Url du domaine.</value>
+	</data>
+	<data name="RequireSslForReplyTo" xml:space="preserve">
+		<value>SSL requis</value>
+	</data>
+	<data name="RequireSslForReplyToDescription" xml:space="preserve">
+		<value>S'assure que SSL soit utilisé pour l'adresse de redirection. Cette option devrait toujours être activée.</value>
+	</data>
 </root>

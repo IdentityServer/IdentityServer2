@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 	<!-- 
 		Microsoft ResX Schema
@@ -58,7 +58,6 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
 	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
 		<xsd:element name="root" msdata:IsDataSet="true">
 			<xsd:complexType>
@@ -98,4 +97,64 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+	<data name="SymmetricSigningKeyDescription" xml:space="preserve">
+		<value>Clef Base64 encodée utilisée pour la signature symétrique des jetons.</value>
+	</data>
+	<data name="Enabled" xml:space="preserve">
+		<value>Activé</value>
+	</data>
+	<data name="EnabledDescription" xml:space="preserve">
+		<value>Activer ou désactiver cette partie de confiance.</value>
+	</data>
+	<data name="Name" xml:space="preserve">
+		<value>Nom d'affichage</value>
+	</data>
+	<data name="ReplyTo" xml:space="preserve">
+		<value>Url de redirection</value>
+	</data>
+	<data name="SymmetricSigningKey" xml:space="preserve">
+		<value>Clef de signature symétrique</value>
+	</data>
+	<data name="EncryptingCertificate" xml:space="preserve">
+		<value>Certificat de chiffrage</value>
+	</data>
+	<data name="EncryptingCertificateDescription" xml:space="preserve">
+		<value>Certificat X.509 optionnel pour chiffrer les jetons sortants.</value>
+	</data>
+	<data name="NameDescription" xml:space="preserve">
+		<value>Nom descriptif (affiché dans le journal de traçage.)</value>
+	</data>
+	<data name="Realm" xml:space="preserve">
+		<value>Nom du domaine/portée</value>
+	</data>
+	<data name="RealmDescription" xml:space="preserve">
+		<value>Uri de l'identifiant de domaine/portée.</value>
+	</data>
+	<data name="ReplyToDescription" xml:space="preserve">
+		<value>Url de réacheminement (paramètre ReplyTo) après qu'un jeton soit émis.</value>
+	</data>
+	<data name="ExtraData1" xml:space="preserve">
+		<value>Donnée supplémentaire 1</value>
+	</data>
+	<data name="ExtraData1Description" xml:space="preserve">
+		<value>Donnée supplémentaire que vous pouvez associer avec cette partie de confiance. (1)</value>
+	</data>
+	<data name="ExtraData2" xml:space="preserve">
+		<value>Donnée supplémentaire 2</value>
+	</data>
+	<data name="ExtraData2Description" xml:space="preserve">
+		<value>Donnée supplémentaire que vous pouvez associer avec cette partie de confiance. (2)</value>
+	</data>
+	<data name="ExtraData3" xml:space="preserve">
+		<value>Donnée supplémentaire 3</value>
+	</data>
+	<data name="ExtraData3Description" xml:space="preserve">
+		<value>Donnée supplémentaire que vous pouvez associer avec cette partie de confiance. (3)</value>
+	</data>
+	<data name="TokenLifeTime" xml:space="preserve">
+		<value>Durée de vie d'un jeton (en minutes)</value>
+	</data>
+	<data name="TokenLifeTimeDescription" xml:space="preserve">
+		<value>Peut être utilisé pour surpasser la durée de vie par défaut des jetons. La valeur globale par défaut sera utilisée lorsque cette valeur est '0'.</value>
+	</data>
 </root>
