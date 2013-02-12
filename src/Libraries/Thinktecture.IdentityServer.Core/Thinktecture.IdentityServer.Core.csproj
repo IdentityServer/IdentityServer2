@@ -373,6 +373,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Models\Configuration\WSFederationConfiguration.fr.resx">
       <DependentUpon>WSFederationConfiguration.resx</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Models\Configuration\WSFederationConfiguration.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -415,6 +416,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Models\RelyingParty.fr.resx">
       <DependentUpon>RelyingParty.resx</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Models\RelyingParty.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

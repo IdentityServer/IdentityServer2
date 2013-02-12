@@ -131,7 +131,7 @@
 		<value>URI de l’identifiant de domaine/portée.</value>
 	</data>
 	<data name="ReplyToDescription" xml:space="preserve">
-		<value>URL de réacheminement (paramètre « replyto ») après qu’un jeton soit émis.</value>
+		<value>URL de réacheminement (paramètre «&#xA0;replyto&#xA0;») après qu’un jeton soit émis.</value>
 	</data>
 	<data name="ExtraData1" xml:space="preserve">
 		<value>Donnée supplémentaire #1</value>
