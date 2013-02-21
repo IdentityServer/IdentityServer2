@@ -17,17 +17,27 @@ namespace Thinktecture.IdentityServer.TokenService
     /// </summary>
     public class TokenServiceConfiguration : SecurityTokenServiceConfiguration
     {
-        private static readonly object _syncRoot = new object();
         private static Lazy<TokenServiceConfiguration> _configuration = new Lazy<TokenServiceConfiguration>();
 
         [Import]
         public IConfigurationRepository ConfigurationRepository { get; set; }
 
+        public TokenServiceConfiguration(IConfigurationRepository configurationRepository)
+        {
+            ConfigurationRepository = configurationRepository;
+            Configure();
+        }
+
         public TokenServiceConfiguration() : base()
         {
-            Tracing.Information("Configuring token service");
             Container.Current.SatisfyImportsOnce(this);
+            Configure();
+        }
 
+        protected virtual void Configure()
+        {
+            Tracing.Information("Configuring token service");
+            
             SecurityTokenService = typeof(TokenService);
             DefaultTokenLifetime = TimeSpan.FromHours(ConfigurationRepository.Global.DefaultTokenLifetime);
             MaximumTokenLifetime = TimeSpan.FromDays(ConfigurationRepository.Global.MaximumTokenLifetime);
