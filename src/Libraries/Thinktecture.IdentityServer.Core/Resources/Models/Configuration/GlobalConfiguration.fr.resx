@@ -130,7 +130,7 @@
     <value>Activer les certificats client</value>
   </data>
 	<data name="EnableClientCertificateAuthenticationDescription" xml:space="preserve">
-    <value>Permet aux utilisateurs de s'authentifier dans le portail avec un certificat client.</value>
+    <value>Permet aux utilisateurs de s’authentifier dans le portail avec un certificat client.</value>
   </data>
 	<data name="EnforceUsersGroupMembership" xml:space="preserve">
     <value>Requiert le rôle ‘IdentityServerUsers’ pour l’obtention de jetons</value>
@@ -184,7 +184,7 @@
 		<value>Lorsque cette option est activée, tous les jetons sortant doivent être chiffrés.</value>
 	</data>
 	<data name="RequireRelyingPartyRegistration" xml:space="preserve">
-		<value>Requiert l'enregistrement de parties utilisatrices</value>
+		<value>Requiert l’enregistrement de parties utilisatrices</value>
 	</data>
 	<data name="RequireRelyingPartyRegistrationDescription" xml:space="preserve">
 		<value>Lorsque cette option est activée, le SJS émettra des jetons seulement aux parties utilisatrices qui sont enregistrées.</value>
