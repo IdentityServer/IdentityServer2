@@ -122,7 +122,7 @@
 		<value>Parties utilisatrices &amp; ressources</value>
 	</data>
 	<data name="IdentityProviders" xml:space="preserve">
-		<value>Fournisseurs d'identié</value>
+		<value>Fournisseurs d'identité</value>
 	</data>
 	<data name="OAuthClients" xml:space="preserve">
 		<value>Clients OAuth</value>
