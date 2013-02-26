@@ -22,8 +22,9 @@ namespace Thinktecture.IdentityServer
         public Uri WSTrustMixedUserName { get; set; }
         public Uri WSTrustMessageCertificate { get; set; }
         public Uri WSTrustMixedCertificate { get; set; }
-        
+
         public Uri SimpleHttp { get; set; }
+        public Uri AdfsIntegration { get; set; }
         public Uri Wrap { get; set; }
         public Uri OAuth2Token { get; set; }
         public Uri OAuth2Callback { get; set; }
@@ -135,6 +136,12 @@ namespace Thinktecture.IdentityServer
             builder.Scheme = Uri.UriSchemeHttps;
             builder.Port = httpsPort;
             ep.WSFederationMetadata = builder.Uri;
+            
+            var adfs = new Uri(baseUriString + Paths.AdfsIntegration);
+            builder = new UriBuilder(adfs);
+            builder.Scheme = Uri.UriSchemeHttps;
+            builder.Port = httpsPort;
+            ep.AdfsIntegration = builder.Uri;
 
             var activeClear = new Uri(baseUriString + Paths.WSTrustBase);
             builder = new UriBuilder(activeClear);

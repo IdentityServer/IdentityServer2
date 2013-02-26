@@ -105,6 +105,15 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 }
             }
 
+            // adfs integration
+            if (Configuration.AdfsIntegration.Enabled)
+            {
+                if (Configuration.AdfsIntegration.AuthenticationEnabled || Configuration.AdfsIntegration.FederationEnabled)
+                {
+                    list.Add("ADFS Integration", endpoints.AdfsIntegration.AbsoluteUri);
+                }
+            }
+
             // simple http
             if (Configuration.SimpleHttp.Enabled)
             {
