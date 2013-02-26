@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
     public class UsersViewModel
     {
+        [Import]
+        public IConfigurationRepository ConfigurationRepository { get; set; }
+
         private Repositories.IUserManagementRepository UserManagementRepository;
 
         public UsersViewModel(Repositories.IUserManagementRepository UserManagementRepository, string filter)
         {
+            Container.Current.SatisfyImportsOnce(this);
+
             this.UserManagementRepository = UserManagementRepository;
             this.Filter = filter;
 
@@ -39,6 +46,15 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
             get
             {
                 return System.Web.Profile.ProfileManager.Enabled;
+            }
+        }
+        
+        public bool IsOAuthRefreshTokenEnabled
+        {
+            get
+            {
+                return ConfigurationRepository.OAuth2.Enabled &&
+                    ConfigurationRepository.OAuth2.EnableCodeFlow;
             }
         }
     }

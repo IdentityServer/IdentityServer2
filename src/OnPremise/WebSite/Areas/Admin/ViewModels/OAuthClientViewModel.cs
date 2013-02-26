@@ -1,29 +1,41 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
+using System.Web;
+using Thinktecture.IdentityServer.Models;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
     public class OAuthClientViewModel
     {
-        private Repositories.IClientsRepository clientsRepository;
-        public OAuthClientInputModel[] Clients
+        [Import]
+        public IConfigurationRepository ConfigurationRepository { get; set; }
+        public Client Client { get; set; }
+
+        public OAuthClientViewModel(Models.Client client)
         {
-            get;
-            private set;
+            Container.Current.SatisfyImportsOnce(this);
+            this.Client = client;
         }
 
-        public OAuthClientViewModel(Repositories.IClientsRepository clientsRepository)
+        public bool IsNew
         {
-            // TODO: Complete member initialization
-            this.clientsRepository = clientsRepository;
-            this.Clients = this.clientsRepository.GetAll().Select(x=>new OAuthClientInputModel{Name=x.Name, ID=x.ID}).ToArray();
+            get
+            {
+                return this.Client.ID == 0;
+            }
+        }
+
+        public bool IsOAuthRefreshTokenEnabled
+        {
+            get
+            {
+                return !IsNew && Client.AllowCodeFlow &&
+                    ConfigurationRepository.OAuth2.Enabled &&
+                    ConfigurationRepository.OAuth2.EnableCodeFlow;
+            }
         }
     }
-
-    public class OAuthClientInputModel
-    {
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public bool Delete { get; set; }
-    }
-
 }

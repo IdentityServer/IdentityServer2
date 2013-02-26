@@ -26,6 +26,12 @@
             @Html.ActionLink("OAuth Clients", "Index", "OAuthClient")
             @Html.Action("ChildMenu", "Menu", new{controllerName="OAuthClient"})
         </li>
+        if (Model.ShowOAuthTokens)
+        {
+        <li>
+            @Html.ActionLink("OAuth Tokens", "Index", "OAuthRefreshToken")
+        </li>
+        }
     }
 </ul>
 <ul>

@@ -1,0 +1,23 @@
+﻿@model OAuthRefreshTokenIndexViewModel
+
+@{
+    ViewBag.Title = "OAuth Refresh Tokens";
+}
+
+@using (Html.BeginForm("Index", "OAuthRefreshToken", FormMethod.Get))
+{
+    <fieldset class="editor small">
+        <legend>Refresh Tokens</legend>
+
+        @Html.EditorFor(x=>x.SearchCriteria)
+        
+        <div>
+            @Html.LabelFor(x=>x.SearchCriteria.ClientID)
+            @Html.DropDownListFor(x=>x.SearchCriteria.ClientID, Model.Clients)
+        </div>
+
+        <div class="buttons">
+            <button>Search</button>
+        </div>
+    </fieldset>
+}

@@ -27,13 +27,13 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var vm = new OAuthClientViewModel(this.clientRepository);
+            var vm = new OAuthClientIndexViewModel(this.clientRepository);
             return View("Index", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(string action, OAuthClientInputModel[] list)
+        public ActionResult Index(string action, OAuthClientIndexInputModel[] list)
         {
             if (action == "new") return RedirectToAction("Edit");
             if (action == "delete") return Delete(list);
@@ -42,7 +42,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             return Index();
         }
 
-        private ActionResult Delete(OAuthClientInputModel[] list)
+        private ActionResult Delete(OAuthClientIndexInputModel[] list)
         {
             if (ModelState.IsValid)
             {
@@ -80,8 +80,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             {
                 client = new Client();
             }
-            
-            return View("Edit", client);
+
+            var vm = new OAuthClientViewModel(client); 
+            return View("Edit", vm);
         }
 
         [HttpPost]
@@ -162,7 +163,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
         [ChildActionOnly]
         public ActionResult Menu()
         {
-            var list = new OAuthClientViewModel(this.clientRepository);
+            var list = new OAuthClientIndexViewModel(this.clientRepository);
             if (list.Clients.Any())
             {
                 var vm = new ChildMenuViewModel

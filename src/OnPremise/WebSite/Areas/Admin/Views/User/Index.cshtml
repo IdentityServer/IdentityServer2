@@ -24,6 +24,10 @@
                 {
                     @Html.ActionLink("profile", "Profile", new{id=list[i].Username})
                 }
+                @if (Model.IsOAuthRefreshTokenEnabled)
+                {
+                    @Html.ActionLink("tokens", "Index", "OAuthRefreshToken", new{username=list[i].Username}, null)
+                }
             </div>
         }
         <div class="buttons">

@@ -165,6 +165,7 @@
     <Compile Include="Areas\Admin\Controllers\IPController.cs" />
     <Compile Include="Areas\Admin\Controllers\KeyConfigurationController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OAuthRefreshTokenController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProtocolController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\RPController.cs" />
@@ -176,12 +177,14 @@
     <Compile Include="Areas\Admin\ViewModels\ClientCertificatesViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\CertificateInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\MenuViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\OAuthClientViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\OAuthClientIndexViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DelegationSettingsForUserInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\DelegationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\IdentityProvidersViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\IPCertInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\KeyConfigurationViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\OAuthClientViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\OAuthRefreshTokenIndexViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserProfileViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RoleInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RolesViewModel.cs" />
@@ -349,6 +352,7 @@
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Enum.cshtml" />
     <Content Include="Areas\Admin\Views\User\Profile.cshtml" />
     <Content Include="Areas\Admin\Views\General\Recycle.cshtml" />
+    <Content Include="Areas\Admin\Views\OAuthRefreshToken\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Local Release.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />

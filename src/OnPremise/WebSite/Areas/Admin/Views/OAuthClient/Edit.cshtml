@@ -1,17 +1,17 @@
-﻿@model Thinktecture.IdentityServer.Models.Client
+﻿@model OAuthClientViewModel
 
 @{
-    if (Model.ID == 0)
+    if (Model.IsNew)
     {
         ViewBag.Title = "New OAuth Client";
     }
     else
     {
-        ViewBag.Title = "OAuth Client : " + Model.Name;
+        ViewBag.Title = "OAuth Client : " + Model.IsNew;
     }
 }
 @{
-    var action = Model.Name == null ? "Create" : "Update";
+    var action = Model.IsNew ? "Create" : "Update";
 }
 @using (Html.BeginForm(action, "OAuthClient"))
 {
@@ -20,10 +20,10 @@
     <fieldset class="editor">
         <legend>@ViewBag.Title</legend>
 
-        @Html.EditorForModel()
+        @Html.EditorFor(x=>x.Client)
 
         <div class="buttons">
-            @if (Model.ID != 0)
+            @if (!Model.IsNew)
             {
                 <button type="submit" name="action" value="save">Save Changes</button>
                 <button type="submit" name="action" value="delete">Delete</button>
@@ -34,5 +34,14 @@
             }
             <button type="reset">Cancel</button>
         </div>
+
+        @if (Model.IsOAuthRefreshTokenEnabled)
+        {
+            <nav class="links">
+                <ul>
+                    <li>@Html.ActionLink("tokens", "Index", "OAuthRefreshToken", new { ClientID=Model.Client.ID }, null)</li>
+                </ul>
+            </nav>
+        }
     </fieldset>
 }
