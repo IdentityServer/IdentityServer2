@@ -34,7 +34,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
                 x => x.OAuth2,
                 (c, v) => { c.OAuth2 = (OAuth2Configuration)v; }));
             protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
-                "ADFS Bridge",
+                "ADFS Integration",
                 x => x.AdfsIntegration,
                 (c, v) => { c.AdfsIntegration = (AdfsIntegrationConfiguration)v; }));
         }
