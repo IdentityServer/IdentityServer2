@@ -38,6 +38,7 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         // general settings
 
         [Display(Name = "Symmetric signing key", Description = "The symmetric singing key for the newly created token, empty if you want to use the default signing key")]
+        [UIHint("SymmetricKey")]
         public string SymmetricSigningKey { get; set; }        
 
 
