@@ -4,6 +4,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Thinktecture.IdentityServer.Models;
 
@@ -67,6 +68,44 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     entities.CodeTokens.Remove(item);
                     entities.SaveChanges();
                 }
+            }
+        }
+
+        public IEnumerable<Models.CodeToken> Search(int? clientId, string username, string scope, CodeTokenType type)
+        {
+            using (var entities = IdentityServerConfigurationContext.Get())
+            {
+                var query = 
+                    from t in entities.CodeTokens
+                    where t.Type == (int)type
+                    select t;
+
+                if (clientId != null)
+                {
+                    query =
+                        from t in query
+                        where t.ClientId == clientId.Value
+                        select t;
+                }
+
+                if (!String.IsNullOrWhiteSpace(username))
+                {
+                    query =
+                        from t in query
+                        where t.UserName.Contains(username)
+                        select t;
+                }
+
+                if (!String.IsNullOrWhiteSpace(scope))
+                {
+                    query =
+                        from t in query
+                        where t.Scope.Contains(scope)
+                        select t;
+                }
+
+                var results = query.ToArray().Select(x => x.ToDomainModel());
+                return results;
             }
         }
     }

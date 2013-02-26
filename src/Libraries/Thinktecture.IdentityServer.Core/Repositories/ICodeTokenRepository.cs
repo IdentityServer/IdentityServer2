@@ -3,6 +3,8 @@
  * see license.txt
  */
 
+using System.Collections;
+using System.Collections.Generic;
 using Thinktecture.IdentityServer.Models;
 
 namespace Thinktecture.IdentityServer.Repositories
@@ -15,5 +17,6 @@ namespace Thinktecture.IdentityServer.Repositories
         string AddCode(CodeTokenType type, int clientId, string userName, string scope);
         bool TryGetCode(string tokenIdentifier, out CodeToken token);
         void DeleteCode(string tokenIdentifier);
+        IEnumerable<CodeToken> Search(int? clientId, string username, string scope, CodeTokenType type);
     }
 }

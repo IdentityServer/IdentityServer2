@@ -9,15 +9,57 @@
     <fieldset class="editor small">
         <legend>Refresh Tokens</legend>
 
-        @Html.EditorFor(x=>x.SearchCriteria)
-        
+        @Html.EditorFor(x => x.SearchCriteria)
+
         <div>
-            @Html.LabelFor(x=>x.SearchCriteria.ClientID)
-            @Html.DropDownListFor(x=>x.SearchCriteria.ClientID, Model.Clients)
+            @Html.LabelFor(x => x.SearchCriteria.ClientID)
+            @Html.DropDownListFor(x => x.SearchCriteria.ClientID, Model.Clients)
         </div>
 
         <div class="buttons">
             <button>Search</button>
         </div>
     </fieldset>
+}
+
+@if (Model.SearchResults != null)
+{
+    if (!Model.SearchResults.Any())
+    {
+    <h2>No Results Found</h2>
+    }
+    else
+    {
+    <h2>Search Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>TimeStamp</th>
+                <th>UserName</th>
+                <th>Client</th>
+                <th>Scope</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var token in Model.SearchResults)
+            {
+                <tr>
+                    <td>
+                        @using (Html.BeginForm("DeleteToken", "OAuthRefreshToken", new { Model.SearchCriteria.Username, Model.SearchCriteria.Scope, Model.SearchCriteria.ClientID }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("token", token.Code)
+                            <button>delete</button>
+                        }
+                    </td>
+                    <td>@token.TimeStamp</td>
+                    <td>@token.UserName</td>
+                    <td>@Model.LookupClientId(token.ClientId)</td>
+                    <td>@token.Scope</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
 }

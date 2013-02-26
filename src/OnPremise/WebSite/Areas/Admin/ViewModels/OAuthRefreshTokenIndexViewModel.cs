@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
@@ -12,7 +13,8 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
     {
         public OAuthRefreshTokenIndexViewModel(
             TokenSearchCriteria searchCriteria,
-            IClientsRepository clientRepository)
+            IClientsRepository clientRepository,
+            ICodeTokenRepository codeTokenRepository)
         {
             this.SearchCriteria = searchCriteria;
             var clients = 
@@ -29,12 +31,22 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
                 }).ToList();
             list.Insert(0, new SelectListItem { Text = "-none selected-", Value="" });
             this.Clients = list;
+
+            if (searchCriteria.HasValues)
+            {
+                var results = codeTokenRepository.Search(searchCriteria.ClientID, searchCriteria.Username, searchCriteria.Scope, CodeTokenType.RefreshTokenIdentifier);
+                this.SearchResults = results.OrderBy(x=>x.TimeStamp);
+            }
         }
         
         public TokenSearchCriteria SearchCriteria { get; private set; }
         public IEnumerable<SelectListItem> Clients { get; set; }
+        public IEnumerable<CodeToken> SearchResults { get; set; }
 
-
+        public string LookupClientId(int clientID)
+        {
+            return Clients.Where(x => x.Value == clientID.ToString()).Select(x => x.Text).SingleOrDefault();
+        }
     }
 
     public class TokenSearchCriteria
@@ -43,5 +55,16 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         public string Scope { get; set; }
         [ScaffoldColumn(false)]
         public int? ClientID { get; set; }
+        [ScaffoldColumn(false)]
+        public bool HasValues
+        {
+            get
+            {
+                return
+                    !String.IsNullOrWhiteSpace(Username) ||
+                    !String.IsNullOrWhiteSpace(Scope) ||
+                    ClientID != null;
+            }
+        }
     }
 }
