@@ -40,6 +40,12 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 
         public bool UpdateProfileFromValues(ModelStateDictionary errors)
         {
+            if (ProfileValues.All(x => String.IsNullOrWhiteSpace(x.Data.Value)))
+            {
+                ProfileManager.DeleteProfile(Username);
+                return true;
+            }
+
             var profile = ProfileBase.Create(Username);
             for (int i = 0; i < ProfileValues.Length; i++)
             {
@@ -69,7 +75,15 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 
             if (errors.IsValid)
             {
-                profile.Save();
+                try
+                {
+                    profile.Save();
+                }
+                catch (Exception ex)
+                {
+                    errors.AddModelError("", "Error updating profile.");
+                    Tracing.Error(ex.Message);
+                }
             }
 
             return errors.IsValid;
