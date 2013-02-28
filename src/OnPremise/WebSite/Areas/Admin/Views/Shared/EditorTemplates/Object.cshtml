@@ -8,7 +8,7 @@
             <div>
                 @if (prop.TemplateHint == "HiddenInput")
                 {
-                    @Html.Hidden(prop.PropertyName)
+                    @Html.Hidden(prop.PropertyName, prop.Model)
                 }
                 else
                 {

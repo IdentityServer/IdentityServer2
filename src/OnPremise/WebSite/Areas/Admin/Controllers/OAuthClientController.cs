@@ -87,15 +87,15 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Client model)
+        public ActionResult Create(Client client)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    this.clientRepository.Create(model);
+                    this.clientRepository.Create(client);
                     TempData["Message"] = "Client Created";
-                    return RedirectToAction("Edit", new { id = model.ID });
+                    return RedirectToAction("Edit", new { id = client.ID });
                 }
                 catch (ValidationException ex)
                 {
@@ -107,20 +107,20 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
             }
 
-            return Edit(model.ID);
+            return Edit(client.ID);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(Client model)
+        public ActionResult Update(Client client)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    this.clientRepository.Update(model);
+                    this.clientRepository.Update(client);
                     TempData["Message"] = "Client updated";
-                    return RedirectToAction("Edit", new { id = model.ID });
+                    return RedirectToAction("Edit", new { id = client.ID });
                 }
                 catch (ValidationException ex)
                 {
@@ -132,7 +132,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
             }
 
-            return Edit(model.ID);
+            return Edit(client.ID);
         }
 
         [HttpPost]
