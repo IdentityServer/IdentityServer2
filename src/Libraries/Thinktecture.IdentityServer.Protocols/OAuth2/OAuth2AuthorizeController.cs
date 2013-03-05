@@ -51,28 +51,25 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             var error = CheckRequest(request, out client);
             if (error != null) return error;
 
+            RelyingParty rp;
+            if (!RPRepository.TryGet(request.scope, out rp))
+            {
+                return ClientError(client.RedirectUri, OAuth2Constants.Errors.InvalidScope, request.response_type, request.state);
+            }
+
             if (Configuration.OAuth2.EnableConsent)
             {
-                RelyingParty rp;
-                if (RPRepository.TryGet(request.scope, out rp))
+                // show resource name, uri and client name
+                // client is trying to access resource on your behalf
+                var vm = new OAuth2ConsentViewModel
                 {
-                    // show resource name, uri and client name
-                    // client is trying to access resource on your behalf
-                    var vm = new OAuth2ConsentViewModel
-                    {
-                        ResourceUri = rp.Realm.AbsoluteUri,
-                        ResourceName = rp.Name,
-                        ClientName = client.ClientId,
-                        RefreshTokenEnabled = client.AllowRefreshToken
-                    };
+                    ResourceUri = rp.Realm.AbsoluteUri,
+                    ResourceName = rp.Name,
+                    ClientName = client.ClientId,
+                    RefreshTokenEnabled = client.AllowRefreshToken
+                };
 
-                    return View("ShowConsent", vm);
-                }
-                else
-                {
-                    // unknown RP - error out
-                    return ClientError(client.RedirectUri, OAuth2Constants.Errors.InvalidScope, request.response_type, request.state);
-                }
+                return View("ShowConsent", vm);
             }
             else
             {
@@ -80,7 +77,8 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                 if (grantResult != null) return grantResult;
             }
 
-            return ClientError(client.RedirectUri, OAuth2Constants.Errors.InvalidRequest, request.response_type, request.state);
+            // we don't know exactly why, so use ServerError
+            return ClientError(client.RedirectUri, OAuth2Constants.Errors.ServerError, request.response_type, request.state);
         }
 
         [ActionName("Index")]
@@ -109,6 +107,13 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
         private ActionResult CheckRequest(AuthorizeRequest request, out Client client)
         {
+            if (request == null)
+            {
+                client = null;
+                ViewBag.Message = "Invalid request parameters";
+                return View("Error");
+            }
+            
             // validate client
             if (!Clients.TryGetClient(request.client_id, out client))
             {
@@ -117,10 +122,16 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             }
 
             // validate redirect uri
-            if (string.IsNullOrEmpty(request.redirect_uri) || !string.Equals(request.redirect_uri, client.RedirectUri.AbsoluteUri, StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrEmpty(request.redirect_uri) || 
+                !string.Equals(request.redirect_uri, client.RedirectUri.AbsoluteUri, StringComparison.OrdinalIgnoreCase))
             {
                 ViewBag.Message = "The redirect_uri in the request: " + request.redirect_uri + " did not match a registered redirect URI.";
                 return View("Error");
+            }
+
+            if (String.IsNullOrWhiteSpace(request.response_type))
+            {
+                return ClientError(client.RedirectUri, OAuth2Constants.Errors.InvalidRequest, string.Empty, request.state);
             }
 
             // check response type (only code and token are supported)
@@ -177,7 +188,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
             if (!string.IsNullOrEmpty(request.state))
             {
-                tokenString = string.Format("{0}&state={1}", tokenString, request.state);
+                tokenString = string.Format("{0}&state={1}", tokenString, Server.UrlEncode(request.state));
             }
 
             var redirectString = string.Format("{0}?{1}",
@@ -205,7 +216,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
                 if (!string.IsNullOrEmpty(request.state))
                 {
-                    tokenString = string.Format("{0}&state={1}", tokenString, request.state);
+                    tokenString = string.Format("{0}&state={1}", tokenString, Server.UrlEncode(request.state));
                 }
 
                 var redirectString = string.Format("{0}#{1}",
@@ -235,7 +246,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             }
             else
             {
-                url = string.Format("{0}{1}error={2}&state={3}", redirectUri.AbsoluteUri, separator, error, state);
+                url = string.Format("{0}{1}error={2}&state={3}", redirectUri.AbsoluteUri, separator, error, Server.UrlEncode(state));
             }
 
             return new RedirectResult(url);
