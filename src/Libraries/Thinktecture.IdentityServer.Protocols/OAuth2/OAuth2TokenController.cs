@@ -3,6 +3,7 @@
  * see license.txt
  */
 
+using System;
 using System.ComponentModel.Composition;
 using System.IdentityModel.Protocols.WSTrust;
 using System.Net;
@@ -27,19 +28,19 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         public IClientsRepository ClientsRepository { get; set; }
 
         [Import]
-        public ICodeTokenRepository RefreshTokenRepository { get; set; }
+        public ICodeTokenRepository CodeTokenRepository { get; set; }
 
         public OAuth2TokenController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public OAuth2TokenController(IUserRepository userRepository, IConfigurationRepository configurationRepository, IClientsRepository clientsRepository, ICodeTokenRepository refreshTokenRepository)
+        public OAuth2TokenController(IUserRepository userRepository, IConfigurationRepository configurationRepository, IClientsRepository clientsRepository, ICodeTokenRepository codeTokenRepository)
         {
             UserRepository = userRepository;
             ConfigurationRepository = configurationRepository;
             ClientsRepository = clientsRepository;
-            RefreshTokenRepository = refreshTokenRepository;
+            CodeTokenRepository = codeTokenRepository;
         }
 
         public HttpResponseMessage Post([FromBody] TokenRequest tokenRequest)
@@ -97,30 +98,35 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
 
         private HttpResponseMessage ProcessAuthorizationCodeRequest(Client client, string code, string tokenType)
         {
-            return ProcessRefreshTokenRequest(client, code, tokenType);
+            Tracing.Information("Processing authorization code token request for client: " + client.Name);
+            return ProcessCodeTokenRequest(client, code, tokenType);
         }
-
+        
         private HttpResponseMessage ProcessRefreshTokenRequest(Client client, string refreshToken, string tokenType)
         {
             Tracing.Information("Processing refresh token request for client: " + client.Name);
+            return ProcessCodeTokenRequest(client, refreshToken, tokenType);
+        }
 
-            // 1. get refresh token from DB - if not exists: error
+        private HttpResponseMessage ProcessCodeTokenRequest(Client client, string codeToken, string tokenType)
+        {
+            // 1. get code token from DB - if not exists: error
             CodeToken token;
-            if (RefreshTokenRepository.TryGetCode(refreshToken, out token))
+            if (CodeTokenRepository.TryGetCode(codeToken, out token))
             {
                 // 2. make sure the client is the same - if not: error
                 if (token.ClientId == client.ID)
                 {
                     // 3. call STS 
-                    RefreshTokenRepository.DeleteCode(token.Code);
+                    CodeTokenRepository.DeleteCode(token.Code);
                     return CreateTokenResponse(token.UserName, client, new EndpointReference(token.Scope), tokenType, includeRefreshToken: client.AllowRefreshToken);
                 }
 
-                Tracing.Error("Invalid client for refresh token. " + client.Name + " / " + refreshToken);
+                Tracing.Error("Invalid client for refresh token. " + client.Name + " / " + codeToken);
                 return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
             }
 
-            Tracing.Error("Refresh token not found. " + client.Name + " / " + refreshToken);
+            Tracing.Error("Refresh token not found. " + client.Name + " / " + codeToken);
             return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidGrant);
         }
 
@@ -147,7 +153,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             {
                 if (includeRefreshToken)
                 {
-                    tokenResponse.RefreshToken = RefreshTokenRepository.AddCode(CodeTokenType.RefreshTokenIdentifier, client.ID, userName, scope.Uri.AbsoluteUri);
+                    tokenResponse.RefreshToken = CodeTokenRepository.AddCode(CodeTokenType.RefreshTokenIdentifier, client.ID, userName, scope.Uri.AbsoluteUri);
                 }
 
                 var resp = Request.CreateResponse<TokenResponse>(HttpStatusCode.OK, tokenResponse);
@@ -169,6 +175,11 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         {
             client = null;
 
+            if (request == null)
+            {
+                return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidRequest);
+            }
+
             // grant type is required
             if (string.IsNullOrWhiteSpace(request.Grant_Type))
             {
@@ -184,19 +195,16 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             }
 
             // resource owner password flow requires a well-formed scope
-            EndpointReference appliesTo = null;
             if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.Password))
             {
-                try
-                {
-                    appliesTo = new EndpointReference(request.Scope);
-                    Tracing.Information("OAuth2 endpoint called for scope: " + request.Scope);
-                }
-                catch
+                Uri appliesTo;
+                if (!Uri.TryCreate(request.Scope, UriKind.Absolute, out appliesTo))
                 {
                     Tracing.Error("Malformed scope: " + request.Scope);
                     return OAuthErrorResponseMessage(OAuth2Constants.Errors.InvalidScope);
                 }
+                
+                Tracing.Information("OAuth2 endpoint called for scope: " + request.Scope);
             }
 
             if (!ValidateClient(out client))
