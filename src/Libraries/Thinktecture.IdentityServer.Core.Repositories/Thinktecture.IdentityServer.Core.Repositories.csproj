@@ -15,6 +15,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
+    <UICulture>en-US</UICulture>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -125,6 +126,16 @@
     <Compile Include="ProviderUserRepository.cs" />
     <Compile Include="EntityModel\RelyingParties.cs" />
     <Compile Include="RelyingPartyRepository.cs" />
+    <Compile Include="Resources\IdentityProviderRepository.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IdentityProviderRepository.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Mappings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Mappings.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Thinktecture.IdentityServer.Core\Thinktecture.IdentityServer.Core.csproj">
@@ -154,6 +165,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations.SqlServer\201303101659384_ClientSecretNotRequired.resx">
       <DependentUpon>201303101659384_ClientSecretNotRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\IdentityProviderRepository.fr.resx">
+      <DependentUpon>IdentityProviderRepository.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\IdentityProviderRepository.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IdentityProviderRepository.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Mappings.fr.resx">
+      <DependentUpon>Mappings.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Mappings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Mappings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
