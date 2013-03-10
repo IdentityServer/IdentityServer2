@@ -20,7 +20,7 @@ namespace Thinktecture.IdentityServer.Helper
 
             var count = GetIterationsFromYear(GetCurrentYear());
             var result = Crypto.HashPassword(password, count);
-            return count.ToString() + PasswordHashingIterationCountSeparator + result;
+            return EncodeIterations(count) + PasswordHashingIterationCountSeparator + result;
         }
 
         public static bool VerifyHashedPassword(string hashedPassword, string password)
@@ -33,8 +33,7 @@ namespace Thinktecture.IdentityServer.Helper
             var parts = hashedPassword.Split(PasswordHashingIterationCountSeparator);
             if (parts.Length != 2) return false;
 
-            int count;
-            if (!Int32.TryParse(parts[0], out count)) return false;
+            int count = DecodeIterations(parts[0]);
             if (count <= 0) return false;
 
             hashedPassword = parts[1];
@@ -42,6 +41,21 @@ namespace Thinktecture.IdentityServer.Helper
             return Crypto.VerifyHashedPassword(hashedPassword, password, count);
         }
 
+        internal static string EncodeIterations(int count)
+        {
+            return count.ToString("X");
+        }
+
+        internal static int DecodeIterations(string prefix)
+        {
+            int val;
+            if (Int32.TryParse(prefix, System.Globalization.NumberStyles.HexNumber, null, out val))
+            {
+                return val;
+            }
+            return -1;
+        }
+        
         // from OWASP : https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
         const int StartYear = 2000;
         const int StartCount = 1000;
