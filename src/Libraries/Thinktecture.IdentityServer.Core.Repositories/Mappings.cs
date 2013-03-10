@@ -368,7 +368,8 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 ID = client.Id,
                 ClientId = client.ClientId,
-                ClientSecret = client.ClientSecret,
+                //ClientSecret = client.ClientSecret,
+                HasClientSecret = !String.IsNullOrWhiteSpace(client.ClientSecret),
                 Description = client.Description,
                 Name = client.Name,
                 RedirectUri = client.RedirectUri != null ? new Uri(client.RedirectUri) : null,
@@ -382,7 +383,10 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             target.Id = client.ID;
             target.ClientId = client.ClientId;
-            target.ClientSecret = client.ClientSecret;
+            if (!String.IsNullOrWhiteSpace(client.ClientSecret))
+            {
+                target.ClientSecret = Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword(client.ClientSecret);
+            }
             target.Description = client.Description;
             target.Name = client.Name;
             target.RedirectUri = client.RedirectUri != null ? client.RedirectUri.AbsoluteUri : null;

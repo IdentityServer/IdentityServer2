@@ -15,9 +15,11 @@ namespace Thinktecture.IdentityServer.Models
         public int ID { get; set; }
 
         [Display(Name = "Name", Description = "Display name.")]
+        [Required]
         public string Name { get; set; }
 
         [Display(Name = "Description", Description = "Description.")]
+        [Required]
         public string Description { get; set; }
         
         [Display(Name = "Client ID", Description = "Client ID.")]
@@ -26,8 +28,10 @@ namespace Thinktecture.IdentityServer.Models
 
         [Display(Name = "Client Secret", Description = "Client secret.")]
         [UIHint("SymmetricKey")]
-        [Required]
         public string ClientSecret { get; set; }
+
+        [UIHint("HiddenInput")]
+        public bool HasClientSecret { get; set; }
 
         [AbsoluteUri]
         [Display(Name = "Redirect URI", Description = "Redirect URI.")]
@@ -53,7 +57,8 @@ namespace Thinktecture.IdentityServer.Models
         {
             var errors = new List<ValidationResult>();
 
-            if (String.IsNullOrWhiteSpace(this.ClientSecret) &&
+            if (!HasClientSecret &&
+                String.IsNullOrWhiteSpace(this.ClientSecret) &&
                 (this.AllowCodeFlow || this.AllowResourceOwnerFlow))
             {
                 errors.Add(new ValidationResult("Client Secret is required for Code and Resource Owner Flows.", new string[] { "ClientSecret" }));

@@ -352,7 +352,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Description = "Test Client for Windows Store App",
                     RedirectUri = "ms-app://s-1-15-2-756967155-51850-665164220-3494723435-3400456802-3915619528-546309680/",
                     ClientId = "test",
-                    ClientSecret = "secret",
+                    ClientSecret = Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"),
                     AllowImplicitFlow = true,
                     AllowResourceOwnerFlow = false,
                     AllowCodeFlow = false
@@ -361,9 +361,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 {
                     Name = "Code Flow Sample Client",
                     Description = "Code Flow Sample Client",
-                    RedirectUri = "http://localhost:12345/callback",
+                    RedirectUri = "https://localhost:44306/callback",
                     ClientId = "codeflowclient",
-                    ClientSecret = "secret",
+                    ClientSecret = Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"),
                     AllowImplicitFlow = false,
                     AllowResourceOwnerFlow = false,
                     AllowCodeFlow = true,

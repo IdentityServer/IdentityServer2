@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Thinktecture.IdentityModel;
 
@@ -19,12 +20,12 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             using (var entities = IdentityServerConfigurationContext.Get())
             {
-                var client = (from c in entities.Clients
+                var record = (from c in entities.Clients
                               where c.ClientId.Equals(clientId, StringComparison.Ordinal)
                               select c).SingleOrDefault();
-                if (client != null)
+                if (record != null)
                 {
-                    return ObfuscatingComparer.IsEqual(client.ClientSecret, clientSecret);
+                    return Thinktecture.IdentityServer.Helper.CryptoHelper.VerifyHashedPassword(record.ClientSecret, clientSecret);
                 }
                 return false;
             }
@@ -51,16 +52,23 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 
         public bool ValidateAndGetClient(string clientId, string clientSecret, out Models.Client client)
         {
-            if (TryGetClient(clientId, out client))
+            using (var entities = IdentityServerConfigurationContext.Get())
             {
-                if (Thinktecture.IdentityModel.ObfuscatingComparer.IsEqual(client.ClientSecret, clientSecret))
+                var record = (from c in entities.Clients
+                              where c.ClientId.Equals(clientId, StringComparison.Ordinal)
+                              select c).SingleOrDefault();
+                if (record != null)
                 {
-                    return true;
+                    if (Thinktecture.IdentityServer.Helper.CryptoHelper.VerifyHashedPassword(record.ClientSecret, clientSecret))
+                    {
+                        client = record.ToDomainModel();
+                        return true;
+                    }
                 }
-            }
 
-            client = null;
-            return false;
+                client = null;
+                return false;
+            }
         }
         
         public IEnumerable<Models.Client> GetAll()

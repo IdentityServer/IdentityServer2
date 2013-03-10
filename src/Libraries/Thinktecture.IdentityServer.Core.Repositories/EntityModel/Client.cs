@@ -16,21 +16,16 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         [Required]
         public string ClientId { get; set; }
 
-        [Required]
         public string ClientSecret { get; set; }
 
         public string RedirectUri { get; set; }
 
-        [Required]
         public bool AllowRefreshToken { get; set; }
 
-        [Required]
         public bool AllowImplicitFlow { get; set; }
 
-        [Required]
         public bool AllowResourceOwnerFlow { get; set; }
 
-        [Required]
         public bool AllowCodeFlow { get; set; }
     }
 }
