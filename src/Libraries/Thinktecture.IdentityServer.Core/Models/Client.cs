@@ -65,6 +65,11 @@ namespace Thinktecture.IdentityServer.Models
                 errors.Add(new ValidationResult("Redirect URI is required for Code and Implicit Flows.", new string[] { "RedirectUri" }));
             }
 
+            if (this.RedirectUri != null && this.RedirectUri.Scheme == Uri.UriSchemeHttp)
+            {
+                errors.Add(new ValidationResult("Redirect URI must be HTTPS.", new string[] { "RedirectUri" }));
+            }
+
             return errors;
         }
     }

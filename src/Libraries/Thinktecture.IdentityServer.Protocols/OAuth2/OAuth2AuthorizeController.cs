@@ -139,7 +139,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             Uri redirectUrl;
             if (Uri.TryCreate(request.redirect_uri, UriKind.Absolute, out redirectUrl))
             {
-                if (redirectUrl.Scheme != Uri.UriSchemeHttps)
+                if (redirectUrl.Scheme == Uri.UriSchemeHttp)
                 {
                     Tracing.Error("Redirect URI not over SSL : " + request.redirect_uri);
                     return ClientError(client.RedirectUri, OAuth2Constants.Errors.InvalidRequest, string.Empty, request.state);
