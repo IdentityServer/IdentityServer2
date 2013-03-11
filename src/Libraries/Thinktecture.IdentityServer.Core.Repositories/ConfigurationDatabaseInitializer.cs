@@ -361,7 +361,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 {
                     Name = "Code Flow Sample Client",
                     Description = "Code Flow Sample Client",
-                    RedirectUri = "https://localhost:44306/callback",
+                    RedirectUri = "https://localhost:44303/callback",
                     ClientId = "codeflowclient",
                     ClientSecret = Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"),
                     AllowImplicitFlow = false,
