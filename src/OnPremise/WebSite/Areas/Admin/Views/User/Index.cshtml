@@ -21,6 +21,7 @@
                 @Html.LabelFor(x => list[i].Delete, list[i].Username)
                 @Html.CheckBoxFor(x => list[i].Delete)
                 @Html.ActionLink(Index_cshtml.Roles, "Roles", new{id=list[i].Username})
+                @Html.ActionLink("password", "ChangePassword", new { id = list[i].Username })
                 @if (Model.IsProfileEnabled)
                 {
                     @Html.ActionLink(Index_cshtml.Profile, "Profile", new{id=list[i].Username})

@@ -640,6 +640,7 @@
     <Compile Include="Areas\Admin\ViewModels\KeyConfigurationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\OAuthClientViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\OAuthRefreshTokenIndexViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserPasswordModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserProfileViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RoleInputModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\RolesViewModel.cs" />
@@ -1162,7 +1163,7 @@
     <Content Include="Areas\Admin\Views\User\Profile.cshtml" />
     <Content Include="Areas\Admin\Views\General\Recycle.cshtml" />
     <Content Include="Areas\Admin\Views\OAuthRefreshToken\Index.cshtml" />
-    <None Include="Properties\PublishProfiles\Local Release.pubxml" />
+    <Content Include="Areas\Admin\Views\User\ChangePassword.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />

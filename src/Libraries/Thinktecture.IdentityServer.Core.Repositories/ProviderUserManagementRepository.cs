@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration.Provider;
 using System.Linq;
@@ -82,6 +83,54 @@ namespace Thinktecture.IdentityServer.Repositories
                       (user.Email != null && user.Email.Contains(filter))
                 select user.UserName;
             return query;
+        }
+
+        public void SetPassword(string userName, string password)
+        {
+            if (String.IsNullOrEmpty(userName))
+            {
+                throw new ValidationException("Username is required");
+            }
+            if (String.IsNullOrEmpty(password))
+            {
+                throw new ValidationException("Password is required");
+            }
+
+            var provider = Membership.Provider;
+            if (password.Length < provider.MinRequiredPasswordLength)
+            {
+                throw new ValidationException(String.Format("{0} is the minimum password length", provider.MinRequiredPasswordLength));
+            }
+            if (provider.MinRequiredNonAlphanumericCharacters > 0)
+            {
+                int num2 = 0;
+                for (int i = 0; i < password.Length; i++)
+                {
+                    if (!char.IsLetterOrDigit(password[i]))
+                    {
+                        num2++;
+                    }
+                }
+                if (num2 < provider.MinRequiredNonAlphanumericCharacters)
+                {
+                    throw new ValidationException(String.Format("{0} is the minimum number of non-alphanumeric characters", provider.MinRequiredNonAlphanumericCharacters));
+                }
+            }
+            if (!String.IsNullOrWhiteSpace(provider.PasswordStrengthRegularExpression) && 
+                !System.Text.RegularExpressions.Regex.IsMatch(provider.PasswordStrengthRegularExpression, password))
+            {
+                throw new ValidationException(String.Format("Password does not match the regular expression {0}", provider.PasswordStrengthRegularExpression));
+            }
+
+            try
+            {
+                var user = Membership.GetUser(userName);
+                user.ChangePassword(user.ResetPassword(), password);
+            }
+            catch (MembershipPasswordException mex)
+            {
+                throw new ValidationException(mex.Message, mex);
+            }
         }
     }
 }

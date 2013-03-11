@@ -164,5 +164,37 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
             return View(vm);
         }
+
+        public ActionResult ChangePassword(string id)
+        {
+            UserPasswordModel model = new UserPasswordModel();
+            model.Username = id;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(UserPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.UserManagementRepository.SetPassword(model.Username, model.Password);
+                    TempData["Message"] = Resources.UserController.ProfileUpdated;
+                    return RedirectToAction("Index");
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Error updating password");
+                }
+            }
+            
+            return View("ChangePassword", model);
+        }
     }
 }
