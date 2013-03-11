@@ -47,7 +47,7 @@
     </Reference>
     <Reference Include="BrockAllen.CookieTempData, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\packages\BrockAllen.CookieTempData.dll.1.2.0\lib\net45\BrockAllen.CookieTempData.dll</HintPath>
+      <HintPath>..\..\..\packages\BrockAllen.CookieTempData.dll.1.2.1\lib\net45\BrockAllen.CookieTempData.dll</HintPath>
     </Reference>
     <Reference Include="BrockAllen.OAuth2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
