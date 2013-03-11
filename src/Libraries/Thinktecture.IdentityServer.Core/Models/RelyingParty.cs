@@ -38,6 +38,16 @@ namespace Thinktecture.IdentityServer.Models
         [Display(Order=10002, ResourceType = typeof (Resources.Models.RelyingParty), Name = "EncryptingCertificate", Description = "EncryptingCertificateDescription")]
         public X509Certificate2 EncryptingCertificate { get; set; }
 
+        [Display(Order = 10003, ResourceType = typeof(Resources.Models.RelyingParty), Name = "EncryptingCertificateThumbprint", Description = "EncryptingCertificateThumbprintDescription")]
+        public string EncryptingCertificateThumbprint
+        {
+            get
+            {
+                if (EncryptingCertificate == null) return null;
+                return EncryptingCertificate.Thumbprint;
+            }
+        }
+
         [Display(Order = 10001, ResourceType = typeof (Resources.Models.RelyingParty), Name = "SymmetricSigningKey", Description = "SymmetricSigningKeyDescription")]
         public byte[] SymmetricSigningKey { get; set; }
 

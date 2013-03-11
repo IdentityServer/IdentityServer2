@@ -70,7 +70,7 @@ namespace Thinktecture.IdentityServer.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabled or disable this RP..
+        ///   Looks up a localized string similar to Enable or disable this RP..
         /// </summary>
         public static string EnabledDescription {
             get {
@@ -93,6 +93,24 @@ namespace Thinktecture.IdentityServer.Resources.Models {
         public static string EncryptingCertificateDescription {
             get {
                 return ResourceManager.GetString("EncryptingCertificateDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypting Certificate Thumbprint.
+        /// </summary>
+        public static string EncryptingCertificateThumbprint {
+            get {
+                return ResourceManager.GetString("EncryptingCertificateThumbprint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Encrypting Certificate Thumbprint.
+        /// </summary>
+        public static string EncryptingCertificateThumbprintDescription {
+            get {
+                return ResourceManager.GetString("EncryptingCertificateThumbprintDescription", resourceCulture);
             }
         }
         
@@ -196,7 +214,7 @@ namespace Thinktecture.IdentityServer.Resources.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to URL to return to once a token is issued..
+        ///   Looks up a localized string similar to URL to return (ReplyTo parameter) to once a token is issued..
         /// </summary>
         public static string ReplyToDescription {
             get {
