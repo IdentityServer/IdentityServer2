@@ -213,8 +213,6 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
                 AudienceUriMode = AudienceUriMode.Never,
                 SigningToken = new X509SecurityToken(_configuration.Keys.SigningCertificate),
                 ValidIssuer = _configuration.Global.IssuerUri,
-                
-                // todo: should we validate that or not?
                 ValidateExpiration = true
             };
 

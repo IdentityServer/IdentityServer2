@@ -181,7 +181,6 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
         {
             var response = new TokenResponse();
 
-            // todo: rename to PassThruToken - and use it for all flows
             if (ConfigurationRepository.AdfsIntegration.PassThruAuthenticationToken)
             {
                 response.AccessToken = token.TokenXml.OuterXml;
