@@ -14,6 +14,7 @@ namespace Thinktecture.IdentityServer.Protocols
             public const string ClientCredentials = "client_credentials";
             public const string RefreshToken = "refresh_token";
             public const string Saml2 = "urn:ietf:params:oauth:grant-type:saml2-bearer";
+            public const string JwtBearer = "urn:ietf:params:oauth:grant-type:jwt-bearer";
         }
 
         public static class ResponseTypes

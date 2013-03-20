@@ -2,6 +2,7 @@
 using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
@@ -9,85 +10,184 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
+using System.Xml;
+using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityModel.Tokens;
 using Thinktecture.IdentityModel.WSTrust;
+using Thinktecture.IdentityServer.Repositories;
+using Thinktecture.IdentityModel.Extensions;
+using System.ServiceModel.Security.Tokens;
+using System.Collections.ObjectModel;
+using System.IdentityModel.Policy;
+using System.Collections.Generic;
+using Microsoft.IdentityModel.Tokens.JWT;
 
 namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 {
-    internal static class AdfsBridge
+    internal class AdfsBridge
     {
-        public static GenericXmlSecurityToken Authenticate(string userName, string password, string appliesTo, Uri adfsEndpoint)
+        IConfigurationRepository _configuration;
+        SecurityTokenHandlerCollection _handler;
+            
+        public AdfsBridge(IConfigurationRepository configuration)
+        {
+            _configuration = configuration;
+            _handler = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+        }
+
+        public GenericXmlSecurityToken AuthenticateUserName(string userName, string password, string appliesTo)
         {
             var credentials = new ClientCredentials();
             credentials.UserName.UserName = userName;
             credentials.UserName.Password = password;
 
             return WSTrustClient.Issue(
-                new EndpointAddress(adfsEndpoint),
+                new EndpointAddress(_configuration.AdfsIntegration.UserNameAuthenticationEndpoint),
                 new EndpointAddress(appliesTo),
                 new UserNameWSTrustBinding(SecurityMode.TransportWithMessageCredential),
                 credentials) as GenericXmlSecurityToken;
         }
 
-        public static GenericXmlSecurityToken Delegate(string adfsEndpoint, SecurityToken token, string appliesTo)
+        public GenericXmlSecurityToken Authenticate(ClaimsIdentity identity, string appliesTo)
         {
-            return Delegate(adfsEndpoint, appliesTo, token, new ClientCredentials(), new WindowsWSTrustBinding(SecurityMode.TransportWithMessageCredential));
+            // todo: cert goes into config
+            var encryptingCert = new X509Certificate2("c:\\etc\\ADFS encryption.cer");
+
+
+            // create new token
+            var proof = CreateProofDescriptor(encryptingCert);
+            var outputToken = CreateOutputSamlToken(identity, proof, encryptingCert);
+
+            // turn token into a generic xml security token
+            var outputTokenString = outputToken.ToTokenXmlString();
+
+            // create attached and unattached references
+            var handler = new SamlSecurityTokenHandler();
+            var ar = handler.CreateSecurityTokenReference(outputToken, true);
+            var uar = handler.CreateSecurityTokenReference(outputToken, false);
+
+            var xmlToken = new GenericXmlSecurityToken(
+                GetElement(outputTokenString),
+                new BinarySecretSecurityToken(proof.GetKeyBytes()),
+                DateTime.UtcNow,
+                DateTime.UtcNow.AddHours(1),
+                ar,
+                uar,
+                new ReadOnlyCollection<IAuthorizationPolicy>(new List<IAuthorizationPolicy>()));
+
+            // send to ADFS federation endpoint
+            return RequestFederationToken(xmlToken, appliesTo) as GenericXmlSecurityToken;
         }
 
-        public static GenericXmlSecurityToken Delegate(string adfsEndpoint, SecurityToken token, string appliesTo, string serviceAccountName, string serviceAccountPassword)
+        public GenericXmlSecurityToken AuthenticateSaml(string incomingToken, string appliesTo)
         {
-            var credentials = new ClientCredentials();
-            credentials.UserName.UserName = serviceAccountName;
-            credentials.UserName.Password = serviceAccountPassword;
+            // turn string saml token into SecurityToken
+            var samlToken = _handler.ReadToken(new XmlTextReader(new StringReader(incomingToken)));
 
-            return Delegate(adfsEndpoint, appliesTo, token, credentials, new UserNameWSTrustBinding(SecurityMode.TransportWithMessageCredential));
+            // validate saml token
+            var identity = ValidateSamlToken(samlToken);
+
+            return Authenticate(identity, appliesTo);
         }
 
-        public static GenericXmlSecurityToken Delegate(string adfsEndpoint, string appliesTo, SecurityToken token, ClientCredentials credentials, Binding binding)
+        public GenericXmlSecurityToken AuthenticateJwt(string incomingToken, string appliesTo)
         {
+            // validate jwt token
+            var identity = ValidateJwtToken(incomingToken);
+
+            return Authenticate(identity, appliesTo);
+        }
+
+        private XmlElement GetElement(string xml)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(xml);
+            return doc.DocumentElement;
+        }
+
+        private SecurityToken RequestFederationToken(GenericXmlSecurityToken xmlToken, string appliesTo)
+        {
+            // todo: endpoint goes to config
+            var adfsEndpoint = "https://adfs.leastprivilege.vm/adfs/services/trust/13/issuedtokenmixedsymmetricbasic256";
+
             var rst = new RequestSecurityToken
             {
-                AppliesTo = new EndpointReference(appliesTo),
                 RequestType = RequestTypes.Issue,
-                KeyType = KeyTypes.Bearer,
-
-                ActAs = new SecurityTokenElement(token)
+                AppliesTo = new EndpointReference(appliesTo),
+                KeyType = KeyTypes.Bearer
             };
 
-            RequestSecurityTokenResponse rstr;
-            return WSTrustClient.Issue(
-                new EndpointAddress(adfsEndpoint),
+            var binding = new IssuedTokenWSTrustBinding();
+            binding.SecurityMode = SecurityMode.TransportWithMessageCredential;
+
+            var factory = new WSTrustChannelFactory(
                 binding,
-                credentials,
-                rst,
-                out rstr) as GenericXmlSecurityToken;
+                new EndpointAddress(adfsEndpoint));
+            factory.TrustVersion = TrustVersion.WSTrust13;
+            factory.Credentials.SupportInteractive = false;
+
+            var channel = factory.CreateChannelWithIssuedToken(xmlToken);
+            return channel.Issue(rst);
         }
 
-        public static TokenResponse ConvertSamlToJwt(SecurityToken securityToken, string issuerThumbprint, string signingKey, string issuerUri, int ttl)
+        private SecurityToken CreateOutputSamlToken(ClaimsIdentity identity, ProofDescriptor proof, X509Certificate2 encryptingCertificate)
         {
-            var identity = AdfsBridge.ValidateSamlToken(
-                securityToken,
-                issuerThumbprint);
+            // todo: add to config
+            string adfsIssuerUri = "http://adfs.leastprivilege.vm/adfs/services/trust";
+
+            var encryptingCredentials = new EncryptedKeyEncryptingCredentials(
+                new X509EncryptingCredentials(encryptingCertificate),
+                256,
+                "http://www.w3.org/2001/04/xmlenc#aes256-cbc");
 
             var descriptor = new SecurityTokenDescriptor
             {
+                AppliesToAddress = adfsIssuerUri,
+                TokenIssuerName = _configuration.Global.IssuerUri,
+
+                SigningCredentials = new X509SigningCredentials(_configuration.Keys.SigningCertificate), // signing creds of IdSrv
+                EncryptingCredentials = encryptingCredentials,
+
+                Lifetime = new Lifetime(DateTime.UtcNow, DateTime.UtcNow.AddHours(1)),
+                Proof = proof,
                 Subject = identity,
-                SigningCredentials = new HmacSigningCredentials(signingKey),
-                TokenIssuerName = issuerUri,
-                Lifetime = new Lifetime(DateTime.UtcNow, DateTime.UtcNow.AddMinutes(ttl))
+                TokenType = TokenTypes.Saml2TokenProfile11
             };
 
-            var jwtHandler = new JsonWebTokenHandler();
+            return _handler.CreateToken(descriptor) as Saml2SecurityToken;
+        }
+
+        private static SymmetricProofDescriptor CreateProofDescriptor(X509Certificate2 encryptingCertificate)
+        {
+            return new SymmetricProofDescriptor(
+                256, 
+                new X509EncryptingCredentials(encryptingCertificate));
+        }
+
+        public TokenResponse ConvertSamlToJwt(SecurityToken securityToken, string scope)
+        {
+            var subject = ValidateSamlToken(securityToken);
+
+            var descriptor = new SecurityTokenDescriptor
+            {
+                Subject = subject,
+                AppliesToAddress = scope,
+                SigningCredentials = new X509SigningCredentials(_configuration.Keys.SigningCertificate),
+                TokenIssuerName = _configuration.Global.IssuerUri,
+                Lifetime = new Lifetime(DateTime.UtcNow, DateTime.UtcNow.AddMinutes(_configuration.AdfsIntegration.AuthenticationTokenLifetime))
+            };
+
+            var jwtHandler = new JWTSecurityTokenHandler();
             var jwt = jwtHandler.CreateToken(descriptor);
 
             return new TokenResponse
             {
                 AccessToken = jwtHandler.WriteToken(jwt),
-                ExpiresIn = ttl
+                ExpiresIn = _configuration.AdfsIntegration.AuthenticationTokenLifetime
             };
         }
 
-        public static ClaimsIdentity ValidateSamlToken(SecurityToken securityToken, string issuerThumbprint)
+        public ClaimsIdentity ValidateSamlToken(SecurityToken securityToken)
         {
             var configuration = new SecurityTokenHandlerConfiguration();
             configuration.AudienceRestriction.AudienceMode = AudienceUriMode.Never;
@@ -96,12 +196,30 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             configuration.CertificateValidator = X509CertificateValidator.None;
 
             var registry = new ConfigurationBasedIssuerNameRegistry();
-            registry.AddTrustedIssuer(issuerThumbprint, "ADFS");
+            registry.AddTrustedIssuer(_configuration.AdfsIntegration.IssuerThumbprint, "ADFS");
             configuration.IssuerNameRegistry = registry;
 
             var handler = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(configuration);
             var identity = handler.ValidateToken(securityToken).First();
             return identity;
+        }
+
+        public ClaimsIdentity ValidateJwtToken(string jwt)
+        {
+            var handler = new JWTSecurityTokenHandler();
+
+            var validationParameters = new TokenValidationParameters()
+            {
+                AudienceUriMode = AudienceUriMode.Never,
+                SigningToken = new X509SecurityToken(_configuration.Keys.SigningCertificate),
+                ValidIssuer = _configuration.Global.IssuerUri,
+                
+                // todo: should we validate that or not?
+                ValidateExpiration = true
+            };
+
+            var principal = handler.ValidateToken(jwt, validationParameters);
+            return principal.Identities.First();
         }
     }
 }
