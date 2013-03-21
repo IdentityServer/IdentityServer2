@@ -119,6 +119,14 @@
     <Compile Include="Migrations.SqlServer\201303101659384_ClientSecretNotRequired.Designer.cs">
       <DependentUpon>201303101659384_ClientSecretNotRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations.SqlServer\201303212116088_AdfsIntegration.cs" />
+    <Compile Include="Migrations.SqlServer\201303212116088_AdfsIntegration.Designer.cs">
+      <DependentUpon>201303212116088_AdfsIntegration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations.SqlCe\201303212122270_AdfsIntegration.cs" />
+    <Compile Include="Migrations.SqlCe\201303212122270_AdfsIntegration.Designer.cs">
+      <DependentUpon>201303212122270_AdfsIntegration.cs</DependentUpon>
+    </Compile>
     <Compile Include="NullCacheRepository.cs" />
     <Compile Include="PassThruTransformationRuleRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -167,6 +175,12 @@
     <EmbeddedResource Include="Migrations.SqlServer\201303101659384_ClientSecretNotRequired.resx">
       <DependentUpon>201303101659384_ClientSecretNotRequired.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations.SqlServer\201303212116088_AdfsIntegration.resx">
+      <DependentUpon>201303212116088_AdfsIntegration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations.SqlCe\201303212122270_AdfsIntegration.resx">
+      <DependentUpon>201303212122270_AdfsIntegration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\IdentityProviderRepository.fr.resx">
       <DependentUpon>IdentityProviderRepository.resx</DependentUpon>
     </EmbeddedResource>
@@ -188,9 +202,11 @@
     <Content Include="Migrations.SqlCe\Sql\201301011818314_InitialMigration.sql" />
     <Content Include="Migrations.SqlCe\Sql\201302041416106_RefreshToken.sql" />
     <Content Include="Migrations.SqlCe\Sql\201303101641116_ClientSecretNotRequired.sql" />
+    <Content Include="Migrations.SqlCe\Sql\201303212122270_AdfsIntegration.sql" />
     <Content Include="Migrations.SqlServer\Sql\201301011810411_InitialMigration.sql" />
     <Content Include="Migrations.SqlServer\Sql\201302041414549_RefreshToken.sql" />
     <Content Include="Migrations.SqlServer\Sql\201303101659384_ClientSecretNotRequired.sql" />
+    <Content Include="Migrations.SqlServer\Sql\201303212116088_AdfsIntegration.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
