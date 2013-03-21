@@ -108,7 +108,9 @@ namespace Thinktecture.IdentityServer.Web.Controllers
             // adfs integration
             if (Configuration.AdfsIntegration.Enabled)
             {
-                if (Configuration.AdfsIntegration.AuthenticationEnabled || Configuration.AdfsIntegration.FederationEnabled)
+                if (Configuration.AdfsIntegration.UsernameAuthenticationEnabled || 
+                    Configuration.AdfsIntegration.SamlAuthenticationEnabled || 
+                    Configuration.AdfsIntegration.JwtAuthenticationEnabled)
                 {
                     list.Add("ADFS Integration", endpoints.AdfsIntegration.AbsoluteUri);
                 }

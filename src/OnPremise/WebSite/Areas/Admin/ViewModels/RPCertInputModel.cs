@@ -12,5 +12,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
                 return EncryptingCertificate;
             }
         }
-   }
+        public override string Name
+        {
+            get { return "EncryptingCertificate"; }
+        }
+    }
 }

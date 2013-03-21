@@ -230,30 +230,58 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         #region AdfsIntegrationConfiguration
         public static Models.Configuration.AdfsIntegrationConfiguration ToDomainModel(this Entities.Configuration.AdfsIntegrationConfiguration entity)
         {
-            return new Models.Configuration.AdfsIntegrationConfiguration
+            var value = new Models.Configuration.AdfsIntegrationConfiguration
             {
                 Enabled = entity.Enabled,
+                UsernameAuthenticationEnabled = entity.UsernameAuthenticationEnabled,
+                SamlAuthenticationEnabled = entity.SamlAuthenticationEnabled,
+                JwtAuthenticationEnabled = entity.JwtAuthenticationEnabled,
                 PassThruAuthenticationToken = entity.PassThruAuthenticationToken,
-                IssuerThumbprint = entity.IssuerThumbprint,
-                SymmetricSigningKey = entity.SymmetricSigningKey,
-                AuthenticationEnabled = entity.AuthenticationEnabled,
-                UserNameAuthenticationEndpoint = entity.UserNameAuthenticationEndpoint,
                 AuthenticationTokenLifetime = entity.AuthenticationTokenLifetime,    
+                UserNameAuthenticationEndpoint = entity.UserNameAuthenticationEndpoint,
+                FederationEndpoint = entity.FederationEndpoint,
+                IssuerThumbprint = entity.IssuerThumbprint,
+                IssuerUri = entity.IssuerUri,
             };
+
+            if (!String.IsNullOrWhiteSpace(entity.EncryptionCertificate))
+            {
+                value.EncryptionCertificate = new X509Certificate2(Convert.FromBase64String(entity.EncryptionCertificate));
+            }
+            else
+            {
+                value.EncryptionCertificate = null;
+            }
+
+            return value;
         }
 
         public static Entities.Configuration.AdfsIntegrationConfiguration ToEntity(this Models.Configuration.AdfsIntegrationConfiguration model)
         {
-            return new Entities.Configuration.AdfsIntegrationConfiguration
+            var value = new Entities.Configuration.AdfsIntegrationConfiguration
             {
                 Enabled = model.Enabled,
+                UsernameAuthenticationEnabled = model.UsernameAuthenticationEnabled,
+                SamlAuthenticationEnabled = model.SamlAuthenticationEnabled,
+                JwtAuthenticationEnabled = model.JwtAuthenticationEnabled,
                 PassThruAuthenticationToken = model.PassThruAuthenticationToken,
-                IssuerThumbprint = model.IssuerThumbprint,
-                SymmetricSigningKey = model.SymmetricSigningKey,
-                AuthenticationEnabled = model.AuthenticationEnabled,
-                UserNameAuthenticationEndpoint = model.UserNameAuthenticationEndpoint,
                 AuthenticationTokenLifetime = model.AuthenticationTokenLifetime,
+                UserNameAuthenticationEndpoint = model.UserNameAuthenticationEndpoint,
+                FederationEndpoint = model.FederationEndpoint,
+                IssuerThumbprint = model.IssuerThumbprint,
+                IssuerUri = model.IssuerUri,
             };
+
+            if (model.EncryptionCertificate != null)
+            {
+                value.EncryptionCertificate = Convert.ToBase64String(model.EncryptionCertificate.RawData);
+            }
+            else
+            {
+                value.EncryptionCertificate = null;
+            }
+
+            return value;
         }
         #endregion
 

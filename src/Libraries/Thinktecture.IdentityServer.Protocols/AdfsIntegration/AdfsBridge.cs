@@ -50,9 +50,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 
         public GenericXmlSecurityToken Authenticate(ClaimsIdentity identity, string appliesTo)
         {
-            // todo: cert goes into config
-            var encryptingCert = new X509Certificate2("c:\\etc\\ADFS encryption.cer");
-
+            var encryptingCert = _configuration.AdfsIntegration.EncryptionCertificate;
 
             // create new token
             var proof = CreateProofDescriptor(encryptingCert);
@@ -107,8 +105,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 
         private SecurityToken RequestFederationToken(GenericXmlSecurityToken xmlToken, string appliesTo)
         {
-            // todo: endpoint goes to config
-            var adfsEndpoint = "https://adfs.leastprivilege.vm/adfs/services/trust/13/issuedtokenmixedsymmetricbasic256";
+            var adfsEndpoint = this._configuration.AdfsIntegration.FederationEndpoint;
 
             var rst = new RequestSecurityToken
             {
@@ -132,8 +129,7 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 
         private SecurityToken CreateOutputSamlToken(ClaimsIdentity identity, ProofDescriptor proof, X509Certificate2 encryptingCertificate)
         {
-            // todo: add to config
-            string adfsIssuerUri = "http://adfs.leastprivilege.vm/adfs/services/trust";
+            string adfsIssuerUri = this._configuration.AdfsIntegration.IssuerUri;
 
             var encryptingCredentials = new EncryptedKeyEncryptingCredentials(
                 new X509EncryptingCredentials(encryptingCertificate),

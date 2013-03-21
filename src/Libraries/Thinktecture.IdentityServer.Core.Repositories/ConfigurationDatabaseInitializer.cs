@@ -130,10 +130,11 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new AdfsIntegrationConfiguration
             {
                 Enabled = false,
-                AuthenticationEnabled = true,
+                UsernameAuthenticationEnabled = false,
+                SamlAuthenticationEnabled = false,
+                JwtAuthenticationEnabled = false,
                 AuthenticationTokenLifetime = 60,
-                PassThruAuthenticationToken = true,
-                UserNameAuthenticationEndpoint = "https://server/adfs/services/trust/13/usernamemixed"
+                PassThruAuthenticationToken = false
             };
         }
 
@@ -229,12 +230,13 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new AdfsIntegrationConfiguration
             {
                 Enabled = true,
-                AuthenticationEnabled = true,
+                UsernameAuthenticationEnabled = true,
+                SamlAuthenticationEnabled = true,
+                JwtAuthenticationEnabled = true,
                 AuthenticationTokenLifetime = 60,
                 PassThruAuthenticationToken = false,
-                UserNameAuthenticationEndpoint = "https://adfs.leastprivilege.vm/adfs/services/trust/13/usernamemixed",
-                SymmetricSigningKey = "YLjuDzcQZGnAMrnUlyxaSLTW9VX3mNvCa2cw6esDqII=",
-                IssuerThumbprint = "cad5731ae474b932631e57feb72d810aea6f0220"
+                UserNameAuthenticationEndpoint = "https://server/adfs/services/trust/13/usernamemixed",
+                FederationEndpoint = "https://server/adfs/services/trust/13/issuedtokenmixedsymmetricbasic256",
             };
         }
 

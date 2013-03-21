@@ -42,21 +42,21 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             }
 
             if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.Password) &&
-                ConfigurationRepository.AdfsIntegration.AuthenticationEnabled)
+                ConfigurationRepository.AdfsIntegration.UsernameAuthenticationEnabled)
             {
                 return ProcessUserNameRequest(request);
             }
 
             // federation via SAML
-            // todo: need to check if enabled in config
-            if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.Saml2))
+            if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.Saml2) &&
+                ConfigurationRepository.AdfsIntegration.SamlAuthenticationEnabled)
             {
                 return ProcessSamlRequest(request);
             }
 
             // federation via JWT
-            // todo: need to check if enabled in config
-            if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.JwtBearer))
+            if (request.Grant_Type.Equals(OAuth2Constants.GrantTypes.JwtBearer) &&
+                ConfigurationRepository.AdfsIntegration.JwtAuthenticationEnabled)
             {
                 return ProcessJwtRequest(request);
             }

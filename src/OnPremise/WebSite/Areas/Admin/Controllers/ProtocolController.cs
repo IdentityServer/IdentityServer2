@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Authorization.Mvc;
+using Thinktecture.IdentityServer.Models.Configuration;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels;
 
@@ -81,9 +82,73 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
         public ActionResult Protocol(string id)
         {
             var vm = new ProtocolsViewModel(this.ConfigurationRepository);
+
             var protocol = vm.GetProtocol(id);
             if (protocol == null) return HttpNotFound();
+
+            if (id == "ADFSIntegration")
+            {
+                return View("ADFSIntegration", protocol);
+            }
+
             return View("Protocol", protocol);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateADFSIntegration(
+            [Bind(Exclude = "EncryptionCertificate")] AdfsIntegrationConfiguration protocol,
+            [Bind(Prefix = "protocol")] AdfsIntegrationCertInputModel cert,
+            bool? removeCert)
+        {
+            string id = "ADFSIntegration";
+
+            if (removeCert == true)
+            {
+                protocol.EncryptionCertificate = null;
+            }
+            else if (cert.EncryptionCertificate != null)
+            {
+                protocol.EncryptionCertificate = cert.Cert;
+            }
+            else
+            {
+                protocol.EncryptionCertificate = this.ConfigurationRepository.AdfsIntegration.EncryptionCertificate;
+            }
+
+            if (protocol.Enabled)
+            {
+                if (protocol.SamlAuthenticationEnabled && protocol.EncryptionCertificate == null)
+                {
+                    ModelState.AddModelError("protocol.EncryptionCertificate", "EncryptionCertificate required when SamlAuthenticationEnabled is enabled.");
+                }
+                if (protocol.JwtAuthenticationEnabled && protocol.EncryptionCertificate == null)
+                {
+                    ModelState.AddModelError("protocol.EncryptionCertificate", "EncryptionCertificate required when JwtAuthenticationEnabled is enabled.");
+                }
+            } 
+            
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.ConfigurationRepository.AdfsIntegration = protocol;
+                    TempData["Message"] = "Update Successful";
+                    return RedirectToAction("Protocol", new { id });
+                }
+                catch (ValidationException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Error updating protocol.");
+                }
+            }
+
+            var vm = new ProtocolsViewModel(this.ConfigurationRepository);
+            var orig = vm.GetProtocol(id);
+            return View("ADFSIntegration", orig);
         }
 
         [HttpPost]
