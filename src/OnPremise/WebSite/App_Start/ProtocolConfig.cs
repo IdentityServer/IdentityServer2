@@ -86,6 +86,16 @@ namespace Thinktecture.IdentityServer.Web
                 );
             }
 
+            // adfs integration
+            if (configuration.AdfsIntegration.Enabled)
+            {
+                routes.MapHttpRoute(
+                    name: "adfs",
+                    routeTemplate: Thinktecture.IdentityServer.Endpoints.Paths.AdfsIntegration,
+                    defaults: new { controller = "Adfs" }
+                );
+            }
+
             // simple http endpoint
             if (configuration.SimpleHttp.Enabled)
             {

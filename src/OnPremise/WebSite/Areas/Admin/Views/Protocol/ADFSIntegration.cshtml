@@ -1,0 +1,22 @@
+﻿@model ProtocolViewModel
+
+@{
+    ViewBag.Title = "Protocol Configuration : " + Model.DisplayName;
+}
+
+@using (Html.BeginForm("UpdateADFSIntegration", "Protocol", new { id = Model.ID },
+        FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("Error updating protocol")
+    <fieldset class="editor">
+        <legend>@ViewBag.Title</legend>
+
+        @Html.EditorFor(x => x.Protocol)
+
+        <div class="buttons">
+            <button type="submit">Save Changes</button>
+            <button type="reset">Cancel</button>
+        </div>
+    </fieldset>
+}

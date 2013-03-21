@@ -8,6 +8,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
     public abstract class CertificateInputModel : IValidatableObject
     {
+        public abstract string Name { get; }
         public abstract HttpPostedFileBase File { get; }
         public bool? RemoveCert { get; set; }
 
@@ -48,7 +49,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
             }
             catch
             {
-                errors.Add(new ValidationResult(Resources.CertificateInputModel.ErrorProcessingCertificate, new string[]{"EncryptingCertificate"}));
+                errors.Add(new ValidationResult(Resources.CertificateInputModel.ErrorProcessingCertificate, new string[]{Name}));
             }
             return errors;
         }

@@ -197,5 +197,29 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 }
             }
         }
+
+        // todo: wire up with DB
+        public Models.Configuration.AdfsIntegrationConfiguration AdfsIntegration
+        {
+            get
+            {
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.AdfsIntegration.First<Entities.Configuration.AdfsIntegrationConfiguration>();
+                    return entity.ToDomainModel();
+                }
+            }
+            set
+            {
+                using (var entities = IdentityServerConfigurationContext.Get())
+                {
+                    var entity = entities.AdfsIntegration.First<Entities.Configuration.AdfsIntegrationConfiguration>();
+                    entities.AdfsIntegration.Remove(entity);
+
+                    entities.AdfsIntegration.Add(value.ToEntity());
+                    entities.SaveChanges();
+                }
+            }
+        }
     }
 }

@@ -22,8 +22,9 @@ namespace Thinktecture.IdentityServer
         public Uri WSTrustMixedUserName { get; set; }
         public Uri WSTrustMessageCertificate { get; set; }
         public Uri WSTrustMixedCertificate { get; set; }
-        
+
         public Uri SimpleHttp { get; set; }
+        public Uri AdfsIntegration { get; set; }
         public Uri Wrap { get; set; }
         public Uri OAuth2Token { get; set; }
         public Uri OAuth2Callback { get; set; }
@@ -43,6 +44,7 @@ namespace Thinktecture.IdentityServer
             public const string OAuth2Token = "issue/oauth2/token";
             public const string OAuth2Callback = "issue/oauth2/callback";
             public const string OAuth2Authorize = "issue/oauth2/authorize";
+            public const string AdfsIntegration = "issue/adfs";
             public const string JSNotify = "issue/jsnotify";
             public const string Mex = "mex";
             public const string WSTrustMessageUserName = "message/username";
@@ -134,6 +136,12 @@ namespace Thinktecture.IdentityServer
             builder.Scheme = Uri.UriSchemeHttps;
             builder.Port = httpsPort;
             ep.WSFederationMetadata = builder.Uri;
+            
+            var adfs = new Uri(baseUriString + Paths.AdfsIntegration);
+            builder = new UriBuilder(adfs);
+            builder.Scheme = Uri.UriSchemeHttps;
+            builder.Port = httpsPort;
+            ep.AdfsIntegration = builder.Uri;
 
             var activeClear = new Uri(baseUriString + Paths.WSTrustBase);
             builder = new UriBuilder(activeClear);

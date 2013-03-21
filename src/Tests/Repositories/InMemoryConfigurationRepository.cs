@@ -109,5 +109,18 @@ namespace Thinktecture.IdentityServer.Tests.Repositories
                 throw new NotImplementedException();
             }
         }
+
+
+        public AdfsIntegrationConfiguration AdfsIntegration
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 }

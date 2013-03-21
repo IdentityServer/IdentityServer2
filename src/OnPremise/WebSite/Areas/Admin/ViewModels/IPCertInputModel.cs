@@ -9,5 +9,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         {
             get { return IssuerThumbprintFile; }
         }
+        public override string Name
+        {
+            get { return "IssuerThumbprintFile"; }
+        }
     }
 }
