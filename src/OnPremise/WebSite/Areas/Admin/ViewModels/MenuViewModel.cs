@@ -7,7 +7,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         public MenuViewModel(IConfigurationRepository configuration)
         {
             this.ShowOAuthClients = configuration.OAuth2.Enabled;
-            this.ShowOAuthTokens = configuration.OAuth2.Enabled && configuration.OAuth2.EnableCodeFlow;
+            this.ShowOAuthTokens = 
+                configuration.OAuth2.Enabled && 
+                (configuration.OAuth2.EnableCodeFlow || configuration.OAuth2.EnableResourceOwnerFlow);
         }
 
         public bool ShowOAuthClients { get; private set; }

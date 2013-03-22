@@ -32,9 +32,10 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         {
             get
             {
-                return !IsNew && Client.AllowCodeFlow &&
+                return !IsNew && 
+                    (Client.AllowCodeFlow || Client.AllowResourceOwnerFlow) &&
                     ConfigurationRepository.OAuth2.Enabled &&
-                    ConfigurationRepository.OAuth2.EnableCodeFlow;
+                    (ConfigurationRepository.OAuth2.EnableCodeFlow || ConfigurationRepository.OAuth2.EnableResourceOwnerFlow);
             }
         }
     }

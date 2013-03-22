@@ -54,7 +54,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
             get
             {
                 return ConfigurationRepository.OAuth2.Enabled &&
-                    ConfigurationRepository.OAuth2.EnableCodeFlow;
+                    (ConfigurationRepository.OAuth2.EnableCodeFlow || ConfigurationRepository.OAuth2.EnableResourceOwnerFlow);
             }
         }
     }
