@@ -68,7 +68,6 @@ namespace Thinktecture.IdentityServer.Protocols.FederationMetadata
 
             tokenService.TokenTypesOffered.Add(new Uri(TokenTypes.OasisWssSaml11TokenProfile11));
             tokenService.TokenTypesOffered.Add(new Uri(TokenTypes.OasisWssSaml2TokenProfile11));
-            tokenService.TokenTypesOffered.Add(new Uri(TokenTypes.SimpleWebToken));
 
             ClaimsRepository.GetSupportedClaimTypes().ToList().ForEach(claimType => tokenService.ClaimTypesOffered.Add(new DisplayClaim(claimType)));
             tokenService.ProtocolsSupported.Add(new Uri("http://docs.oasis-open.org/wsfed/federation/200706"));
