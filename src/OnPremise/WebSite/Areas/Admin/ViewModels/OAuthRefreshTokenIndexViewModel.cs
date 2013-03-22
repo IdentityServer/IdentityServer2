@@ -14,7 +14,8 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         public OAuthRefreshTokenIndexViewModel(
             TokenSearchCriteria searchCriteria,
             IClientsRepository clientRepository,
-            ICodeTokenRepository codeTokenRepository)
+            ICodeTokenRepository codeTokenRepository,
+            bool doSearch = false)
         {
             this.SearchCriteria = searchCriteria;
             var clients = 
@@ -32,7 +33,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
             list.Insert(0, new SelectListItem { Text = "-none selected-", Value="" });
             this.Clients = list;
 
-            if (searchCriteria.HasValues)
+            if (searchCriteria.HasValues || doSearch)
             {
                 var results = codeTokenRepository.Search(searchCriteria.ClientID, searchCriteria.Username, searchCriteria.Scope, CodeTokenType.RefreshTokenIdentifier);
                 this.SearchResults = results.OrderBy(x=>x.TimeStamp);

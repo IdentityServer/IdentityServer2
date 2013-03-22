@@ -35,6 +35,14 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             var vm = new OAuthRefreshTokenIndexViewModel(searchCriteria, clientRepository, codeTokenRepository);
             return View("Index", vm);
         }
+        
+        [HttpPost]
+        [ActionName("Index")]
+        public ActionResult IndexPost(TokenSearchCriteria searchCriteria)
+        {
+            var vm = new OAuthRefreshTokenIndexViewModel(searchCriteria, clientRepository, codeTokenRepository, true);
+            return View("Index", vm);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
