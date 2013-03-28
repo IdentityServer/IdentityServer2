@@ -3,6 +3,8 @@ obj/
 packages/
 build/
 
+!NuGet.exe
+
 *.suo
 *.csproj.user
 *.pubxml.user
