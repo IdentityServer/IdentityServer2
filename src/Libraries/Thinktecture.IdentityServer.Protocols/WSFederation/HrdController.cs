@@ -453,7 +453,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             var j = JObject.FromObject(new Context { Wctx = wctx, Realm = realm, WsFedEndpoint = wsfedEndpoint });
 
-            var cookie = new HttpCookie(_cookieContext, j.ToString())
+            var cookie = new HttpCookie(_cookieContext, HttpUtility.UrlEncode(j.ToString()))
             {
                 Secure = true,
                 HttpOnly = true,
@@ -485,7 +485,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             var j = JObject.FromObject(ctx);
 
-            var cookie = new HttpCookie(_cookieOAuthContext, j.ToString());
+            var cookie = new HttpCookie(_cookieOAuthContext, HttpUtility.UrlEncode(j.ToString()));
             cookie.Secure = true;
             cookie.HttpOnly = true;
             cookie.Path = Request.ApplicationPath;
