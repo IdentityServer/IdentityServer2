@@ -143,8 +143,15 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(IdentityProvider model, IPCertInputModel cert)
+        public ActionResult Update(IdentityProvider model, IPCertInputModel cert, string action)
         {
+            if (action == "delete")
+            {
+                this.identityProviderRepository.Delete(model.ID);
+                TempData["Message"] = Resources.IPController.IdentityProvidersDeleted;
+                return RedirectToAction("Index");
+            }
+
             if (cert != null && cert.Cert != null)
             {
                 model.IssuerThumbprint = cert.Cert.Thumbprint;
