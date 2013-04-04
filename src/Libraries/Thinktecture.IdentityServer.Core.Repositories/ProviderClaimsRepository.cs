@@ -24,10 +24,14 @@ namespace Thinktecture.IdentityServer.Repositories
             var claims = new List<Claim>(from c in principal.Claims select c);
 
             // email address
-            string email = Membership.FindUsersByName(userName)[userName].Email;
-            if (!String.IsNullOrEmpty(email))
+            var membership = Membership.FindUsersByName(userName)[userName];
+            if (membership != null)
             {
-                claims.Add(new Claim(ClaimTypes.Email, email));
+                string email = membership.Email;
+                if (!String.IsNullOrEmpty(email))
+                {
+                    claims.Add(new Claim(ClaimTypes.Email, email));
+                }
             }
 
             // roles
