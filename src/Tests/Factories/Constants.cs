@@ -50,7 +50,9 @@ namespace Thinktecture.IdentityServer.Tests
 
         public static class Realms
         {
-            public const string TestRP = "https://test/rp/"; 
+            public const string TestRPSymmetric = "urn:test:symmetric";
+            public const string TestRPAsymmetric = "urn:test:asymmetric";
+ 
             public const string DisabledRP = "https://test/disabled/";
             public const string UnknownRealm = "http://unknown/";
             public const string PlainTextNoEncryption = "http://server/noEncryption/";

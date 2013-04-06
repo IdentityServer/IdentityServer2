@@ -286,10 +286,16 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 },
                 new RelyingParties
                 {
-                    Name = "Test RP (Test Project)",
+                    Name = "Test RP (Symmetric Key)",
                     Enabled = true,
-                    Realm = "https://test/rp/",
+                    Realm = "urn:test:symmetric",
                     SymmetricSigningKey = "fWUU28oBOIcaQuwUKiL01KztD/CsZX83C3I0M1MOYN4=",    
+                },
+                new RelyingParties
+                {
+                    Name = "Test RP (Asymmetric Key)",
+                    Enabled = true,
+                    Realm = "urn:test:asymmetric",
                 }
             };
         }
