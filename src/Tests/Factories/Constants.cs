@@ -87,7 +87,7 @@ namespace Thinktecture.IdentityServer.Tests
 
             public const string ValidPassword = "abc!123";
 
-            public const string ValidClientId = "test";
+            public const string ValidClientId = "testclient";
             public const string ValidClientSecret = "secret";
         }
     }
