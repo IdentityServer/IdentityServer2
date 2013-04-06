@@ -114,7 +114,10 @@ namespace Thinktecture.IdentityServer.TokenService
 
             ValidateKnownRealm(details);
             ValidateRelyingParty(details);
-            ValidateTokenType(details);
+            
+            // not needed anymore
+            //ValidateTokenType(details);
+            
             ValidateReplyTo(details);
             ValidateEncryption(details);
             ValidateDelegation(details);
