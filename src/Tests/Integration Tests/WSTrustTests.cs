@@ -1,10 +1,6 @@
 ﻿/*
- * Copyright (c) Dominick Baier.  All rights reserved.
- * 
- * This code is licensed under the Microsoft Permissive License (Ms-PL)
- * 
- * SEE: http://www.microsoft.com/resources/sharedsource/licensingbasics/permissivelicense.mspx
- * 
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
+ * see license.txt
  */
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -53,7 +49,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
-        public void ValidUserNameCredential()
+        public void ValidUserNameCredentialSymmetric()
         {
             RequestSecurityTokenResponse rstr;
             var token = _mixedUserNameClient.Issue(_rst, out rstr);
@@ -62,7 +58,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
-        public void ValidClientCertificateCredential()
+        public void ValidClientCertificateCredentialSymmetric()
         {
             RequestSecurityTokenResponse rstr;
             var token = _mixedCertificateClient.Issue(_rst, out rstr);
@@ -71,7 +67,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
-        public void ValidUserNameCredentialSaml11()
+        public void ValidUserNameCredentialSaml11Symmetric()
         {
             var rst = new RequestSecurityToken
             {
@@ -131,7 +127,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
-        public void ValidUserNameCredentialSaml2()
+        public void ValidUserNameCredentialSaml2Symmetric()
         {
             var rst = new RequestSecurityToken
             {
@@ -193,7 +189,7 @@ namespace Thinktecture.IdentityServer.Tests
 
         [TestMethod]
         [ExpectedException(typeof(MessageSecurityException))]
-        public void InvalidUserNameCredential()
+        public void InvalidUserNameCredentialSymmetric()
         {
             var client = WSTrustClientFactory.CreateMixedUserNameClient(
                 Constants.Credentials.ValidUserName,
@@ -206,7 +202,7 @@ namespace Thinktecture.IdentityServer.Tests
 
         [TestMethod]
         [ExpectedException(typeof(FaultException))]
-        public void UnauthorizedUser()
+        public void UnauthorizedUserSymmetric()
         {
             var client = WSTrustClientFactory.CreateMixedUserNameClient(
                 Constants.Credentials.UnauthorizedUserName,
