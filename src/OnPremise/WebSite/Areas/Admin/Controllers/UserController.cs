@@ -110,26 +110,26 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             return Index();
         }
 
-        public ActionResult Roles(string id)
+        public ActionResult Roles(string username)
         {
-            var vm = new UserRolesViewModel(this.UserManagementRepository, id);
+            var vm = new UserRolesViewModel(this.UserManagementRepository, username);
             return View("Roles", vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Roles(string id, UserRoleAssignment[] roleAssignments)
+        public ActionResult Roles(string username, UserRoleAssignment[] roleAssignments)
         {
-            var vm = new UserRolesViewModel(this.UserManagementRepository, id);
+            var vm = new UserRolesViewModel(this.UserManagementRepository, username);
             if (ModelState.IsValid)
             {
                 try
                 {
                     var currentRoles =
                         roleAssignments.Where(x => x.InRole).Select(x => x.Role);
-                    this.UserManagementRepository.SetRolesForUser(id, currentRoles);
+                    this.UserManagementRepository.SetRolesForUser(username, currentRoles);
                     TempData["Message"] = Resources.UserController.RolesAssignedSuccessfully;
-                    return RedirectToAction("Roles", new { id });
+                    return RedirectToAction("Roles", new { username });
                 }
                 catch (ValidationException ex)
                 {
@@ -144,31 +144,31 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
             return View("Roles", vm);
         }
 
-        public new ActionResult Profile(string id)
+        public new ActionResult Profile(string username)
         {
-            var vm = new UserProfileViewModel(id);
+            var vm = new UserProfileViewModel(username);
             return View(vm);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public new ActionResult Profile(string id, ProfilePropertyInputModel[] profileValues)
+        public new ActionResult Profile(string username, ProfilePropertyInputModel[] profileValues)
         {
-            var vm = new UserProfileViewModel(id, profileValues);
+            var vm = new UserProfileViewModel(username, profileValues);
 
             if (vm.UpdateProfileFromValues(ModelState))
             {
                 TempData["Message"] = Resources.UserController.ProfileUpdated;
-                return RedirectToAction("Profile", new { id });
+                return RedirectToAction("Profile", new { username });
             }
 
             return View(vm);
         }
 
-        public ActionResult ChangePassword(string id)
+        public ActionResult ChangePassword(string username)
         {
             UserPasswordModel model = new UserPasswordModel();
-            model.Username = id;
+            model.Username = username;
             return View(model);
         }
 
