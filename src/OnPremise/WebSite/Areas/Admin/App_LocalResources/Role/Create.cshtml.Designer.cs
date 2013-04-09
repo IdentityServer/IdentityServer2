@@ -71,7 +71,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.App_LocalResources.Role {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Create.
         /// </summary>
         public static string Create {
             get {
@@ -89,7 +89,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.App_LocalResources.Role {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error creating role.
+        ///   Looks up a localized string similar to Error creating role..
         /// </summary>
         public static string ErrorCreatingRole {
             get {
