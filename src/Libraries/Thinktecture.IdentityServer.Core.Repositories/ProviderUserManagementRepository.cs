@@ -35,7 +35,10 @@ namespace Thinktecture.IdentityServer.Repositories
                 Roles.RemoveUserFromRoles(userName, userRoles);
             }
 
-            Roles.AddUserToRoles(userName, roles.ToArray());
+            if (roles.Any())
+            {
+                Roles.AddUserToRoles(userName, roles.ToArray());
+            }
         }
 
         public IEnumerable<string> GetRolesForUser(string userName)
