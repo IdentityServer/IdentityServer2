@@ -38,6 +38,12 @@
 <ul>
     <li>@Html.ActionLink(Index_cshtml.Roles, "Index", "Role")</li>
     <li>@Html.ActionLink(Index_cshtml.Users, "Index", "User")</li>
-    <li>@Html.ActionLink(Index_cshtml.ClientCertificates, "Index", "ClientCertificate")</li>
-    <li>@Html.ActionLink(Index_cshtml.IdentityDelegation, "Index", "Delegation")</li>
+    @if(Model.ShowClientCerts)
+    {
+        <li>@Html.ActionLink(Index_cshtml.ClientCertificates, "Index", "ClientCertificate")</li>
+    }
+    @if(Model.ShowIdentityDelegation)
+    {
+        <li>@Html.ActionLink(Index_cshtml.IdentityDelegation, "Index", "Delegation")</li>
+    }
 </ul>
