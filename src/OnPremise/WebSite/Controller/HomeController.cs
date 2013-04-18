@@ -62,6 +62,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 if (Configuration.WSFederation.EnableFederation)
                 {
                     list.Add("WS-Federation HRD", endpoints.WSFederationHRD.AbsoluteUri);
+                    list.Add("OAuth2 Callback", endpoints.OAuth2Callback.AbsoluteUri);
                 }
             }
 
@@ -98,7 +99,6 @@ namespace Thinktecture.IdentityServer.Web.Controllers
                 {
                     list.Add("OAuth2 Authorize", endpoints.OAuth2Authorize.AbsoluteUri);
                 }
-                list.Add("OAuth2 Callback", endpoints.OAuth2Callback.AbsoluteUri);
                 if (Configuration.OAuth2.EnableResourceOwnerFlow)
                 {
                     list.Add("OAuth2 Token", endpoints.OAuth2Token.AbsoluteUri);

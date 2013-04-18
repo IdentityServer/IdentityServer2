@@ -35,6 +35,7 @@ namespace Thinktecture.IdentityServer
         {
             public const string WSFedIssuePage = "issue/wsfed";
             public const string WSFedHRD = "issue/hrd";
+            public const string OAuth2Callback = "issue/hrd/oauth2callback";
             public const string WSFedHRDSelect = "issue/hrd/select";
             public const string WSFedMetadata = "FederationMetadata/2007-06/FederationMetadata.xml";
             public const string PrivacyNotice = "privacyNotice.txt";
@@ -42,7 +43,6 @@ namespace Thinktecture.IdentityServer
             public const string SimpleHttp = "issue/simple";
             public const string Wrap = "issue/wrap";
             public const string OAuth2Token = "issue/oauth2/token";
-            public const string OAuth2Callback = "issue/oauth2/callback";
             public const string OAuth2Authorize = "issue/oauth2/authorize";
             public const string AdfsIntegration = "issue/adfs";
             public const string JSNotify = "issue/jsnotify";
