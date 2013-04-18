@@ -17,10 +17,13 @@
         @Html.ActionLink(Index_cshtml.RelyingPartiesResources, "Index", "RP")
         @Html.Action("ChildMenu", "Menu", new{controllerName="RP"})
     </li>
-    <li>
-        @Html.ActionLink(Index_cshtml.IdentityProviders, "Index", "IP")
-        @Html.Action("ChildMenu", "Menu", new{controllerName="IP"})
-    </li>
+    @if(Model.ShowIdentityProviders)
+    {
+        <li>
+            @Html.ActionLink(Index_cshtml.IdentityProviders, "Index", "IP")
+            @Html.Action("ChildMenu", "Menu", new{controllerName="IP"})
+        </li>
+    }
     @if(Model.ShowOAuthClients)
     {
         <li>
