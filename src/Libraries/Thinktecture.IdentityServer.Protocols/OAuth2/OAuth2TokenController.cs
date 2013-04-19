@@ -114,11 +114,12 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             CodeToken token;
             if (CodeTokenRepository.TryGetCode(codeToken, out token))
             {
+                CodeTokenRepository.DeleteCode(token.Code);
+
                 // 2. make sure the client is the same - if not: error
                 if (token.ClientId == client.ID)
                 {
                     // 3. call STS 
-                    CodeTokenRepository.DeleteCode(token.Code);
                     return CreateTokenResponse(token.UserName, client, new EndpointReference(token.Scope), tokenType, includeRefreshToken: client.AllowRefreshToken);
                 }
 
