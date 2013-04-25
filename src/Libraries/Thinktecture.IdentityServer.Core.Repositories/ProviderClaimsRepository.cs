@@ -38,6 +38,15 @@ namespace Thinktecture.IdentityServer.Repositories
             GetRolesForToken(userName).ToList().ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role)));
 
             // profile claims
+            claims.AddRange(GetProfileClaims(userName));
+
+            return claims;
+        }
+
+        protected virtual IEnumerable<Claim> GetProfileClaims(string userName)
+        {
+            var claims = new List<Claim>();
+
             if (ProfileManager.Enabled)
             {
                 var profile = ProfileBase.Create(userName, true);
@@ -50,7 +59,7 @@ namespace Thinktecture.IdentityServer.Repositories
                         {
                             if (!string.IsNullOrWhiteSpace(value.ToString()))
                             {
-                                claims.Add(new Claim(ProfileClaimPrefix + prop.Name.ToLowerInvariant(), value.ToString()));
+                                claims.Add(new Claim(GetProfileClaimType(prop.Name.ToLowerInvariant()), value.ToString()));
                             }
                         }
                     }
@@ -58,6 +67,18 @@ namespace Thinktecture.IdentityServer.Repositories
             }
 
             return claims;
+        }
+
+        protected virtual string GetProfileClaimType(string propertyName)
+        {
+            if (StandardClaimTypes.Mappings.ContainsKey(propertyName))
+            {
+                return StandardClaimTypes.Mappings[propertyName];
+            }
+            else
+            {
+                return string.Format("{0}{1}", ProfileClaimPrefix, propertyName);
+            }
         }
 
         public IEnumerable<string> GetSupportedClaimTypes()
@@ -73,7 +94,7 @@ namespace Thinktecture.IdentityServer.Repositories
             {
                 foreach (SettingsProperty prop in ProfileBase.Properties)
                 {
-                    claimTypes.Add(ProfileClaimPrefix + prop.Name.ToLowerInvariant());
+                    claimTypes.Add(GetProfileClaimType(prop.Name.ToLowerInvariant()));
                 }
             }
 

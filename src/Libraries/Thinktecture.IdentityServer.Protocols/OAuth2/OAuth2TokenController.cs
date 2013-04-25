@@ -219,6 +219,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                 if (!ConfigurationRepository.OAuth2.EnableCodeFlow ||
                     !client.AllowCodeFlow)
                 {
+                    Tracing.Error("Code flow not allowed for client");
                     return OAuthErrorResponseMessage(OAuth2Constants.Errors.UnsupportedGrantType);
                 }
             }
@@ -228,6 +229,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
                 if (!ConfigurationRepository.OAuth2.EnableResourceOwnerFlow ||
                     !client.AllowResourceOwnerFlow)
                 {
+                    Tracing.Error("Resource owner password flow not allowed for client");
                     return OAuthErrorResponseMessage(OAuth2Constants.Errors.UnsupportedGrantType);
                 }
             }
@@ -236,6 +238,7 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
             {
                 if (!client.AllowRefreshToken)
                 {
+                    Tracing.Error("Refresh tokens not allowed for client");
                     return OAuthErrorResponseMessage(OAuth2Constants.Errors.UnsupportedGrantType);
                 }
             }

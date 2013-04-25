@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) Dominick Baier.  All rights reserved.
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
  * see license.txt
  */
 
@@ -20,7 +20,7 @@ namespace Thinktecture.IdentityServer.Tests
         string baseAddress = Constants.Http.LocalBaseAddress;
         //string baseAddress = Constants.Http.CloudBaseAddress;
         
-        string rp = Constants.Realms.TestRP;
+        string rp = Constants.Realms.TestRPSymmetric;
 
         [TestMethod]
         public void NoRealm()

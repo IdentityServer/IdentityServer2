@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) Dominick Baier.  All rights reserved.
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
  * see license.txt
  */
 
@@ -23,10 +23,11 @@ namespace Thinktecture.IdentityServer.Tests
         string baseAddress = Constants.OAuth2.LocalBaseAddress;
         //string baseAddress = Constants.OAuth2.CloudBaseAddress;
 
-        string scope = Constants.Realms.TestRP;
+        string scopeSymmetric = Constants.Realms.TestRPSymmetric;
+        string scopeAsymmetric = Constants.Realms.TestRPAsymmetric;
 
         [TestMethod]
-        public void ValidUserNameCredentialValidClientCredential()
+        public void ValidUserNameCredentialValidClientCredentialSymmetric()
         {
             var client = new OAuth2Client(
                 new Uri(baseAddress),
@@ -36,7 +37,28 @@ namespace Thinktecture.IdentityServer.Tests
             var response = client.RequestAccessTokenUserName(
                 Constants.Credentials.ValidUserName,
                 Constants.Credentials.ValidPassword,
-                scope);
+                scopeSymmetric);
+
+            Assert.IsTrue(response != null, "response is null");
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(response.AccessToken), "access token is null");
+            Assert.IsTrue(!string.IsNullOrWhiteSpace(response.TokenType), "token type is null");
+            Assert.IsTrue(response.ExpiresIn > 0, "expiresIn is 0");
+
+            Trace.WriteLine(response.AccessToken);
+        }
+
+        [TestMethod]
+        public void ValidUserNameCredentialValidClientCredentialAsymmetric()
+        {
+            var client = new OAuth2Client(
+                new Uri(baseAddress),
+                Constants.Credentials.ValidClientId,
+                Constants.Credentials.ValidClientSecret);
+
+            var response = client.RequestAccessTokenUserName(
+                Constants.Credentials.ValidUserName,
+                Constants.Credentials.ValidPassword,
+                scopeAsymmetric);
 
             Assert.IsTrue(response != null, "response is null");
             Assert.IsTrue(!string.IsNullOrWhiteSpace(response.AccessToken), "access token is null");
@@ -57,7 +79,7 @@ namespace Thinktecture.IdentityServer.Tests
             var response = client.RequestAccessTokenUserName(
                 Constants.Credentials.ValidUserName,
                 Constants.Credentials.ValidPassword,
-                scope);
+                scopeSymmetric);
 
             Assert.IsTrue(response != null, "response is null");
             Assert.IsTrue(!string.IsNullOrWhiteSpace(response.AccessToken), "access token is null");
@@ -70,7 +92,7 @@ namespace Thinktecture.IdentityServer.Tests
                 {
                     { OAuth2Constants.GrantType, "refresh_token" },
                     { "refresh_token", response.RefreshToken },
-                    { OAuth2Constants.Scope, scope }
+                    { OAuth2Constants.Scope, scopeSymmetric }
                 });
 
             var httpClient = new HttpClient();
@@ -89,7 +111,7 @@ namespace Thinktecture.IdentityServer.Tests
             var response = client.RequestAccessTokenUserName(
                 Constants.Credentials.ValidUserName,
                 Constants.Credentials.ValidPassword,
-                scope);
+                scopeSymmetric);
         }
 
         [TestMethod]
@@ -101,7 +123,7 @@ namespace Thinktecture.IdentityServer.Tests
             var response = client.RequestAccessTokenUserName(
                 Constants.Credentials.ValidUserName,
                 Constants.Credentials.ValidPassword,
-                scope);
+                scopeSymmetric);
 
             Assert.IsTrue(response != null, "response is null");
             Assert.IsTrue(!string.IsNullOrWhiteSpace(response.AccessToken), "access token is null");
@@ -122,7 +144,7 @@ namespace Thinktecture.IdentityServer.Tests
             var response = client.RequestAccessTokenUserName(
                 Constants.Credentials.ValidUserName,
                 Constants.Credentials.ValidPassword,
-                scope);
+                scopeSymmetric);
 
             Assert.IsTrue(response != null, "response is null");
             Assert.IsTrue(!string.IsNullOrWhiteSpace(response.AccessToken), "access token is null");
@@ -137,10 +159,10 @@ namespace Thinktecture.IdentityServer.Tests
             config.IssuerNameRegistry = registry;
 
             var issuerResolver = new WebTokenIssuerTokenResolver();
-            issuerResolver.AddSigningKey("http://identityserver.v2.thinktecture.com/trust/changethis", "3ihK5qGVhp8ptIk9+TDucXQW4Aaengg3d5m6gU8nzc8=");
+            issuerResolver.AddSigningKey("http://identityserver.v2.thinktecture.com/trust/changethis", "fWUU28oBOIcaQuwUKiL01KztD/CsZX83C3I0M1MOYN4=");
             config.IssuerTokenResolver = issuerResolver;
 
-            config.AudienceRestriction.AllowedAudienceUris.Add(new Uri(scope));
+            config.AudienceRestriction.AllowedAudienceUris.Add(new Uri(scopeSymmetric));
 
             var handler = new JsonWebTokenHandler();
             handler.Configuration = config;
@@ -158,7 +180,7 @@ namespace Thinktecture.IdentityServer.Tests
                     { OAuth2Constants.GrantType, OAuth2Constants.Password },
                     { OAuth2Constants.UserName, Constants.Credentials.ValidUserName },
                     { OAuth2Constants.Password, "invalid" },
-                    { OAuth2Constants.Scope, scope }
+                    { OAuth2Constants.Scope, scopeSymmetric }
                 });
 
             var client = new HttpClient();
@@ -177,7 +199,7 @@ namespace Thinktecture.IdentityServer.Tests
                     { OAuth2Constants.GrantType, OAuth2Constants.Password },
                     { OAuth2Constants.UserName, Constants.Credentials.UnauthorizedUserName },
                     { OAuth2Constants.Password, Constants.Credentials.ValidPassword },
-                    { OAuth2Constants.Scope, scope }
+                    { OAuth2Constants.Scope, scopeSymmetric }
                 });
 
             var client = new HttpClient();
@@ -230,7 +252,7 @@ namespace Thinktecture.IdentityServer.Tests
                     { OAuth2Constants.GrantType, "invalid" },
                     { OAuth2Constants.UserName, Constants.Credentials.ValidUserName },
                     { OAuth2Constants.Password, Constants.Credentials.ValidUserName },
-                    { OAuth2Constants.Scope, scope }
+                    { OAuth2Constants.Scope, scopeSymmetric }
                 });
 
             var client = new HttpClient();
@@ -246,7 +268,7 @@ namespace Thinktecture.IdentityServer.Tests
             var form = new FormUrlEncodedContent(new Dictionary<string, string>
                 {
                     { OAuth2Constants.GrantType, OAuth2Constants.Password },
-                    { OAuth2Constants.Scope, scope }
+                    { OAuth2Constants.Scope, scopeSymmetric }
                 });
 
             var client = new HttpClient();

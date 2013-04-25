@@ -1,10 +1,6 @@
 ﻿/*
- * Copyright (c) Dominick Baier.  All rights reserved.
- * 
- * This code is licensed under the Microsoft Permissive License (Ms-PL)
- * 
- * SEE: http://www.microsoft.com/resources/sharedsource/licensingbasics/permissivelicense.mspx
- * 
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
+ * see license.txt
  */
 
 using System;
@@ -50,7 +46,9 @@ namespace Thinktecture.IdentityServer.Tests
 
         public static class Realms
         {
-            public const string TestRP = "https://test/rp/"; 
+            public const string TestRPSymmetric = "urn:test:symmetric";
+            public const string TestRPAsymmetric = "urn:test:asymmetric";
+ 
             public const string DisabledRP = "https://test/disabled/";
             public const string UnknownRealm = "http://unknown/";
             public const string PlainTextNoEncryption = "http://server/noEncryption/";
@@ -82,12 +80,12 @@ namespace Thinktecture.IdentityServer.Tests
 
         public static class Credentials
         {
-            public const string ValidUserName = "dominick";
+            public const string ValidUserName = "bob";
             public const string UnauthorizedUserName = "unauthorized";
 
             public const string ValidPassword = "abc!123";
 
-            public const string ValidClientId = "test";
+            public const string ValidClientId = "testclient";
             public const string ValidClientSecret = "secret";
         }
     }

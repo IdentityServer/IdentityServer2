@@ -283,6 +283,19 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Enabled = true,
                     Realm = "urn:testrp",
                     ReplyTo = "https://roadie/idsrvrp/"
+                },
+                new RelyingParties
+                {
+                    Name = "Test RP (Symmetric Key)",
+                    Enabled = true,
+                    Realm = "urn:test:symmetric",
+                    SymmetricSigningKey = "fWUU28oBOIcaQuwUKiL01KztD/CsZX83C3I0M1MOYN4=",    
+                },
+                new RelyingParties
+                {
+                    Name = "Test RP (Asymmetric Key)",
+                    Enabled = true,
+                    Realm = "urn:test:asymmetric",
                 }
             };
         }
@@ -396,6 +409,18 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     ClientSecret = Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"),
                     AllowImplicitFlow = false,
                     AllowResourceOwnerFlow = false,
+                    AllowCodeFlow = true,
+                    AllowRefreshToken = true
+                },
+                new Client
+                {
+                    Name = "Test Client (Test Project)",
+                    Description = "Test Client",
+                    RedirectUri = "https://foo",
+                    ClientId = "testclient",
+                    ClientSecret = Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"),
+                    AllowImplicitFlow = true,
+                    AllowResourceOwnerFlow = true,
                     AllowCodeFlow = true,
                     AllowRefreshToken = true
                 }

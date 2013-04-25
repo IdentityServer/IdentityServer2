@@ -145,6 +145,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Mappings.resx</DependentUpon>
     </Compile>
+    <Compile Include="StandardClaimTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Thinktecture.IdentityServer.Core\Thinktecture.IdentityServer.Core.csproj">

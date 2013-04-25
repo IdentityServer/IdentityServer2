@@ -29,7 +29,10 @@ namespace Thinktecture.IdentityServer.TokenService
 
             if (RequestDetails.TokenType == TokenTypes.SimpleWebToken || RequestDetails.TokenType == TokenTypes.JsonWebToken)
             {
-                SigningCredentials = new HmacSigningCredentials(details.RelyingPartyRegistration.SymmetricSigningKey);
+                if (details.RelyingPartyRegistration.SymmetricSigningKey != null && details.RelyingPartyRegistration.SymmetricSigningKey.Length > 0)
+                {
+                    SigningCredentials = new HmacSigningCredentials(details.RelyingPartyRegistration.SymmetricSigningKey);
+                }
             }
 
             ReplyToAddress = RequestDetails.ReplyToAddress.AbsoluteUri;
