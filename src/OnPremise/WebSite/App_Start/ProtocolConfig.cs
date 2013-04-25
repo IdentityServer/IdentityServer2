@@ -125,7 +125,6 @@ namespace Thinktecture.IdentityServer.Web
             var authConfig = new AuthenticationConfiguration
             {
                 InheritHostClientIdentity = false,
-                DefaultAuthenticationScheme = "Basic",
                 ClaimsAuthenticationManager = new ClaimsTransformer()
             };
 
@@ -138,7 +137,6 @@ namespace Thinktecture.IdentityServer.Web
             var authConfig = new AuthenticationConfiguration
             {
                 InheritHostClientIdentity = false,
-                DefaultAuthenticationScheme = "Basic",
             };
 
             // accept arbitrary credentials on basic auth header,
