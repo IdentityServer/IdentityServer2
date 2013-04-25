@@ -3,7 +3,6 @@
  * see license.txt
  */
 
-using System.Collections;
 using System.Collections.Generic;
 using Thinktecture.IdentityServer.Models;
 

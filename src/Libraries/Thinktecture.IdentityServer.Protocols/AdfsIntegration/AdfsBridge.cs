@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens.JWT;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IdentityModel.Policy;
 using System.IdentityModel.Protocols.WSTrust;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
@@ -7,20 +11,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Security;
+using System.ServiceModel.Security.Tokens;
 using System.Xml;
 using Thinktecture.IdentityModel.Constants;
-using Thinktecture.IdentityModel.Tokens;
+using Thinktecture.IdentityModel.Extensions;
 using Thinktecture.IdentityModel.WSTrust;
 using Thinktecture.IdentityServer.Repositories;
-using Thinktecture.IdentityModel.Extensions;
-using System.ServiceModel.Security.Tokens;
-using System.Collections.ObjectModel;
-using System.IdentityModel.Policy;
-using System.Collections.Generic;
-using Microsoft.IdentityModel.Tokens.JWT;
 
 namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 {

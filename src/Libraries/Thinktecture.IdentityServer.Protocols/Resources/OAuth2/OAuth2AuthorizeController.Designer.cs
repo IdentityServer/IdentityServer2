@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Thinktecture.IdentityServer.Protocols.Resources.OAuth2 {
-    using System;
-    
-    
+namespace Thinktecture.IdentityServer.Protocols.Resources.OAuth2
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

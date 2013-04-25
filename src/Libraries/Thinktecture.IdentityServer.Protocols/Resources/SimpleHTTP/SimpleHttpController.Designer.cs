@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Thinktecture.IdentityServer.Protocols.Resources.SimpleHTTP {
-    using System;
-    
-    
+namespace Thinktecture.IdentityServer.Protocols.Resources.SimpleHTTP
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

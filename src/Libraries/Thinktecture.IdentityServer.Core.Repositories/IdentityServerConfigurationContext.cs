@@ -4,7 +4,6 @@
  */
 
 using System;
-using System.Configuration;
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;

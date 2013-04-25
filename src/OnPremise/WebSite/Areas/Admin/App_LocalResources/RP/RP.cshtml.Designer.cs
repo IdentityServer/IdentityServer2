@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Thinktecture.IdentityServer.Web.Areas.Admin.App_LocalResources.RP {
-    using System;
-    
-    
+namespace Thinktecture.IdentityServer.Web.Areas.Admin.App_LocalResources.RP
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

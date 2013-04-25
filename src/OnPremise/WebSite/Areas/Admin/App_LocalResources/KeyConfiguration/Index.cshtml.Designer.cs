@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Thinktecture.IdentityServer.Web.Areas.Admin.App_LocalResources.KeyConfiguration {
-    using System;
-    
-    
+namespace Thinktecture.IdentityServer.Web.Areas.Admin.App_LocalResources.KeyConfiguration
+{
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>

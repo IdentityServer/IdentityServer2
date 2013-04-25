@@ -8,7 +8,6 @@ using System.Security.Principal;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel;
 using Thinktecture.IdentityServer.Models.Configuration;
-using Thinktecture.IdentityServer.Web.Areas.Admin.Resources;
 
 namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
 {
