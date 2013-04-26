@@ -4,9 +4,7 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Security.AccessControl;
 
 namespace Thinktecture.IdentityServer.Web.ViewModels
 {

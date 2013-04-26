@@ -25,7 +25,7 @@ namespace Thinktecture.IdentityServer.Tests
 
         string baseAddressCertificate = Constants.WSTrust.LocalMixedCertificate;
 
-        string rp = Constants.Realms.TestRPSymmetric;
+        string rp = Constants.Realms.TestRPEncryption;
 
         [TestInitialize]
         public void Setup()

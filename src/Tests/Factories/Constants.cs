@@ -48,6 +48,7 @@ namespace Thinktecture.IdentityServer.Tests
         {
             public const string TestRPSymmetric = "urn:test:symmetric";
             public const string TestRPAsymmetric = "urn:test:asymmetric";
+            public const string TestRPEncryption = "urn:test:encryption";
  
             public const string DisabledRP = "https://test/disabled/";
             public const string UnknownRealm = "http://unknown/";
