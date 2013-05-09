@@ -150,18 +150,6 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             if (result.Error != null) return View("Error");
 
             var claims = result.Claims.ToList();
-            string[] claimsToRemove = new string[]
-            {
-                "http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider",
-                ClaimTypes.AuthenticationInstant
-            };
-            
-            foreach (var toRemove in claimsToRemove)
-            {
-                var tmp = claims.Find(x => x.Type == toRemove);
-                if (tmp != null) claims.Remove(tmp);
-            }
-            
             claims.Add(new Claim(Constants.Claims.IdentityProvider, ip.Name, ClaimValueTypes.String, Constants.InternalIssuer));
             var id = new ClaimsIdentity(claims, "OAuth");
             var cp = new ClaimsPrincipal(id);
