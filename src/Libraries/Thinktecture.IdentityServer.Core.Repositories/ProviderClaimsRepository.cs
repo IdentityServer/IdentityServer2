@@ -18,7 +18,7 @@ namespace Thinktecture.IdentityServer.Repositories
     {
         private const string ProfileClaimPrefix = "http://identityserver.thinktecture.com/claims/profileclaims/";
 
-        public IEnumerable<Claim> GetClaims(ClaimsPrincipal principal, RequestDetails requestDetails)
+        public virtual IEnumerable<Claim> GetClaims(ClaimsPrincipal principal, RequestDetails requestDetails)
         {
             var userName = principal.Identity.Name;
             var claims = new List<Claim>(from c in principal.Claims select c);
@@ -81,7 +81,7 @@ namespace Thinktecture.IdentityServer.Repositories
             }
         }
 
-        public IEnumerable<string> GetSupportedClaimTypes()
+        public virtual IEnumerable<string> GetSupportedClaimTypes()
         {
             var claimTypes = new List<string>
             {
