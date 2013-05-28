@@ -229,6 +229,7 @@ namespace Thinktecture.IdentityServer.Protocols
         {
             var claims = new List<Claim>
                     {
+                        new Claim(ClaimTypes.NameIdentifier, username),
                         new Claim(ClaimTypes.Name, username),
                         new Claim(ClaimTypes.AuthenticationMethod, authenticationMethod),
                         AuthenticationInstantClaim.Now,
