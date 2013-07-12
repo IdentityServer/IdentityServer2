@@ -72,7 +72,6 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
             Tracing.Information("Token request validation successful.");
             return validatedRequest;
-
         }
 
         private Client ValidateClient(ClaimsPrincipal clientPrincipal)
@@ -86,11 +85,6 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
         }
 
         private void ValidateCodeGrant(ValidatedRequest validatedRequest, TokenRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Client ValidateClient(string clientId, string clientSecret)
         {
             throw new NotImplementedException();
         }
