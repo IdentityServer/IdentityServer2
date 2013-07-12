@@ -78,11 +78,21 @@
     <Compile Include="AdfsIntegration\AdfsBridge.cs" />
     <Compile Include="OAuth2\AuthorizeRequest.cs" />
     <Compile Include="OAuth2\ClientValidator.cs" />
-    <Compile Include="OAuth2\OAuth2AuthorizeController.cs" />
-    <Compile Include="OAuth2\OAuth2ConsentViewModel.cs" />
-    <Compile Include="OAuth2\OAuthTitleGrantResult.cs" />
+    <Compile Include="OAuth2\Endpoints\OAuth2AuthorizeController.cs" />
+    <Compile Include="OAuth2\Endpoints\OAuth2ConsentViewModel.cs" />
+    <Compile Include="OpenIdConnect\Endpoints\AuthorizeController.cs" />
+    <Compile Include="OpenIdConnect\IdentityToken.cs" />
+    <Compile Include="OpenIdConnect\OidcToken.cs" />
     <Compile Include="OpenIdConnect\OidcConstants.cs" />
+    <Compile Include="OpenIdConnect\Endpoints\TokenController.cs" />
     <Compile Include="OpenIdConnect\UserInfoController.cs" />
+    <Compile Include="OAuth2\AuthorizeRequestClientException.cs" />
+    <Compile Include="OAuth2\AuthorizeRequestResourceOwnerException.cs" />
+    <Compile Include="OAuth2\AuthorizeRequestValidationException.cs" />
+    <Compile Include="OpenIdConnect\AuthorizeRequestValidator.cs" />
+    <Compile Include="OAuth2\ClientErrorResult.cs" />
+    <Compile Include="OAuth2\Extensions.cs" />
+    <Compile Include="OpenIdConnect\ValidatedRequest.cs" />
     <Compile Include="Resources\OAuth2\OAuth2AuthorizeController.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,7 +122,7 @@
     <Compile Include="Shared\AuthenticationHelper.cs" />
     <Compile Include="FederationMetadata\FederationMetadataController.cs" />
     <Compile Include="FederationMetadata\WSFederationMetadataGenerator.cs" />
-    <Compile Include="OAuth2\OAuth2TokenController.cs" />
+    <Compile Include="OAuth2\Endpoints\OAuth2TokenController.cs" />
     <Compile Include="OAuth2\TokenRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\SignInSessionsManager.cs" />
@@ -171,6 +181,7 @@
       <LastGenOutput>WSFederationResult.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
