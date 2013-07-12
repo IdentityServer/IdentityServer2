@@ -36,7 +36,7 @@ namespace Thinktecture.IdentityModel.Oidc
                 var scopes = "openid " + WebConfigurationManager.AppSettings["oidc:scopes"];
                 var redirectUri = "https://localhost:44309/" + "oidccallback";
                 
-                var queryString = string.Format("?client_id={0}&scope={1}&redirect_uri={2}&state={3}",
+                var queryString = string.Format("?client_id={0}&scope={1}&redirect_uri={2}&state={3}&response_type=code",
                     clientId,
                     scopes,
                     redirectUri,

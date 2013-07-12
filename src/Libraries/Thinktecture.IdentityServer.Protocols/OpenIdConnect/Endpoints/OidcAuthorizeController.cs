@@ -12,17 +12,17 @@ using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 {
-    public class AuthorizeController : Controller
+    public class OidcAuthorizeController : Controller
     {
         [Import]
         public IClientsRepository Clients { get; set; }
 
-        public AuthorizeController()
+        public OidcAuthorizeController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public AuthorizeController(IClientsRepository clients)
+        public OidcAuthorizeController(IClientsRepository clients)
         {
             Clients = clients;
         }

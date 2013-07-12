@@ -11,7 +11,7 @@ using Thinktecture.IdentityServer.Protocols.OAuth2;
 
 namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 {
-    public class TokenController : ApiController
+    public class OidcTokenController : ApiController
     {
         public HttpResponseMessage Post(TokenRequest request)
         {
