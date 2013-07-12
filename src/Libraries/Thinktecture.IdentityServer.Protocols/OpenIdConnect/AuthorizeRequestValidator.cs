@@ -143,7 +143,7 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
                     validatedRequest.State);
             }
 
-            validatedRequest.Scopes = scopes.Skip(1).Select(s => s).ToArray();           
+            validatedRequest.Scopes = scopes; 
 
 
             if (request.response_type == OAuth2Constants.ResponseTypes.Code)

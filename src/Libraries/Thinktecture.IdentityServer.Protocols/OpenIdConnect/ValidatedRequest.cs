@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Thinktecture.IdentityServer.Models;
 
 namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
@@ -17,6 +13,8 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
         public string ResponseType { get; set; }
 
-        public string[] Scopes { get; set; }
+        public IEnumerable<string> Scopes { get; set; }
+
+        public string GrantType { get; set; }
     }
 }

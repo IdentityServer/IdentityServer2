@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -65,30 +66,26 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
         private ActionResult PerformAuthorizationCodeGrant(ValidatedRequest validatedRequest)
         {
-            //var handle = TokenHandle.CreateAuthorizationCode(
-            //     validatedRequest.Client,
-            //     validatedRequest.Application,
-            //     validatedRequest.RedirectUri.Uri,
-            //     ClaimsPrincipal.Current.FilterInternalClaims(),
-            //     validatedRequest.Scopes,
-            //     validatedRequest.RequestingRefreshToken,
-            //     validatedRequest.RequestedRefreshTokenExpiration);
+            var grant = Grant.CreateAuthorizationCode(
+                validatedRequest.Client.ClientId,
+                ClaimsPrincipal.Current.Identity.Name,
+                validatedRequest.Scopes,
+                validatedRequest.RedirectUri);
 
-            //_handleManager.Add(handle);
-            //var tokenString = string.Format("code={0}", handle.HandleId);
+            // store grant - todo
 
-            //if (!string.IsNullOrWhiteSpace(validatedRequest.State))
-            //{
-            //    tokenString = string.Format("{0}&state={1}", tokenString, Server.UrlEncode(validatedRequest.State));
-            //}
+            var tokenString = string.Format("code={0}", grant.HandleId);
 
-            //var redirectString = string.Format("{0}?{1}",
-            //            validatedRequest.RedirectUri.Uri,
-            //            tokenString);
+            if (!string.IsNullOrWhiteSpace(validatedRequest.State))
+            {
+                tokenString = string.Format("{0}&state={1}", tokenString, Server.UrlEncode(validatedRequest.State));
+            }
 
-            //return Redirect(redirectString);
+            var redirectString = string.Format("{0}?{1}",
+                        validatedRequest.RedirectUri,
+                        tokenString);
 
-            throw new NotImplementedException();
+            return Redirect(redirectString);
         }
 
         private ActionResult PerformImplicitGrant(ValidatedRequest validatedRequest)
