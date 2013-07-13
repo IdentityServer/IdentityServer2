@@ -138,6 +138,7 @@
     <Compile Include="Models\IdentityProvider.cs" />
     <Compile Include="Models\IdentityProviderTypes.cs" />
     <Compile Include="Models\Configuration\DiagnosticsConfiguration.cs" />
+    <Compile Include="Models\StoredGrantType.cs" />
     <Compile Include="Repositories\IClientsRepository.cs" />
     <Compile Include="Repositories\ICodeTokenRepository.cs" />
     <Compile Include="Repositories\IConfigurationRepository.cs" />

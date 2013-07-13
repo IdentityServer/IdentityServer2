@@ -11,9 +11,9 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
         protected override List<Claim> CreateClaims()
         {
-            if (string.IsNullOrWhiteSpace(Issuer))
+            if (string.IsNullOrWhiteSpace(Subject))
             {
-                throw new InvalidOperationException("Issuer is empty");
+                throw new InvalidOperationException("Subject is empty");
             }
 
             var claims = base.CreateClaims();

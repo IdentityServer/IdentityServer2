@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Thinktecture.IdentityServer.Models;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 {
@@ -16,5 +17,11 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
         public IEnumerable<string> Scopes { get; set; }
 
         public string GrantType { get; set; }
+
+        public string AuthorizationCode { get; set; }
+
+        public IGrantsRepository GrantsRepository { get; set; }
+
+        public Grant Grant { get; set; }
     }
 }

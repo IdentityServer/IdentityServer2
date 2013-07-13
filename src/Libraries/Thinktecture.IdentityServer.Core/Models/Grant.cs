@@ -7,13 +7,13 @@ namespace Thinktecture.IdentityServer.Models
     public class Grant
     {
         public string HandleId { get; set; }
-        public string GrantType { get; set; }
+        public StoredGrantType GrantType { get; set; }
         
         public string Subject { get; set; }
         public IEnumerable<string> Scopes { get; set; }
         public string ClientId { get; set; }
         public string RedirectUri { get; set; }
-        public DateTime? Expiration { get; set; }
+        public DateTime Expiration { get; set; }
 
         public Grant()
         {
@@ -24,7 +24,7 @@ namespace Thinktecture.IdentityServer.Models
         {
             return new Grant
             {
-                GrantType = OAuth2Constants.GrantTypes.AuthorizationCode,
+                GrantType = StoredGrantType.AuthorizationCode,
                 
                 ClientId = clientId,
                 Subject = subject,

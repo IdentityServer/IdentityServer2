@@ -10,11 +10,12 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
     class TokenRequestValidator
     {
         public IClientsRepository Clients { get; set; }
+        public IGrantsRepository Grants { get; set; }
 
-
-        public TokenRequestValidator()
+        public TokenRequestValidator(IClientsRepository clients, IGrantsRepository grants)
         {
-
+            Clients = clients;
+            Grants = grants;
         }
 
         public ValidatedRequest Validate(TokenRequest request, ClaimsPrincipal clientPrincipal)
@@ -85,7 +86,29 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
         private Client ValidateClient(ClaimsPrincipal clientPrincipal)
         {
-            throw new NotImplementedException();
+            if (!clientPrincipal.Identity.IsAuthenticated)
+            {
+                Tracing.Error("Anonymous client.");
+                return null;
+            }
+
+            var passwordClaim = ClaimsPrincipal.Current.FindFirst("password");
+            if (passwordClaim == null)
+            {
+                Tracing.Error("No client secret provided.");
+                return null;
+            }
+
+            Client client;
+            if (Clients.ValidateAndGetClient(
+                    clientPrincipal.Identity.Name,
+                    passwordClaim.Value,
+                    out client))
+            {
+                return client;
+            }
+
+            return null;
         }
 
         private void ValidateRefreshTokenGrant(ValidatedRequest validatedRequest, TokenRequest request)
@@ -95,7 +118,60 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
         private void ValidateCodeGrant(ValidatedRequest validatedRequest, TokenRequest request)
         {
-            throw new NotImplementedException();
+            if (!validatedRequest.Client.AllowCodeFlow)
+            {
+                throw new TokenRequestValidationException(
+                    "Code flow not allowed for client",
+                    OAuth2Constants.Errors.UnauthorizedClient);
+            }
+
+            // code needs to be present
+            if (string.IsNullOrWhiteSpace(request.Code))
+            {
+                throw new TokenRequestValidationException(
+                    "Missing authorization code",
+                    OAuth2Constants.Errors.InvalidGrant);
+            }
+
+            validatedRequest.AuthorizationCode = request.Code;
+            Tracing.Information("Authorization code: " + validatedRequest.AuthorizationCode);
+
+            // check for authorization code in datastore
+            var grant = Grants.Get(validatedRequest.AuthorizationCode);
+            if (grant == null)
+            {
+                throw new TokenRequestValidationException(
+                    "Authorization code not found: " + validatedRequest.AuthorizationCode,
+                    OAuth2Constants.Errors.InvalidGrant);
+            }
+
+            validatedRequest.Grant = grant;
+            validatedRequest.GrantsRepository = Grants;
+            Tracing.Information("Token handle found: " + grant.HandleId);
+
+            // check the client binding
+            if (grant.ClientId != validatedRequest.Client.ClientId)
+            {
+                throw new TokenRequestValidationException(
+                    string.Format("Client {0} is trying to request token using an authorization code from {1}.", validatedRequest.Client.ClientId, grant.ClientId),
+                    OAuth2Constants.Errors.InvalidGrant);
+            }
+
+            // redirect URI is required
+            if (string.IsNullOrWhiteSpace(request.Redirect_Uri))
+            {
+                throw new TokenRequestValidationException(
+                    string.Format("Redirect URI is missing"),
+                    OAuth2Constants.Errors.InvalidRequest);
+            }
+
+            // check if redirect URI from authorize and token request match
+            if (!grant.RedirectUri.Equals(request.Redirect_Uri))
+            {
+                throw new TokenRequestValidationException(
+                    string.Format("Redirect URI in token request ({0}), does not match redirect URI from authorize request ({1})", validatedRequest.RedirectUri, grant.RedirectUri),
+                    OAuth2Constants.Errors.InvalidRequest);
+            }
         }
     }
 }

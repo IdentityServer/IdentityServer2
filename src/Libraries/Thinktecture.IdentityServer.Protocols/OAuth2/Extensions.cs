@@ -11,6 +11,7 @@ using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer;
 using Thinktecture.IdentityServer.Protocols;
 using Thinktecture.IdentityServer.Protocols.OAuth2;
+using Thinktecture.IdentityServer.Protocols.OpenIdConnect;
 
 namespace Thinktecture.IdentityServer.Protocols.OAuth2
 {
@@ -28,6 +29,12 @@ namespace Thinktecture.IdentityServer.Protocols.OAuth2
         {
             Tracing.Information("Returning token response.");
             return request.CreateResponse<TokenResponse>(HttpStatusCode.OK, response);
+        }
+
+        public static HttpResponseMessage CreateTokenResponse(this HttpRequestMessage request, OidcTokenResponse response)
+        {
+            Tracing.Information("Returning token response.");
+            return request.CreateResponse<OidcTokenResponse>(HttpStatusCode.OK, response);
         }
         
         public static ActionResult AuthorizeValidationError(this Controller controller, AuthorizeRequestValidationException exception)
