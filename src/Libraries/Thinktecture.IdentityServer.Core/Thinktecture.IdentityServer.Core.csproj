@@ -130,6 +130,7 @@
     <Compile Include="Models\Configuration\OAuth2Configuration.cs" />
     <Compile Include="Models\Configuration\FederationMetadataConfiguration.cs" />
     <Compile Include="Models\Configuration\ProtocolConfiguration.cs" />
+    <Compile Include="Models\Grant.cs" />
     <Compile Include="Models\OAuth2ProviderTypes.cs" />
     <Compile Include="Models\DelegationSetting.cs" />
     <Compile Include="Endpoints.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Repositories\IClientCertificatesRepository.cs" />
     <Compile Include="Repositories\ICacheRepository.cs" />
     <Compile Include="Repositories\IDelegationRepository.cs" />
+    <Compile Include="Repositories\IGrantsRepository.cs" />
     <Compile Include="Repositories\IIdentityProviderRepository.cs" />
     <Compile Include="Models\Configuration\GlobalConfiguration.cs" />
     <Compile Include="Models\Configuration\WSTrustConfiguration.cs" />

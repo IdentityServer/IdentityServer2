@@ -3,11 +3,20 @@ using System.Security.Claims;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Protocols.OAuth2;
+using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 {
     class TokenRequestValidator
     {
+        public IClientsRepository Clients { get; set; }
+
+
+        public TokenRequestValidator()
+        {
+
+        }
+
         public ValidatedRequest Validate(TokenRequest request, ClaimsPrincipal clientPrincipal)
         {
             var validatedRequest = new ValidatedRequest();

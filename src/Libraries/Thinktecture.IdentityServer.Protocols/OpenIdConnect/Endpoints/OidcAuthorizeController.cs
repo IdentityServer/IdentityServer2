@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Constants;
+using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Protocols.OAuth2;
 using Thinktecture.IdentityServer.Repositories;
 
@@ -17,14 +18,18 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
         [Import]
         public IClientsRepository Clients { get; set; }
 
+        //[Import]
+        public IGrantsRepository Grants { get; set; }
+
         public OidcAuthorizeController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public OidcAuthorizeController(IClientsRepository clients)
+        public OidcAuthorizeController(IClientsRepository clients, IGrantsRepository grants)
         {
             Clients = clients;
+            Grants = grants;
         }
 
         public ActionResult Index(AuthorizeRequest request)
@@ -72,7 +77,8 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
                 validatedRequest.Scopes,
                 validatedRequest.RedirectUri);
 
-            // store grant - todo
+            // todo
+            //Grants.Add(grant);
 
             var tokenString = string.Format("code={0}", grant.HandleId);
 

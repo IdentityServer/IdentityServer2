@@ -28,8 +28,7 @@ namespace Thinktecture.IdentityModel.Oidc
                 !context.Response.SuppressFormsAuthenticationRedirect)
             {
                 var state = Guid.NewGuid().ToString("N");
-                var returnUrl = HttpUtility.UrlEncode(context.Request.RawUrl, context.Request.ContentEncoding);
-                state = state + "_" + returnUrl;
+                var returnUrl = context.Request.RawUrl; // = HttpUtility.UrlEncode(context.Request.RawUrl, context.Request.ContentEncoding);
                 
                 var authorizeUrl = WebConfigurationManager.AppSettings["oidc:authorizeUrl"];
                 var clientId = WebConfigurationManager.AppSettings["oidc:clientId"];
@@ -43,7 +42,7 @@ namespace Thinktecture.IdentityModel.Oidc
                     state);
 
                 var cookie = new ProtectedCookie(ProtectionMode.MachineKey);
-                cookie.Write("oidcstate", state, DateTime.UtcNow.AddHours(1));
+                cookie.Write("oidcstate", state + "_" + returnUrl, DateTime.UtcNow.AddHours(1));
                 
                 context.Response.Redirect("https://idsrv.local/issue/oidc/authorize" + queryString);
             }
@@ -53,7 +52,7 @@ namespace Thinktecture.IdentityModel.Oidc
         {
             var context = HttpContext.Current;
 
-            if (context.Request.Url.AbsoluteUri.Equals("https://localhost:44309/" + "oidccallback", StringComparison.OrdinalIgnoreCase))
+            if (context.Request.AppRelativeCurrentExecutionFilePath.Equals("~/oidccallback", StringComparison.OrdinalIgnoreCase))
             {
                 var code = context.Request.QueryString["code"];
                 var state = context.Request.QueryString["state"];
@@ -66,12 +65,14 @@ namespace Thinktecture.IdentityModel.Oidc
                 var cookie = new ProtectedCookie(ProtectionMode.MachineKey);
                 var storedState = cookie.Read("oidcstate");
 
-                if (storedState != state)
+                var parts = storedState.Split('_');
+
+                if (state != parts[0])
                 {
                     throw new InvalidOperationException("state invalid.");
                 }
 
-                var returnUrl = state.Split('_')[1];
+                var returnUrl = parts[1];
 
                 // do back channel communication
                 //  token endpoint

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Thinktecture.IdentityModel.Constants;
 
-namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
+namespace Thinktecture.IdentityServer.Models
 {
     public class Grant
     {
