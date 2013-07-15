@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Configuration;
 using Thinktecture.IdentityModel.Web;
+using System.Linq;
 
 namespace Thinktecture.IdentityModel.Oidc
 {
@@ -22,29 +23,29 @@ namespace Thinktecture.IdentityModel.Oidc
         void OnEndRequest(object sender, EventArgs e)
         {
             var context = HttpContext.Current;
-            
-            if (context.Response.StatusCode == 401 && 
+
+            if (context.Response.StatusCode == 401 &&
                 !context.User.Identity.IsAuthenticated &&
                 !context.Response.SuppressFormsAuthenticationRedirect)
             {
-                var state = Guid.NewGuid().ToString("N");
-                var returnUrl = context.Request.RawUrl; // = HttpUtility.UrlEncode(context.Request.RawUrl, context.Request.ContentEncoding);
-                
                 var authorizeUrl = WebConfigurationManager.AppSettings["oidc:authorizeUrl"];
                 var clientId = WebConfigurationManager.AppSettings["oidc:clientId"];
                 var scopes = "openid " + WebConfigurationManager.AppSettings["oidc:scopes"];
-                var redirectUri = "https://localhost:44309/" + "oidccallback";
-                
-                var queryString = string.Format("?client_id={0}&scope={1}&redirect_uri={2}&state={3}&response_type=code",
+                var state = Guid.NewGuid().ToString("N");
+                var returnUrl = context.Request.RawUrl;
+                var redirectUri = context.Request.GetApplicationUrl() + "oidccallback";
+
+                var authorizeUri = OidcClient.GetRedirectToProviderUrl(
+                    new Uri(authorizeUrl),
+                    new Uri(redirectUri),
                     clientId,
                     scopes,
-                    redirectUri,
                     state);
 
                 var cookie = new ProtectedCookie(ProtectionMode.MachineKey);
                 cookie.Write("oidcstate", state + "_" + returnUrl, DateTime.UtcNow.AddHours(1));
-                
-                context.Response.Redirect("https://idsrv.local/issue/oidc/authorize" + queryString);
+
+                context.Response.Redirect(authorizeUri.AbsoluteUri);
             }
         }
 
@@ -54,74 +55,56 @@ namespace Thinktecture.IdentityModel.Oidc
 
             if (context.Request.AppRelativeCurrentExecutionFilePath.Equals("~/oidccallback", StringComparison.OrdinalIgnoreCase))
             {
-                var code = context.Request.QueryString["code"];
-                var state = context.Request.QueryString["state"];
-                var error = context.Request.QueryString["error"];
-
                 var tokenUrl = WebConfigurationManager.AppSettings["oidc:tokenUrl"];
                 var clientId = WebConfigurationManager.AppSettings["oidc:clientId"];
                 var clientSecret = WebConfigurationManager.AppSettings["oidc:clientSecret"];
+                var issuerName = WebConfigurationManager.AppSettings["oidc:issuerName"];
+                var signingcert = X509.LocalMachine.TrustedPeople.SubjectDistinguishedName.Find(
+                    WebConfigurationManager.AppSettings["oidc:signingCert"]).First();
+
+                var response = OidcClient.HandleOidcAuthorizeResponse(context.Request.QueryString);
+
+                if (response.IsError)
+                {
+                    throw new InvalidOperationException(response.Error);
+                }
                 
                 var cookie = new ProtectedCookie(ProtectionMode.MachineKey);
                 var storedState = cookie.Read("oidcstate");
 
                 var parts = storedState.Split('_');
 
-                if (state != parts[0])
+                if (response.State != parts[0] || parts.Length != 2)
                 {
                     throw new InvalidOperationException("state invalid.");
                 }
 
                 var returnUrl = parts[1];
+                var redirectUri = context.Request.GetApplicationUrl() + "oidccallback";
 
-                // do back channel communication
-                //  token endpoint
-                //  userinfo endpoint
-                var client = new HttpClient
-                {
-                    BaseAddress = new Uri(tokenUrl)
-                };
-                
-                client.SetBasicAuthentication(clientId, clientSecret);
+                var tokenResponse = OidcClient.CallTokenEndpoint(
+                    new Uri(tokenUrl),
+                    new Uri(redirectUri),
+                    response.Code,
+                    clientId,
+                    clientSecret);
 
-                var parameter = new Dictionary<string, string>
-                {
-                    { "grant_type", "authorization_code" },
-                    { "code", code },
-                    { "redirect_uri", "https://localhost:44309/" + "oidccallback" }
-                };
-                
-                var response = client.PostAsync("", new FormUrlEncodedContent(parameter)).Result;
-                if (response.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    throw new InvalidOperationException("error calling token endpoint");
-                }
-
-                var oidcResponse = response.Content.ReadAsStringAsync().Result;
-                var oidcJson = JObject.Parse(oidcResponse);
-
-                var idToken = oidcJson["id_token"].ToString();
-                var principal = ValidateIdentityToken(idToken);
+                var principal = OidcClient.ValidateIdentityToken(
+                    tokenResponse.IdentityToken, 
+                    issuerName, 
+                    clientId, 
+                    signingcert);
 
                 // establish session
                 var sessionToken = new SessionSecurityToken(principal);
                 FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(sessionToken);
 
-                
                 // redirect local to return url
                 context.Response.Redirect(returnUrl);
             }
-
-            
-        }
-
-        private ClaimsPrincipal ValidateIdentityToken(string idToken)
-        {
-            throw new NotImplementedException();
         }
 
         public void Dispose()
         { }
-
     }
 }

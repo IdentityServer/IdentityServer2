@@ -56,6 +56,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="OidcAuthorizeResponse.cs" />
+    <Compile Include="OidcClient.cs" />
+    <Compile Include="OidcTokenResponse.cs" />
     <Compile Include="OpenIdConnectAuthenticationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

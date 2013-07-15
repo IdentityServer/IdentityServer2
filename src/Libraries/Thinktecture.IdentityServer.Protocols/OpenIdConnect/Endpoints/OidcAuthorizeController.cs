@@ -18,7 +18,7 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
         [Import]
         public IClientsRepository Clients { get; set; }
 
-        //[Import]
+        [Import]
         public IStoredGrantRepository Grants { get; set; }
 
         public OidcAuthorizeController()
@@ -78,7 +78,7 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
                 validatedRequest.RedirectUri);
 
             // todo
-            //Grants.Add(grant);
+            Grants.Add(grant);
 
             var tokenString = string.Format("code={0}", grant.GrantId);
 
