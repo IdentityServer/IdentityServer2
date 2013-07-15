@@ -14,14 +14,14 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
         public string ResponseType { get; set; }
 
-        public IEnumerable<string> Scopes { get; set; }
+        public string Scopes { get; set; }
 
         public string GrantType { get; set; }
 
         public string AuthorizationCode { get; set; }
 
-        public IGrantsRepository GrantsRepository { get; set; }
+        public IStoredGrantRepository GrantsRepository { get; set; }
 
-        public Grant Grant { get; set; }
+        public StoredGrant Grant { get; set; }
     }
 }

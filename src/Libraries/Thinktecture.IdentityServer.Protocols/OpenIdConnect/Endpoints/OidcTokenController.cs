@@ -16,13 +16,18 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
     public class OidcTokenController : ApiController
     {
         [Import]
-        public IGrantsRepository Grants { get; set; }
+        public IStoredGrantRepository Grants { get; set; }
 
         [Import]
         public IClientsRepository Clients { get; set; }
 
         [Import]
         public IConfigurationRepository ServerConfiguration { get; set; }
+
+        public OidcTokenController()
+        {
+            Container.Current.SatisfyImportsOnce(this);
+        }
 
         public HttpResponseMessage Post(TokenRequest request)
         {

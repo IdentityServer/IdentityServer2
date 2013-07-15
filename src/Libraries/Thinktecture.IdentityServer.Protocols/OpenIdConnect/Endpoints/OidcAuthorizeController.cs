@@ -19,14 +19,14 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
         public IClientsRepository Clients { get; set; }
 
         //[Import]
-        public IGrantsRepository Grants { get; set; }
+        public IStoredGrantRepository Grants { get; set; }
 
         public OidcAuthorizeController()
         {
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public OidcAuthorizeController(IClientsRepository clients, IGrantsRepository grants)
+        public OidcAuthorizeController(IClientsRepository clients, IStoredGrantRepository grants)
         {
             Clients = clients;
             Grants = grants;
@@ -71,7 +71,7 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
         private ActionResult PerformAuthorizationCodeGrant(ValidatedRequest validatedRequest)
         {
-            var grant = Grant.CreateAuthorizationCode(
+            var grant = StoredGrant.CreateAuthorizationCode(
                 validatedRequest.Client.ClientId,
                 ClaimsPrincipal.Current.Identity.Name,
                 validatedRequest.Scopes,
@@ -80,7 +80,7 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
             // todo
             //Grants.Add(grant);
 
-            var tokenString = string.Format("code={0}", grant.HandleId);
+            var tokenString = string.Format("code={0}", grant.GrantId);
 
             if (!string.IsNullOrWhiteSpace(validatedRequest.State))
             {

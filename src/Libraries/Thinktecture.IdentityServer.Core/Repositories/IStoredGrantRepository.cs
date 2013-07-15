@@ -2,10 +2,10 @@
 
 namespace Thinktecture.IdentityServer.Repositories
 {
-    public interface IGrantsRepository
+    public interface IStoredGrantRepository
     {
-        void Add(Grant grant);
-        Grant Get(string id);
+        void Add(StoredGrant grant);
+        StoredGrant Get(string id);
         void Delete(string id);
     }
 }

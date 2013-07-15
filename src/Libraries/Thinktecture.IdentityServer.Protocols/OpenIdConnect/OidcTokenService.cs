@@ -24,7 +24,7 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
             if (request.Grant.GrantType == StoredGrantType.AuthorizationCode)
             {
-                request.GrantsRepository.Delete(request.Grant.HandleId);
+                request.GrantsRepository.Delete(request.Grant.GrantId);
             }
 
             return new OidcTokenResponse

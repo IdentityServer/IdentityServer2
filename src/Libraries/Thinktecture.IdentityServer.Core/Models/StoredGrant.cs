@@ -4,25 +4,28 @@ using Thinktecture.IdentityModel.Constants;
 
 namespace Thinktecture.IdentityServer.Models
 {
-    public class Grant
+    public class StoredGrant
     {
-        public string HandleId { get; set; }
+        public string GrantId { get; set; }
         public StoredGrantType GrantType { get; set; }
         
         public string Subject { get; set; }
-        public IEnumerable<string> Scopes { get; set; }
+        public string Scopes { get; set; }
         public string ClientId { get; set; }
         public string RedirectUri { get; set; }
-        public DateTime Expiration { get; set; }
 
-        public Grant()
+        public DateTime Created { get; set; }
+        public DateTime Expiration { get; set; }
+        public DateTime? RefreshTokenExpiration { get; set; }
+
+        public StoredGrant()
         {
-            HandleId = Guid.NewGuid().ToString("N");
+            GrantId = Guid.NewGuid().ToString("N");
         }
 
-        public static Grant CreateAuthorizationCode(string clientId, string subject, IEnumerable<string> scopes, string redirectUri)
+        public static StoredGrant CreateAuthorizationCode(string clientId, string subject, string scopes, string redirectUri)
         {
-            return new Grant
+            return new StoredGrant
             {
                 GrantType = StoredGrantType.AuthorizationCode,
                 
@@ -30,6 +33,7 @@ namespace Thinktecture.IdentityServer.Models
                 Subject = subject,
                 Scopes = scopes,
                 RedirectUri = redirectUri,
+                Created = DateTime.UtcNow,
                 Expiration = DateTime.UtcNow.AddMinutes(60)
             };
         }

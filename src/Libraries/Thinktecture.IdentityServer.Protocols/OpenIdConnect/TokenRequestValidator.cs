@@ -10,9 +10,9 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
     class TokenRequestValidator
     {
         public IClientsRepository Clients { get; set; }
-        public IGrantsRepository Grants { get; set; }
+        public IStoredGrantRepository Grants { get; set; }
 
-        public TokenRequestValidator(IClientsRepository clients, IGrantsRepository grants)
+        public TokenRequestValidator(IClientsRepository clients, IStoredGrantRepository grants)
         {
             Clients = clients;
             Grants = grants;
@@ -147,7 +147,7 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
             validatedRequest.Grant = grant;
             validatedRequest.GrantsRepository = Grants;
-            Tracing.Information("Token handle found: " + grant.HandleId);
+            Tracing.Information("Token handle found: " + grant.GrantId);
 
             // check the client binding
             if (grant.ClientId != validatedRequest.Client.ClientId)
