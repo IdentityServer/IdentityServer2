@@ -13,6 +13,7 @@ using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 {
+    [Authorize]
     public class OidcAuthorizeController : Controller
     {
         [Import]
@@ -77,7 +78,6 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
                 validatedRequest.Scopes,
                 validatedRequest.RedirectUri);
 
-            // todo
             Grants.Add(grant);
 
             var tokenString = string.Format("code={0}", grant.GrantId);
