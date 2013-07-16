@@ -268,7 +268,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="packages.config" />
-    <None Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
