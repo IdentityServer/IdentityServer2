@@ -55,10 +55,7 @@ namespace Thinktecture.IdentityModel.Oidc
                 };
 
             var response = client.PostAsync("", new FormUrlEncodedContent(parameter)).Result;
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                throw new InvalidOperationException("error calling token endpoint");
-            }
+            response.EnsureSuccessStatusCode();
 
             var json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
             return json.ToObject<OidcTokenResponse>();

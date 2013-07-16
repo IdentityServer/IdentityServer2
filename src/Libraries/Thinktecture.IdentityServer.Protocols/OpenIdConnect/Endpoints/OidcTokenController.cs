@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Thinktecture.IdentityModel.Constants;
+using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Protocols.OAuth2;
 using Thinktecture.IdentityServer.Repositories;
 
@@ -65,7 +66,12 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
             Tracing.Information("Processing authorization code request");
 
             var tokenService = new OidcTokenService(ServerConfiguration.Global.IssuerUri, ServerConfiguration.Keys.SigningCertificate);
-            var response = tokenService.CreateTokenResponse(validatedRequest);
+            var response = tokenService.CreateTokenResponse(validatedRequest.Grant);
+
+            if (validatedRequest.Grant.GrantType == StoredGrantType.AuthorizationCode)
+            {
+                validatedRequest.GrantsRepository.Delete(validatedRequest.Grant.GrantId);
+            }
 
             return Request.CreateTokenResponse(response);
         } 

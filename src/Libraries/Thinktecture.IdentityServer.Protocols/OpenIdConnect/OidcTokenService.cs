@@ -18,15 +18,10 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
             _signingCert = signingCertificate;
         }
 
-        public OidcTokenResponse CreateTokenResponse(ValidatedRequest request)
+        public OidcTokenResponse CreateTokenResponse(StoredGrant grant)
         {
-            var idToken = CreateIdentityToken(request.Grant.Subject, request.Grant.ClientId);
-            var accessToken = CreateAccessToken(request.Grant.Subject, "urn:userinfo", request.Grant.ClientId, request.Grant.Scopes);
-
-            if (request.Grant.GrantType == StoredGrantType.AuthorizationCode)
-            {
-                request.GrantsRepository.Delete(request.Grant.GrantId);
-            }
+            var idToken = CreateIdentityToken(grant.Subject, grant.ClientId);
+            var accessToken = CreateAccessToken(grant.Subject, _issuer + "/userinfo", grant.ClientId, grant.Scopes);
 
             return new OidcTokenResponse
             {
