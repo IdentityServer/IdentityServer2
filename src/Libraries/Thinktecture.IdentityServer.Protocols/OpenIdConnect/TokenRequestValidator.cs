@@ -145,6 +145,14 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
                     OAuth2Constants.Errors.InvalidGrant);
             }
 
+            // make sure the handle is an authorization code
+            if (grant.GrantType != StoredGrantType.AuthorizationCode)
+            {
+                throw new TokenRequestValidationException(
+                    "Tampered authorization code: " + validatedRequest.AuthorizationCode,
+                    OAuth2Constants.Errors.InvalidGrant);
+            }
+
             validatedRequest.Grant = grant;
             validatedRequest.GrantsRepository = Grants;
             Tracing.Information("Token handle found: " + grant.GrantId);

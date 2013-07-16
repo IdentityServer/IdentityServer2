@@ -3,11 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IdentityModel.Tokens;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
-using Thinktecture.IdentityModel.Tokens;
-using System.Linq;
 
 namespace Thinktecture.IdentityModel.Oidc
 {

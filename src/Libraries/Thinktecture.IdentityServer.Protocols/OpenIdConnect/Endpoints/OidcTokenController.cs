@@ -52,13 +52,22 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
             {
                 return ProcessAuthorizationCodeRequest(validatedRequest);
             }
-            //else if (string.Equals(validatedRequest.GrantType, OAuth2Constants.GrantTypes.RefreshToken))
-            //{
-            //    return ProcessRefreshTokenRequest(validatedRequest);
-            //}
-            
+            else if (string.Equals(validatedRequest.GrantType, OAuth2Constants.GrantTypes.RefreshToken))
+            {
+                return ProcessRefreshTokenRequest(validatedRequest);
+            }
+
             Tracing.Error("invalid grant type: " + request.Grant_Type);
             return Request.CreateOAuthErrorResponse(OAuth2Constants.Errors.UnsupportedGrantType);
+        }
+
+        private HttpResponseMessage ProcessRefreshTokenRequest(ValidatedRequest validatedRequest)
+        {
+            var tokenService = new OidcTokenService(ServerConfiguration.Global.IssuerUri, ServerConfiguration.Keys.SigningCertificate);
+            var response = tokenService.CreateTokenResponse(validatedRequest.Grant);
+
+            response.RefreshToken = validatedRequest.Grant.GrantId;
+            return Request.CreateTokenResponse(response);
         }
 
         private HttpResponseMessage ProcessAuthorizationCodeRequest(ValidatedRequest validatedRequest)
@@ -67,13 +76,22 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
             var tokenService = new OidcTokenService(ServerConfiguration.Global.IssuerUri, ServerConfiguration.Keys.SigningCertificate);
             var response = tokenService.CreateTokenResponse(validatedRequest.Grant);
+            validatedRequest.GrantsRepository.Delete(validatedRequest.Grant.GrantId);
 
-            if (validatedRequest.Grant.GrantType == StoredGrantType.AuthorizationCode)
+            if (validatedRequest.Scopes.Contains(OidcConstants.Scopes.OfflineAccess) &&
+                validatedRequest.Client.AllowRefreshToken)
             {
-                validatedRequest.GrantsRepository.Delete(validatedRequest.Grant.GrantId);
+                var refreshToken = StoredGrant.CreateRefreshToken(
+                    validatedRequest.Grant.ClientId,
+                    validatedRequest.Grant.Subject,
+                    validatedRequest.Grant.Scopes,
+                    3600);
+
+                Grants.Add(refreshToken);
+                response.RefreshToken = refreshToken.GrantId;
             }
 
             return Request.CreateTokenResponse(response);
-        } 
+        }
     }
 }

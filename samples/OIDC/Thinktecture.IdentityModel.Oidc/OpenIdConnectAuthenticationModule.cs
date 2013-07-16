@@ -1,14 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IdentityModel.Services;
 using System.IdentityModel.Tokens;
-using System.Net.Http;
+using System.Linq;
 using System.Security.Claims;
 using System.Web;
-using System.Web.Configuration;
 using Thinktecture.IdentityModel.Web;
-using System.Linq;
 
 namespace Thinktecture.IdentityModel.Oidc
 {

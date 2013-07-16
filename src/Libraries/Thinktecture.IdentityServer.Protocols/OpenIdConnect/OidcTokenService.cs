@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using System.IdentityModel.Tokens;
+﻿using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
-using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Models;
-using Thinktecture.IdentityServer.Repositories;
 
 namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 {
@@ -20,16 +17,21 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
 
         public OidcTokenResponse CreateTokenResponse(StoredGrant grant)
         {
-            var idToken = CreateIdentityToken(grant.Subject, grant.ClientId);
             var accessToken = CreateAccessToken(grant.Subject, _issuer + "/userinfo", grant.ClientId, grant.Scopes);
-
-            return new OidcTokenResponse
+            var response = new OidcTokenResponse
             {
-                IdentityToken = idToken.ToJwtString(),
                 AccessToken = accessToken.ToJwtString(),
                 TokenType = "Bearer",
                 ExpiresIn = 60 * 60
             };
+
+            if (grant.GrantType == StoredGrantType.AuthorizationCode)
+            {
+                var idToken = CreateIdentityToken(grant.Subject, grant.ClientId);
+                response.IdentityToken = idToken.ToJwtString();
+            }
+
+            return response;
         }
 
         public IdentityToken CreateIdentityToken(string subject, string audience)

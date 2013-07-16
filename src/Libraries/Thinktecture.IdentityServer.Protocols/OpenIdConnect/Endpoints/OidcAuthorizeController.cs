@@ -76,7 +76,8 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
                 validatedRequest.Client.ClientId,
                 ClaimsPrincipal.Current.Identity.Name,
                 validatedRequest.Scopes,
-                validatedRequest.RedirectUri);
+                validatedRequest.RedirectUri,
+                60);
 
             Grants.Add(grant);
 
