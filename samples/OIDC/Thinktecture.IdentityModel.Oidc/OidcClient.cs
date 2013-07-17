@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
+using Thinktecture.IdentityModel.Clients;
 
 namespace Thinktecture.IdentityModel.Oidc
 {
@@ -58,6 +59,24 @@ namespace Thinktecture.IdentityModel.Oidc
 
             var json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
             return json.ToObject<OidcTokenResponse>();
+        }
+
+        public static OidcTokenResponse RefreshAccessToken(Uri tokenEndpoint, string clientId, string clientSecret, string refreshToken)
+        {
+            var client = new OAuth2Client(
+                tokenEndpoint,
+                clientId,
+                clientSecret);
+
+            var response = client.RequestAccessTokenRefreshToken(refreshToken);
+
+            return new OidcTokenResponse
+            {
+                AccessToken = response.AccessToken,
+                ExpiresIn = response.ExpiresIn,
+                TokenType = response.TokenType,
+                RefreshToken = refreshToken
+            };
         }
 
         public static ClaimsPrincipal ValidateIdentityToken(string token, string issuer, string audience, X509Certificate2 signingCertificate)

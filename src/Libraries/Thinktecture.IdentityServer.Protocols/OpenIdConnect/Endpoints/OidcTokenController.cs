@@ -57,12 +57,14 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
                 return ProcessRefreshTokenRequest(validatedRequest);
             }
 
-            Tracing.Error("invalid grant type: " + request.Grant_Type);
+            Tracing.Error("unsupported grant type: " + request.Grant_Type);
             return Request.CreateOAuthErrorResponse(OAuth2Constants.Errors.UnsupportedGrantType);
         }
 
         private HttpResponseMessage ProcessRefreshTokenRequest(ValidatedRequest validatedRequest)
         {
+            Tracing.Information("Processing refresh token request");
+
             var tokenService = new OidcTokenService(ServerConfiguration.Global.IssuerUri, ServerConfiguration.Keys.SigningCertificate);
             var response = tokenService.CreateTokenResponse(validatedRequest.Grant);
 
@@ -74,11 +76,14 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
         {
             Tracing.Information("Processing authorization code request");
 
-            var tokenService = new OidcTokenService(ServerConfiguration.Global.IssuerUri, ServerConfiguration.Keys.SigningCertificate);
-            var response = tokenService.CreateTokenResponse(validatedRequest.Grant);
-            validatedRequest.GrantsRepository.Delete(validatedRequest.Grant.GrantId);
+            var tokenService = new OidcTokenService(
+                ServerConfiguration.Global.IssuerUri, 
+                ServerConfiguration.Keys.SigningCertificate);
 
-            if (validatedRequest.Scopes.Contains(OidcConstants.Scopes.OfflineAccess) &&
+            var response = tokenService.CreateTokenResponse(validatedRequest.Grant);
+            Grants.Delete(validatedRequest.Grant.GrantId);
+
+            if (validatedRequest.Grant.Scopes.Contains(OidcConstants.Scopes.OfflineAccess) &&
                 validatedRequest.Client.AllowRefreshToken)
             {
                 var refreshToken = StoredGrant.CreateRefreshToken(
