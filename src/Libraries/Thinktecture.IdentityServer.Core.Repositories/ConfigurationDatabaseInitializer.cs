@@ -71,7 +71,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new GlobalConfiguration
             {
                 SiteName = "thinktecture identity server v2",
-                IssuerUri = "http://identityserver.v2.thinktecture.com/trust/changethis",
+                IssuerUri = "http://identityserver.v2.thinktecture.com/samples",
                 IssuerContactEmail = "office@thinktecture.com",
                 DefaultWSTokenType = TokenTypes.Saml2TokenProfile11,
                 DefaultHttpTokenType = TokenTypes.JsonWebToken,
@@ -170,7 +170,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             return new GlobalConfiguration
             {
                 SiteName = "thinktecture identity server v2",
-                IssuerUri = "http://identityserver.v2.thinktecture.com/trust/changethis",
+                IssuerUri = "http://identityserver.v2.thinktecture.com/samples",
                 IssuerContactEmail = "office@thinktecture.com",
                 DefaultWSTokenType = TokenTypes.Saml2TokenProfile11,
                 DefaultHttpTokenType = TokenTypes.JsonWebToken,
