@@ -74,6 +74,7 @@ namespace Thinktecture.IdentityModel.Oidc
                 // read and parse state cookie
                 var cookie = new ProtectedCookie(ProtectionMode.MachineKey);
                 var storedState = cookie.Read("oidcstate");
+                ProtectedCookie.Delete("oidcstate");
 
                 var separator = storedState.IndexOf('_');
                 if (separator == -1)
