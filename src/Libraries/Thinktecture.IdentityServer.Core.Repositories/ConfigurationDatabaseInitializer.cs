@@ -297,7 +297,14 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     Name = "Test RP (Asymmetric Key)",
                     Enabled = true,
                     Realm = "urn:test:asymmetric",
-                }
+                },
+                new RelyingParties
+                {
+                    Name = "Authorization Server",
+                    Enabled = true,
+                    Realm = "urn:authorizationserver",
+                    ReplyTo = "https://as.local"
+                },
             };
         }
 
