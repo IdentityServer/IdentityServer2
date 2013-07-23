@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,76 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Enabled" xml:space="preserve">
-    <value>Enabled</value>
-  </data>
-  <data name="EnabledDescription" xml:space="preserve">
-    <value>Enable or disable this RP.</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Display Name</value>
-  </data>
-  <data name="NameDescription" xml:space="preserve">
-    <value>Descriptive name (shows up in trace logs).</value>
-  </data>
-  <data name="Realm" xml:space="preserve">
-    <value>Realm/Scope Name</value>
-  </data>
-  <data name="RealmDescription" xml:space="preserve">
-    <value>Realm/Scope identifier URI.</value>
-  </data>
-  <data name="TokenLifeTime" xml:space="preserve">
-    <value>Token life time (in minutes)</value>
-  </data>
-  <data name="TokenLifeTimeDescription" xml:space="preserve">
-    <value>Can be used to override the default token lifetime (a value of 0 uses the global default).</value>
-  </data>
-  <data name="ReplyTo" xml:space="preserve">
-    <value>Redirect URL</value>
-  </data>
-  <data name="ReplyToDescription" xml:space="preserve">
-    <value>URL to return (ReplyTo parameter) to once a token is issued.</value>
-  </data>
-  <data name="EncryptingCertificate" xml:space="preserve">
-    <value>Encrypting Certificate</value>
-  </data>
-  <data name="EncryptingCertificateDescription" xml:space="preserve">
-    <value>Optional X.509 certificate to encrypt outgoing tokens.</value>
-  </data>
-  <data name="SymmetricSigningKey" xml:space="preserve">
-    <value>Symmetric Signing Key</value>
-  </data>
-  <data name="SymmetricSigningKeyDescription" xml:space="preserve">
-    <value>Base64 encoded key used for symmetric signing of tokens.</value>
-  </data>
-  <data name="ExtraData1" xml:space="preserve">
-    <value>Extra Data 1</value>
-  </data>
-  <data name="ExtraData1Description" xml:space="preserve">
-    <value>Extra data you can associate with the RP. (1)</value>
-  </data>
-  <data name="ExtraData2" xml:space="preserve">
-    <value>Extra Data 2</value>
-  </data>
-  <data name="ExtraData2Description" xml:space="preserve">
-    <value>Extra data you can associate with the RP. (2)</value>
-  </data>
-  <data name="ExtraData3" xml:space="preserve">
-    <value>Extra Data 3</value>
-  </data>
-  <data name="ExtraData3Description" xml:space="preserve">
-    <value>Extra data you can associate with the RP. (3)</value>
-  </data>
-  <data name="EncryptingCertificateThumbprint" xml:space="preserve">
-    <value>Encrypting Certificate Thumbprint</value>
-  </data>
-  <data name="EncryptingCertificateThumbprintDescription" xml:space="preserve">
-    <value>Encrypting Certificate Thumbprint</value>
-  </data>
-  <data name="TokenType" xml:space="preserve">
-    <value>Token Type</value>
-  </data>
-  <data name="TokenTypeDescription" xml:space="preserve">
-    <value>Token type to issue for this replying party.</value>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
 </root>

@@ -27,6 +27,10 @@ namespace Thinktecture.IdentityServer.Models
         [AbsoluteUri]
         public Uri Realm { get; set; }
 
+        [UIHint("Enum")]
+        [Display(ResourceType = typeof(Resources.Models.RelyingParty), Name = "TokenType", Description = "TokenTypeDescription")]
+        public TokenType? TokenType { get; set; }
+        
         [Required]
         [Display(ResourceType = typeof (Resources.Models.RelyingParty), Name = "TokenLifeTime", Description = "TokenLifeTimeDescription")]
         public int TokenLifeTime { get; set; }

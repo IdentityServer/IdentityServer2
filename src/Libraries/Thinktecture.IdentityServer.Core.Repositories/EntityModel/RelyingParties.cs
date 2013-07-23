@@ -4,6 +4,7 @@
  */
 
 using System.ComponentModel.DataAnnotations;
+using Thinktecture.IdentityServer.Models;
 
 namespace Thinktecture.IdentityServer.Repositories.Sql
 {
@@ -21,6 +22,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         [Required]
         public string Realm { get; set; }
 
+        public TokenType? TokenType { get; set; }
         public int TokenLifeTime { get; set; }
         
         public string ReplyTo { get; set; }
