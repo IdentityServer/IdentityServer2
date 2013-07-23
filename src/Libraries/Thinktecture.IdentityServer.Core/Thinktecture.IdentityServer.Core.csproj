@@ -122,6 +122,7 @@
     <Compile Include="Helper\X509Certificates.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ClientCertificate.cs" />
+    <Compile Include="Models\ClientSecretTypes.cs" />
     <Compile Include="Models\CodeToken.cs" />
     <Compile Include="Models\CodeTokenType.cs" />
     <Compile Include="Models\Configuration\AdfsIntegrationConfiguration.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Models\Configuration\FederationMetadataConfiguration.cs" />
     <Compile Include="Models\Configuration\ProtocolConfiguration.cs" />
     <Compile Include="Models\OpenIdConnectClient.cs" />
+    <Compile Include="Models\OpenIdConnectFlows.cs" />
     <Compile Include="Models\StoredGrant.cs" />
     <Compile Include="Models\OAuth2ProviderTypes.cs" />
     <Compile Include="Models\DelegationSetting.cs" />
