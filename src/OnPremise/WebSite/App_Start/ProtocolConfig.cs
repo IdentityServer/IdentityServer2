@@ -15,9 +15,6 @@ namespace Thinktecture.IdentityServer.Web
     {
         public static void RegisterProtocols(HttpConfiguration httpConfiguration, RouteCollection routes, IConfigurationRepository configuration, IUserRepository users, IRelyingPartyRepository relyingParties)
         {
-            var basicAuthConfig = CreateBasicAuthConfig(users);
-            var clientAuthConfig = CreateClientAuthConfig();
-
             // require SSL for all web api endpoints
             httpConfiguration.MessageHandlers.Add(new RequireHttpsHandler());
 
@@ -82,11 +79,12 @@ namespace Thinktecture.IdentityServer.Web
                     routeTemplate: Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Token,
                     defaults: new { controller = "OAuth2Token" },
                     constraints: null,
-                    handler: new AuthenticationHandler(clientAuthConfig, httpConfiguration)
+                    handler: new AuthenticationHandler(CreateClientAuthConfig(), httpConfiguration)
                 );
             }
 
             // open id connect
+            // todo: check for enabled
             if (configuration.Keys.SigningCertificate != null)
             {
                 // authorize endpoint
@@ -96,21 +94,17 @@ namespace Thinktecture.IdentityServer.Web
                     new { controller = "OidcAuthorize", action = "index" }
                 );
 
-                //// token endpoint
+                // token endpoint
                 routes.MapHttpRoute(
                     name: "oidctoken",
                     routeTemplate: "issue/oidc/token",
                     defaults: new { controller = "OidcToken" },
                     constraints: null,
-                    handler: new AuthenticationHandler(clientAuthConfig, httpConfiguration)
+                    handler: new AuthenticationHandler(CreateUserInfoAuthConfig(configuration), httpConfiguration)
                 );
 
-                //// userinfo endpoint
-                var userInfoAuth = new AuthenticationConfiguration();
-                userInfoAuth.AddJsonWebToken(
-                    issuer: configuration.Global.IssuerUri,
-                    audience: configuration.Global.IssuerUri + "/userinfo",
-                    signingCertificate: configuration.Keys.SigningCertificate);
+                // userinfo endpoint
+                var userInfoAuth = CreateUserInfoAuthConfig(configuration);
 
                 routes.MapHttpRoute(
                     name: "oidcuserinfo",
@@ -139,7 +133,7 @@ namespace Thinktecture.IdentityServer.Web
                     routeTemplate: Thinktecture.IdentityServer.Endpoints.Paths.SimpleHttp,
                     defaults: new { controller = "SimpleHttp" },
                     constraints: null,
-                    handler: new AuthenticationHandler(basicAuthConfig, httpConfiguration)
+                    handler: new AuthenticationHandler(CreateBasicAuthConfig(users), httpConfiguration)
                 );
             }
 
@@ -180,6 +174,17 @@ namespace Thinktecture.IdentityServer.Web
             // validation will be done in the protocol endpoint
             authConfig.AddBasicAuthentication((id, secret) => true, retainPassword: true);
             return authConfig;
+        }
+
+        public static AuthenticationConfiguration CreateUserInfoAuthConfig(IConfigurationRepository configuration)
+        {
+            var userInfoAuth = new AuthenticationConfiguration();
+            userInfoAuth.AddJsonWebToken(
+                issuer: configuration.Global.IssuerUri,
+                audience: configuration.Global.IssuerUri + "/userinfo",
+                signingCertificate: configuration.Keys.SigningCertificate);
+
+            return userInfoAuth;
         }
     }
 }
