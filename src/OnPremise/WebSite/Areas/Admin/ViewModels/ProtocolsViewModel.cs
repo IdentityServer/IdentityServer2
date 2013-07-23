@@ -37,6 +37,10 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
                 "ADFS Integration",
                 x => x.AdfsIntegration,
                 (c, v) => { c.AdfsIntegration = (AdfsIntegrationConfiguration)v; }));
+            protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
+                "OpenID Connect",
+                x => x.OpenIdConnect,
+                (c, v) => { c.OpenIdConnect = (OpenIdConnectConfiguration)v; }));
         }
 
         private Repositories.IConfigurationRepository ConfigurationRepository;

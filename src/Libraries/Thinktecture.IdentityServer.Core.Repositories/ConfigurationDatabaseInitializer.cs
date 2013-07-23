@@ -6,6 +6,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
+using System.Linq;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Repositories.Sql.Configuration;
 
@@ -34,6 +35,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                         context.AdfsIntegration.Add(CreateTestAdfsIntegrationConfiguration());
                         context.SimpleHttp.Add(CreateTestSimpleHttpConfiguration());
                         context.Diagnostics.Add(CreateTestDiagnosticsConfiguration());
+                        context.OpenIdConnect.Add(CreateTestOpenIdConnectConfiguration());
 
                         // test data
                         CreateTestRelyingParties().ForEach(rp => context.RelyingParties.Add(rp));
@@ -56,6 +58,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             context.AdfsIntegration.Add(CreateDefaultAdfsIntegrationConfiguration());
             context.SimpleHttp.Add(CreateDefaultSimpleHttpConfiguration());
             context.Diagnostics.Add(CreateDefaultDiagnosticsConfiguration());
+            if (!context.OpenIdConnect.Any()) context.OpenIdConnect.Add(CreateOpenIdConnectConfiguration());
         }
 
         protected override void Seed(IdentityServerConfigurationContext context)
@@ -161,6 +164,15 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 EnableFederationMessageTracing = false
             };
         }
+
+        private static OpenIdConnectConfiguration CreateOpenIdConnectConfiguration()
+        {
+            return new OpenIdConnectConfiguration
+            {
+                Enabled = false
+            };
+        }
+
         #endregion
 
         #region Test Configuration
@@ -263,6 +275,15 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 EnableFederationMessageTracing = true
             };
         }
+
+        private static OpenIdConnectConfiguration CreateTestOpenIdConnectConfiguration()
+        {
+            return new OpenIdConnectConfiguration
+            {
+                Enabled = true
+            };
+        }
+
         #endregion
 
         #region Test Data

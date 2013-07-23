@@ -21,6 +21,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public DbSet<OAuth2Configuration> OAuth2 { get; set; }
         public DbSet<AdfsIntegrationConfiguration> AdfsIntegration { get; set; }
         public DbSet<SimpleHttpConfiguration> SimpleHttp { get; set; }
+        public DbSet<OpenIdConnectConfiguration> OpenIdConnect { get; set; }
         public DbSet<DiagnosticsConfiguration> Diagnostics { get; set; }
         
         public DbSet<ClientCertificates> ClientCertificates { get; set; }

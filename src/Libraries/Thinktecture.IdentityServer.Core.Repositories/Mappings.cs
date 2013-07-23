@@ -596,5 +596,28 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             };
         }
         #endregion
+
+    
+ #region OpenIdConnectConfiguration
+        public static Models.Configuration.OpenIdConnectConfiguration ToDomainModel(this Entities.Configuration.OpenIdConnectConfiguration entity)
+        {
+            var value = new Models.Configuration.OpenIdConnectConfiguration
+            {
+                Enabled = entity.Enabled,
+            };
+
+            return value;
+        }
+
+        public static Entities.Configuration.OpenIdConnectConfiguration ToEntity(this Models.Configuration.OpenIdConnectConfiguration model)
+        {
+            var value = new Entities.Configuration.OpenIdConnectConfiguration
+            {
+                Enabled = model.Enabled,
+            };
+
+            return value;
+        }
+#endregion    
     }
 }
