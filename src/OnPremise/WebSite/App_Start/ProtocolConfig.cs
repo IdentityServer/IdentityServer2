@@ -53,7 +53,7 @@ namespace Thinktecture.IdentityServer.Web
                     new { controller = "Hrd", action = "Select" },
                     new { method = new HttpMethodConstraint("POST") }
                 );
-                
+
                 // callback endpoint
                 OAuth2Client.OAuthCallbackUrl = Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Callback;
                 routes.MapRoute(
@@ -69,14 +69,14 @@ namespace Thinktecture.IdentityServer.Web
                 // authorize endpoint
                 routes.MapRoute(
                     "oauth2authorize",
-                    Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Authorize,
+                    Endpoints.Paths.OAuth2Authorize,
                     new { controller = "OAuth2Authorize", action = "index" }
                 );
 
                 // token endpoint
                 routes.MapHttpRoute(
                     name: "oauth2token",
-                    routeTemplate: Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Token,
+                    routeTemplate: Endpoints.Paths.OAuth2Token,
                     defaults: new { controller = "OAuth2Token" },
                     constraints: null,
                     handler: new AuthenticationHandler(CreateClientAuthConfig(), httpConfiguration)
@@ -84,34 +84,32 @@ namespace Thinktecture.IdentityServer.Web
             }
 
             // open id connect
-            // todo: check for enabled
-            if (configuration.Keys.SigningCertificate != null)
+            if (configuration.OpenIdConnect.Enabled &&
+                configuration.Keys.SigningCertificate != null)
             {
                 // authorize endpoint
                 routes.MapRoute(
                     "oidcauthorize",
-                    "issue/oidc/authorize",
+                    Endpoints.Paths.OidcAuthorize,
                     new { controller = "OidcAuthorize", action = "index" }
                 );
 
                 // token endpoint
                 routes.MapHttpRoute(
                     name: "oidctoken",
-                    routeTemplate: "issue/oidc/token",
+                    routeTemplate: Endpoints.Paths.OidcToken,
                     defaults: new { controller = "OidcToken" },
                     constraints: null,
-                    handler: new AuthenticationHandler(CreateUserInfoAuthConfig(configuration), httpConfiguration)
+                    handler: new AuthenticationHandler(CreateClientAuthConfig(), httpConfiguration)
                 );
 
                 // userinfo endpoint
-                var userInfoAuth = CreateUserInfoAuthConfig(configuration);
-
                 routes.MapHttpRoute(
                     name: "oidcuserinfo",
-                    routeTemplate: "issue/oidc/userinfo",
+                    routeTemplate: Endpoints.Paths.OidcUserInfo,
                     defaults: new { controller = "OidcUserInfo" },
                     constraints: null,
-                    handler: new AuthenticationHandler(userInfoAuth, httpConfiguration)
+                    handler: new AuthenticationHandler(CreateUserInfoAuthConfig(configuration), httpConfiguration)
                 );
             }
 
@@ -178,7 +176,12 @@ namespace Thinktecture.IdentityServer.Web
 
         public static AuthenticationConfiguration CreateUserInfoAuthConfig(IConfigurationRepository configuration)
         {
-            var userInfoAuth = new AuthenticationConfiguration();
+            var userInfoAuth = new AuthenticationConfiguration
+            {
+                RequireSsl = true,
+                InheritHostClientIdentity = false
+            };
+
             userInfoAuth.AddJsonWebToken(
                 issuer: configuration.Global.IssuerUri,
                 audience: configuration.Global.IssuerUri + "/userinfo",
