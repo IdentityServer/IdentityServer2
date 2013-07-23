@@ -26,9 +26,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
                 x => x.WSTrust,
                 (c, v) => { c.WSTrust = (WSTrustConfiguration)v; }));
             protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
-                "Simple HTTP",
-                x => x.SimpleHttp,
-                (c, v) => { c.SimpleHttp = (SimpleHttpConfiguration)v; }));
+                "OpenID Connect",
+                x => x.OpenIdConnect,
+                (c, v) => { c.OpenIdConnect = (OpenIdConnectConfiguration)v; }));
             protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
                 "OAuth2",
                 x => x.OAuth2,
@@ -38,9 +38,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
                 x => x.AdfsIntegration,
                 (c, v) => { c.AdfsIntegration = (AdfsIntegrationConfiguration)v; }));
             protocolMap.Add(new Tuple<string, Func<IConfigurationRepository, ProtocolConfiguration>, Action<IConfigurationRepository, ProtocolConfiguration>>(
-                "OpenID Connect",
-                x => x.OpenIdConnect,
-                (c, v) => { c.OpenIdConnect = (OpenIdConnectConfiguration)v; }));
+                "Simple HTTP",
+                x => x.SimpleHttp,
+                (c, v) => { c.SimpleHttp = (SimpleHttpConfiguration)v; }));
         }
 
         private Repositories.IConfigurationRepository ConfigurationRepository;
