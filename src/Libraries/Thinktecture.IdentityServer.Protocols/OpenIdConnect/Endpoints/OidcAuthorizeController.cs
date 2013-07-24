@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+ * Copyright (c) Dominick Baier, Brock Allen.  All rights reserved.
+ * see license.txt
+ */
+
+using System;
 using System.ComponentModel.Composition;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Thinktecture.IdentityModel.Constants;
 using Thinktecture.IdentityServer.Models;
@@ -17,7 +18,7 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
     public class OidcAuthorizeController : Controller
     {
         [Import]
-        public IClientsRepository Clients { get; set; }
+        public IOpenIdConnectClientsRepository Clients { get; set; }
 
         [Import]
         public IStoredGrantRepository Grants { get; set; }
@@ -27,7 +28,7 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public OidcAuthorizeController(IClientsRepository clients, IStoredGrantRepository grants)
+        public OidcAuthorizeController(IOpenIdConnectClientsRepository clients, IStoredGrantRepository grants)
         {
             Clients = clients;
             Grants = grants;
