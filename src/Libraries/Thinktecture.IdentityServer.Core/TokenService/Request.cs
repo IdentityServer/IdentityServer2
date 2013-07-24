@@ -212,7 +212,7 @@ namespace Thinktecture.IdentityServer.TokenService
                 return;
             }
 
-            if (details.RelyingPartyRegistration.TokenType != null)
+            if (details.IsKnownRealm && details.RelyingPartyRegistration.TokenType != null)
             {
                 switch (details.RelyingPartyRegistration.TokenType.Value)
                 {
