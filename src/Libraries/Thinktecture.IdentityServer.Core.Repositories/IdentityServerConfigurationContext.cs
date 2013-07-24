@@ -30,6 +30,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public DbSet<IdentityProvider> IdentityProviders { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<CodeToken> CodeTokens { get; set; }
+        public DbSet<OpenIdConnectClientEntity> OpenIdConnectClients { get; set; }
 
         public DbSet<StoredGrant> StoredGrants { get; set; }
 
@@ -58,6 +59,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<OpenIdConnectClientEntity>().ToTable("OpenIdConnectClients");
+            modelBuilder.Entity<OpenIdConnectClientRedirectUri>().ToTable("OpenIdConnectClientsRedirectUris");
+
             base.OnModelCreating(modelBuilder);
         }
     }

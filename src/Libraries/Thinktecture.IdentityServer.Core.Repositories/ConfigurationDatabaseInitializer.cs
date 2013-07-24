@@ -43,6 +43,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                         CreateTestDelegationSettings().ForEach(d => context.Delegation.Add(d));
                         CreateTestClientCertificateSettings().ForEach(cc => context.ClientCertificates.Add(cc));
                         CreateTestClients().ForEach(c => context.Clients.Add(c));
+                        CreateTestOpenIdConnectClients().ForEach(c => context.OpenIdConnectClients.Add(c));
 
                         return;
                     }
@@ -454,6 +455,16 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 }
             };
         }
+
+        private static List<OpenIdConnectClientEntity> CreateTestOpenIdConnectClients()
+        {
+            return new List<OpenIdConnectClientEntity>()
+            {
+                new OpenIdConnectClientEntity{ClientId="test1", ClientSecret=Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"), Name="test1"},
+                new OpenIdConnectClientEntity{ClientId="test2", ClientSecret=Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"), Name="test2"},
+            };
+        }
+
         #endregion
     }
 }

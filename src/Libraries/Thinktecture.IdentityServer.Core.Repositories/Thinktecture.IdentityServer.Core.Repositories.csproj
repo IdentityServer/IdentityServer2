@@ -75,6 +75,7 @@
     <Compile Include="CodeTokenRepository.cs" />
     <Compile Include="ConfigurationDatabaseInitializer.cs" />
     <Compile Include="ClientsRepository.cs" />
+    <Compile Include="OpenIdConnectClientsRepository.cs" />
     <Compile Include="EntityModel\CodeToken.cs" />
     <Compile Include="EntityModel\Configuration\AdfsIntegrationConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\OpenIdConnectConfiguration.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="EntityModel\Configuration\WSFederationConfiguration.cs" />
     <Compile Include="EntityModel\Configuration\WSTrustConfiguration.cs" />
     <Compile Include="EntityModel\Client.cs" />
+    <Compile Include="EntityModel\OpenIdConnectClient.cs" />
     <Compile Include="EntityModel\StoredGrant.cs" />
     <Compile Include="IdentityServerConfigurationContext.cs" />
     <Compile Include="EntityModel\Configuration\GlobalConfiguration.cs" />
