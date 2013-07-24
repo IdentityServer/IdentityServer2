@@ -61,7 +61,7 @@ namespace Thinktecture.IdentityModel.Oidc
                 var clientSecret = config.ClientSecret;
                 var issuerName = config.IssuerName;
                 var signingcert = X509.LocalMachine.TrustedPeople.SubjectDistinguishedName.Find(
-                    config.SigningCertificate).First();
+                    config.SigningCertificate, false).First();
 
                 // parse OIDC authorize response
                 var response = OidcClient.HandleAuthorizeResponse(context.Request.QueryString);
