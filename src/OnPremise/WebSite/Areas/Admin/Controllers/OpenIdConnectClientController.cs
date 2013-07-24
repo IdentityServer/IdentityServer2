@@ -112,15 +112,16 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Update(OpenIdConnectClient client)
+        public ActionResult Update(OpenIdConnectClientInputModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    this.repository.Update(client);
+                    model.Client.RedirectUris = model.ParsedRedirectUris;
+                    this.repository.Update(model.Client);
                     TempData["Message"] = Resources.OpenIdConnectClientController.ClientUpdated;
-                    return RedirectToAction("Edit", new { clientId = client.ClientId });
+                    return RedirectToAction("Edit", new { clientId = model.Client.ClientId });
                 }
                 catch (ValidationException ex)
                 {
@@ -132,7 +133,7 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.Controllers
                 }
             }
 
-            return Edit(client.ClientId);
+            return Edit(model.Client.ClientId);
         }
 
         [HttpPost]

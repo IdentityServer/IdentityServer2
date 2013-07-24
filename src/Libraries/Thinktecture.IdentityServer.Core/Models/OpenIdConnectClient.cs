@@ -6,6 +6,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace Thinktecture.IdentityServer.Models
 {
@@ -46,7 +47,7 @@ namespace Thinktecture.IdentityServer.Models
         public bool RequireConsent { get; set; }
 
         [ScaffoldColumn(false)]
-        public ICollection<string> RedirectUris { get; set; }
+        public string[] RedirectUris { get; set; }
         
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

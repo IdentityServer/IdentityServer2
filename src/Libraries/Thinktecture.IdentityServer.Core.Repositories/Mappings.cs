@@ -640,11 +640,11 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             {
                 ret.RedirectUris =
                     (from item in client.RedirectUris
-                     select item.RedirectUri).ToList();
+                     select item.RedirectUri).ToArray();
             }
             else
             {
-                ret.RedirectUris = new List<string>();
+                ret.RedirectUris = new string[0];
             }
             
             return ret;
@@ -666,9 +666,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 target.ClientSecret = Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword(client.ClientSecret);
             }
 
-            if (target.RedirectUris != null && client.RedirectUris != null)
+            if (client.RedirectUris != null)
             {
-                var urlsToRemove = target.RedirectUris.Where(x => !client.RedirectUris.Contains(x.RedirectUri));
+                var urlsToRemove = target.RedirectUris.Where(x => !client.RedirectUris.Contains(x.RedirectUri)).ToArray();
                 foreach (var remove in urlsToRemove)
                 {
                     target.RedirectUris.Remove(remove);
@@ -678,7 +678,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
             if (client.RedirectUris != null)
             {
                 var urlsToAdd = target.RedirectUris != null ?
-                    client.RedirectUris.Where(x => !target.RedirectUris.Any(y => y.RedirectUri == x)) :
+                    client.RedirectUris.Where(x => !target.RedirectUris.Any(y => y.RedirectUri == x)).ToArray() :
                     client.RedirectUris;
                 foreach (var add in urlsToAdd)
                 {

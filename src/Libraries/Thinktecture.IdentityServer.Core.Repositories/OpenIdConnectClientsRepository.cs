@@ -49,7 +49,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             using (var entities = IdentityServerConfigurationContext.Get())
             {
-                var item = entities.OpenIdConnectClients.Find(clientId);
+                var item = entities.OpenIdConnectClients.Include("RedirectUris").Where(x=>x.ClientId==clientId).SingleOrDefault();
                 if (item != null) return item.ToDomainModel();
             }
 

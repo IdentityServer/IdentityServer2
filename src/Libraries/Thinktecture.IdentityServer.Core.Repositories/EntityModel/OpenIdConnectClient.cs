@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Thinktecture.IdentityServer.Models;
 
@@ -6,6 +7,11 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
 {
     public class OpenIdConnectClientEntity
     {
+        public OpenIdConnectClientEntity()
+        {
+            this.RedirectUris = new HashSet<OpenIdConnectClientRedirectUri>();
+        }
+
         [Key]
         public string ClientId { get; set; }
         [Required]
@@ -20,7 +26,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public int AccessTokenLifetime { get; set; }
         public int RefreshTokenLifetime { get; set; }
         public bool RequireConsent { get; set; }
-        public ICollection<OpenIdConnectClientRedirectUri> RedirectUris { get; set; }
+        public virtual ICollection<OpenIdConnectClientRedirectUri> RedirectUris { get; set; }
     }
 
     public class OpenIdConnectClientRedirectUri

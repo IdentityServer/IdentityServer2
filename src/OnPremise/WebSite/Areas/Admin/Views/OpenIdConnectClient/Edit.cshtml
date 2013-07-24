@@ -1,5 +1,5 @@
 @model OpenIdConnectClientViewModel
-
+@using Thinktecture.IdentityServer.Web.Utility
 @{
     if (Model.IsNew)
     {
@@ -37,12 +37,16 @@
         }
 
         @Html.EditorFor(x=>x.Client)
+        <div>
+            @Html.LabelFor(x=>x.RedirectUris)
+            @Html.EditorFor(x=>x.RedirectUris)
+            @Html.ValidatorFor(x=>x.RedirectUris)
+        </div>
 
         <div class="buttons">
             @if (!Model.IsNew)
             {
                 <button type="submit" name="action" value="save">Save Changes</button>
-                <button type="submit" name="action" value="delete">Delete</button>
             }
             else
             {
