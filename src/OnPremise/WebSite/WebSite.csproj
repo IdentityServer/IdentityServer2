@@ -210,6 +210,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ShowConsent.Mobile.cshtml.resx</DependentUpon>
     </Compile>
+    <Compile Include="App_LocalResources\OidcAuthorize\Consent.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Consent.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_LocalResources\Shared\Confirm.cshtml.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -700,6 +705,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\dummy.txt" />
+    <EmbeddedResource Include="App_LocalResources\OidcAuthorize\Consent.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Consent.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Resources\CertificateInputModel.fr.resx">
       <DependentUpon>CertificateInputModel.resx</DependentUpon>
     </EmbeddedResource>
@@ -1203,6 +1212,8 @@
     <Content Include="Views\OAuth2Authorize\ShowConsent.cshtml" />
     <Content Include="Views\OAuth2Authorize\Error.Mobile.cshtml" />
     <Content Include="Views\OAuth2Authorize\ShowConsent.Mobile.cshtml" />
+    <Content Include="Views\OidcAuthorize\Consent.cshtml" />
+    <Content Include="Views\OidcAuthorize\ValidationError.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

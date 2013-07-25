@@ -24,7 +24,6 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
         public IStoredGrantRepository Grants { get; set; }
 
         protected abstract ActionResult ShowConsent(ValidatedRequest validatedRequest);
-        protected abstract ActionResult HandleConsent(AuthorizeRequest request);
         
         public OidcAuthorizeControllerBase()
         {
@@ -37,21 +36,36 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
             Grants = grants;
         }
 
-        public ActionResult Index(AuthorizeRequest request)
+        protected bool TryValidateRequest(AuthorizeRequest request, 
+            out ValidatedRequest validatedRequest, 
+            out ActionResult failedResult)
         {
-            Tracing.Start("OIDC Authorize Endpoint");
-
-            ValidatedRequest validatedRequest;
+            validatedRequest = null;
+            failedResult = null;
 
             try
             {
                 var validator = new AuthorizeRequestValidator(Clients);
                 validatedRequest = validator.Validate(request);
+                return true;
             }
             catch (AuthorizeRequestValidationException ex)
             {
+                failedResult = this.AuthorizeValidationError(ex);
+                return false;
+            }
+        }
+
+        public ActionResult Index(AuthorizeRequest request)
+        {
+            Tracing.Start("OIDC Authorize Endpoint");
+
+            ValidatedRequest validatedRequest;
+            ActionResult failedResult;
+            if (!TryValidateRequest(request, out validatedRequest, out failedResult))
+            {
                 Tracing.Error("Aborting OAuth2 authorization request");
-                return this.AuthorizeValidationError(ex);
+                return failedResult;
             }
 
             if (validatedRequest.Client.RequireConsent)
@@ -77,6 +91,11 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect
             }
 
             return null;
+        }
+
+        protected virtual ActionResult DenyGrant(ValidatedRequest validatedRequest)
+        {
+            return new ClientErrorResult(new Uri(validatedRequest.RedirectUri), OAuth2Constants.Errors.AccessDenied, validatedRequest.ResponseType, validatedRequest.State);
         }
 
         protected virtual ActionResult PerformAuthorizationCodeGrant(ValidatedRequest validatedRequest)

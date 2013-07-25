@@ -90,6 +90,7 @@
     <Compile Include="OpenIdConnect\Endpoints\OidcTokenController.cs" />
     <Compile Include="OpenIdConnect\OidcTokenResponse.cs" />
     <Compile Include="OpenIdConnect\OidcTokenService.cs" />
+    <Compile Include="OpenIdConnect\OidcViewModel.cs" />
     <Compile Include="OpenIdConnect\TokenRequestValidator.cs" />
     <Compile Include="OpenIdConnect\Endpoints\UserInfoController.cs" />
     <Compile Include="OAuth2\AuthorizeRequestClientException.cs" />

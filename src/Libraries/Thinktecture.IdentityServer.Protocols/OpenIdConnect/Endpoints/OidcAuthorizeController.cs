@@ -22,28 +22,34 @@ namespace Thinktecture.IdentityServer.Protocols.OpenIdConnect.Endpoints
         {
             Tracing.Information("OIDC Consent screen");
 
-            return View("Consent", validatedRequest);
+            return View("Consent", new OidcViewModel(validatedRequest));
         }
 
+        [ActionName("Index")]
         [HttpPost]
-        protected override ActionResult HandleConsent(AuthorizeRequest request)
+        [ValidateAntiForgeryToken]
+        public ActionResult HandleConsent(AuthorizeRequest request, string button, string[] selectedScopes)
         {
             Tracing.Start("OIDC consent response");
 
             ValidatedRequest validatedRequest;
-
-            try
+            ActionResult failedResult;
+            if (!TryValidateRequest(request, out validatedRequest, out failedResult))
             {
-                var validator = new AuthorizeRequestValidator(Clients);
-                validatedRequest = validator.Validate(request);
+                Tracing.Error("Aborting OIDC consent response");
+                return failedResult;
             }
-            catch (AuthorizeRequestValidationException ex)
-            {
-                Tracing.Error("Aborting OAuth2 authorization request");
-                return this.AuthorizeValidationError(ex);
-            };
 
-            return PerformGrant(validatedRequest);
+            if (button == "allow")
+            {
+                var vm = new OidcViewModel(validatedRequest);
+                vm.SetScopes(selectedScopes);
+                return PerformGrant(vm.ValidatedRequest);
+            }
+            else
+            {
+                return DenyGrant(validatedRequest);
+            }
         }
     }
 }
