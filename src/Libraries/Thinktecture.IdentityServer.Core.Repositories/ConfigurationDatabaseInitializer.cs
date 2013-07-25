@@ -467,9 +467,11 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     AccessTokenLifetime=60,
                     AllowRefreshToken=true, 
                     RefreshTokenLifetime=1440,
-                    RequireConsent = true,
-                    RedirectUris=new HashSet<OpenIdConnectClientRedirectUri>(){
-                        new OpenIdConnectClientRedirectUri{RedirectUri="https://localhost/CodeFlowClient/oidccallback"}
+                    RequireConsent = false,
+                    RedirectUris = new HashSet<OpenIdConnectClientRedirectUri>()
+                    {
+                        new OpenIdConnectClientRedirectUri { RedirectUri = "https://localhost/CodeFlowClient/oidccallback" },
+                        new OpenIdConnectClientRedirectUri { RedirectUri = "https://localhost:44309/oidccallback" }
                     }
                 }
             };
