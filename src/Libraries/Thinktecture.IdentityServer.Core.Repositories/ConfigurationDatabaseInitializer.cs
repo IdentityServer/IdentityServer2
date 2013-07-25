@@ -460,8 +460,18 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             return new List<OpenIdConnectClientEntity>()
             {
-                new OpenIdConnectClientEntity{ClientId="test1", ClientSecret=Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"), Name="test1"},
-                new OpenIdConnectClientEntity{ClientId="test2", ClientSecret=Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"), Name="test2"},
+                new OpenIdConnectClientEntity{
+                    ClientId="oidccode", 
+                    ClientSecret=Thinktecture.IdentityServer.Helper.CryptoHelper.HashPassword("secret"), 
+                    Name="oidccode sample",
+                    AccessTokenLifetime=60,
+                    AllowRefreshToken=true, 
+                    RefreshTokenLifetime=1440,
+                    RequireConsent = true,
+                    RedirectUris=new HashSet<OpenIdConnectClientRedirectUri>(){
+                        new OpenIdConnectClientRedirectUri{RedirectUri="https://localhost/CodeFlowClient/oidccallback"}
+                    }
+                }
             };
         }
 
