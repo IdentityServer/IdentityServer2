@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using Thinktecture.IdentityModel.Clients;
 
 namespace Thinktecture.IdentityModel.Oidc
@@ -60,6 +61,29 @@ namespace Thinktecture.IdentityModel.Oidc
             var json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
             return json.ToObject<OidcTokenResponse>();
         }
+        
+        public async static Task<OidcTokenResponse> CallTokenEndpointAsync(Uri tokenEndpoint, Uri redirectUri, string code, string clientId, string clientSecret)
+        {
+            var client = new HttpClient
+            {
+                BaseAddress = tokenEndpoint
+            };
+
+            client.SetBasicAuthentication(clientId, clientSecret);
+
+            var parameter = new Dictionary<string, string>
+                {
+                    { "grant_type", "authorization_code" },
+                    { "code", code },
+                    { "redirect_uri", redirectUri.AbsoluteUri }
+                };
+
+            var response = await client.PostAsync("", new FormUrlEncodedContent(parameter));
+            response.EnsureSuccessStatusCode();
+
+            var json = JObject.Parse(await response.Content.ReadAsStringAsync());
+            return json.ToObject<OidcTokenResponse>();
+        }
 
         public static OidcTokenResponse RefreshAccessToken(Uri tokenEndpoint, string clientId, string clientSecret, string refreshToken)
         {
@@ -94,13 +118,45 @@ namespace Thinktecture.IdentityModel.Oidc
             return handler.ValidateToken(token, parameters);
         }
 
+        public async static Task<IEnumerable<Claim>> GetUserInfoClaimsAsync(Uri userInfoEndpoint, string accessToken)
+        {
+            var client = new HttpClient
+            {
+                BaseAddress = userInfoEndpoint
+            };
+
+            client.SetBearerToken(accessToken);
+
+            var response = await client.GetAsync("");
+            response.EnsureSuccessStatusCode();
+
+            var dictionary = await response.Content.ReadAsAsync<Dictionary<string, string>>();
+
+            var claims = new List<Claim>();
+            foreach (var pair in dictionary)
+            {
+                if (pair.Value.Contains(','))
+                {
+                    foreach (var item in pair.Value.Split(','))
+                    {
+                        claims.Add(new Claim(pair.Key, item));
+                    }
+                }
+                else
+                {
+                    claims.Add(new Claim(pair.Key, pair.Value));
+                }
+            }
+
+            return claims;
+        }
         public static IEnumerable<Claim> GetUserInfoClaims(Uri userInfoEndpoint, string accessToken)
         {
             var client = new HttpClient
             {
                 BaseAddress = userInfoEndpoint
             };
-            
+
             client.SetBearerToken(accessToken);
 
             var response = client.GetAsync("").Result;
