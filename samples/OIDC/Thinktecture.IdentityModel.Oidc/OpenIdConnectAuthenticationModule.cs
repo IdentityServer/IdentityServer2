@@ -136,11 +136,11 @@ namespace Thinktecture.IdentityModel.Oidc
         async Task AuthenticateAsync()
         {
             var context = HttpContext.Current;
+            var config = OidcClientConfigurationSection.Instance;
 
-            if (context.Request.AppRelativeCurrentExecutionFilePath.Equals("~/oidccallback", StringComparison.OrdinalIgnoreCase))
+            var appRelativeCallbackUrl = config.AppRelativeCallbackUrl;
+            if (context.Request.AppRelativeCurrentExecutionFilePath.Equals(appRelativeCallbackUrl, StringComparison.OrdinalIgnoreCase))
             {
-                var config = OidcClientConfigurationSection.Instance;
-
                 var tokenUrl = config.Endpoints.Token;
                 var userInfoUrl = config.Endpoints.UserInfo;
                 var clientId = config.ClientId;
@@ -148,6 +148,7 @@ namespace Thinktecture.IdentityModel.Oidc
                 var issuerName = config.IssuerName;
                 var signingcert = X509.LocalMachine.TrustedPeople.SubjectDistinguishedName.Find(
                     config.SigningCertificate, false).First();
+                var callUserInfoEndpoint = config.CallUserInfoEndpoint;
 
                 // parse OIDC authorize response
                 var response = OidcClient.HandleAuthorizeResponse(context.Request.QueryString);
@@ -167,7 +168,7 @@ namespace Thinktecture.IdentityModel.Oidc
 
                 if (response.IsError)
                 {
-                    throw new InvalidOperationException("OpenID Connect Callback Error: " + response.Error + ". Handle the ");
+                    throw new InvalidOperationException("OpenID Connect Callback Error: " + response.Error + ". Handle the AuthorizeResponse event to handle authorization errors.");
                 }
 
                 try
@@ -185,7 +186,12 @@ namespace Thinktecture.IdentityModel.Oidc
 
                     var state = storedState.Substring(0, separator);
                     var returnUrl = storedState.Substring(separator + 1);
-                    var redirectUri = context.Request.GetApplicationUrl() + "oidccallback";
+                    
+                    if (appRelativeCallbackUrl.StartsWith("~/"))
+                    {
+                        appRelativeCallbackUrl = appRelativeCallbackUrl.Substring(2);
+                    }
+                    var redirectUri = context.Request.GetApplicationUrl() + appRelativeCallbackUrl;
 
                     // validate state
                     if (response.State != state)
@@ -236,27 +242,34 @@ namespace Thinktecture.IdentityModel.Oidc
                         return;
                     }
 
-                    // retrieve user info data
-                    var userInfoClaims = await OidcClient.GetUserInfoClaimsAsync(
-                        new Uri(userInfoUrl),
-                        tokenResponse.AccessToken);
+                    var claims = identityTokenValidatedEventArgs.Claims;
 
-                    // event -- profile loaded w/ claims
-                    var userInfoClaimsReceivedEventArgs = new UserInfoClaimsReceivedEventArgs { Claims = identityClaims };
-                    OnUserInfoClaimsReceived(userInfoClaimsReceivedEventArgs);
-                    if (userInfoClaimsReceivedEventArgs.Cancel)
+                    if (callUserInfoEndpoint)
                     {
-                        if (String.IsNullOrWhiteSpace(userInfoClaimsReceivedEventArgs.RedirectUrl))
+                        // retrieve user info data
+                        var userInfoClaims = await OidcClient.GetUserInfoClaimsAsync(
+                            new Uri(userInfoUrl),
+                            tokenResponse.AccessToken);
+
+                        // event -- profile loaded w/ claims
+                        var userInfoClaimsReceivedEventArgs = new UserInfoClaimsReceivedEventArgs { Claims = userInfoClaims };
+                        OnUserInfoClaimsReceived(userInfoClaimsReceivedEventArgs);
+                        if (userInfoClaimsReceivedEventArgs.Cancel)
                         {
-                            throw new ArgumentNullException("RedirectUrl");
+                            if (String.IsNullOrWhiteSpace(userInfoClaimsReceivedEventArgs.RedirectUrl))
+                            {
+                                throw new ArgumentNullException("RedirectUrl");
+                            }
+
+                            context.Response.Redirect(userInfoClaimsReceivedEventArgs.RedirectUrl);
+                            return;
                         }
 
-                        context.Response.Redirect(userInfoClaimsReceivedEventArgs.RedirectUrl);
-                        return;
+                        claims = userInfoClaimsReceivedEventArgs.Claims;
                     }
 
                     // create identity
-                    var id = new ClaimsIdentity(userInfoClaims, "oidc");
+                    var id = new ClaimsIdentity(claims, "oidc");
 
                     if (!string.IsNullOrWhiteSpace(tokenResponse.RefreshToken))
                     {
@@ -317,7 +330,13 @@ namespace Thinktecture.IdentityModel.Oidc
                 var scopes = "openid " + config.Scope;
                 var state = Guid.NewGuid().ToString("N");
                 var returnUrl = context.Request.RawUrl;
-                var redirectUri = context.Request.GetApplicationUrl() + "oidccallback";
+
+                var appRelativeCallbackUrl = config.AppRelativeCallbackUrl;
+                if (appRelativeCallbackUrl.StartsWith("~/"))
+                {
+                    appRelativeCallbackUrl = appRelativeCallbackUrl.Substring(2);
+                }
+                var redirectUri = context.Request.GetApplicationUrl() + appRelativeCallbackUrl;
 
                 var authorizeUri = OidcClient.GetAuthorizeUrl(
                     new Uri(authorizeUrl),

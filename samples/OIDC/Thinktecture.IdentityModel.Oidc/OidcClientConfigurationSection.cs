@@ -204,6 +204,58 @@ namespace Thinktecture.IdentityModel.Oidc
         }
         #endregion
 
+        #region AppRelativeCallbackUrl Property
+        /// <summary>
+        /// The XML name of the <see cref="AppRelativeCallbackUrl"/> property.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        internal const string AppRelativeCallbackUrlPropertyName = "appRelativeCallbackUrl";
+
+        /// <summary>
+        /// Gets or sets the AppRelativeCallbackUrl.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        [global::System.ComponentModel.DescriptionAttribute("The AppRelativeCallbackUrl.")]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::Thinktecture.IdentityModel.Oidc.OidcClientConfigurationSection.AppRelativeCallbackUrlPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = "~/oidccallback")]
+        public virtual string AppRelativeCallbackUrl
+        {
+            get
+            {
+                return ((string)(base[global::Thinktecture.IdentityModel.Oidc.OidcClientConfigurationSection.AppRelativeCallbackUrlPropertyName]));
+            }
+            set
+            {
+                base[global::Thinktecture.IdentityModel.Oidc.OidcClientConfigurationSection.AppRelativeCallbackUrlPropertyName] = value;
+            }
+        }
+        #endregion
+
+        #region CallUserInfoEndpoint Property
+        /// <summary>
+        /// The XML name of the <see cref="CallUserInfoEndpoint"/> property.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        internal const string CallUserInfoEndpointPropertyName = "callUserInfoEndpoint";
+
+        /// <summary>
+        /// Gets or sets the CallUserInfoEndpoint.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        [global::System.ComponentModel.DescriptionAttribute("The CallUserInfoEndpoint.")]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::Thinktecture.IdentityModel.Oidc.OidcClientConfigurationSection.CallUserInfoEndpointPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false, DefaultValue = true)]
+        public virtual bool CallUserInfoEndpoint
+        {
+            get
+            {
+                return ((bool)(base[global::Thinktecture.IdentityModel.Oidc.OidcClientConfigurationSection.CallUserInfoEndpointPropertyName]));
+            }
+            set
+            {
+                base[global::Thinktecture.IdentityModel.Oidc.OidcClientConfigurationSection.CallUserInfoEndpointPropertyName] = value;
+            }
+        }
+        #endregion
+
         #region Endpoints Property
         /// <summary>
         /// The XML name of the <see cref="Endpoints"/> property.
