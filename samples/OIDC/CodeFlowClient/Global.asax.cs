@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Thinktecture.IdentityModel.Oidc;
 
 namespace CodeFlowClient
 {
@@ -22,6 +23,28 @@ namespace CodeFlowClient
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        void OpenIdConnectAuthenticationModule_AuthorizeResponse(object sender, AuthorizeResponseEventArgs args)
+        {
+        }
+        void OpenIdConnectAuthenticationModule_TokenResponse(object sender, TokenResponseEventArgs args)
+        {
+        }
+        void OpenIdConnectAuthenticationModule_IdentityTokenValidated(object sender, IdentityTokenValidatedEventArgs args)
+        {
+        }
+        void OpenIdConnectAuthenticationModule_UserInfoClaimsReceived(object sender, UserInfoClaimsReceivedEventArgs args)
+        {
+        }
+        void OpenIdConnectAuthenticationModule_SessionSecurityTokenCreated(object sender, SessionTokenCreatedEventArgs args)
+        {
+        }
+        void OpenIdConnectAuthenticationModule_SignedIn(object sender, EventArgs args)
+        {
+        }
+        void OpenIdConnectAuthenticationModule_Error(object sender, ErrorEventArgs args)
+        {
         }
     }
 }
