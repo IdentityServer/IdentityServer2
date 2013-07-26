@@ -35,6 +35,10 @@ namespace Thinktecture.IdentityModel.Oidc
         public bool Cancel { get; set; }
         public string RedirectUrl { get; set; }
     }
+    public class SessionTokenCreatedEventArgs : EventArgs
+    {
+        public SessionSecurityToken Token { get; set; }
+    }
     public class ErrorEventArgs : EventArgs
     {
         public Exception Exception { get; set; }
@@ -104,8 +108,8 @@ namespace Thinktecture.IdentityModel.Oidc
                 UserInfoClaimsReceived(this, args);
             }
         }
-        public event EventHandler<SessionSecurityTokenCreatedEventArgs> SessionSecurityTokenCreated;
-        protected virtual void OnSessionSecurityTokenCreated(SessionSecurityTokenCreatedEventArgs args)
+        public event EventHandler<SessionTokenCreatedEventArgs> SessionSecurityTokenCreated;
+        protected virtual void OnSessionSecurityTokenCreated(SessionTokenCreatedEventArgs args)
         {
             if (SessionSecurityTokenCreated != null)
             {
@@ -267,12 +271,10 @@ namespace Thinktecture.IdentityModel.Oidc
                     var sessionToken = new SessionSecurityToken(transformedPrincipal);
 
                     // event? raise session security token created
-                    var sessionSecurityTokenCreatedEventArgs = new SessionSecurityTokenCreatedEventArgs(sessionToken);
-                    OnSessionSecurityTokenCreated(sessionSecurityTokenCreatedEventArgs);
-                    if (sessionSecurityTokenCreatedEventArgs.WriteSessionCookie)
-                    {
-                        FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(sessionToken);
-                    }
+                    var sessionTokenCreatedEventArgs = new SessionTokenCreatedEventArgs { Token = sessionToken };
+                    OnSessionSecurityTokenCreated(sessionTokenCreatedEventArgs);
+                        
+                    FederatedAuthentication.SessionAuthenticationModule.WriteSessionTokenToCookie(sessionToken);
 
                     // event? signed in -- pass in return URL and allow them to change
                     OnSignedIn();
