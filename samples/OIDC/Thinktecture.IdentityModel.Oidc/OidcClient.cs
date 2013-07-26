@@ -103,7 +103,7 @@ namespace Thinktecture.IdentityModel.Oidc
             };
         }
 
-        public static ClaimsPrincipal ValidateIdentityToken(string token, string issuer, string audience, X509Certificate2 signingCertificate)
+        public static IEnumerable<Claim> ValidateIdentityToken(string token, string issuer, string audience, X509Certificate2 signingCertificate)
         {
             var idToken = new JwtSecurityToken(token);
             var handler = new JwtSecurityTokenHandler();
@@ -115,7 +115,7 @@ namespace Thinktecture.IdentityModel.Oidc
                 SigningToken = new X509SecurityToken(signingCertificate)
             };
 
-            return handler.ValidateToken(token, parameters);
+            return handler.ValidateToken(token, parameters).Claims;
         }
 
         public async static Task<IEnumerable<Claim>> GetUserInfoClaimsAsync(Uri userInfoEndpoint, string accessToken)
