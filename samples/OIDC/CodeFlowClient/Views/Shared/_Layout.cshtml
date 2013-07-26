@@ -17,6 +17,10 @@
                 <div class="float-right">
                     <section id="login">
                        Hello, <span class="username">@User.Identity.Name</span>!
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Logout", "Logout", "Home")
+                        }
                     </section>
                     <nav>
                         <ul id="menu">

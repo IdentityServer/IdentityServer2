@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Services;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
@@ -16,12 +17,18 @@ namespace CodeFlowClient.Controllers
             return View();
         }
 
-        
+
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
 
             return View();
+        }
+        
+        public ActionResult Logout()
+        {
+            FederatedAuthentication.SessionAuthenticationModule.SignOut();
+            return Redirect("~/");
         }
 
         [Authorize]
