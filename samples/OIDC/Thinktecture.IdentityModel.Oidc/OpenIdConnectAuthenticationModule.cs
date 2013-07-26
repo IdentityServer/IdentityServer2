@@ -3,6 +3,7 @@ using System.IdentityModel.Services;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using Thinktecture.IdentityModel.Web;
 
@@ -10,44 +11,36 @@ namespace Thinktecture.IdentityModel.Oidc
 {
     public class OpenIdConnectAuthenticationModule : IHttpModule
     {
-        public void Init(HttpApplication context)
+        public void Init(HttpApplication app)
         {
-            context.AuthenticateRequest += OnAuthenticateRequestRequest;
-            context.EndRequest += OnEndRequest;
+            app.AddOnAuthenticateRequestAsync(BeginAuthenticateRequest, EndAuthenticateRequest);
+            app.EndRequest += OnEndRequest;
         }
 
-        void OnEndRequest(object sender, EventArgs e)
+        public async Task<IAsyncResult> BeginAuthenticateRequest(
+            object sender, EventArgs e, AsyncCallback cb, object extraData)
         {
-            var context = HttpContext.Current;
-
-            if (context.Response.StatusCode == 401 &&
-                !context.User.Identity.IsAuthenticated &&
-                !context.Response.SuppressFormsAuthenticationRedirect)
+            var tcs = new TaskCompletionSource<object>(extraData);
+            try
             {
-                var config = OidcClientConfigurationSection.Instance;
-
-                var authorizeUrl = config.Endpoints.Authorize;
-                var clientId = config.ClientId;
-                var scopes = "openid " + config.Scope;
-                var state = Guid.NewGuid().ToString("N");
-                var returnUrl = context.Request.RawUrl;
-                var redirectUri = context.Request.GetApplicationUrl() + "oidccallback";
-
-                var authorizeUri = OidcClient.GetAuthorizeUrl(
-                    new Uri(authorizeUrl),
-                    new Uri(redirectUri),
-                    clientId,
-                    scopes,
-                    state);
-
-                var cookie = new ProtectedCookie(ProtectionMode.MachineKey);
-                cookie.Write("oidcstate", state + "_" + returnUrl, DateTime.UtcNow.AddHours(1));
-
-                context.Response.Redirect(authorizeUri.AbsoluteUri);
+                await AuthenticateAsync();
+                tcs.SetResult(null);
             }
+            catch(Exception ex)
+            {
+                tcs.SetException(ex);
+            }
+            if (cb != null) cb(tcs.Task);
+            return tcs.Task;
         }
 
-        void OnAuthenticateRequestRequest(object sender, EventArgs e)
+        public void EndAuthenticateRequest(IAsyncResult result)
+        {
+            Task task = (Task)result;
+            task.Wait();
+        }
+
+        async Task AuthenticateAsync()
         {
             var context = HttpContext.Current;
 
@@ -93,7 +86,7 @@ namespace Thinktecture.IdentityModel.Oidc
                 }
 
                 // call token endpoint and retrieve id and access token (and maybe a refresh token)
-                var tokenResponse = OidcClient.CallTokenEndpoint(
+                var tokenResponse = await OidcClient.CallTokenEndpointAsync(
                     new Uri(tokenUrl),
                     new Uri(redirectUri),
                     response.Code,
@@ -108,7 +101,7 @@ namespace Thinktecture.IdentityModel.Oidc
                     signingcert);
 
                 // retrieve user info data
-                var userInfoClaims = OidcClient.GetUserInfoClaims(
+                var userInfoClaims = await OidcClient.GetUserInfoClaimsAsync(
                     new Uri(userInfoUrl),
                     tokenResponse.AccessToken);
 
@@ -137,6 +130,37 @@ namespace Thinktecture.IdentityModel.Oidc
                 {
                     context.Response.Redirect("~/");
                 }
+            }
+        }
+
+        void OnEndRequest(object sender, EventArgs e)
+        {
+            var context = HttpContext.Current;
+
+            if (context.Response.StatusCode == 401 &&
+                !context.User.Identity.IsAuthenticated &&
+                !context.Response.SuppressFormsAuthenticationRedirect)
+            {
+                var config = OidcClientConfigurationSection.Instance;
+
+                var authorizeUrl = config.Endpoints.Authorize;
+                var clientId = config.ClientId;
+                var scopes = "openid " + config.Scope;
+                var state = Guid.NewGuid().ToString("N");
+                var returnUrl = context.Request.RawUrl;
+                var redirectUri = context.Request.GetApplicationUrl() + "oidccallback";
+
+                var authorizeUri = OidcClient.GetAuthorizeUrl(
+                    new Uri(authorizeUrl),
+                    new Uri(redirectUri),
+                    clientId,
+                    scopes,
+                    state);
+
+                var cookie = new ProtectedCookie(ProtectionMode.MachineKey);
+                cookie.Write("oidcstate", state + "_" + returnUrl, DateTime.UtcNow.AddHours(1));
+
+                context.Response.Redirect(authorizeUri.AbsoluteUri);
             }
         }
 
