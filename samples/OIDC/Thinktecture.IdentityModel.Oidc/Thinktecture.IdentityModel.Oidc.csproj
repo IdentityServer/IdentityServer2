@@ -74,6 +74,7 @@
     <Compile Include="OidcClientConfigurationSection.cs" />
     <Compile Include="OidcTokenResponse.cs" />
     <Compile Include="OpenIdConnectAuthenticationModule.cs" />
+    <Compile Include="OWIN\OpenIdConnectAuthenticationExtensions.cs" />
     <Compile Include="OWIN\OpenIdConnectAuthenticationHandler.cs" />
     <Compile Include="OWIN\OpenIdConnectAuthenticationMiddleware.cs" />
     <Compile Include="OWIN\OpenIdConnectAuthenticationOptions.cs" />
