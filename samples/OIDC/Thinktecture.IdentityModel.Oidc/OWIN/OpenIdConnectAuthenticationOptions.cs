@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Thinktecture.IdentityModel.Oidc.OWIN
 {
-    class OpenIdConnectAuthenticationOptions : AuthenticationOptions
+    public class OpenIdConnectAuthenticationOptions : AuthenticationOptions
     {
         public OpenIdConnectAuthenticationOptions() : base("OpenIdConnect")
         { }

@@ -5,7 +5,9 @@ using System.Text;
 
 namespace Thinktecture.IdentityModel.Oidc.OWIN
 {
-    class OpenIdConnectConfiguration
+    public class OpenIdConnectConfiguration
     {
+        public string ClientId { get; set; }
+        public string ClientSecret { get; set; }
     }
 }
