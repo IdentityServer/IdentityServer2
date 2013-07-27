@@ -53,20 +53,22 @@ namespace Thinktecture.IdentityModel.Oidc
             app.EndRequest += OnEndRequest;
         }
 
-        public async Task<IAsyncResult> BeginAuthenticateRequest(
+        public IAsyncResult BeginAuthenticateRequest(
             object sender, EventArgs e, AsyncCallback cb, object extraData)
         {
             var tcs = new TaskCompletionSource<object>(extraData);
-            try
+            AuthenticateAsync(HttpContext.Current).ContinueWith(t =>
             {
-                await AuthenticateAsync();
-                tcs.SetResult(null);
-            }
-            catch (Exception ex)
-            {
-                tcs.SetException(ex);
-            }
-            if (cb != null) cb(tcs.Task);
+                if (t.IsFaulted)
+                {
+                    tcs.SetException(t.Exception.InnerExceptions);
+                }
+                else
+                {
+                    tcs.SetResult(null);
+                }
+                if (cb != null) cb(tcs.Task);
+            });
             return tcs.Task;
         }
 
@@ -133,9 +135,8 @@ namespace Thinktecture.IdentityModel.Oidc
             }
         }
 
-        async Task AuthenticateAsync()
+        async Task AuthenticateAsync(HttpContext context)
         {
-            var context = HttpContext.Current;
             var config = OidcClientConfigurationSection.Instance;
 
             var appRelativeCallbackUrl = config.AppRelativeCallbackUrl;
