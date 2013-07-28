@@ -11,5 +11,7 @@ namespace Thinktecture.IdentityModel.Oidc.OWIN
     {
         public OpenIdConnectAuthenticationOptions() : base("OpenIdConnect")
         { }
+
+        public string ReturnPath { get; set; }
     }
 }
