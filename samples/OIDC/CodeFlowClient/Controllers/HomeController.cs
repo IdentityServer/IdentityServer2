@@ -25,6 +25,13 @@ namespace CodeFlowClient.Controllers
             return View();
         }
         
+        public ActionResult OidcError(string error)
+        {
+            ViewBag.Message = error;
+
+            return View();
+        }
+        
         public ActionResult Logout()
         {
             FederatedAuthentication.SessionAuthenticationModule.SignOut();

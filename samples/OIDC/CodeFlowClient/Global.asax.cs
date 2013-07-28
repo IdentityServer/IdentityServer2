@@ -23,10 +23,18 @@ namespace CodeFlowClient
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //OidcClientConfigurationSection.Instance.ClientId = "MyClientId";
+            //OidcClientConfigurationSection.Instance.ClientId = "MySecret";
         }
 
         void OpenIdConnectAuthenticationModule_AuthorizeResponse(object sender, AuthorizeResponseEventArgs args)
         {
+            if (args.Response.IsError)
+            {
+                //args.Cancel = true;
+                //args.RedirectUrl = "~/error";
+            }
         }
         void OpenIdConnectAuthenticationModule_TokenResponse(object sender, TokenResponseEventArgs args)
         {

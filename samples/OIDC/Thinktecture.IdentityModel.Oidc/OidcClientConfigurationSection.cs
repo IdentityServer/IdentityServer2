@@ -256,6 +256,31 @@ namespace Thinktecture.IdentityModel.Oidc
         }
         #endregion
 
+        #region AuthorizeErrorRedirectUrl Property
+        /// <summary>
+        /// The XML name of the <see cref="AuthorizeErrorRedirectUrl"/> property.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        internal const string AuthorizeErrorRedirectUrlPropertyName = "authorizeErrorRedirectUrl";
+
+        /// <summary>
+        /// Gets or sets the AppRelativeCallbackUrl.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("ConfigurationSectionDesigner.CsdFileGenerator", "2.0.1.0")]
+        [global::System.ComponentModel.DescriptionAttribute("The AuthorizeErrorRedirectUrl.")]
+        [global::System.Configuration.ConfigurationPropertyAttribute(global::Thinktecture.IdentityModel.Oidc.OidcClientConfigurationSection.AuthorizeErrorRedirectUrlPropertyName, IsRequired = false, IsKey = false, IsDefaultCollection = false)]
+        public virtual string AuthorizeErrorRedirectUrl
+        {
+            get
+            {
+                return ((string)(base[global::Thinktecture.IdentityModel.Oidc.OidcClientConfigurationSection.AuthorizeErrorRedirectUrlPropertyName]));
+            }
+            set
+            {
+                base[global::Thinktecture.IdentityModel.Oidc.OidcClientConfigurationSection.AuthorizeErrorRedirectUrlPropertyName] = value;
+            }
+        }
+        #endregion
         #region Endpoints Property
         /// <summary>
         /// The XML name of the <see cref="Endpoints"/> property.

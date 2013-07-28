@@ -142,6 +142,7 @@ namespace Thinktecture.IdentityModel.Oidc
             var appRelativeCallbackUrl = config.AppRelativeCallbackUrl;
             if (context.Request.AppRelativeCurrentExecutionFilePath.Equals(appRelativeCallbackUrl, StringComparison.OrdinalIgnoreCase))
             {
+                var authorizeErrorUrl = config.AuthorizeErrorRedirectUrl;
                 var tokenUrl = config.Endpoints.Token;
                 var userInfoUrl = config.Endpoints.UserInfo;
                 var clientId = config.ClientId;
@@ -169,6 +170,21 @@ namespace Thinktecture.IdentityModel.Oidc
 
                 if (response.IsError)
                 {
+                    if (!String.IsNullOrWhiteSpace(authorizeErrorUrl))
+                    {
+                        if (!authorizeErrorUrl.Contains("?"))
+                        {
+                            authorizeErrorUrl += "?";
+                        }
+                        if (!authorizeErrorUrl.EndsWith("?"))
+                        {
+                            authorizeErrorUrl += "&";
+                        }
+                        authorizeErrorUrl += "error=" + response.Error;
+                        context.Response.Redirect(authorizeErrorUrl);
+                        return;
+                    }
+
                     throw new InvalidOperationException("OpenID Connect Callback Error: " + response.Error + ". Handle the AuthorizeResponse event to handle authorization errors.");
                 }
 
