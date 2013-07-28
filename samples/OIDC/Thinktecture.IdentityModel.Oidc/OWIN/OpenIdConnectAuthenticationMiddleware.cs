@@ -15,13 +15,11 @@ namespace Thinktecture.IdentityModel.Oidc.OWIN
         public OpenIdConnectAuthenticationMiddleware(
             OwinMiddleware next,
             OpenIdConnectAuthenticationOptions options) : base(next, options)
-        {
-            //_federationConfiguration = Options.FederationConfiguration ?? new FederationConfiguration(loadConfig: true);
-        }
+        { }
 
         protected override AuthenticationHandler<OpenIdConnectAuthenticationOptions> CreateHandler()
         {
-            throw new NotImplementedException();
+            return new OpenIdConnectAuthenticationHandler();
         }
     }
 }

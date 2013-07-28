@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{48DEA1
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWIN Code Flow Client", "OwinCodeFlowClient\OWIN Code Flow Client.csproj", "{0B732396-0EDE-468A-A356-6D1EB950F533}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{9669AED6-CC75-4DA4-A639-13E084905CA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9669AED6-CC75-4DA4-A639-13E084905CA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9669AED6-CC75-4DA4-A639-13E084905CA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B732396-0EDE-468A-A356-6D1EB950F533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B732396-0EDE-468A-A356-6D1EB950F533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B732396-0EDE-468A-A356-6D1EB950F533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B732396-0EDE-468A-A356-6D1EB950F533}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
