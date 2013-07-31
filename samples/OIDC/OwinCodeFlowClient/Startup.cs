@@ -16,7 +16,14 @@ namespace OwinDemo
             app.UseOpenIdConnectAuthentication(
                 new OpenIdConnectAuthenticationOptions
                 {
-                    ReturnPath = "http://foo.com/return"
+                    ClientId = "oidccode",
+                    ClientSecret = "secret",
+                    Scope = "openid profile",
+
+                    ReturnPath = "/oidccallback",
+                    RedirectUri = new Uri("https://localhost:44310/oidccallback"),
+                    AuthorizeEndpoint = new Uri("https://idsrv.local/issue/oidc/authorize"),
+                    SigninAsAuthenticationType = "Federation"
                 });
 
 
@@ -43,6 +50,7 @@ namespace OwinDemo
                 }
                 else
                 {
+                    res.StatusCode = 401;
                     return res.WriteAsync("Hello stranger!");
                 }
             });

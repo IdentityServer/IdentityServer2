@@ -10,8 +10,6 @@ namespace Thinktecture.IdentityModel.Oidc.OWIN
 {
     public class OpenIdConnectAuthenticationMiddleware : AuthenticationMiddleware<OpenIdConnectAuthenticationOptions>
     {
-        private readonly OpenIdConnectConfiguration _configuration;
-
         public OpenIdConnectAuthenticationMiddleware(
             OwinMiddleware next,
             OpenIdConnectAuthenticationOptions options) : base(next, options)
