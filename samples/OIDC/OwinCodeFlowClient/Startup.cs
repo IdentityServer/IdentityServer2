@@ -13,18 +13,18 @@ namespace OwinDemo
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseOpenIdConnectAuthentication(
-                new OpenIdConnectAuthenticationOptions
-                {
-                    ClientId = "oidccode",
-                    ClientSecret = "secret",
-                    Scope = "openid profile",
+            //app.UseOpenIdConnectAuthentication(
+            //    new OpenIdConnectAuthenticationOptions
+            //    {
+            //        ClientId = "oidccode",
+            //        ClientSecret = "secret",
+            //        Scope = "openid profile",
 
-                    ReturnPath = "/oidccallback",
-                    RedirectUri = new Uri("https://localhost:44310/oidccallback"),
-                    AuthorizeEndpoint = new Uri("https://idsrv.local/issue/oidc/authorize"),
-                    SigninAsAuthenticationType = "Federation"
-                });
+            //        ReturnPath = "/oidccallback",
+            //        RedirectUri = new Uri("https://localhost:44310/oidccallback"),
+            //        AuthorizeEndpoint = new Uri("https://idsrv.local/issue/oidc/authorize"),
+            //        SigninAsAuthenticationType = "Federation"
+            //    });
 
 
             // authentication
@@ -50,7 +50,7 @@ namespace OwinDemo
                 }
                 else
                 {
-                    res.StatusCode = 401;
+                    //res.StatusCode = 401;
                     return res.WriteAsync("Hello stranger!");
                 }
             });

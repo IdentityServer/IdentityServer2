@@ -20,4 +20,15 @@ namespace Thinktecture.IdentityModel.Oidc.OWIN
             return new OpenIdConnectAuthenticationHandler();
         }
     }
+
+    public class OpenIdConnectAuthenticationHandler : AuthenticationHandler<OpenIdConnectAuthenticationOptions>
+    {
+        protected override Task<Microsoft.Owin.Security.AuthenticationTicket> AuthenticateCoreAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        
+    }
+
 }
