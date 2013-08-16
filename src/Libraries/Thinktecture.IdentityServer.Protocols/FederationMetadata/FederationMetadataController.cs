@@ -3,6 +3,7 @@
  * see license.txt
  */
 
+using System;
 using System.ComponentModel.Composition;
 using System.Web;
 using System.Web.Mvc;
@@ -36,8 +37,13 @@ namespace Thinktecture.IdentityServer.Protocols.FederationMetadata
             {
                 return Cache.ReturnFromCache<ActionResult>(CacheRepository, Constants.CacheKeys.WSFedMetadata, 1, () =>
                     {
+                        var host = ConfigurationRepository.Global.PublicHostName;
+                        if (String.IsNullOrWhiteSpace(host))
+                        {
+                            host = HttpContext.Request.Headers["Host"];
+                        }
                         var endpoints = Endpoints.Create(
-                            HttpContext.Request.Headers["Host"],
+                            host,
                             HttpContext.Request.ApplicationPath,
                             ConfigurationRepository.Global.HttpPort,
                             ConfigurationRepository.Global.HttpsPort);
