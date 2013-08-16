@@ -30,7 +30,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 EnableClientCertificateAuthentication = entity.EnableClientCertificateAuthentication,
                 EnforceUsersGroupMembership = entity.EnforceUsersGroupMembership,
                 HttpPort = entity.HttpPort,
+                DisableSSL = entity.DisableSSL,
                 HttpsPort = entity.HttpsPort,
+                PublicHostName = entity.PublicHostName,
                 RequireEncryption = entity.RequireEncryption,
                 RequireRelyingPartyRegistration = entity.RequireRelyingPartyRegistration,
                 SsoCookieLifetime = entity.SsoCookieLifetime
@@ -51,7 +53,9 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                 EnableClientCertificateAuthentication = model.EnableClientCertificateAuthentication,
                 EnforceUsersGroupMembership = model.EnforceUsersGroupMembership,
                 HttpPort = model.HttpPort,
+                DisableSSL = model.DisableSSL,
                 HttpsPort = model.HttpsPort,
+                PublicHostName = model.PublicHostName,
                 RequireEncryption = model.RequireEncryption,
                 RequireRelyingPartyRegistration = model.RequireRelyingPartyRegistration,
                 SsoCookieLifetime = model.SsoCookieLifetime
