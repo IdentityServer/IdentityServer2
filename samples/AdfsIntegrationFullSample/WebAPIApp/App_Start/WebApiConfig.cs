@@ -12,7 +12,7 @@ namespace WebAPIApp
     {
         public static void Register(HttpConfiguration config)
         {
-            var idsvrId = "http://idsrv.local/trust";
+            var idsvrId = "http://identityserver.v2.thinktecture.com/samples";
             var cert = X509.LocalMachine.TrustedPeople.SubjectDistinguishedName.Find("CN=sts", false).Single();
             
             {
