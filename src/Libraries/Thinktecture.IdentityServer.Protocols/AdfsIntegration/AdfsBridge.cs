@@ -182,6 +182,8 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
 
         public ClaimsIdentity ValidateSamlToken(SecurityToken securityToken)
         {
+            StripSaml2ProtocolProperties(securityToken);
+
             var configuration = new SecurityTokenHandlerConfiguration();
             configuration.AudienceRestriction.AudienceMode = AudienceUriMode.Never;
             configuration.CertificateValidationMode = X509CertificateValidationMode.None;
@@ -195,6 +197,26 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             var handler = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(configuration);
             var identity = handler.ValidateToken(securityToken).First();
             return identity;
+        }
+
+        private void StripSaml2ProtocolProperties(SecurityToken securityToken)
+        {
+            var saml2Token = securityToken as Saml2SecurityToken;
+            if (saml2Token != null && 
+                saml2Token.Assertion != null &&
+                saml2Token.Assertion.Subject != null &&
+                saml2Token.Assertion.Subject.SubjectConfirmations != null && 
+                saml2Token.Assertion.Subject.SubjectConfirmations.Count > 0 && 
+                saml2Token.Assertion.Subject.SubjectConfirmations[0].SubjectConfirmationData != null)
+            {
+                // these are flags in the token that pertain to the saml2-p response from the sts to 
+                // the rp, and for our use here these don't pertain and the MSFT Saml2SecurityTokenHandler 
+                // throws when validating if they are set
+                var subjectConfirmationData = saml2Token.Assertion.Subject.SubjectConfirmations[0].SubjectConfirmationData;
+                subjectConfirmationData.Address = null;
+                subjectConfirmationData.InResponseTo = null;
+                subjectConfirmationData.Recipient = null;
+            }
         }
 
         public ClaimsIdentity ValidateJwtToken(string jwt)
