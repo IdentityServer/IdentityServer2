@@ -63,5 +63,11 @@ namespace Thinktecture.IdentityServer.Models.Configuration
         [Display(ResourceType = typeof (Resources.Models.Configuration.GlobalConfiguration), Name = "HttpsPort", Description = "HttpsPortDescription")]
         [Range(0, Int32.MaxValue)]
         public int HttpsPort { get; set; }
+
+        [Display(ResourceType = typeof(Resources.Models.Configuration.GlobalConfiguration), Name = "DisableSSL", Description = "DisableSSLDescription")]
+        public bool DisableSSL { get; set; }
+
+        [Display(ResourceType = typeof(Resources.Models.Configuration.GlobalConfiguration), Name = "PublicHostName", Description = "PublicHostNameDescription")]
+        public string PublicHostName { get; set; }
     }
 }

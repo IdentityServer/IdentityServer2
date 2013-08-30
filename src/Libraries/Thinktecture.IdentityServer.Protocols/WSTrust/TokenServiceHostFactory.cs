@@ -49,7 +49,9 @@ namespace Thinktecture.IdentityServer.Protocols.WSTrust
             serviceBehavior.AddressFilterMode = AddressFilterMode.Any;
 
             // add and configure a mixed mode security endpoint
-            if (ConfigurationRepository.WSTrust.Enabled && ConfigurationRepository.WSTrust.EnableMixedModeSecurity)
+            if (ConfigurationRepository.WSTrust.Enabled && 
+                ConfigurationRepository.WSTrust.EnableMixedModeSecurity &&
+                !ConfigurationRepository.Global.DisableSSL)
             {
                 EndpointIdentity epi = null;
                 

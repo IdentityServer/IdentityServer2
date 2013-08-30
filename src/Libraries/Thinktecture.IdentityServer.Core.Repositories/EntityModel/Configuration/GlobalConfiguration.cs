@@ -49,5 +49,10 @@ namespace Thinktecture.IdentityServer.Repositories.Sql.Configuration
 
         [Required]
         public int HttpsPort { get; set; }
+
+        [Required]
+        public bool DisableSSL { get; set; }
+
+        public string PublicHostName { get; set; }
     }
 }

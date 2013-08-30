@@ -1,4 +1,5 @@
 ﻿using BrockAllen.OAuth2;
+using System;
 using System.ServiceModel.Activation;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -16,7 +17,10 @@ namespace Thinktecture.IdentityServer.Web
         public static void RegisterProtocols(HttpConfiguration httpConfiguration, RouteCollection routes, IConfigurationRepository configuration, IUserRepository users, IRelyingPartyRepository relyingParties)
         {
             // require SSL for all web api endpoints
-            httpConfiguration.MessageHandlers.Add(new RequireHttpsHandler());
+            if (!configuration.Global.DisableSSL)
+            {
+                httpConfiguration.MessageHandlers.Add(new RequireHttpsHandler());
+            }
 
             #region Protocols
             // federation metadata
@@ -56,6 +60,11 @@ namespace Thinktecture.IdentityServer.Web
 
                 // callback endpoint
                 OAuth2Client.OAuthCallbackUrl = Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Callback;
+                if (!String.IsNullOrWhiteSpace(configuration.Global.PublicHostName))
+                {
+                    var ub = new UriBuilder(Uri.UriSchemeHttps, configuration.Global.PublicHostName, configuration.Global.HttpsPort);
+                    OAuth2Client.OAuthCallbackOrigin = ub.Uri;
+                }
                 routes.MapRoute(
                     "oauth2callback",
                     Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Callback,
@@ -79,7 +88,7 @@ namespace Thinktecture.IdentityServer.Web
                     routeTemplate: Endpoints.Paths.OAuth2Token,
                     defaults: new { controller = "OAuth2Token" },
                     constraints: null,
-                    handler: new AuthenticationHandler(CreateClientAuthConfig(), httpConfiguration)
+                    handler: new AuthenticationHandler(CreateClientAuthConfig(configuration), httpConfiguration)
                 );
             }
 
@@ -100,7 +109,7 @@ namespace Thinktecture.IdentityServer.Web
                     routeTemplate: Endpoints.Paths.OidcToken,
                     defaults: new { controller = "OidcToken" },
                     constraints: null,
-                    handler: new AuthenticationHandler(CreateClientAuthConfig(), httpConfiguration)
+                    handler: new AuthenticationHandler(CreateClientAuthConfig(configuration), httpConfiguration)
                 );
 
                 // userinfo endpoint
@@ -131,7 +140,7 @@ namespace Thinktecture.IdentityServer.Web
                     routeTemplate: Thinktecture.IdentityServer.Endpoints.Paths.SimpleHttp,
                     defaults: new { controller = "SimpleHttp" },
                     constraints: null,
-                    handler: new AuthenticationHandler(CreateBasicAuthConfig(users), httpConfiguration)
+                    handler: new AuthenticationHandler(CreateBasicAuthConfig(configuration, users), httpConfiguration)
                 );
             }
 
@@ -147,12 +156,12 @@ namespace Thinktecture.IdentityServer.Web
             #endregion
         }
 
-        public static AuthenticationConfiguration CreateBasicAuthConfig(IUserRepository userRepository)
+        public static AuthenticationConfiguration CreateBasicAuthConfig(IConfigurationRepository configuration, IUserRepository userRepository)
         {
             var authConfig = new AuthenticationConfiguration
             {
                 InheritHostClientIdentity = false,
-                RequireSsl = true,
+                RequireSsl = !configuration.Global.DisableSSL,
                 ClaimsAuthenticationManager = new ClaimsTransformer()
             };
 
@@ -160,12 +169,12 @@ namespace Thinktecture.IdentityServer.Web
             return authConfig;
         }
 
-        public static AuthenticationConfiguration CreateClientAuthConfig()
+        public static AuthenticationConfiguration CreateClientAuthConfig(IConfigurationRepository configuration)
         {
             var authConfig = new AuthenticationConfiguration
             {
                 InheritHostClientIdentity = false,
-                RequireSsl = true,
+                RequireSsl = !configuration.Global.DisableSSL,
             };
 
             // accept arbitrary credentials on basic auth header,
@@ -178,7 +187,7 @@ namespace Thinktecture.IdentityServer.Web
         {
             var userInfoAuth = new AuthenticationConfiguration
             {
-                RequireSsl = true,
+                RequireSsl = !configuration.Global.DisableSSL,
                 InheritHostClientIdentity = false
             };
 

@@ -11,25 +11,27 @@ namespace Thinktecture.IdentityServer.Web.GlobalFilter
     public class SslRedirectFilter : ActionFilterAttribute
     {
         int _port = 443;
+        string _host;
 
-        public SslRedirectFilter(int sslPort)
+        public SslRedirectFilter(int sslPort, string host)
         {
             _port = sslPort;
+            _host = host;
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             if (!filterContext.HttpContext.Request.IsSecureConnection)
             {
-                filterContext.Result = new RedirectResult(
-                    GetAbsoluteUri(filterContext.HttpContext.Request.Url).AbsoluteUri,
-                    true);
+                var url = GetAbsoluteUri(filterContext.HttpContext.Request.Url).AbsoluteUri;
+                filterContext.Result = new RedirectResult(url, true);
             }
         }
 
         private Uri GetAbsoluteUri(Uri uriFromCaller)
         {
-            UriBuilder builder = new UriBuilder(Uri.UriSchemeHttps, uriFromCaller.Host);
+            var host = String.IsNullOrWhiteSpace(_host) ? uriFromCaller.Host : _host;
+            UriBuilder builder = new UriBuilder(Uri.UriSchemeHttps, host);
             builder.Path = uriFromCaller.GetComponents(UriComponents.Path, UriFormat.Unescaped);
             builder.Port = _port;
 

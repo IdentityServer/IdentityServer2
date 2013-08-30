@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+﻿    using System.Web.Mvc;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.GlobalFilter;
 
@@ -10,7 +10,10 @@ namespace Thinktecture.IdentityServer.Web
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new GlobalViewModelFilter());
-            filters.Add(new SslRedirectFilter(configuration.Global.HttpsPort));
+            if (!configuration.Global.DisableSSL)
+            {
+                filters.Add(new SslRedirectFilter(configuration.Global.HttpsPort, configuration.Global.PublicHostName));
+            }
             filters.Add(new InitialConfigurationFilter());
         }
     }
