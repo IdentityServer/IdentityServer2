@@ -16,6 +16,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, SignIn_cshtml.SignInWasUnsuccessful)
     <fieldset class="editor small signin">
         <legend>@SignIn_cshtml.Login</legend>

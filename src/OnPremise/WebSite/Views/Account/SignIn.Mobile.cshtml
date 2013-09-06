@@ -17,6 +17,7 @@
         <h2>@ViewBag.Title</h2>
         @using (Html.BeginForm("Signin", "Account", FormMethod.Post, new { data_ajax="false" }))
         {
+            @Html.AntiForgeryToken()
             @Html.ValidationSummary(true, SignIn_Mobile_cshtml.SignInWasUnsuccessful)
             @Html.HiddenFor(x=>x.ReturnUrl)
             <fieldset>
