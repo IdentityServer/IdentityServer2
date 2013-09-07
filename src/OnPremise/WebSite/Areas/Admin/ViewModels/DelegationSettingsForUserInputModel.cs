@@ -31,8 +31,9 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
         {
             this.delegationRepository = delegationRepository;
             this.userManagementRepository = userManagementRepository;
+            int totalCount;
             var allnames =
-                userManagementRepository.GetUsers()
+                userManagementRepository.GetUsers(0, 100, out totalCount)
                 .Select(x => new SelectListItem
                 {
                     Text = x
