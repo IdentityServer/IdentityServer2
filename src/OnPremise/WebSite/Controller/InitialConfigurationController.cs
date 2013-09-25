@@ -54,6 +54,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Index(InitialConfigurationModel model)
         {
             if (ConfigurationRepository.Keys.SigningCertificate != null)
