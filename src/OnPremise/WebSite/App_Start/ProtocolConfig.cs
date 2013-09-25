@@ -57,6 +57,11 @@ namespace Thinktecture.IdentityServer.Web
                     new { controller = "Hrd", action = "Select" },
                     new { method = new HttpMethodConstraint("POST") }
                 );
+                routes.MapRoute(
+                    "hrd-signout-redirect",
+                    Thinktecture.IdentityServer.Endpoints.Paths.WSFedHRDSignoutRedirect,
+                    new { controller = "Hrd", action = "SignoutRedirect" }
+                );
 
                 // callback endpoint
                 OAuth2Client.OAuthCallbackUrl = Thinktecture.IdentityServer.Endpoints.Paths.OAuth2Callback;

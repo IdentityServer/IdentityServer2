@@ -41,6 +41,7 @@ namespace Thinktecture.IdentityServer
             public const string WSFedHRD = "issue/hrd";
             public const string OAuth2Callback = "issue/hrd/oauth2callback";
             public const string WSFedHRDSelect = "issue/hrd/select";
+            public const string WSFedHRDSignoutRedirect = "issue/hrd/SignoutRedirect";
             public const string WSFedMetadata = "FederationMetadata/2007-06/FederationMetadata.xml";
             public const string PrivacyNotice = "privacyNotice.txt";
             public const string WSTrustBase = "issue/wstrust";

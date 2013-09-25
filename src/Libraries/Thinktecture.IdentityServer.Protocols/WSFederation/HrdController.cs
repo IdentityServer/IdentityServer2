@@ -167,6 +167,24 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
 
             return ProcessOAuthResponse(cp, ctx);
         }
+
+        [HttpGet]
+        public ActionResult SignoutRedirect(string rp)
+        {
+            if (!String.IsNullOrWhiteSpace(rp))
+            {
+                try
+                {
+                    var bytes = Convert.FromBase64String(rp);
+                    bytes = System.Web.Security.MachineKey.Unprotect(bytes);
+                    var url = System.Text.Encoding.UTF8.GetString(bytes);
+                    return Redirect(url);
+                }
+                catch { }
+            }
+            return View("Error");
+        }
+        
         #endregion
 
         #region Helper
@@ -214,7 +232,28 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             var signOutMessage = new SignOutRequestMessage(new Uri(idp));
             if (!string.IsNullOrWhiteSpace(message.Reply))
             {
-                signOutMessage.Reply = message.Reply;
+                var bytes = System.Text.Encoding.UTF8.GetBytes(message.Reply);
+                bytes = System.Web.Security.MachineKey.Protect(bytes);
+                var param = Url.Encode(Convert.ToBase64String(bytes));
+
+                var host = this.ConfigurationRepository.Global.PublicHostName;
+                if (String.IsNullOrWhiteSpace(host))
+                {
+                    host = Request.Headers["host"];
+                }
+                
+                var builder = new UriBuilder();
+                builder.Host = host;
+                builder.Scheme = Uri.UriSchemeHttps;
+                if (this.ConfigurationRepository.Global.HttpsPort != 443)
+                {
+                    builder.Port = this.ConfigurationRepository.Global.HttpsPort;
+                }
+                builder.Path = Request.ApplicationPath;
+                if (!builder.Path.EndsWith("/")) builder.Path += "/";
+                builder.Path += Thinktecture.IdentityServer.Endpoints.Paths.WSFedHRDSignoutRedirect;
+                builder.Query = "rp=" + param;
+                signOutMessage.Reply = builder.ToString();
             }
 
             return Redirect(signOutMessage.WriteQueryString());
