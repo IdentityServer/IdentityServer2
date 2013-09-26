@@ -182,7 +182,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 }
                 catch { }
             }
-            return View("Error");
+            return ShowSignOutPage(null);
         }
         
         #endregion
