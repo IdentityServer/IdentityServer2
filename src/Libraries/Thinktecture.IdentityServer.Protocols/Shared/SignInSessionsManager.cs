@@ -60,6 +60,18 @@ namespace Thinktecture.IdentityServer.Protocols
             }
         }
 
+        public bool ContainsUrl(string url)
+        {
+            Uri uri;
+            if (Uri.TryCreate(url, UriKind.Absolute, out uri))
+            {
+                var host = uri.Scheme + "://" + uri.Host;
+                return this.GetEndpoints().Any(x => x.StartsWith(host, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return false;
+        }
+
         private List<string> ReadCookie()
         {
             var cookie = _context.Request.Cookies[_cookieName];

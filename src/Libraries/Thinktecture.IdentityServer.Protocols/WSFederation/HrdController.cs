@@ -230,7 +230,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             }
 
             var signOutMessage = new SignOutRequestMessage(new Uri(idp));
-            if (!string.IsNullOrWhiteSpace(message.Reply))
+            if (!string.IsNullOrWhiteSpace(message.Reply) && IsValidReplyTo(message.Reply))
             {
                 var bytes = System.Text.Encoding.UTF8.GetBytes(message.Reply);
                 bytes = System.Web.Security.MachineKey.Protect(bytes);
@@ -241,7 +241,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 {
                     host = Request.Headers["host"];
                 }
-                
+
                 var builder = new UriBuilder();
                 builder.Host = host;
                 builder.Scheme = Uri.UriSchemeHttps;
@@ -259,6 +259,13 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             return Redirect(signOutMessage.WriteQueryString());
         }
 
+        private bool IsValidReplyTo(string url)
+        {
+            // check to see if the URL is in the RPs we've logged into
+            var mgr = new SignInSessionsManager(HttpContext, _cookieName, ConfigurationRepository.Global.MaximumTokenLifetime);
+            return mgr.ContainsUrl(url);
+        }
+
         private ActionResult ProcessWSFedSignOutCleanupRequest(SignOutCleanupRequestMessage message)
         {
             return ShowSignOutPage(message.Reply);
@@ -266,14 +273,15 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
 
         private ActionResult ShowSignOutPage(string returnUrl)
         {
+            var mgr = new SignInSessionsManager(HttpContext, _cookieName);
+
             // check for return url
-            if (!string.IsNullOrWhiteSpace(returnUrl))
+            if (!string.IsNullOrWhiteSpace(returnUrl) && mgr.ContainsUrl(returnUrl))
             {
                 ViewBag.ReturnUrl = returnUrl;
             }
 
             // check for existing sign in sessions
-            var mgr = new SignInSessionsManager(HttpContext, _cookieName);
             var realms = mgr.GetEndpoints();
             mgr.ClearEndpoints();
 

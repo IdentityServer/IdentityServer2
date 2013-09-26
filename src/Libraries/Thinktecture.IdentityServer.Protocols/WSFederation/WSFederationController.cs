@@ -80,14 +80,15 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         {
             FederatedAuthentication.SessionAuthenticationModule.SignOut();
 
+            var mgr = new SignInSessionsManager(HttpContext, _cookieName);
+
             // check for return url
-            if (!string.IsNullOrWhiteSpace(message.Reply))
+            if (!string.IsNullOrWhiteSpace(message.Reply) && mgr.ContainsUrl(message.Reply))
             {
                 ViewBag.ReturnUrl = message.Reply;
             }
 
             // check for existing sign in sessions
-            var mgr = new SignInSessionsManager(HttpContext, _cookieName);
             var realms = mgr.GetEndpoints();
             mgr.ClearEndpoints();
             
