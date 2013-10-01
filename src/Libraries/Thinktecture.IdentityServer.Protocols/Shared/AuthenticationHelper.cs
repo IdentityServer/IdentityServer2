@@ -227,21 +227,35 @@ namespace Thinktecture.IdentityServer.Protocols
 
         public ClaimsPrincipal CreatePrincipal(string username, string authenticationMethod, IEnumerable<Claim> additionalClaims = null)
         {
-            var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.NameIdentifier, username),
-                        new Claim(ClaimTypes.Name, username),
-                        new Claim(ClaimTypes.AuthenticationMethod, authenticationMethod),
-                        AuthenticationInstantClaim.Now,
-                    };
+            List<Claim> claims = null;
 
-            var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, Constants.AuthenticationType));
-
-            // add additional claims if present
             if (additionalClaims != null)
             {
-                additionalClaims.ToList().ForEach(c => principal.Identities.First().AddClaim(c));
+                claims = additionalClaims.ToList();
             }
+            else
+            {
+                claims = new List<Claim>();
+            }
+
+            if (!claims.Exists((p) => p.Type == ClaimTypes.NameIdentifier))
+            {
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, username));
+            }
+
+            if (!claims.Exists((p) => p.Type == ClaimTypes.Name))
+            {
+                claims.Add(new Claim(ClaimTypes.Name, username));
+            }
+
+            if (!claims.Exists((p) => p.Type == ClaimTypes.AuthenticationMethod))
+            {
+                claims.Add(new Claim(ClaimTypes.AuthenticationMethod, authenticationMethod));
+            }
+
+            claims.Add(AuthenticationInstantClaim.Now);
+
+            var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, Constants.AuthenticationType));
 
             return FederatedAuthentication.FederationConfiguration.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(string.Empty, principal);
         }
