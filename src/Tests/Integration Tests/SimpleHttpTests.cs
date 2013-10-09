@@ -23,6 +23,7 @@ namespace Thinktecture.IdentityServer.Tests
         string rp = Constants.Realms.TestRPSymmetric;
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void NoRealm()
         {
             var client = new HttpClient();
@@ -33,6 +34,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void MalformedRealm()
         {
             var values = new Dictionary<string, string>
@@ -48,6 +50,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void NoCredentials()
         {
             var values = new Dictionary<string, string>
@@ -62,6 +65,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredential()
         {
             var values = new Dictionary<string, string>
@@ -79,6 +83,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void UnAuthorizedUser()
         {
             var values = new Dictionary<string, string>
@@ -94,6 +99,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialSaml11()
         {
             var values = new Dictionary<string, string>
@@ -114,6 +120,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialSaml2()
         {
             var values = new Dictionary<string, string>
@@ -135,6 +142,7 @@ namespace Thinktecture.IdentityServer.Tests
 
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialJwt()
         {
             var values = new Dictionary<string, string>
@@ -155,6 +163,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void InvalidUserNameCredential()
         {
             var values = new Dictionary<string, string>

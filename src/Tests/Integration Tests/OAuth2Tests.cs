@@ -25,6 +25,7 @@ namespace Thinktecture.IdentityServer.Tests
         string scopeAsymmetric = Constants.Realms.TestRPAsymmetric;
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialValidClientCredentialSymmetric()
         {
             var client = new OAuth2Client(
@@ -46,6 +47,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialValidClientCredentialAsymmetric()
         {
             var client = new OAuth2Client(
@@ -67,6 +69,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialValidClientCredentialUseRefreshToken()
         {
             var client = new OAuth2Client(
@@ -101,6 +104,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         [ExpectedException(typeof(HttpRequestException))]
         public void ValidUserNameCredentialMissingClientCredential()
         {
@@ -113,6 +117,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         [ExpectedException(typeof(HttpRequestException))]
         public void ValidUserNameCredentialInvalidClientCredential()
         {
@@ -172,6 +177,7 @@ namespace Thinktecture.IdentityServer.Tests
         //}
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void InvalidUserNameCredential()
         {
             var form = new FormUrlEncodedContent(new Dictionary<string, string>
@@ -191,6 +197,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void UnauthorizedUser()
         {
             var form = new FormUrlEncodedContent(new Dictionary<string, string>
@@ -209,6 +216,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void NoRealm()
         {
             var form = new FormUrlEncodedContent(new Dictionary<string, string>
@@ -226,6 +234,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void MalformedRealm()
         {
             var form = new FormUrlEncodedContent(new Dictionary<string, string>
@@ -244,6 +253,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void InvalidGrantType()
         {
             var form = new FormUrlEncodedContent(new Dictionary<string, string>
@@ -262,6 +272,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void NoUserCredentials()
         {
             var form = new FormUrlEncodedContent(new Dictionary<string, string>

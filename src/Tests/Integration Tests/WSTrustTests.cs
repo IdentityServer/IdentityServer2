@@ -49,6 +49,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialSymmetric()
         {
             RequestSecurityTokenResponse rstr;
@@ -58,6 +59,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidClientCertificateCredentialSymmetric()
         {
             RequestSecurityTokenResponse rstr;
@@ -67,6 +69,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialSaml11Symmetric()
         {
             var rst = new RequestSecurityToken
@@ -87,6 +90,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialSaml11Bearer()
         {
             var rst = new RequestSecurityToken
@@ -107,6 +111,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialSaml2Bearer()
         {
             var rst = new RequestSecurityToken
@@ -127,6 +132,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialSaml2Symmetric()
         {
             var rst = new RequestSecurityToken
@@ -147,6 +153,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialJwtSymmetric()
         {
             var rst = new RequestSecurityToken
@@ -167,6 +174,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         public void ValidUserNameCredentialJwtBearer()
         {
             var rst = new RequestSecurityToken
@@ -188,6 +196,7 @@ namespace Thinktecture.IdentityServer.Tests
 
 
         [TestMethod]
+        [TestCategory("Integration")]
         [ExpectedException(typeof(MessageSecurityException))]
         public void InvalidUserNameCredentialSymmetric()
         {
@@ -201,6 +210,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         [ExpectedException(typeof(FaultException))]
         public void UnauthorizedUserSymmetric()
         {
@@ -214,6 +224,7 @@ namespace Thinktecture.IdentityServer.Tests
         }
 
         [TestMethod]
+        [TestCategory("Integration")]
         [ExpectedException(typeof(FaultException))]
         public void NoRealm()
         {
