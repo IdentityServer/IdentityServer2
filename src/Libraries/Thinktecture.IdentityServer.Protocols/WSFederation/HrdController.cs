@@ -327,6 +327,8 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                     return new OAuth2ActionResult(oauth2, ProviderType.Facebook, null);
                 case OAuth2ProviderTypes.Live:
                     return new OAuth2ActionResult(oauth2, ProviderType.Live, null);
+                case OAuth2ProviderTypes.LinkedIn:
+                    return new OAuth2ActionResult(oauth2, ProviderType.LinkedIn, null);
             }
 
             return View("Error");
@@ -386,6 +388,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
                 case OAuth2ProviderTypes.Facebook: return ProviderType.Facebook;
                 case OAuth2ProviderTypes.Live: return ProviderType.Live;
                 case OAuth2ProviderTypes.Google: return ProviderType.Google;
+                case OAuth2ProviderTypes.LinkedIn: return ProviderType.LinkedIn;
                 default: throw new Exception("Invalid OAuthProfileTypes");
             }
         }

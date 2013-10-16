@@ -410,7 +410,19 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
                     ClientID = "00000000480DD362",
                     ClientSecret = "gH9ngNoSaxRrupt3UcynwI2aK8qODZvf",
                     OAuth2ProviderType = 3
-                },                
+                },       
+                new IdentityProvider
+                {
+                    Name = "LinkedIn",
+                    DisplayName = "LinkedIn",
+                    Enabled = true,
+                    ShowInHrdSelection = true,
+                    Type = 2,
+                    ClientID = "f8xh60airbta",
+                    ClientSecret = "DGY4NpcP8HiFW004",
+                    OAuth2ProviderType = 4
+                },       
+                
             };
         }
 

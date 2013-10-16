@@ -10,5 +10,6 @@ namespace Thinktecture.IdentityServer.Models
         Google = 1,
         Facebook = 2,
         Live = 3,
+        LinkedIn = 4
     }
 }
