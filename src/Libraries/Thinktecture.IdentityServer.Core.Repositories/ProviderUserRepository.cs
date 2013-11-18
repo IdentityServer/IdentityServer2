@@ -21,17 +21,17 @@ namespace Thinktecture.IdentityServer.Repositories
             Container.Current.SatisfyImportsOnce(this);
         }
 
-        public bool ValidateUser(string userName, string password)
+        public virtual bool ValidateUser(string userName, string password)
         {
             return Membership.ValidateUser(userName, password);
         }
 
-        public bool ValidateUser(X509Certificate2 clientCertificate, out string userName)
+        public virtual bool ValidateUser(X509Certificate2 clientCertificate, out string userName)
         {
             return Repository.TryGetUserNameFromThumbprint(clientCertificate, out userName);
         }
 
-        public IEnumerable<string> GetRoles(string userName)
+        public virtual IEnumerable<string> GetRoles(string userName)
         {
             var returnedRoles = new List<string>();
 
