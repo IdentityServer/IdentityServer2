@@ -7,6 +7,7 @@ using System.IdentityModel.Tokens;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Thinktecture.IdentityServer.Protocols;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.Web.ViewModels;
@@ -39,6 +40,7 @@ namespace Thinktecture.IdentityServer.Web.Controllers
         // handles the signin
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
         public ActionResult SignIn(SignInModel model)
         {
             if (ModelState.IsValid)

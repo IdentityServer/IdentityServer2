@@ -3,11 +3,13 @@
  * see license.txt
  */
 
+using System;
 using System.ComponentModel.Composition;
 using System.IdentityModel.Services;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Thinktecture.IdentityModel.Authorization.Mvc;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
@@ -32,6 +34,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
             ConfigurationRepository = configurationRepository;
         }
 
+        [OutputCache(Location = OutputCacheLocation.None, NoStore=true)]
         public ActionResult Issue()
         {
             Tracing.Start("WS-Federation endpoint.");

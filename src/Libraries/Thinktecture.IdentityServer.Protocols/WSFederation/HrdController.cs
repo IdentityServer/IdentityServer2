@@ -19,6 +19,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using Thinktecture.IdentityServer.Models;
 using Thinktecture.IdentityServer.Repositories;
 using Thinktecture.IdentityServer.TokenService;
@@ -54,6 +55,7 @@ namespace Thinktecture.IdentityServer.Protocols.WSFederation
         #region Protocol Implementation
         [HttpGet]
         [ActionName("Issue")]
+        [OutputCache(Location = OutputCacheLocation.None, NoStore = true)]
         public ActionResult ProcessRequest()
         {
             Tracing.Verbose("HRD endpoint called.");
