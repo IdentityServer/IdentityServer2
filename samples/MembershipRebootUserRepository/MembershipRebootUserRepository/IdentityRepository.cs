@@ -18,14 +18,21 @@ namespace MembershipRebootUserRepository
     {
         UserAccountService userSvc;
         GroupService groupSvc;
+        IUserAccountQuery userQuery;
+        IGroupQuery groupQuery;
 
         public IdentityRepository()
         {
             var settings = SecuritySettings.FromConfiguration();
             settings.RequireAccountVerification = false;
             var config = new MembershipRebootConfiguration(settings);
-            this.userSvc = new UserAccountService(config, new BrockAllen.MembershipReboot.Ef.DefaultUserAccountRepository());
-            this.groupSvc = new GroupService(new BrockAllen.MembershipReboot.Ef.DefaultGroupRepository());
+            var uarepo = new BrockAllen.MembershipReboot.Ef.DefaultUserAccountRepository();
+            this.userSvc = new UserAccountService(config, uarepo);
+            this.userQuery = uarepo;
+
+            var grpRepo = new BrockAllen.MembershipReboot.Ef.DefaultGroupRepository();
+            this.groupSvc = new GroupService(config.DefaultTenant, grpRepo);
+            this.groupQuery = grpRepo;
         }
 
         public IdentityRepository(UserAccountService userSvc, GroupService groupSvc)
@@ -78,7 +85,7 @@ namespace MembershipRebootUserRepository
 
         public void DeleteRole(string roleName)
         {
-            var grp = groupSvc.GetAll().Where(x=>x.Name == roleName).SingleOrDefault();
+            var grp = groupSvc.Get(roleName);
             if (grp != null)
             {
                 groupSvc.Delete(grp.ID);
@@ -96,7 +103,7 @@ namespace MembershipRebootUserRepository
 
         public IEnumerable<string> GetRoles()
         {
-            return groupSvc.GetAll().Select(x => x.Name);
+            return groupQuery.GetRoleNames(userSvc.Configuration.DefaultTenant);
         }
 
         public IEnumerable<string> GetRolesForUser(string userName)
@@ -111,21 +118,12 @@ namespace MembershipRebootUserRepository
 
         public IEnumerable<string> GetUsers(int start, int count, out int totalCount)
         {
-            var query =
-                from u in userSvc.GetAll().OrderBy(x=>x.ID)
-                select u.Username;
-            totalCount = query.Count();
-            return query.Skip(start).Take(count).ToArray();
+            return userQuery.Query(userSvc.Configuration.DefaultTenant, null, start, count, out totalCount).Select(x => x.Username);
         }
 
         public IEnumerable<string> GetUsers(string filter, int start, int count, out int totalCount)
         {
-            var query =
-                from u in userSvc.GetAll().OrderBy(x=>x.ID)
-                where u.Username.Contains(filter)
-                select u.Username;
-            totalCount = query.Count();
-            return query.Skip(start).Take(count).ToArray();
+            return userQuery.Query(userSvc.Configuration.DefaultTenant, filter, start, count, out totalCount).Select(x => x.Username);
         }
 
         public void SetPassword(string userName, string password)
@@ -142,15 +140,14 @@ namespace MembershipRebootUserRepository
             var user = userSvc.GetByUsername(userName);
             if (user != null)
             {
-                user.RemoveClaim(ClaimTypes.Role);
+                userSvc.RemoveClaim(user.ID, ClaimTypes.Role);
                 if (roles != null)
                 {
                     foreach (var role in roles)
                     {
-                        user.AddClaim(ClaimTypes.Role, role);
+                        userSvc.AddClaim(user.ID, ClaimTypes.Role, role);
                     }
                 }
-                userSvc.Update(user);
             }
         }
         #endregion
@@ -161,8 +158,7 @@ namespace MembershipRebootUserRepository
             var user = userSvc.GetByUsername(certificate.UserName);
             if (user != null)
             {
-                user.AddCertificate(certificate.Thumbprint, certificate.Description);
-                userSvc.Update(user);
+                userSvc.AddCertificate(user.ID, certificate.Thumbprint, certificate.Description);
             }
         }
 
@@ -171,8 +167,7 @@ namespace MembershipRebootUserRepository
             var user = userSvc.GetByUsername(certificate.UserName);
             if (user != null)
             {
-                user.RemoveCertificate(certificate.Thumbprint);
-                userSvc.Update(user);
+                userSvc.RemoveCertificate(user.ID, certificate.Thumbprint);
             }
         }
 
@@ -188,18 +183,11 @@ namespace MembershipRebootUserRepository
 
         public IEnumerable<string> List(int pageIndex, int pageSize)
         {
-            var query =
-                from u in userSvc.GetAll().OrderBy(x => x.ID)
-                where u.Certificates.Any()
-                select u.Username;
-            if (pageIndex >= 0 && pageSize >= 0)
-            {
-                return query.Skip(pageIndex).Take(pageSize);
-            }
-            else
-            {
-                return query;
-            }
+            if (pageIndex < 1) pageIndex = 1;
+            if (pageSize < 0) pageSize = 10;
+            int skip = pageSize * (pageIndex-1);
+            int totalCount;
+            return userQuery.Query(userSvc.Configuration.DefaultTenant, null, skip, pageSize, out totalCount).Select(x => x.Username);
         }
 
         public bool SupportsWriteAccess
@@ -251,14 +239,14 @@ namespace MembershipRebootUserRepository
 
         public IEnumerable<string> GetSupportedClaimTypes()
         {
-            var query =
-                from u in userSvc.GetAll()
-                from c in u.Claims
-                select c.Type;
-            
+            //var query =
+            //    from u in userSvc.GetAll()
+            //    from c in u.Claims
+            //    select c.Type;
+
             return
-                new string[] { ClaimTypes.Name, ClaimTypes.Email, ClaimTypes.MobilePhone, ClaimTypes.Role }
-                .Union(query.Distinct()).Distinct();
+                new string[] { ClaimTypes.Name, ClaimTypes.Email, ClaimTypes.MobilePhone, ClaimTypes.Role };
+                //.Union(query.Distinct()).Distinct();
         }
         #endregion
     }

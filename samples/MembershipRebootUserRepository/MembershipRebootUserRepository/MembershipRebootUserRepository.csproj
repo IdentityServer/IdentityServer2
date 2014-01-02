@@ -32,21 +32,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BrockAllen.MembershipReboot">
-      <HintPath>..\packages\BrockAllen.MembershipReboot.3.0.1\lib\net45\BrockAllen.MembershipReboot.dll</HintPath>
+    <Reference Include="BrockAllen.MembershipReboot, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\BrockAllen.MembershipReboot\build\BrockAllen.MembershipReboot.dll</HintPath>
     </Reference>
-    <Reference Include="BrockAllen.MembershipReboot.Ef">
-      <HintPath>..\packages\BrockAllen.MembershipReboot.Ef.3.0.0\lib\net45\BrockAllen.MembershipReboot.Ef.dll</HintPath>
+    <Reference Include="BrockAllen.MembershipReboot.Ef, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\BrockAllen.MembershipReboot\build\BrockAllen.MembershipReboot.Ef.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0-alpha1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0-alpha1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Services" />
     <Reference Include="System.Xml.Linq" />
