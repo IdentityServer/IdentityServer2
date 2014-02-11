@@ -5,13 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeFlowClient", "CodeFlowC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thinktecture.IdentityModel.Oidc", "Thinktecture.IdentityModel.Oidc\Thinktecture.IdentityModel.Oidc.csproj", "{9669AED6-CC75-4DA4-A639-13E084905CA7}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{48DEA169-6158-4AE7-91D4-9E59695AB482}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OWIN Code Flow Client", "OwinCodeFlowClient\OWIN Code Flow Client.csproj", "{0B732396-0EDE-468A-A356-6D1EB950F533}"
 EndProject
 Global
