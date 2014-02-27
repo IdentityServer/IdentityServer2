@@ -71,13 +71,13 @@ namespace Thinktecture.IdentityServer.Repositories
             { }
         }
 
-        public IEnumerable<string> GetUsers(int start, int count, out int totalCount)
+        public IEnumerable<string> GetUsers(int pageIndex, int count, out int totalCount)
         {
-            var items = Membership.GetAllUsers(start, count, out totalCount).OfType<MembershipUser>();
+            var items = Membership.GetAllUsers(pageIndex, count, out totalCount).OfType<MembershipUser>();
             return items.Select(x => x.UserName);
         }
 
-        public IEnumerable<string> GetUsers(string filter, int start, int count, out int totalCount)
+        public IEnumerable<string> GetUsers(string filter, int pageIndex, int count, out int totalCount)
         {
             var items = Membership.GetAllUsers().OfType<MembershipUser>();
             var query =
@@ -86,7 +86,7 @@ namespace Thinktecture.IdentityServer.Repositories
                       (user.Email != null && user.Email.Contains(filter))
                 select user.UserName;
             totalCount = query.Count();
-            return query.Skip(start).Take(count);
+            return query.Skip(pageIndex * count).Take(count);
         }
 
         public void SetPassword(string userName, string password)

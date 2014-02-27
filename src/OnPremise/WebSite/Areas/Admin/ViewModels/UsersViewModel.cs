@@ -33,18 +33,18 @@ namespace Thinktecture.IdentityServer.Web.Areas.Admin.ViewModels
             else CurrentPage = currentPage;
 
             int rows = 20;
-            int startRow = (currentPage - 1) * rows;
+            int pageIndex = (currentPage - 1);
 
             if (String.IsNullOrEmpty(filter))
             {
                 int total;
-                Users = UserManagementRepository.GetUsers(startRow, rows, out total);
+                Users = UserManagementRepository.GetUsers(pageIndex, rows, out total);
                 Total = total;
             }
             else
             {
                 int total;
-                Users = UserManagementRepository.GetUsers(filter, startRow, rows, out total);
+                Users = UserManagementRepository.GetUsers(filter, pageIndex, rows, out total);
                 Total = total;
             }
 
