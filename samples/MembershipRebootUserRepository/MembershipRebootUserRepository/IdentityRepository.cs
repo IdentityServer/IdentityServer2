@@ -118,11 +118,17 @@ namespace MembershipRebootUserRepository
 
         public IEnumerable<string> GetUsers(int start, int count, out int totalCount)
         {
+            if (start < 1) start = 0;
+            if (count < 0) count = 10;
+            start = (start - 1) * count;
             return userQuery.Query(userSvc.Configuration.DefaultTenant, null, start, count, out totalCount).Select(x => x.Username);
         }
 
         public IEnumerable<string> GetUsers(string filter, int start, int count, out int totalCount)
         {
+            if (start < 1) start = 1;
+            if (count < 0) count = 10;
+            start = (start - 1) * count;
             return userQuery.Query(userSvc.Configuration.DefaultTenant, filter, start, count, out totalCount).Select(x => x.Username);
         }
 
