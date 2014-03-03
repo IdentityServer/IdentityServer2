@@ -80,10 +80,11 @@ namespace Thinktecture.IdentityServer.Repositories
         public IEnumerable<string> GetUsers(string filter, int pageIndex, int count, out int totalCount)
         {
             var items = Membership.GetAllUsers().OfType<MembershipUser>();
+			filter = filter.ToLower();
             var query =
                 from user in items
-                where user.UserName.Contains(filter) ||
-                      (user.Email != null && user.Email.Contains(filter))
+                where user.UserName.ToLower().Contains(filter) ||
+                      (user.Email != null && user.Email.ToLower().Contains(filter))
                 select user.UserName;
             totalCount = query.Count();
             return query.Skip(pageIndex * count).Take(count);
