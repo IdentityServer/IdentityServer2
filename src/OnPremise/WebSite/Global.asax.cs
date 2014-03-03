@@ -46,7 +46,7 @@ namespace Thinktecture.IdentityServer.Web
 
         private void SetupCompositionContainer()
         {
-            Container.Current = new CompositionContainer(new RepositoryExportProvider());
+            Container.Current = new CompositionContainer(CompositionOptions.IsThreadSafe, new RepositoryExportProvider());
         }
     }
 }
