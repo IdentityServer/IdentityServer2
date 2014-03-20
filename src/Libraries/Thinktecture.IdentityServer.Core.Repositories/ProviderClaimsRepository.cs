@@ -23,6 +23,12 @@ namespace Thinktecture.IdentityServer.Repositories
             var userName = principal.Identity.Name;
             var claims = new List<Claim>(from c in principal.Claims select c);
 
+            var nameIdClaim = claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            if (nameIdClaim == null)
+            {
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, userName));
+            }
+
             // email address
             var membership = Membership.FindUsersByName(userName)[userName];
             if (membership != null)
