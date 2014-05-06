@@ -5,7 +5,6 @@
 
 using System;
 using System.ComponentModel.Composition;
-using System.Web;
 using System.Web.Mvc;
 using Thinktecture.IdentityServer.Helper;
 using Thinktecture.IdentityServer.Repositories;
@@ -54,6 +53,36 @@ namespace Thinktecture.IdentityServer.Protocols.FederationMetadata
                             ContentType = "text/xml"
                         };
                     });
+            }
+            else
+            {
+                return new HttpNotFoundResult();
+            }
+        }
+
+        public ActionResult GenerateRPMetadata()
+        {
+            if (ConfigurationRepository.FederationMetadata.Enabled)
+            {
+                return Cache.ReturnFromCache<ActionResult>(CacheRepository, Constants.CacheKeys.WSFedRPMetadata, 1, () =>
+                {
+                    var host = ConfigurationRepository.Global.PublicHostName;
+                    if (String.IsNullOrWhiteSpace(host))
+                    {
+                        host = HttpContext.Request.Headers["Host"];
+                    }
+                    var endpoints = Endpoints.Create(
+                        host,
+                        HttpContext.Request.ApplicationPath,
+                        ConfigurationRepository.Global.HttpPort,
+                        ConfigurationRepository.Global.HttpsPort);
+
+                    return new ContentResult
+                    {
+                        Content = new WSFederationMetadataGenerator(endpoints).GenerateRelyingPartyMetadata(),
+                        ContentType = "text/xml"
+                    };
+                });
             }
             else
             {

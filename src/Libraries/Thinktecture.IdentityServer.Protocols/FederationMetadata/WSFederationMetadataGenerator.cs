@@ -43,28 +43,47 @@ namespace Thinktecture.IdentityServer.Protocols.FederationMetadata
             Container.Current.SatisfyImportsOnce(this);
         }
 
+        //Builds federation metadata for using Id Srv as an IdP using the wsfed endpoint
         public string Generate()
         {
-            var tokenServiceDescriptor = GetTokenServiceDescriptor();
+            var tokenServiceDescriptor = GetTokenServiceDescriptor(_endpoints.WSFederation.AbsoluteUri);
+            return GenerateMetadata(tokenServiceDescriptor);
+        }
+
+        //Builds federation metadata for using Id Srv as an RP using the HRD endpoint
+        public string GenerateRelyingPartyMetadata()
+        {
+            var tokenServiceDescriptor = GetTokenServiceDescriptor(_endpoints.WSFederationHRD.AbsoluteUri);
+            var appServiceDescriptor = GetApplicationServiceDescriptor();
+
+            return GenerateMetadata(tokenServiceDescriptor, appServiceDescriptor);
+        }
+
+        private string GenerateMetadata(params RoleDescriptor[] roles)
+        {
             var id = new EntityId(ConfigurationRepository.Global.IssuerUri);
             var entity = new EntityDescriptor(id);
             entity.SigningCredentials = new X509SigningCredentials(ConfigurationRepository.Keys.SigningCertificate);
-            entity.RoleDescriptors.Add(tokenServiceDescriptor);
 
+            foreach (var roleDescriptor in roles)
+            {
+                entity.RoleDescriptors.Add(roleDescriptor);
+            }
+            
             var ser = new MetadataSerializer();
             var sb = new StringBuilder(512);
 
             ser.WriteMetadata(XmlWriter.Create(new StringWriter(sb), new XmlWriterSettings { OmitXmlDeclaration = true }), entity);
             return sb.ToString();
         }
-
-        private SecurityTokenServiceDescriptor GetTokenServiceDescriptor()
+        
+        private SecurityTokenServiceDescriptor GetTokenServiceDescriptor(string passiveRequestorEndpoint)
         {
             var tokenService = new SecurityTokenServiceDescriptor();
             tokenService.ServiceDescription = ConfigurationRepository.Global.SiteName;
             tokenService.Keys.Add(GetSigningKeyDescriptor());
 
-            tokenService.PassiveRequestorEndpoints.Add(new EndpointReference(_endpoints.WSFederation.AbsoluteUri));
+            tokenService.PassiveRequestorEndpoints.Add(new EndpointReference(passiveRequestorEndpoint));
 
             tokenService.TokenTypesOffered.Add(new Uri(TokenTypes.OasisWssSaml11TokenProfile11));
             tokenService.TokenTypesOffered.Add(new Uri(TokenTypes.OasisWssSaml2TokenProfile11));
@@ -101,6 +120,23 @@ namespace Thinktecture.IdentityServer.Protocols.FederationMetadata
             return tokenService;
         }
 
+        private ApplicationServiceDescriptor GetApplicationServiceDescriptor()
+        {
+            var appDescriptor = new ApplicationServiceDescriptor();
+
+            appDescriptor.ServiceDescription = ConfigurationRepository.Global.SiteName;
+            appDescriptor.Keys.Add(GetSigningKeyDescriptor());
+
+            appDescriptor.PassiveRequestorEndpoints.Add(new EndpointReference(_endpoints.WSFederationHRD.AbsoluteUri));
+            appDescriptor.TokenTypesOffered.Add(new Uri(TokenTypes.OasisWssSaml11TokenProfile11));
+            appDescriptor.TokenTypesOffered.Add(new Uri(TokenTypes.OasisWssSaml2TokenProfile11));
+
+            ClaimsRepository.GetSupportedClaimTypes().ToList().ForEach(claimType => appDescriptor.ClaimTypesOffered.Add(new DisplayClaim(claimType)));
+            appDescriptor.ProtocolsSupported.Add(new Uri("http://docs.oasis-open.org/wsfed/federation/200706"));
+           
+            return appDescriptor;
+        }
+        
         private KeyDescriptor GetSigningKeyDescriptor()
         {
             var certificate = ConfigurationRepository.Keys.SigningCertificate;
