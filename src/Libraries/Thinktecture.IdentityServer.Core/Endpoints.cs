@@ -15,6 +15,7 @@ namespace Thinktecture.IdentityServer
         public Uri WSFederation { get; set; }
         public Uri WSFederationHRD { get; set; }
         public Uri WSFederationMetadata { get; set; }
+        public Uri WSFederationRPMetadata { get; set; }
         public Uri WSTrustMex { get; set; }
         public Uri PrivacyNotice { get; set; }
 
@@ -43,6 +44,7 @@ namespace Thinktecture.IdentityServer
             public const string WSFedHRDSelect = "issue/hrd/select";
             public const string WSFedHRDSignoutRedirect = "issue/hrd/SignoutRedirect";
             public const string WSFedMetadata = "FederationMetadata/2007-06/FederationMetadata.xml";
+            public const string WSFedRPMetadata = "FederationMetadataRP/2007-06/FederationMetadata.xml";
             public const string PrivacyNotice = "privacyNotice.txt";
             public const string WSTrustBase = "issue/wstrust";
             public const string SimpleHttp = "issue/simple";
@@ -164,6 +166,12 @@ namespace Thinktecture.IdentityServer
             builder.Scheme = Uri.UriSchemeHttps;
             builder.Port = httpsPort;
             ep.WSFederationMetadata = builder.Uri;
+
+            var wsfedrpmd = new Uri(baseUriString + Paths.WSFedRPMetadata);
+            builder = new UriBuilder(wsfedrpmd);
+            builder.Scheme = Uri.UriSchemeHttps;
+            builder.Port = httpsPort;
+            ep.WSFederationRPMetadata = builder.Uri;
             
             var adfs = new Uri(baseUriString + Paths.AdfsIntegration);
             builder = new UriBuilder(adfs);

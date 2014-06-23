@@ -26,6 +26,12 @@ namespace Thinktecture.IdentityServer.Web
             // federation metadata
             if (configuration.FederationMetadata.Enabled)
             {
+                 routes.MapRoute(
+                    "FederationMetadataRP",
+                    Thinktecture.IdentityServer.Endpoints.Paths.WSFedRPMetadata,
+                    new { controller = "FederationMetadata", action = "GenerateRPMetadata" }
+                );
+
                 routes.MapRoute(
                     "FederationMetadata",
                     Thinktecture.IdentityServer.Endpoints.Paths.WSFedMetadata,

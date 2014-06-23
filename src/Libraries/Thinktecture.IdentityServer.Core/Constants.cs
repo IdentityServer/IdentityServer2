@@ -58,6 +58,7 @@ namespace Thinktecture.IdentityServer
         public static class CacheKeys
         {
             public const string WSFedMetadata = "Cache_WSFedMetadata";
+            public const string WSFedRPMetadata = "Cache_WSFedRPMetadata";
         }
     }
 }
