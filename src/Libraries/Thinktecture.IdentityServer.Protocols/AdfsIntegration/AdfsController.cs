@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Security;
 using System.Text;
 using System.Web.Http;
 using Thinktecture.IdentityModel.Constants;
@@ -190,8 +194,24 @@ namespace Thinktecture.IdentityServer.Protocols.AdfsIntegration
             else
             {
                 var bridge = new AdfsBridge(ConfigurationRepository);
-
-                response = bridge.ConvertSamlToJwt(token.ToSecurityToken(), scope);
+                if (ConfigurationRepository.Keys.DecryptionCertificate != null)
+                {
+                    var configuration = new SecurityTokenHandlerConfiguration
+                    {
+                        AudienceRestriction = { AudienceMode = AudienceUriMode.Never },
+                        CertificateValidationMode = X509CertificateValidationMode.None,
+                        RevocationMode = X509RevocationMode.NoCheck,
+                        CertificateValidator = X509CertificateValidator.None,
+                        ServiceTokenResolver = SecurityTokenResolver.CreateDefaultSecurityTokenResolver(
+                            new ReadOnlyCollection<SecurityToken>(new SecurityToken[] { new X509SecurityToken(ConfigurationRepository.Keys.DecryptionCertificate) }), false)
+                    };
+                    var handler = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection(configuration);
+                    response = bridge.ConvertSamlToJwt(token.ToSecurityToken(handler), scope);
+                }
+                else
+                {
+                    response = bridge.ConvertSamlToJwt(token.ToSecurityToken(), scope);
+                }
             }
 
             return Request.CreateResponse<TokenResponse>(HttpStatusCode.OK, response);
