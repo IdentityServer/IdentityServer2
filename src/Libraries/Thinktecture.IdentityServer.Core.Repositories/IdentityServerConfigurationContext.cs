@@ -39,6 +39,10 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public IdentityServerConfigurationContext()
             : base("name=IdentityServerConfiguration")
         { }
+        
+        public IdentityServerConfigurationContext(String nameOrConnectionString)
+            : base(nameOrConnectionString)
+        { }
 
         public IdentityServerConfigurationContext(DbConnection conn) : base(conn, true)
         {
