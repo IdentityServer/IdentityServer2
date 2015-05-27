@@ -35,9 +35,18 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         public DbSet<StoredGrant> StoredGrants { get; set; }
 
         public static Func<IdentityServerConfigurationContext> FactoryMethod { get; set; }
+        private static String _connectionStringName = "IdentityServerConfiguration";
+        public static String ConnectionStringName {
+            get { return _connectionStringName; }
+            set { _connectionStringName = value; }
+        }
 
         public IdentityServerConfigurationContext()
-            : base("name=IdentityServerConfiguration")
+            : base(_connectionStringName)
+        { }
+        
+        public IdentityServerConfigurationContext(String nameOrConnectionString)
+            : base(nameOrConnectionString)
         { }
 
         public IdentityServerConfigurationContext(DbConnection conn) : base(conn, true)
@@ -53,7 +62,7 @@ namespace Thinktecture.IdentityServer.Repositories.Sql
         {
             if (FactoryMethod != null) return FactoryMethod();
 
-            return new IdentityServerConfigurationContext();
+            return new IdentityServerConfigurationContext(ConnectionStringName);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
