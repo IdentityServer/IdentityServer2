@@ -1,6 +1,6 @@
 # Thinktecture.IdentityServer v2 #
 
-[project page](http://thinktecture.github.com/Thinktecture.IdentityServer.v2/)
+[project page](https://github.com/IdentityServer/IdentityServer2/wiki)
 
 Thinktecture IdentityServer is a light-weight security token service built with .NET 4.5, MVC 4, Web API and WCF.
 
